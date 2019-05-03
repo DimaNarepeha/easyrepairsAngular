@@ -1,0 +1,132 @@
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito Regular'), local('Nunito-Regular'), url(https://fonts.gstatic.com/s/nunito/v10/XRXV3I6Li01BKofINeaE.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito Bold'), local('Nunito-Bold'), url(https://fonts.gstatic.com/s/nunito/v10/XRXW3I6Li01BKofAjsOUYevN.ttf) format('truetype');
+}
+body {
+  background-color: #4c4f52;
+  font-family: "Nunito", sans-serif;
+  font-size: 12pt;
+}
+.slider {
+  color: white;
+  display: block;
+  position:absolute;
+  box-shadow: 0px 0px 2px 1px #aaa, 0 20px 10px -5px #999;
+  overflow: hidden;
+}
+.slider::before {
+  content: "";
+  background-color: #222;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: relative;
+  z-index: -1;
+}
+.slider > .slide {
+  top: 55px;
+  position: absolute;
+}
+.slider > .counter {
+  display: block;
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 999;
+}
+.slider > .progress {
+  width: 0px;
+  height: 5px;
+  background-color: #f5f528;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+}
+.slider > .progress::before {
+  content: "";
+  width: 315px;
+  height: 5px;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 998;
+  background-color: #f5f528;
+  opacity: 0.25;
+}
+.center {
+  margin-top: 25px;
+  position: relative;
+  height: 320px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #222;
+}
+.quote {
+  padding: 0 20px;
+  font-size: 15pt;
+  text-align: center;
+}
+.quote::before {
+  content: "\f10d  ";
+  font-family: FontAwesome;
+  color: #f5f528;
+  font-size: 18pt;
+}
+.quote::after {
+  content: "  \f10e";
+  font-family: FontAwesome;
+  color: #f5f528;
+  font-size: 18pt;
+}
+.author {
+  width: 315px;
+  position: absolute;
+  left: 0;
+  bottom: 23px;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+.author img {
+  width: 62px;
+  height: 62px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 5px solid #f5f528;
+  position: absolute;
+  left: 0;
+  bottom: 25px;
+  right: 0;
+  margin: 5px auto;
+}
+.love {
+  border-radius: 50%;
+  border: 2px solid white;
+  padding: 4px 4px 2px 4px;
+  right: 18px;
+  top: 16px;
+  position: absolute;
+  content: "\f08a";
+  font-family: FontAwesome;
+  display: block;
+}
+.love:hover:before {
+  color: #f5f528;
+  content: "\f004";
+}
