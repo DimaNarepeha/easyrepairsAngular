@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700");
+
+body {
+  line-height: 26px;
+  font-size: 16px;
+  font-family: "Inconsolata", monospace;
+  font-weight: normal;
+  color: #777777;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+}
+
+a {
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Inconsolata", monospace;
+  font-weight: bold;
+}
+
+.home_banner_area {
+  background: url(http://www.possibilitree.com/wp-content/uploads/2018/09/tradesman-tool-belt-2.jpg) no-repeat scroll center left;
+  background-color: #f7f7f8;
+  background-size: contain;
+}
+
+.home_banner_area .blog_text_slider {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  position: relative;
+  z-index: 0;
+}
+
+.blog_text {
+  background-color: #f5f517;
+}
+
+.blog_text {
+  background: #fff;
+  padding: 115px 65px 65px 65px;
+}
+
+.blog_text h4 {
+  font-size: 46px;
+  line-height: 52px;
+  color: #222;
+  margin-bottom: 18px;
+}
+
+.blog_text p {
+  margin-bottom: 35px;
+  font-size: 16px;
+  color: #222;
+}
+
+.blog_banner {
+  min-height: 780px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0px;
+}
+
+.banner_area {
+  position: relative;
+  background: url(res/bg_img2.jpg) no-repeat scroll center left;
+  background-color: #f9f9ff;
+  background-size: contain;
+}
+
+.genric-btn {
+  display: inline-block;
+  outline: none;
+  line-height: 40px;
+  padding: 0 30px;
+  font-size: .8em;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  color: #fff;
+  background: #f8b600;
+  border: 1px solid transparent;
+}
+
+.right {
+  float: right;
+}
+
+.genric-btn.primary:hover {
+  color: #f8b600;
+  border: 1px solid #f8b600;
+  background: #fff;
+}
