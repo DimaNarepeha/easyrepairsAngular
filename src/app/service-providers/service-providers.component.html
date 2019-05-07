@@ -1,0 +1,31 @@
+<h1>Welcome!</h1>
+
+<div>
+  <table class="table table-hover table-dark" align="center">
+      <tr>
+        <th scope="col" align="center">Id</th>
+        <th scope="col" align="center">Name</th>
+        <th scope="col" align="center">Photo</th>
+        <th scope="col" align="center">Actions</th>
+        <th scope="col" align="center">Show more</th>
+        <!-- <th scope="col" align="center">Add photo</th> -->
+
+      </tr>
+    <tr *ngFor="let serviceProvider of providerPage">
+      <td align="center">{{serviceProvider.id}}</td>
+      <td align="center">{{serviceProvider.name}}</td>
+      <td><img  alt="{{serviceProvider.image}}" width="100" height="100" src= "http://localhost:8080/api/image/{{serviceProvider.image}}" /></td>
+      <td align="center"><button class="btn btn-success" [routerLink] = "['/update-service-provider',serviceProvider.id]">Update</button><button class="btn btn-danger" (click) = "deleteService(serviceProvider.id)">Delete</button></td>
+      <td><button class="btn btn-success" [routerLink] = "['/service-providers',serviceProvider.id]">Show More</button></td>
+
+    </tr>
+  </table>
+<ul class="nav nav-pills">
+        <li class="nav-item" *ngFor="let p of pages; let i=index">
+          <a  class="nav-link " href="" (click)="setPage(i,$event)" >{{i}}</a>
+        </li>
+    </ul> 
+
+</div>
+
+<button routerLink = "/add-service-provider"  class="btn btn-success">Create new providers</button>
