@@ -11,6 +11,10 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { SpGeneralComponent } from './sp-general/sp-general.component';
 import { QuoteComponent } from './quote/quote.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { CustomerComponent } from './customer/customer.component';
+import { CustomerService } from './customer/customer.service';
+import {FormsModule} from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -22,13 +26,16 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     PaginationComponent,
     SpGeneralComponent,
     QuoteComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    CustomerComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [CustomerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
