@@ -1,0 +1,69 @@
+
+<head>
+    <meta charset="UTF-8">
+    <title>Super app!</title>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=<Your API KEY>&libraries=places&language=en"></script>
+</head>
+<div class="w3-container w3-yellow">
+<h1>Welcome to  Api! </h1>
+</div>
+<div>
+     <form  class="w3-selection bg-dark w3-padding">
+        <input type="hidden" name="customer.id"/>
+       <p class="text-white bg-dark"> Enter first name:</p> <input class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text" [(ngModel)]= "customer.firstName" name ="firstName"/><br/>
+       <p class="text-white bg-dark">   Enter last name:</p><input class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text" [(ngModel)]= "customer.lastName" name ="lastName"/><br/>
+        <p class="text-white bg-dark">  Enter email name:</p><input class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text" [(ngModel)]= "customer.email" name ="email"/><br/>
+       
+        <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom"   (click) = "addCustomer()">Add Customer</button>
+    </form>
+</div>
+<div class="w3-container w3-yellow">
+        <h2>Customers</h2>
+    </div>
+<div>
+<table class="table table-hover table-dark">
+                <thead>
+        <tr>
+            <th>ID</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Email</th>
+            <th>Last Update</th>
+            <th>Photo</th>
+            <th>Image</th>
+            <th>Actions</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor = "let customer1 of customerPage ">
+            
+        <th scope="row" >{{customer1.id}}</th>
+        <td>{{customer1.firstName}}</td>
+        <td>{{customer1.lastName}}</td>
+        <td>{{customer1.email}}</td>
+        <td>{{customer1.updated}}</td>
+        <td><!---<div class="form-group">-->
+            <label for="file">File upload:</label>
+            <input type="file" class="form-control" accept="image/" (change)="onSelectFile($event,customer1.id)" style="height:100%" />
+      <!--- </div>--></td>
+       <img  alt="{{customer1.image}}" width="100" height="100" src= "http://localhost:8080/customers/image/{{customer1.image}}" />
+        <td><button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="getCustomerById(customer1.id)" >Update</button>|<button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="deleteCustomer(customer1.id)">Delete</button> </td>
+    </tr>
+</tbody>
+    </table>
+    <ul class="nav nav-pills">
+            <li class="nav-item" *ngFor="let p of pages; let i=index">
+              <a  class="nav-link " href="" (click)="setPage(i,$event)" >{{i}}</a>
+            </li>
+        </ul> 
+    </div>
