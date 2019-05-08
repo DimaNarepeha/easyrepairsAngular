@@ -98,7 +98,7 @@ export class CustomerComponent implements OnInit{
 
        deleteCustomer(customerId:string){
                 this._customerService.deleteCustomer(customerId)
-                .subscribe((response)=> {console.log(response);this.getCustomers();},
+                .subscribe((response)=> {console.log(response);this.getCustomersByPage();},
                 (error)=>{console.log(error);} );
 
        }
