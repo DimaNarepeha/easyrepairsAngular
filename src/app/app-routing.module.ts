@@ -4,7 +4,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const routes: Routes = [
-  {path:' ', component:LandingPageComponent},
+  {path:'', component:LandingPageComponent},
   {path:'customers', component:CustomerComponent}
 ];
 
