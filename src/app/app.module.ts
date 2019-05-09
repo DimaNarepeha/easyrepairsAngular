@@ -11,6 +11,9 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { SpGeneralComponent } from './sp-general/sp-general.component';
 import { QuoteComponent } from './quote/quote.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LoginComponent } from './login/login.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +25,14 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     PaginationComponent,
     SpGeneralComponent,
     QuoteComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    LoginComponent,
+    PasswordRecoveryComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
