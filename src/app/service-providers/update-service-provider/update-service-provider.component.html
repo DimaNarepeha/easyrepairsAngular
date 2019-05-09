@@ -2,7 +2,7 @@ Update service providers!!!
 
 <div>
   <form>
-      <img  alt="{{serviceProvider.image}}" width="100" height="100" src= "http://localhost:8080/api/image/{{serviceProvider.image}}" /><br/>
+      <img  alt="{{serviceProvider.image}}" width="100" height="100" src= "http://localhost:8080/service-providers/image/{{serviceProvider.image}}" /><br/>
       <td><div class="form-group">
         <label for="file">File upload:</label>
         <input type="file" class="form-control" accept="image/" (change)="onSelectFile($event,serviceProvider.id)" style="height:100%" />
