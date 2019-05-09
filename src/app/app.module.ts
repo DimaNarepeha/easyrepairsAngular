@@ -39,7 +39,7 @@ import { UpdateServiceProviderComponent } from './service-providers/update-servi
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+AppRoutingModule,
     RouterModule,
     HttpModule,
     FormsModule,
@@ -47,6 +47,7 @@ import { UpdateServiceProviderComponent } from './service-providers/update-servi
     HttpClientModule
   ],
   providers: [ServiceProvidersService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
