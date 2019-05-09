@@ -11,6 +11,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { SpGeneralComponent } from './sp-general/sp-general.component';
 import { QuoteComponent } from './quote/quote.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+
 import {HttpModule} from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -22,6 +23,9 @@ import { AddServiceProvidersComponent } from './service-providers/add-service-pr
 import { UpdateServiceProviderComponent } from './service-providers/update-service-provider/update-service-provider.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerService } from './customer/customer.service';
+import { LoginComponent } from './login/login.component';
+import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
+import {ApiService} from './core/api.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,9 @@ import { CustomerService } from './customer/customer.service';
     ServiceProviderOneComponent,
     AddServiceProvidersComponent,
     UpdateServiceProviderComponent,
-    CustomerComponent
+    CustomerComponent,
+    LoginComponent,
+    PasswordRecoveryComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +55,7 @@ import { CustomerService } from './customer/customer.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ServiceProvidersService,CustomerService],
+  providers: [ServiceProvidersService, CustomerService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

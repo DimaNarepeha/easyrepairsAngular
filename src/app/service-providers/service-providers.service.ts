@@ -13,24 +13,26 @@ export class ServiceProvidersService {
   constructor(private httpService: Http) {
   }
 
-  getServiceProvidersByPage(page:Number){
-    return  this.httpService.get("http://localhost:8080/service-providers/find-all/page/?page="+page)
-    .map((response: Response) => response.json())
-      .catch(this.handleError);;
-}
+  getServiceProvidersByPage(page: Number) {
+    return this.httpService.get('http://localhost:8080/service-providers/find-all/page/?page=' + page)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
+    ;
+  }
 
 
-uploadImage(file:any,id:number){
-  const formData = new FormData();
-  formData.append('imageFile',file);
-  let headers = new Headers({'Access-Control-Allow-Origin': 'http://localhost:8080'});
-  let options = new RequestOptions({headers: headers});
-  return  this.httpService.post("http://localhost:8080/service-providers/"+id,formData, options)
-  .subscribe(res => {
-      console.log(res);
-      alert('SUCCESS !!');
-    });
-}
+  uploadImage(file: any, id: number) {
+    const formData = new FormData();
+    formData.append('imageFile', file);
+    let headers = new Headers({'Access-Control-Allow-Origin': 'http://localhost:8080'});
+    let options = new RequestOptions({headers: headers});
+    return this.httpService.post('http://localhost:8080/service-providers/' + id, formData, options)
+      .subscribe(res => {
+        console.log(res);
+        alert('SUCCESS !!');
+      });
+  }
+
   getAllServiceProviders(): Observable<ServiceProviders[]> {
     let headers = new Headers({'Access-Control-Allow-Origin': 'http://localhost:8080'});
     let options = new RequestOptions({headers: headers});
@@ -44,10 +46,10 @@ uploadImage(file:any,id:number){
     let body = JSON.stringify(service);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-  
+
     return this.httpService.post('http://localhost:8080/service-providers/save', body, options)
       .map((response: Response) => response.json());
-  
+
   }
 
   updateServiceProvider(id: number, service: ServiceProviders): Observable<ServiceProviders> {
@@ -55,7 +57,7 @@ uploadImage(file:any,id:number){
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.httpService.put('http://localhost:8080/service-providers/update/' + id, body, options)
-    .map((response: Response) => response.json());
+      .map((response: Response) => response.json());
   }
 
   getServiceProviderById(id: number): Observable<ServiceProviders> {
@@ -63,7 +65,8 @@ uploadImage(file:any,id:number){
     let options = new RequestOptions({headers: headers});
     return this.httpService.get('http://localhost:8080/service-providers/find-one/' + id, options)
       .map((response: Response) => response.json())
-      .catch(this.handleError);;
+      .catch(this.handleError);
+    ;
   }
 
   deleteServiceProvider(id: number) {
