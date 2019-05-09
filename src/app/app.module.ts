@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BannerComponent } from './banner/banner.component';
@@ -20,6 +19,9 @@ import { ServiceProvidersService } from './service-providers/service-providers.s
 import { ServiceProviderOneComponent } from './service-providers/service-provider-one/service-provider-one.component';
 import { AddServiceProvidersComponent } from './service-providers/add-service-providers/add-service-providers.component';
 import { UpdateServiceProviderComponent } from './service-providers/update-service-provider/update-service-provider.component';
+import { CustomerComponent } from './customer/customer.component';
+import { CustomerService } from './customer/customer.service';
+
 
 @NgModule({
   declarations: [
@@ -39,15 +41,17 @@ import { UpdateServiceProviderComponent } from './service-providers/update-servi
   ],
   imports: [
     BrowserModule,
-AppRoutingModule,
+    AppRoutingModule,
+    UpdateServiceProviderComponent,
+    CustomerComponent,
+    AppRoutingModule,
     RouterModule,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ServiceProvidersService],
-
+  providers: [ServiceProvidersService,CustomerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
