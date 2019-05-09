@@ -1,7 +1,7 @@
-  <div class="blog_left_sidebar">
+  <div class="blog_left_sidebar" *ngFor="let serviceProvider of serviceProviders">
     <article class="blog_style1">
       <div class="blog_img">
-        <img class="img-fluid" src="https://static1.squarespace.com/static/57d6dbf5ebbd1af76fa218cd/t/5a579c13e4966b1f7d7db599/1515691029787/One+Man+and+a+Toolbox+Handy+Man+Services.jpg?format=1500w" alt="">
+        <img class="img-fluid" src="http://localhost:8080/service-providers/image/{{serviceProvider.image}}" alt="">
       </div>
       <div class="blog_text">
         <div class="blog_text_inner">
@@ -18,9 +18,9 @@
             </div>
           </div>
           <a href="#">
-            <h4>Vasya Pupkin and Co.</h4>
+            <h4>{{serviceProvider.name}}</h4>
           </a>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+          <p>{{serviceProvider.description}}</p>
 
           <ul class="list-horizontal">
             <li>
