@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.apiService.login(body.toString()).subscribe(data => {
         window.sessionStorage.setItem('token', JSON.stringify(data));
         console.log(window.sessionStorage.getItem('token'));
-        this.router.navigate(['recovery']);
+        this.router.navigate(['']);
       }, error => {
         this.invalidLogin = true;
       }

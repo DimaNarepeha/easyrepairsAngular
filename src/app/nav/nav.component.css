@@ -13,9 +13,9 @@ header {
   color: #fff;
   justify-content: center;
   align-items: center;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   font-size: 2em;
-z-index: 12;
+  z-index: 12;
 }
 
 main {
@@ -25,7 +25,7 @@ main {
   height: 100%;
 }
 
-main > div {
+main>div {
   margin: auto;
   max-width: 600px;
 }
@@ -40,34 +40,26 @@ main p {
   margin: 20px 0;
 }
 
-main small {
-  font-weight: 300;
-  color: #888;
-}
-
 #nav-container {
   position: fixed;
   height: 100vh;
   width: 100%;
   pointer-events: none;
+  z-index: 200;
+  display: none;
+  transition: .3s;
 }
- .bg {
+
+.bg {
   position: fixed;
-  top: 70px;
   left: 0;
   width: 100%;
-  height: calc(100% - 70px);
-  visibility: hidden;
-  opacity: 0;
+  height: 100%;
+  visibility: visible;
+  opacity: 0.75;
   transition: .3s;
   background: #000;
-}
-#nav-container:focus-within .bg {
-  visibility: visible;
-  opacity: .6;
-}
-* {
-  visibility: visible;
+  z-index: 201;
 }
 
 .button {
@@ -86,8 +78,9 @@ main small {
   pointer-events: auto;
   margin-left: 25px;
   touch-action: manipulation;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
 .icon-bar {
   display: block;
   width: 100%;
@@ -95,42 +88,42 @@ main small {
   background: #f5f528;
   transition: .3s;
 }
-.icon-bar + .icon-bar {
+
+.icon-bar+.icon-bar {
   margin-top: 5px;
 }
 
-:focus-within .button {
+.button:focus-within .button {
   pointer-events: none;
+}
 
+.button:focus-within .icon-bar:nth-of-type(1) {
+  transform: translate3d(0, 8px, 0) rotate(45deg);
 }
-:focus-within .icon-bar:nth-of-type(1) {
-  transform: translate3d(0,8px,0) rotate(45deg);
-}
-:focus-within .icon-bar:nth-of-type(2) {
+
+.button:focus-within .icon-bar:nth-of-type(2) {
   opacity: 0;
 }
-:focus-within .icon-bar:nth-of-type(3) {
-  transform: translate3d(0,-8px,0) rotate(-45deg);
+
+.button:focus-within .icon-bar:nth-of-type(3) {
+  transform: translate3d(0, -8px, 0) rotate(-45deg);
 }
 
 #nav-content {
-  margin-top: 70px;
-  padding: 20px;
   width: 90%;
   max-width: 300px;
   position: absolute;
   top: 0;
   left: 0;
-  height: calc(100% - 70px);
+  height: 100%;
   background: #ececec;
   pointer-events: auto;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  transform: translateX(-100%);
-  transition: transform .3s;
-  will-change: transform;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  transition: .3s;
   contain: paint;
-  z-index: 20;
-
+  z-index: 202;
+  display: none;
+  opacity: 1;
 }
 
 #nav-content ul {
@@ -140,44 +133,31 @@ main small {
 }
 
 #nav-content li a {
-  padding: 10px 5px;
+  margin-left: 20px;
+  padding: 15px 5px;
   display: block;
-  text-transform: uppercase;
+  font-size: 15px;
+  color: #212121;
+  font-weight: 650;
+  font-family: 'Roboto', sans-serif;
   transition: color .1s;
 }
 
 #nav-content li a:hover {
-  color: #BF7497;
+  color: #f8b600;
 }
 
-#nav-content li:not(.small) + .small {
+#nav-content li:not(.small)+.small {
   margin-top: auto;
 }
 
-.small {
-  display: flex;
-  align-self: center;
+.button:focus-within+#nav-content {
+  display: block;
 }
 
-.small a {
-  font-size: 12px;
-  font-weight: 400;
-  color: #888;
+.displayon {
+  display: block;
 }
-.small a + a {
-  margin-left: 15px;
-}
-
-#nav-container:focus-within #nav-content {
-  transform: none;
-}
-
-
-.button:focus-within + #nav-content{
-visibility: visible;
-}
-
-
 
 * {
   box-sizing: border-box;
@@ -218,18 +198,66 @@ img {
   width: 100%;
 }
 
-.orange{
-color: #f5f528;
-
+.orange {
+  color: #f5f528;
 }
-.login{
+
+.login {
   display: flex;
   position: fixed;
   width: 100%;
   height: 70px;
   align-items: center;
-  left: 92% ;
+  left: 92%;
   font-size: 1.2em;
   color: #fff;
   z-index: 12;
+}
+
+.avatar_container {
+  background: url(https://www.hdwallpapers.in/download/yellow_blue_material_design_4k-wide.jpg) no-repeat;
+  background-size: 320px 180px;
+  width: 100%;
+  height: 170px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.avatar_container img {
+  width: 75px;
+  height: 75px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  margin-top: 20px;
+  position: absolute;
+  left: 20px;
+  right: 0;
+  display: block;
+}
+
+.user_info {
+  display: block;
+  color: white;
+  margin-left: 20px;
+  font-size: 1em;
+  margin-top: 100px;
+  float: left;
+}
+
+.show_block {
+  float: right;
+  margin-right: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+a i {
+  margin-right: 26px;
+  color: #667;
+}
+
+a:hover i {
+  color: orange;
 }
