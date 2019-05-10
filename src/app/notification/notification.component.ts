@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-notification',
@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificationComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
+  openNotifications() {
+    console.log('CLICKED');
+  }
 }

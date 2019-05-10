@@ -1,0 +1,40 @@
+.notification_message_block {
+}
+
+.notification_time {
+  float: right;
+  font-style: italic;
+  font-size: 80%;
+  z-index: 12;
+}
+
+.notification_dropdown_block {
+  background: #212121;
+  z-index: 12;
+}
+
+.notification-block {
+  float: left;
+  right: 70%;
+  width: 150%;
+}
+
+.notification-header {
+  font-weight: bold;
+  font-size: 100%;
+}
+
+.notification-message {
+  font-style: italic;
+  font-size: 80%;
+}
+
+.unread {
+background: #f5ff70;
+}
+
+.read {
+}
+.dot{
+float: right;
+}

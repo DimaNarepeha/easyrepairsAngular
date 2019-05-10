@@ -214,16 +214,28 @@ img {
   z-index: 12;
 }
 .notification_icon{
-  display: flex;
+  display: block;
   position: fixed;
-  width: 100%;
-  height: 70px;
+  width: 7%;
+  height: 7%;
   align-items: center;
   left: 85%;
+  top:3%;
   font-size: 1.2em;
   color: #fff;
   z-index: 12;
 }
+.notification_icon_position{
+  display: block;
+  position: fixed;
+  align-items: center;
+  left: 85%;
+  top:3%;
+  font-size: 1.2em;
+  color: #fff;
+  z-index: 12;
+}
+
 .avatar_container {
   background: url(https://www.hdwallpapers.in/download/yellow_blue_material_design_4k-wide.jpg) no-repeat;
   background-size: 320px 180px;
