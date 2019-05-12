@@ -16,6 +16,7 @@
 .notification-block {
   float: left;
   right: 70%;
+  height: 400px;
   width: 150%;
 }
 

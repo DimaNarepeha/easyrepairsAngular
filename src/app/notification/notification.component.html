@@ -1,9 +1,9 @@
-<p><img width="40px" (click)="openNotifications()" src="../../assets/img/bell-icon.png"></p>
-<div class="notification-block card text-dark overflow-y: scroll read">
-  <div class="border-top border-bottom">
-    <p class="notification-header">Notification header</p>
+<p><img width="40px" (click)="openNotifications(divNotifications)" src="../../assets/img/bell-icon.png"></p>
+<div [hidden]="!isOpen" class="notification-block card text-dark overflow-auto">
+  <div #divNotifications *ngFor="let notification of notifications" class="border-top border-bottom">
+    <p class="notification-header">{{notification.header}}</p>
     <p class="text-danger dot">♦</p>
-    <p class="notification-message">Message</p>
-    <div class="notification_time">time</div>
+    <p class="notification-message">{{notification.message}}</p>
+    <div class="notification_time">{{notification.time}}</div>
   </div>
 </div>

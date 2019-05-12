@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
+import {NotificationService} from './notification.service';
 
 @Component({
   selector: 'app-notification',
@@ -7,18 +8,33 @@ import {Component, OnInit} from '@angular/core';
 })
 export class NotificationComponent implements OnInit {
   isOpen: boolean;
+  notifications: { header: string; id: number; time: string; message: string }[];
+  private wasInside: boolean;
 
-  constructor() {
+  constructor(private notificationService: NotificationService) {
+    this.notifications = notificationService.getNotificationsForUser(1);
   }
 
   ngOnInit() {
   }
 
-  openNotifications() {
-    if (this.isOpen) {
+  openNotifications(divNotifications: HTMLDivElement) {
+    this.isOpen = !this.isOpen;
+    divNotifications.focus();
+    divNotifications.scrollTop = 0;
+  }
+
+
+  @HostListener('click')
+  clickInside() {// if clicked inside the div
+    this.wasInside = true;
+  }
+
+  @HostListener('document:click')
+  clickOutside() {// if clicked outside the div then close the notification block
+    if (!this.wasInside) {
       this.isOpen = false;
-    } else {
-      this.isOpen = true;
     }
+    this.wasInside = false;
   }
 }
