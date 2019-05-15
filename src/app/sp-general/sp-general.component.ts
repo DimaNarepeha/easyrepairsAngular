@@ -9,6 +9,7 @@ import { ServiceProvidersService } from '../service-providers/service-providers.
 })
 export class SpGeneralComponent implements OnInit {
 
+  private page:number =0;
   serviceProviders: ServiceProviders[];
   serviceProvider = new ServiceProviders();
   private providerPage: Array<any>;
@@ -20,7 +21,7 @@ export class SpGeneralComponent implements OnInit {
   ngOnInit() {
     // this.serviceProviders = this.providerPage;
     // console.log(this.serviceProviders);
-    this.getServiceProviders();
+    this.getServiceProvidersByPage();
   }
 
   // setPage(i,event:any){
@@ -36,25 +37,32 @@ export class SpGeneralComponent implements OnInit {
     this.userFile=file; 
     this.serviceProvidersService.uploadImage(file,id);
 }
-//   getServiceProvidersByPage(){
-//   this.serviceProvidersService.getServiceProvidersByPage(this.page)
-//     .subscribe(
-//       data=>{
-//         console.log(data);
-//         let d = data;
-//          console.log(d);
-//         //console.log("result = " + d.result);
-//         this.providerPage= d['content'];
-//         this.pages=new Array(d['totalPages']);
-//         console.log(data['content']);
-//         console.log( this.pages);
-//         console.log( this.providerPage)
-//         console.log(data)
-//     },
-//      (error)=>{console.log(error);
-//     }
-//   );
-// }
+  getServiceProvidersByPage(){
+  this.serviceProvidersService.getServiceProvidersByPage(this.page)
+    .subscribe(
+      data=>{
+        console.log(data);
+        let d = data;
+         console.log(d);
+        //console.log("result = " + d.result);
+        this.providerPage= d['content'];
+        this.pages=new Array(d['totalPages']);
+        console.log(data['content']);
+        console.log( this.pages);
+        console.log( this.providerPage)
+        console.log(data)
+    },
+     (error)=>{console.log(error);
+    }
+  );
+}
+
+setPage(i,event:any){
+  event.preventDefault();
+  this.page=i;
+  this.getServiceProvidersByPage();
+  
+}
 
   getServiceProviders(): void {
     this.serviceProvidersService.getAllServiceProviders()

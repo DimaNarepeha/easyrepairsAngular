@@ -1,4 +1,4 @@
-  <div class="blog_left_sidebar" *ngFor="let serviceProvider of serviceProviders">
+  <div class="blog_left_sidebar" *ngFor="let serviceProvider of providerPage">
     <article class="blog_style1">
       <div class="blog_img">
         <img class="img-fluid" src="http://localhost:8080/service-providers/image/{{serviceProvider.image}}" alt="">
@@ -7,7 +7,7 @@
         <div class="blog_text_inner">
           <div class="cat">
             <a href="#"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Lviv</a>
-            <a href="#"><i class="far fa-calendar-alt" aria-hidden="true"></i> March 14, 2018</a>
+            <a href="#"><i class="far fa-calendar-alt" aria-hidden="true"></i>{{serviceProvider.lastUpdate}}</a>
             <a href="#"><i class="far fa-comments" aria-hidden="true"></i> 05</a>
             <div class="right">
               <span class="fas fa-heart checked"></span>
@@ -17,7 +17,7 @@
               <span class="fas fa-heart"></span>
             </div>
           </div>
-          <a href="#">
+          <a [routerLink] = "['/service-providers',serviceProvider.id]">
             <h4>{{serviceProvider.name}}</h4>
           </a>
           <p>{{serviceProvider.description}}</p>
@@ -31,8 +31,13 @@
             </li>
 
           </ul>
-          <a href="#" class="right genric-btn primary">Read more</a>
+          <a [routerLink] = "['/service-providers',serviceProvider.id]" class="right genric-btn primary">Read more</a>
         </div>
       </div>
     </article>
   </div>
+  <ul class="nav nav-pills">
+      <li class="nav-item" *ngFor="let p of pages; let i=index">
+        <a  class="nav-link " href="" (click)="setPage(i,$event)" >{{i+1}}</a>
+      </li>
+  </ul> 
