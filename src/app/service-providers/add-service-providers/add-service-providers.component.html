@@ -3,6 +3,8 @@ Create new service providers!!!
 <div>
   <form>
       Enter name: <input type="text" class="form-control" [(ngModel)]="serviceProvider.name" name = "name" ><br/>
+      Enter email: <input type="text" class="form-control" [(ngModel)]="serviceProvider.email" name = "email" ><br/>
+      Enter description: <input type="text" class="form-control" [(ngModel)]="serviceProvider.description" name = "description"><br/>
     <button class="btn btn-success" (click) = "addServicerovider()">Save</button>
   </form>
 
