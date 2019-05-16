@@ -1,7 +1,7 @@
-  <div class="blog_left_sidebar">
+<div class="blog_left_sidebar" *ngFor="let serviceProvider of providerPage">
     <article class="blog_style1">
       <div class="blog_img">
-        <img class="img-fluid" src="https://static1.squarespace.com/static/57d6dbf5ebbd1af76fa218cd/t/5a579c13e4966b1f7d7db599/1515691029787/One+Man+and+a+Toolbox+Handy+Man+Services.jpg?format=1500w" alt="">
+        <img class="img-fluid" src="{{serviceProvider.image}}" alt="">
       </div>
       <div class="blog_text">
         <div class="blog_text_inner">
@@ -18,9 +18,9 @@
             </div>
           </div>
           <a href="#">
-            <h4>Vasya Pupkin and Co.</h4>
+            <h4>{{serviceProvider.name}}</h4>
           </a>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+          <p>{{serviceProvider.description}}</p>
 
           <ul class="list-horizontal">
             <li>
@@ -35,4 +35,25 @@
         </div>
       </div>
     </article>
-  </div>
+</div>
+<nav class="blog-pagination justify-content-center d-flex">
+<ul class="pagination">
+    <li class="page-item">
+        <a href="#" class="page-link" aria-label="Previous">
+            <span aria-hidden="true">
+                  <i class="fas fa-arrow-left"></i>
+            </span>
+        </a>
+    </li>
+    <li class="page-item" *ngFor="let p of pages; let i=index">
+      <a href="" class="page-link" (click)="setPage(i,$event)" >{{i+1}}</a>
+    </li>
+    <li class="page-item">
+        <a href="#" class="page-link" aria-label="Next">
+            <span aria-hidden="true">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+</nav>

@@ -10,7 +10,6 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { SpGeneralComponent } from './sp-general/sp-general.component';
 import { QuoteComponent } from './quote/quote.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-
 import {HttpModule} from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -41,7 +40,6 @@ import {ApiService} from './core/api.service';
     ServiceProvidersComponent,
     ServiceProviderOneComponent,
     AddServiceProvidersComponent,
-
     UpdateServiceProviderComponent,
     CustomerComponent,
     LoginComponent,
@@ -50,9 +48,6 @@ import {ApiService} from './core/api.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    UpdateServiceProviderComponent,
-    CustomerComponent,
     AppRoutingModule,
     RouterModule,
     HttpModule,
