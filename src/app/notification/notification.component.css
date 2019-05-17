@@ -17,8 +17,13 @@
   float: left;
   right: 70%;
   height: 400px;
+  min-width: 150%;
   width: 150%;
 }
+.notification-card{
+  min-width: 200px;
+}
+
 
 .notification-header {
   font-weight: bold;
@@ -31,11 +36,12 @@
 }
 
 .unread {
-background: #f5ff70;
+  background: #f5ff70;
 }
 
 .read {
 }
-.dot{
-float: right;
+
+.dot {
+  float: right;
 }

@@ -8,11 +8,12 @@ import {NotificationService} from './notification.service';
 })
 export class NotificationComponent implements OnInit {
   isOpen: boolean;
-  notifications: { header: string; id: number; time: string; message: string }[];
+  notifications;
   private wasInside: boolean;
 
   constructor(private notificationService: NotificationService) {
-    this.notifications = notificationService.getNotificationsForUser(1);
+    this.notificationService.getNotificationsForUser(1)// TODO change hardcoded user here
+      .subscribe(data => this.notifications = data);
   }
 
   ngOnInit() {
