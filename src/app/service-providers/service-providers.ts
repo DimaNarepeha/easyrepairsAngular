@@ -4,4 +4,5 @@ export class  ServiceProviders {
   email: string;
   description: string;
   image:any = File;
+  lastUpdate: string;
 }

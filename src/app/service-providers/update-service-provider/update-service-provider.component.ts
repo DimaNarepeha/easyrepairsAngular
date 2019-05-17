@@ -29,9 +29,6 @@ export class UpdateServiceProviderComponent implements OnInit {
 
   onSelectFile(event,id){
     const file = event.target.files[0];
-   /*const fd = new FormData();
-    fd.append('image',file);
-    console.log(file);*/
     console.log(file);
     this.userFile=file; 
     this.serviceProvidersService.uploadImage(file,id);

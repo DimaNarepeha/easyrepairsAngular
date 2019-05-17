@@ -17,6 +17,7 @@ export class ServiceProviderOneComponent implements OnInit {
     this.rout.params.subscribe(next => {
       this.serviceProvidersService.getServiceProviderById(next['id']).subscribe(next => {
         this.serviceProvider = next;
+        console.log(this.serviceProvider);
       }, err => {
         console.log(err);
       })

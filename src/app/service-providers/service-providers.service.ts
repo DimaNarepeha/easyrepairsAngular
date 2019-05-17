@@ -63,7 +63,7 @@ export class ServiceProvidersService {
   getServiceProviderById(id: number): Observable<ServiceProviders> {
     let headers = new Headers({'Access-Control-Allow-Origin': 'http://localhost:8080'});
     let options = new RequestOptions({headers: headers});
-    return this.httpService.get('http://localhost:8080/service-providers/find-one/' + id, options)
+    return this.httpService.get('http://localhost:8080/service-providers/find-by-id/' + id, options)
       .map((response: Response) => response.json())
       .catch(this.handleError);
     ;

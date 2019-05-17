@@ -1,12 +1,40 @@
-Create new service providers!!!
+<!-- Create new service providers!!!
 
 <div>
   <form>
       Enter name: <input type="text" class="form-control" [(ngModel)]="serviceProvider.name" name = "name" ><br/>
+      Enter email: <input type="text" class="form-control" [(ngModel)]="serviceProvider.email" name = "email" ><br/>
+      Enter description: <input type="text" class="form-control" [(ngModel)]="serviceProvider.description" name = "description"><br/>
     <button class="btn btn-success" (click) = "addServicerovider()">Save</button>
   </form>
 
   <button class="btn btn-danger" routerLink = "/service-providers">Back</button>
   
 
-</div>
+</div> -->
+
+<app-nav></app-nav>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="card mb-3" style="max-width: 1200px; ">
+    <div class="row no-gutters">
+      <div class="col-md-8">
+        <div class="card-body">
+         <form>
+          Enter name: <input type="text" class="form-control" [(ngModel)]="serviceProvider.name" name = "name" value="serviceProvider.name"><br/>
+          Enter email: <input type="text" class="form-control" [(ngModel)]="serviceProvider.email" name = "email" value="serviceProvider.email"><br/>
+          Enter description: <textarea  class="form-control" [(ngModel)]="serviceProvider.description" name = "description" value="serviceProvider.description" cols="500" rows="5"></textarea><br/>
+          <button class="btn btn-success" (click) = "addServicerovider()">Save</button>
+         </form>
+        </div>
+      </div>
+    </div>
+    </div>
+  <br/>
+  <br/>
+  <button class="btn btn-danger" routerLink = "/service-providers"> Previos page</button>
+  <br/>
+  <br/>
+  <app-footer></app-footer>
