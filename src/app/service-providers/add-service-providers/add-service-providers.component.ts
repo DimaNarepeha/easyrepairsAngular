@@ -11,6 +11,7 @@ import { ServiceProvidersService } from '../service-providers.service';
 export class AddServiceProvidersComponent implements OnInit {
 
   serviceProvider = new ServiceProviders();
+  public userFile:any = File; 
 
   constructor(private serviceProvidersService: ServiceProvidersService) { }
 
@@ -22,10 +23,11 @@ export class AddServiceProvidersComponent implements OnInit {
       .subscribe((response) => {
         console.log(response);
         alert("Provider saved!");
-
       }, (error) => {
         console.log(error);
       });
   }
+
+
 
 }

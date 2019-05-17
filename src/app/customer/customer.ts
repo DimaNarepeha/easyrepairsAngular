@@ -3,6 +3,7 @@ export class Customer{
     firstName:string;
     lastName:string;
     email:string;
+    userId:string="1";
     updated:string;
     image:string;
     logo:any;
