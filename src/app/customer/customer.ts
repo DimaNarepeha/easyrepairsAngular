@@ -5,6 +5,6 @@ export class Customer{
     email:string;
     userId:string="1";
     updated:string;
-    image:string;
+    image:string="1.jpg";
     logo:any;
 }
