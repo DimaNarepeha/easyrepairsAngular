@@ -26,6 +26,7 @@ import { CustomerService } from './customer/customer.service';
 import { LoginComponent } from './login/login.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import {ApiService} from './core/api.service';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {ApiService} from './core/api.service';
     UpdateServiceProviderComponent,
     CustomerComponent,
     LoginComponent,
-    PasswordRecoveryComponent
+    PasswordRecoveryComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
