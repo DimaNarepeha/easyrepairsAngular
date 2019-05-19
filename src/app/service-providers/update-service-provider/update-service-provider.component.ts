@@ -61,7 +61,7 @@ export class UpdateServiceProviderComponent implements OnInit {
     this.providerLocation.city = this.addr.locality;
     // @ts-ignore
     this.providerLocation.region = this.addr.admin_area_l1;
-    this.serviceProvidersService.updateServiceProvider(this.providerLocation)
+    this.serviceProvidersService.updateServiceProvider(id, this.providerLocation)
       .subscribe((response) => {
         console.log(response);
         alert('Provider updated!');
