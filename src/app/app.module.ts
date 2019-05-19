@@ -22,6 +22,7 @@ import { AddServiceProvidersComponent } from './service-providers/add-service-pr
 import { UpdateServiceProviderComponent } from './service-providers/update-service-provider/update-service-provider.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerService } from './customer/customer.service';
+import { GooglePlacesDirective } from './google-places.directive';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CustomerService } from './customer/customer.service';
     ServiceProviderOneComponent,
     AddServiceProvidersComponent,
     UpdateServiceProviderComponent,
-    CustomerComponent
+    CustomerComponent,
+    GooglePlacesDirective
   ],
   imports: [
     BrowserModule,
