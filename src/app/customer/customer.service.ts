@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -27,15 +28,15 @@ export class CustomerService{
         .append('imageName', image);*/
         
            
-                return this._httpService.get("http://localhost:8080/customers/image/"+image);
+                return this._httpService.get(environment.customer_url+"/image/"+image);
     }
 
     getCustomersPage(page:Number){
         
-        return  this._httpService.get("http://localhost:8080/customers/list?page="+page);
+        return  this._httpService.get(environment.customer_url+"/list?page="+page);
     }
     getAllCustomers(): Observable <Customer[]>{
-           return this._httpService.get("http://localhost:8080/customers").
+           return this._httpService.get(environment.customer_url).
             map( (response:Response) => response.json()).catch(this.handleError);
     }
    
@@ -46,17 +47,17 @@ export class CustomerService{
         if(customer.id){
             let c = customer.id;
             customer.id = null; 
-            return this._httpService.put("http://localhost:8080/customers/"+c,body,options);
+            return this._httpService.put(environment.customer_url+c,body,options);
             
         }
-        else{return this._httpService.post("http://localhost:8080/customers",body,options);}
+        else{return this._httpService.post(environment.customer_url,body,options);}
     }
     deleteCustomer(customerId:string){
-       return this._httpService.delete("http://localhost:8080/customers/"+customerId);
+       return this._httpService.delete(environment.customer_url+customerId);
 }
 
     getCustomerById(customerId:string):Observable<Customer>{
-           return  this._httpService.get("http://localhost:8080/customers/"+customerId)
+           return  this._httpService.get(environment.customer_url+customerId)
             .map((response: Response)=>response.json())
             .catch(this.handleError);
     }
