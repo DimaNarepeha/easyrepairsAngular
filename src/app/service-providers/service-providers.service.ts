@@ -4,8 +4,10 @@ import {HttpClient} from '@angular/common/http';
 import {ServiceProviders} from './service-providers';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import {RequestOptions, Http, Response, Headers} from '@angular/http';
 import {throwError} from 'rxjs';
+import {ProviderLocatoin} from '../location/provider-locatoin';
 
 @Injectable()
 export class ServiceProvidersService {
@@ -14,10 +16,10 @@ export class ServiceProvidersService {
   }
 
   getServiceProvidersByPage(page: Number) {
-    return this.httpService.get('http://localhost:8080/service-providers/find-all/page/?page=' + page)
+
+    return this.httpService.get("http://localhost:8080/service-providers/find-all/page/?page=" + page)
       .map((response: Response) => response.json())
       .catch(this.handleError);
-    ;
   }
 
 
@@ -26,6 +28,7 @@ export class ServiceProvidersService {
     formData.append('imageFile', file);
     let headers = new Headers({'Access-Control-Allow-Origin': 'http://localhost:8080'});
     let options = new RequestOptions({headers: headers});
+
     return this.httpService.post('http://localhost:8080/service-providers/' + id, formData, options)
       .subscribe(res => {
         console.log(res);
@@ -42,7 +45,7 @@ export class ServiceProvidersService {
 
   }
 
-  addServiceProviders(service: ServiceProviders): Observable<ServiceProviders> {
+  addServiceProviders(service: ProviderLocatoin): Observable<ServiceProviders> {
     let body = JSON.stringify(service);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
@@ -52,10 +55,11 @@ export class ServiceProvidersService {
 
   }
 
-  updateServiceProvider(id: number, service: ServiceProviders): Observable<ServiceProviders> {
+  updateServiceProvider(id: number, service: ProviderLocatoin): Observable<ServiceProviders> {
     let body = JSON.stringify(service);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
+
     return this.httpService.put('http://localhost:8080/service-providers/update/' + id, body, options)
       .map((response: Response) => response.json());
   }
@@ -74,6 +78,6 @@ export class ServiceProvidersService {
   }
 
   private handleError(error: Response) {
-    return Observable.throw(error);
+    return throwError(error);
   }
 }

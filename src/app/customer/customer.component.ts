@@ -39,17 +39,17 @@ export class CustomerComponent implements OnInit {
     firstname: new FormControl(null, [
       Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(35)
+      Validators.maxLength(60)
     ]),
     lastname: new FormControl(null, [
       Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(255)
+      Validators.minLength(2),
+      Validators.maxLength(60)
     ]),
     email: new FormControl(null, [
       Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(60),
+      Validators.minLength(5),
+      Validators.maxLength(90),
       Validators.pattern('^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$')
     ])
   });

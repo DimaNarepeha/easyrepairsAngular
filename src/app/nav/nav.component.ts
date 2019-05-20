@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -6,19 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  displayOn :boolean =false;
-  constructor() { }
+  displayOn: boolean = false;
+
+  constructor() {
+  }
 
 
   ngOnInit() {
 
   }
 
-  firstClick(){
+  firstClick() {
     this.displayOn = true;
   }
+
   closeMenu() {
-  this.displayOn = false;
+    this.displayOn = false;
   }
 
 }

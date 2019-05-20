@@ -23,9 +23,12 @@ import { AddServiceProvidersComponent } from './service-providers/add-service-pr
 import { UpdateServiceProviderComponent } from './service-providers/update-service-provider/update-service-provider.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerService } from './customer/customer.service';
+
+import { GooglePlacesDirective } from './google-places.directive';
 import { LoginComponent } from './login/login.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import {ApiService} from './core/api.service';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +46,10 @@ import {ApiService} from './core/api.service';
     AddServiceProvidersComponent,
     UpdateServiceProviderComponent,
     CustomerComponent,
+    GooglePlacesDirective,
     LoginComponent,
-    PasswordRecoveryComponent
+    PasswordRecoveryComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
