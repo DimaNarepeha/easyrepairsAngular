@@ -26,7 +26,11 @@ import { CustomerService } from './customer/customer.service';
 import { LoginComponent } from './login/login.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import {ApiService} from './core/api.service';
+import { CreateOfferComponent } from './create-offer/create-offer.component';
+import {CreateOfferService} from "./create-offer/create-offer.service";
 import { NotificationComponent } from './notification/notification.component';
+import { ListOffersComponent } from './list-offers/list-offers.component';
+import {ListOfferService} from "./list-offers/list-offer.service";
 
 @NgModule({
   declarations: [
@@ -46,7 +50,9 @@ import { NotificationComponent } from './notification/notification.component';
     CustomerComponent,
     LoginComponent,
     PasswordRecoveryComponent,
-    NotificationComponent
+    CreateOfferComponent,
+    NotificationComponent,
+    ListOffersComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +63,7 @@ import { NotificationComponent } from './notification/notification.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ServiceProvidersService, CustomerService, ApiService],
+  providers: [ServiceProvidersService, CustomerService, ApiService, CreateOfferService, ListOfferService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
