@@ -5,6 +5,6 @@ export class Customer {
     email: string;
     userId: '1';
     updated: string;
-    image:string= '1.jpg';
+    image:string = '1.jpg';
     logo: any;
 }

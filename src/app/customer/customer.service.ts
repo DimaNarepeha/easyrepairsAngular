@@ -10,7 +10,6 @@ import 'rxjs/Rx';
 import { environment } from 'src/environments/environment';
 
 
-
 @Injectable()
 export class CustomerService{
     
@@ -37,7 +36,7 @@ export class CustomerService{
     }
     getAllCustomers(): Observable <Customer[]>{
            return this._httpService.get(environment.customer_url).
-            map( (response:Response) => response.json()).catch(this.handleError);
+            map( (response: Response) => response.json()).catch(this.handleError);
     }
    
     addCustomer(customer:Customer){

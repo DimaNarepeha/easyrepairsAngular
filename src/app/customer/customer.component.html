@@ -17,13 +17,13 @@
 <h1>Welcome to  Api! </h1>
 </div>
 <div>
-     <form  class="w3-selection bg-dark w3-padding">
+     <form  class="w3-selection bg-dark w3-padding" [formGroup]="formGroup">
         <input type="hidden" name="customer.id"/>
-       <p class="text-white bg-dark"> Enter first name:</p> <input class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text" [(ngModel)]= "customer.firstName" name ="firstName"/><br/>
-       <p class="text-white bg-dark">   Enter last name:</p><input class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text" [(ngModel)]= "customer.lastName" name ="lastName"/><br/>
-        <p class="text-white bg-dark">  Enter email name:</p><input class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text" [(ngModel)]= "customer.email" name ="email"/><br/>
+       <p class="text-white bg-dark"> Enter first name:</p> <input formControlName="firstname" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text" [(ngModel)]= "customer.firstName" name ="firstName"/><br/>
+       <p class="text-white bg-dark">   Enter last name:</p><input formControlName="lastname" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text" [(ngModel)]= "customer.lastName" name ="lastName"/><br/>
+        <p class="text-white bg-dark">  Enter email name:</p><input  formControlName="email" type="text" [(ngModel)]= "customer.email" name ="email" [ngClass]="formGroup.get('email').invalid ? 'invalid-input' : 'valid-input'"  class="w3-input w3-animate-input w3-border w3-round-large" /><br/>
        
-        <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom"   (click) = "addCustomer()">Add Customer</button>
+        <button [disabled]="!formGroup.valid" class="w3-btn w3-yellow w3-round-large w3-margin-bottom"   (click) = "addCustomer()">Add Customer</button>
     </form>
 </div>
 <div class="w3-container w3-yellow">
