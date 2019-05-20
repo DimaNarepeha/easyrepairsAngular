@@ -13,6 +13,10 @@
           <h2 class="card-title">Name: {{serviceProvider.name}}</h2>
           <h4 class="card-text">Email: {{serviceProvider.email}}</h4>
           <p class="card-text">Description: {{serviceProvider.description}}</p>
+          <h3>Your location:</h3>
+          <p class="card-text">Country: {{serviceProvider.location.country}}</p>
+          <p class="card-text">Region: {{serviceProvider.location.region}}</p>
+          <p class="card-text">City: 1{{serviceProvider.location.city}}</p>
           <p class="card-text"><small class="text-muted">Last updated at  {{serviceProvider.lastUpdate}}</small></p>
         </div>
       </div>

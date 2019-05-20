@@ -19,7 +19,19 @@
           Enter name: <input type="text" class="form-control" [(ngModel)]="serviceProvider.name" name = "name" value="serviceProvider.name"><br/>
           Enter email: <input type="text" class="form-control" [(ngModel)]="serviceProvider.email" name = "email" value="serviceProvider.email"><br/>
           Enter description: <textarea  class="form-control" [(ngModel)]="serviceProvider.description" name = "description" value="serviceProvider.description" cols="500" rows="5"></textarea><br/>
-          <button class="btn btn-success" (click) = "updateService(serviceProvider.id)">Update</button>
+           <h3>Your location:</h3>
+           <p class="card-text">Country: {{serviceProvider.location.country}}</p>
+           <p class="card-text">Region: {{serviceProvider.location.region}}</p>
+           <p class="card-text">City: {{serviceProvider.location.city}}</p>
+           <div class="input-container">
+             Enter your location: <input
+             type="text"
+             class="google-place-input"
+             google-place
+             (onSelect)="setAddress($event)"
+             placeholder="Type to search..">
+           </div>
+           <button style="margin-top: 54px;" class="btn btn-success" (click) = "updateService(serviceProvider.id)">Update</button>
          </form>
         </div>
       </div>
