@@ -3,4 +3,5 @@ export interface Notification {
   header: string;
   message: string;
   time: Date;
+  seen: boolean;
 }

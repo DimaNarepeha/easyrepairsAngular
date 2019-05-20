@@ -45,10 +45,11 @@ export class NotificationComponent implements OnInit {
       id: 1,
       header: 'HI!',
       message: 'Here we go!',
-      time: new Date()
+      time: new Date(),
+      seen: false
     };
-
-    this.notificationService.addNotificationForUser(1, x);
+    console.log('Send notifications');
+    this.notificationService.addNotificationForUser(1, x).subscribe();
   }
 
 }
