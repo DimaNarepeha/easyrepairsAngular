@@ -19,7 +19,7 @@ export class CustomerService{
         uploadImage(file:any,id:number){
         const formData = new FormData();
         formData.append('imageFile',file);
-        return  this._httpService.post("http://localhost:8080/customers/"+id+"/image",formData);
+        return  this._httpService.post(environment.customer_url+id+"/image",formData);
        
     }
 
@@ -28,12 +28,12 @@ export class CustomerService{
         .append('imageName', image);*/
         
            
-                return this._httpService.get(environment.customer_url+"/image/"+image);
+                return this._httpService.get(environment.customer_url+"image/"+image);
     }
 
     getCustomersPage(page:Number){
         
-        return  this._httpService.get(environment.customer_url+"/list?page="+page);
+        return  this._httpService.get(environment.customer_url+"list?page="+page);
     }
     getAllCustomers(): Observable <Customer[]>{
            return this._httpService.get(environment.customer_url).
