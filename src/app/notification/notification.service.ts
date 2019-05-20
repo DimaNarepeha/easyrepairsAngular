@@ -10,7 +10,6 @@ import {Notification} from './notification';
 })
 export class NotificationService {
   private readonly baseURL; // TODO change hardcoded localhost
-  const
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -25,6 +24,7 @@ export class NotificationService {
   getNotificationsForUser(id: number): Observable<Notification[]> {
     return this.http.get<Notification[]>(this.baseURL + '/notification/get/' + id);
   }
+
 
   addNotificationForUser(id, notification: Notification): Observable<Notification> {
     return this.http.post<Notification>(this.baseURL + '/notification/add/' + id, JSON.stringify(notification), this.httpOptions);
