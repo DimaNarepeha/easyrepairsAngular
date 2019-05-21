@@ -5,5 +5,5 @@ export class CustomerDTO {
   email: string;
   // image: string;
   // updated: string;
-  // user: User;
+  // userDTO: UserDTO;
 }
