@@ -1,114 +1,155 @@
-import {Component,OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Customer} from './customer';
-import { CustomerService } from './customer.service';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import {CustomerService} from './customer.service';
+import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-    selector:'customers',
-    templateUrl:'./customer.component.html',
-    styleUrls: ['./customer.component.css']
+  selector: 'customers',
+  templateUrl: './customer.component.html',
+  styleUrls: ['./customer.component.css']
 })
 
 
-export class CustomerComponent implements OnInit{
-       private page:number =0;
-        customers: Customer[];
-        customer = new Customer();
-        private customerPage: Array<any>;
-        private  pages:Array<number>;
-        public userFile:any = File; 
-        public im:any;
-        constructor( private _customerService: CustomerService,private _sanitizer: DomSanitizer){}
+export class CustomerComponent implements OnInit {
+  private page: number = 0;
+  customers: Customer[];
+  customer = new Customer();
+  private customerPage: Array<any>;
+  private pages: Array<number>;
+  public userFile: any = File;
+  public im: any;
 
-        ngOnInit():void{
-            this.getCustomersByPage();
-        }
+  constructor(private customerService: CustomerService, private _sanitizer: DomSanitizer) {
+  }
 
-        setPage(i,event:any){
-            event.preventDefault();
-            this.page=i;
-            this.getCustomersByPage();
-            
-        }
+  ngOnInit(): void {
+    this.getCustomersByPage();
+  }
 
+  setPage(i, event: any) {
+    event.preventDefault();
+    this.page = i;
+    this.getCustomersByPage();
 
-        serveImage(image:string){
-           return this._customerService.getImage(image).subscribe(res => {
-               this.im= this._sanitizer.bypassSecurityTrustUrl(res);
-            console.log("!!!!!!!!!!!!!!"+this.im);
-            
-            
-          }) ;
-        }
+  }
 
 
-        onSelectFile(event,id){
-            const file = event.target.files[0];
-           /*const fd = new FormData();
-            fd.append('image',file);
-            console.log(file);*/
-            console.log(file);
-            this.userFile=file; 
-            this._customerService.uploadImage(file,id) .subscribe(res => {
-                console.log(res);
-                this.getCustomersByPage();
-              });;
-           
-        }
-
-        getCustomersByPage(){
-            return this._customerService.getCustomersPage(this.page).subscribe(
-                data=>{
-                    console.log(data);
-                    let d = data.json();
-                     console.log(d);
-                    //console.log("result = " + d.result);
-                    this.customerPage= d['content'];
-                    this.pages=new Array(d['totalPages']);
-                    console.log(data['content']);
-                    console.log( this.pages);
-                    console.log( this.customerPage)
-                    console.log(data)
-                },
-                 (error)=>{console.log(error);
-                }
-            );
-        }
-
-        getCustomers(): void{
-            this._customerService.getAllCustomers().subscribe(
-                (customerData)=>{this.customers=customerData,console.log(customerData)},
-                 (error)=>{console.log(error);
-                }
-            );
-        }
-
-        addCustomer(): void{
-            this._customerService.addCustomer(this.customer)
-            .subscribe((response)=>{console.log(response);this.reset();this.getCustomersByPage();},
-                (error) => {console.log(error);
-                });
-        }
-
-        private reset(){
-                this.customer.firstName=null;
-                this.customer.lastName = null;
-                this.customer.email=null;
-        }
-
-       deleteCustomer(customerId:string){
-                this._customerService.deleteCustomer(customerId)
-                .subscribe((response)=> {console.log(response);this.getCustomersByPage();},
-                (error)=>{console.log(error);} );
-
-       }
+  formGroup: FormGroup = new FormGroup({
+    firstname: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(60)
+    ]),
+    lastname: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(60)
+    ]),
+    email: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(90),
+      Validators.pattern('^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$')
+    ])
+  });
 
 
-       getCustomerById(customerId: string){
-            this._customerService.getCustomerById(customerId)
-            .subscribe((customerData)=>{this.customer = customerData; this.getCustomers();},(error)=>{
-                    console.log(error);
-            });
-       }
+  serveImage(image: string) {
+    return this.customerService.getImage(image).subscribe(res => {
+      this.im = this._sanitizer.bypassSecurityTrustUrl(res);
+      console.log(this.im);
+
+
+    });
+  }
+
+
+  onSelectFile(event, id) {
+    const file = event.target.files[0];
+    console.log(file);
+    this.userFile = file;
+    this.customerService.uploadImage(file, id).subscribe(res => {
+      console.log(res);
+      this.getCustomersByPage();
+    });
+  }
+
+  getCustomersByPage() {
+    return this.customerService.getCustomersPage(this.page).subscribe(
+      data => {
+        console.log(data);
+        const d = data.json();
+        console.log(d);
+        this.customerPage = d['content'];
+        this.pages = new Array(d['totalPages']);
+        console.log(data['content']);
+        console.log(this.pages);
+        console.log(this.customerPage);
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getCustomers(): void {
+    this.customerService.getAllCustomers().subscribe(
+      (customerData) => {
+        this.customers = customerData; console.log(customerData);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  addCustomer(): void {
+    this.customerService.addCustomer(this.customer)
+      .subscribe((response) => {
+          console.log(response);
+          this.reset();
+          this.getCustomersByPage();
+          alert('customer added/updated!');
+        },
+        (error) => {
+          alert('Invalid data provided!');
+          console.log(error);
+        });
+  }
+
+  private reset() {
+    this.customer.firstName = null;
+    this.customer.lastName = null;
+    this.customer.email = null;
+    this.customer.image = '1.jpg';
+  }
+
+  deleteCustomer(customerId: string) {
+    this.customerService.deleteCustomer(customerId)
+      .subscribe((response) => {
+          console.log(response);
+          alert('customer deleted!');
+          this.getCustomersByPage();
+        },
+        (error) => {
+          alert('Invalid data provided!');
+          console.log(error);
+        });
+
+  }
+
+
+  getCustomerById(customerId: string) {
+    this.customerService.getCustomerById(customerId)
+      .subscribe((customerData) => {
+        this.customer = customerData;
+        this.getCustomers();
+      }, (error) => {
+        alert('Invalid data provided!');
+        console.log(error);
+      });
+  }
 
 }
