@@ -5,7 +5,7 @@ export class  ServiceProviders {
   name: string;
   email: string;
   description: string;
-  image:any = File;
+  image: any = File;
   lastUpdate: string;
   location: Location;
 }

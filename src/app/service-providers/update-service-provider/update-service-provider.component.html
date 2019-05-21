@@ -20,9 +20,9 @@
           Enter email: <input type="text" class="form-control" [(ngModel)]="serviceProvider.email" name = "email" value="serviceProvider.email"><br/>
           Enter description: <textarea  class="form-control" [(ngModel)]="serviceProvider.description" name = "description" value="serviceProvider.description" cols="500" rows="5"></textarea><br/>
            <h3>Your location:</h3>
-           <p class="card-text">Country: {{serviceProvider.location.country}}</p>
-           <p class="card-text">Region: {{serviceProvider.location.region}}</p>
-           <p class="card-text">City: {{serviceProvider.location.city}}</p>
+           <p class="card-text">Country: {{serviceProvider.location?.country}}</p>
+           <p class="card-text">Region: {{serviceProvider.location?.region}}</p>
+           <p class="card-text">City: {{serviceProvider.location?.city}}</p>
            <div class="input-container">
              Enter your location: <input
              type="text"
