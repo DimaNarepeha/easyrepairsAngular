@@ -1,0 +1,11 @@
+.invalid-input {
+  border-left-color: salmon!important;
+  border-left-width: 15px!important;
+  border-radius: 5px;
+}
+
+.valid-input {
+  border-left-color: greenyellow!important;
+  border-left-width: 15px!important;
+  border-radius: 5px;
+}
