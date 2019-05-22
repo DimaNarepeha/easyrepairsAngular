@@ -89,6 +89,11 @@
       <td><!---<div class="form-group">-->
       <td>
         <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom"
+                (click)="showServices(offer.serviceDTOs)">
+          Services
+        </button>
+      |
+        <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom"
                 (click)="deleteOfferDTOById(offer.id)">
           Delete
         </button>

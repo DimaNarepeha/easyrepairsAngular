@@ -1,5 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {NotificationService} from './notification.service';
+import {Notification} from './notification';
 
 @Component({
   selector: 'app-notification',
@@ -21,8 +22,6 @@ export class NotificationComponent implements OnInit {
 
   openNotifications(divNotifications: HTMLDivElement) {
     this.isOpen = !this.isOpen;
-    divNotifications.focus();
-    divNotifications.scrollTop = 0;
   }
 
 
@@ -38,4 +37,17 @@ export class NotificationComponent implements OnInit {
     }
     this.wasInside = false;
   }
+
+  sendNotifications() {
+    const x: Notification = {
+      id: 0,
+      header: 'HI!',
+      message: 'Here we go!',
+      time: new Date(),
+      seen: false
+    };
+    console.log('Send notifications');
+    this.notificationService.addNotificationForUser(1, x).subscribe();
+  }
+
 }

@@ -224,7 +224,7 @@ img {
   top: 15px;
   font-size: 1.2em;
   color: #fff;
-  z-index: 12;
+  z-index: 13;
 }
 
 .notification_icon_position {
@@ -232,11 +232,11 @@ img {
   position: fixed;
   align-items: center;
   left: 85%;
-  top: 3%;
+  top: 15px;
   height: 5%;
   font-size: 1.2em;
   color: #fff;
-  z-index: 12;
+  z-index: 13;
 }
 
 .avatar_container {
