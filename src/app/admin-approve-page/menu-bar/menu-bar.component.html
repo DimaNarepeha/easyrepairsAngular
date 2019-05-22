@@ -1,0 +1,9 @@
+<div class="background_menu">
+  <h3 class="bar_text">Select by Status:</h3>
+
+    <select  class="form-control status-select" placeholder="Select Status" [(ngModel)]="status" name="selectedStatus" panelClass="myPanelClass" (change)="setStatus()">
+      <option *ngFor="let selectedStatus of statuses" [value]="selectedStatus">
+        {{selectedStatus}}
+      </option>
+    </select>
+</div>
