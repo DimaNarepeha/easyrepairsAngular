@@ -22,7 +22,6 @@ export class NotificationComponent implements OnInit {
 
   openNotifications(divNotifications: HTMLDivElement) {
     this.isOpen = !this.isOpen;
-    divNotifications.focus();
     divNotifications.scrollTop = 0;
   }
 
@@ -42,7 +41,7 @@ export class NotificationComponent implements OnInit {
 
   sendNotifications() {
     const x: Notification = {
-      id: 1,
+      id: 0,
       header: 'HI!',
       message: 'Here we go!',
       time: new Date(),
