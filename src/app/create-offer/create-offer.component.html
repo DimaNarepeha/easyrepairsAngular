@@ -32,24 +32,33 @@
           </label>
         </li>
       </ul>
+
+<!--      <div class="input-container">-->
+<!--        Enter yout location: <input-->
+<!--        type="text"-->
+<!--        class="google-place-input"-->
+<!--        google-place-->
+<!--        (onSelect)="setAddress($event)"-->
+<!--        placeholder="Type to search..">-->
+<!--        &lt;!&ndash;&lt;!&ndash; Displaying the contents of the address object received from our event emitter &ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;<ul style="list-style-type: none;">&ndash;&gt;-->
+<!--        &lt;!&ndash;<li *ngFor="let key of addrKeys">&ndash;&gt;-->
+<!--        &lt;!&ndash;<span style="font-weight: bold">{{key}}</span>: <span>{{addr[key]}}</span>&ndash;&gt;-->
+<!--        &lt;!&ndash;</li>&ndash;&gt;-->
+<!--        &lt;!&ndash;</ul>&ndash;&gt;-->
+<!--      </div>-->
+
       <form class="w3-selection w3-padding" style="background-color: #222222">
         <input type="hidden" name="offerDTO.id"/>
         <p style="color: #FFC107">Enter description:</p><input
         class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text"
         [(ngModel)]="offerDTO.description" name="description"/><br/>
-        <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="createOfferDTO()">Create offer</button>
+        <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="createOfferDTO()">Create offer
+        </button>
       </form>
     </div>
   </div>
 </div>
-
-<!--<h2>List of services which has been chosen</h2>-->
-<!--<div *ngFor="let service of serviceDTOs">-->
-<!--  <div *ngIf="service.choose">-->
-<!--    <p>{{service.serviceName}}</p>-->
-<!--  </div>-->
-<!--</div>-->
-
 <div class="w3-container w3-yellow">
   <h2>Offers</h2>
 </div>
@@ -59,7 +68,7 @@
     <tr>
       <th>FirstName</th>
       <th>LastName</th>
-      <th>email</th>
+      <th>Email</th>
       <th>Country</th>
       <th>Region</th>
       <th>City</th>

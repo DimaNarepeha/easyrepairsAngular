@@ -16,18 +16,25 @@ export class CreateOfferService {
   }
 
   createOffer(offerDTO: OfferDTO): Observable<OfferDTO> {
-    let body = JSON.stringify(offerDTO);
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
-
+    const body = JSON.stringify(offerDTO);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
     return this.httpService.post(environment.baseURL + '/offers/create', body, options)
       .map((response: Response) => response.json());
   }
 
   getAllOffers(): Observable<OfferDTO[]> {
-    let headers = new Headers({'Access-Control-Allow-Origin': environment.baseURL});
-    let options = new RequestOptions({headers: headers});
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
     return this.httpService.get(environment.baseURL + '/offers/get-all', options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
+  }
+
+  getOffersByCustomerId(id: number): Observable<OfferDTO[]> {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.httpService.get(environment.baseURL + '/offers/get-all-by-customer/' + id, options)
       .map((response: Response) => response.json())
       .catch(this.handleError);
   }
@@ -41,9 +48,7 @@ export class CreateOfferService {
   }
 
   getAllServices(): Observable<ServiceDTO[]> {
-    let headers = new Headers({'Access-Control-Allow-Origin': environment.baseURL});
-    let options = new RequestOptions({headers: headers});
-    return this.httpService.get(environment.baseURL + '/services/get-all', options)
+    return this.httpService.get(environment.baseURL + '/services/get-all')
       .map((response: Response) => response.json())
       .catch(this.handleError);
   }

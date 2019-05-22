@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {OfferDTO} from './models/offerDTO';
 import {CreateOfferService} from './create-offer.service';
 import {ServiceDTO} from './models/serviceDTO';
@@ -16,8 +16,10 @@ export class CreateOfferComponent implements OnInit {
   offerDTO: OfferDTO = new OfferDTO();
   serviceDTOs: ServiceDTO[];
   chosenServices: ServiceDTO[];
+  public addrKeys: string[];
+  public addr: object;
 
-  constructor(private createOfferService: CreateOfferService) {
+  constructor(private createOfferService: CreateOfferService, private zone: NgZone) {
   }
 
   ngOnInit() {
@@ -25,10 +27,19 @@ export class CreateOfferComponent implements OnInit {
     this.getOfferDTOs();
     this.offerDTO.locationDTO = new LocationDTO();
     this.offerDTO.customerDTO = new CustomerDTO();
-    this.offerDTO.locationDTO.country = 'Ukraine';
-    this.offerDTO.locationDTO.region = 'Lvivska';
-    this.offerDTO.locationDTO.city = 'Lviv';
-    this.offerDTO.locationDTO.id = 3;
+
+    // this.offerDTO.locationDTO.country = this.addr.country; // TODO
+    // this.offerDTO.locationDTO.region = this.addr.admin_area_l1;
+    // this.offerDTO.locationDTO.city = this.addr.city;
+    // this.offerDTO.locationDTO.id = 3;
+  }
+
+  setAddress(addrObj) {
+    this.zone.run(() => {
+      this.addr = addrObj;
+      this.addrKeys = Object.keys(addrObj);
+      console.log(this.addrKeys);
+    });
   }
 
   createOfferDTO(): void {
@@ -40,17 +51,16 @@ export class CreateOfferComponent implements OnInit {
     }
 
     this.offerDTO.serviceDTOs = this.chosenServices;
-    this.offerDTO.id = 1;  // TODO
-    this.offerDTO.customerDTO.id = 1;  // TODO
-    this.offerDTO.locationDTO.id = 1;  // TODO
-    this.offerDTO.locationDTO.country = 'HGVHGvghvk';
-    this.offerDTO.locationDTO.region = 'HGVHGvghvk';
-    this.offerDTO.locationDTO.city = 'HGVHGvghvk';
+    this.offerDTO.customerDTO.id = 2;  // TODO
+    this.offerDTO.locationDTO.country = 'Ukraine123';
+    this.offerDTO.locationDTO.region = 'Lvivska123';
+    this.offerDTO.locationDTO.city = 'Lviv123';
 
     this.createOfferService.createOffer(this.offerDTO)
       .subscribe((x) => {
         console.log(x);
         alert('Offer was created!');
+        this.getOfferDTOs();
       }, (error) => {
         console.log(error);
         alert(error);
@@ -60,6 +70,17 @@ export class CreateOfferComponent implements OnInit {
 
   getOfferDTOs(): void {
     this.createOfferService.getAllOffers()
+      .subscribe((x) => {
+          this.offerDTOs = x;
+          console.log(x);
+        },
+        (error) => {
+          console.log(error);
+        });
+  }
+
+  getOfferDTOsByCustomerId(id: number): void {
+    this.createOfferService.getOffersByCustomerId(id)
       .subscribe((x) => {
           this.offerDTOs = x;
           console.log(x);
@@ -83,7 +104,8 @@ export class CreateOfferComponent implements OnInit {
   getServiceDTOs(): void {
     this.createOfferService.getAllServices()
       .subscribe((x) => {
-          this.serviceDTOs = x, console.log(x);
+          this.serviceDTOs = x;
+          console.log(x);
         },
         (error) => {
           console.log(error);
@@ -94,5 +116,16 @@ export class CreateOfferComponent implements OnInit {
     this.offerDTO.description = null;
     this.offerDTO.startDate = null;
     this.serviceDTOs.forEach(x => x.choose = false);
+    this.getOfferDTOs();
+  }
+
+  showServices(serviceDTOs: ServiceDTO[]) {
+    let services: string = ' ';
+    serviceDTOs.forEach(x => {
+      console.log(x.serviceName);
+      services.concat(x.serviceName);
+    });
+    console.log(services);
+    alert(services.toString());
   }
 }
