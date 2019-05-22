@@ -48,6 +48,7 @@ export class RegistrationComponent implements OnInit {
     this.customer.email = this.CustomerForm.controls.email.value;
     this.registration.createCustomer(this.customer).subscribe(data => {
         this.customer = data;
+        console.log(data);
         alert('successful!');
         this.CustomerForm.reset();
       },
