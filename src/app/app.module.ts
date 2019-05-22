@@ -26,6 +26,8 @@ import { CustomerService } from './customer/customer.service';
 import { LoginComponent } from './login/login.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import {ApiService} from './core/api.service';
+import {RegistrationComponent} from './registration/registration.component';
+import {RegistrationService} from "./registration/registration.service";
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import {ApiService} from './core/api.service';
     UpdateServiceProviderComponent,
     CustomerComponent,
     LoginComponent,
-    PasswordRecoveryComponent
+    PasswordRecoveryComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,7 @@ import {ApiService} from './core/api.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ServiceProvidersService, CustomerService, ApiService],
+  providers: [ServiceProvidersService, CustomerService, ApiService, RegistrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
