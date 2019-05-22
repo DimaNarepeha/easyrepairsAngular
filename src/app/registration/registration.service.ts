@@ -18,7 +18,7 @@ export class RegistrationService {
 
   createCustomer(customer: Customer): Observable<Customer> {
     let body = JSON.stringify(customer);
-    let headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+    let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
     return this.httpService.post(this.baseURL + '/register/customer', body, options)
@@ -28,7 +28,7 @@ export class RegistrationService {
   createProvider(provider: Provider): Observable<Provider> {
     {
       let body = JSON.stringify(provider);
-      let headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+      let headers = new Headers({'Content-Type': 'application/json'});
       let options = new RequestOptions({headers: headers});
 
       return this.httpService.post(this.baseURL + '/register/provider', body, options)
