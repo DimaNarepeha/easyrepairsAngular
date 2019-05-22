@@ -25,6 +25,7 @@ export class AddServiceProvidersComponent implements OnInit {
       this.addr = addrObj;
       this.addrKeys = Object.keys(addrObj);
       console.log(this.addrKeys);
+      console.log(this.addr);
     });
   }
 
