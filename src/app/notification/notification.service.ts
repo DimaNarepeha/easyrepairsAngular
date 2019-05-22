@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
+import {Notification} from './notification';
 
 
 @Injectable({
@@ -9,7 +10,12 @@ import {environment} from '../../environments/environment';
 })
 export class NotificationService {
   private readonly baseURL; // TODO change hardcoded localhost
-
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'my-auth-token'
+    })
+  };
 
   constructor(private http: HttpClient) {// TODO change to https here
     this.baseURL = environment.baseURL;
@@ -19,7 +25,9 @@ export class NotificationService {
     return this.http.get<Notification[]>(this.baseURL + '/notification/get/' + id);
   }
 
-  addNotificationForUser(id, notification: Notification) {
-    this.http.post(this.baseURL + 'notification/post/' + id, notification);
+
+  addNotificationForUser(id, notification: Notification): Observable<Notification> {
+    return this.http.post<Notification>(this.baseURL + '/notification/add/' + id, JSON.stringify(notification), this.httpOptions);
   }
+
 }
