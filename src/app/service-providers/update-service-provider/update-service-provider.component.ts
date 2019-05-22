@@ -39,6 +39,12 @@ export class UpdateServiceProviderComponent implements OnInit {
       this.addr = addrObj;
       this.addrKeys = Object.keys(addrObj);
       console.log(this.addrKeys);
+      // @ts-ignore
+      this.serviceProvider.location.country = this.addr.country;
+      // @ts-ignore
+      this.serviceProvider.location.city = this.addr.locality;
+      // @ts-ignore
+      this.serviceProvider.location.region = this.addr.admin_area_l1;
     });
   }
 
@@ -55,12 +61,9 @@ export class UpdateServiceProviderComponent implements OnInit {
     this.providerLocation.name = this.serviceProvider.name;
     this.providerLocation.email = this.serviceProvider.email;
     this.providerLocation.description = this.serviceProvider.description;
-    // @ts-ignore
-    this.providerLocation.country = this.addr.country;
-    // @ts-ignore
-    this.providerLocation.city = this.addr.locality;
-    // @ts-ignore
-    this.providerLocation.region = this.addr.admin_area_l1;
+    this.providerLocation.country = this.serviceProvider.location.country;
+    this.providerLocation.city = this.serviceProvider.location.city;
+    this.providerLocation.region = this.serviceProvider.location.region;
     this.serviceProvidersService.updateServiceProvider(id, this.providerLocation)
       .subscribe((response) => {
         console.log(response);
@@ -73,8 +76,10 @@ export class UpdateServiceProviderComponent implements OnInit {
 
   ngOnInit() {
     this.rout.params.subscribe(next => {
-      this.serviceProvidersService.getServiceProviderById(next['id']).subscribe(next => {
+      this.serviceProvidersService.getServiceProviderById(next.id).subscribe(next => {
         this.serviceProvider = next;
+        console.log(next);
+        console.log(this.serviceProvider);
       }, err => {
         console.log(err);
       });
