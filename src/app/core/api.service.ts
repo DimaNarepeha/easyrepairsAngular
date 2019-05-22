@@ -2,12 +2,15 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../login/user';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class ApiService {
 
+  private readonly baseURL;
 
   constructor(private http: HttpClient) {
+    this.baseURL = environment.baseURL;
   }
 
   login(loginPayload) {
@@ -15,12 +18,12 @@ export class ApiService {
       Authorization: 'Basic ' + btoa('junior-client:junior-secret'),
       'Content-type': 'application/x-www-form-urlencoded',
     });
-    return this.http.post('http://localhost:8080/' + 'oauth/token', loginPayload, {headers});
+    return this.http.post(this.baseURL + '/oauth/token', loginPayload, {headers});
   }
 
   get(): Observable<User> {
     // @ts-ignore
-    return this.http.get('http://localhost:8080/user?access_token=' + this.returnAccessToken())
+    return this.http.get(this.baseURL + '/user?access_token=' + this.returnAccessToken())
       .catch(err => Observable.throw(err));
   }
 

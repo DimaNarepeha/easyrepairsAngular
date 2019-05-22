@@ -1,7 +1,11 @@
+import {Location} from '../location/location';
+
 export class  ServiceProviders {
   id: number;
   name: string;
   email: string;
   description: string;
   image:any = File;
+  lastUpdate: string;
+  location: Location;
 }
