@@ -1,14 +1,8 @@
 <div>
 <header tabindex="0"><span>easy</span><span class="orange">REPAIRS.COM</span> </header>
 <div class="notification_icon_position"><app-notification></app-notification></div>
-<div class="login"><a routerLink="/login"><span class="orange">Log</span>In</a></div>
-<header tabindex="0"><span>easy</span><span class="orange">REPAIRS.COM</span></header>
-<div class="login" *ngIf="isUser()==false">
-  <a routerLink="/login"><span class="orange">Log</span>In</a>
-</div>
-<div class="login" *ngIf="isUser()==true">
-  <a routerLink="/logout"><span class="orange">Log</span>Out</a>
-</div>
+<div class="login" *ngIf="isUser()==false"><a routerLink="/login"><span class="orange">Log</span>In</a></div>
+<div class="login" *ngIf="isUser()==true"><a routerLink="/logout"><span class="orange">Log</span>Out</a></div>
 <div class="button" tabindex="0" (click)="firstClick()">
   <span class="icon-bar"></span>
   <span class="icon-bar"></span>
@@ -40,9 +34,8 @@
     </div>
     <ul>
       <li><a routerLink="/"><i class="fas fa-home"></i> Home</a></li>
-      <li><a routerLink="/service-providers"><i class="fas fa-cog"></i>Service providers</a></li>
-      <li><a routerLink="/service-providers"><i class="fas fa-cog"></i> Services</a></li>
-      <li><a routerLink="/customers"><i class="far fa-smile"></i> Customers</a></li>
+      <li *ngIf="isUser()==true"><a routerLink="/service-providers"><i class="fas fa-cog"></i>Service providers</a></li>
+      <li *ngIf="isUser()==true"><a routerLink="/customers"><i class="far fa-smile"></i>Customers</a></li>
       <li><a routerLink="#0"><i class="fas fa-blog"></i> Blog</a></li>
       <li><a routerLink="#0"><i class="fas fa-info-circle"></i> About</a></li>
     </ul>
