@@ -39,12 +39,14 @@ export class CustomerComponent implements OnInit {
     firstname: new FormControl(null, [
       Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(60)
+      Validators.maxLength(60),
+      Validators.pattern('[A-Z][a-z]*')
     ]),
     lastname: new FormControl(null, [
       Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(60)
+      Validators.maxLength(60),
+      Validators.pattern('[A-Z][a-z]*')
     ]),
     email: new FormControl(null, [
       Validators.required,

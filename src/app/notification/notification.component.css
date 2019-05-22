@@ -5,12 +5,12 @@
   float: right;
   font-style: italic;
   font-size: 80%;
-  z-index: 12;
+  z-index: 13;
 }
 
 .notification_dropdown_block {
   background: #212121;
-  z-index: 12;
+  z-index: 13;
 }
 
 .notification-block {
