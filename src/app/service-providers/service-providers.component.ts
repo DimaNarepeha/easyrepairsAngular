@@ -10,7 +10,7 @@ import 'rxjs/add/observable/throw';
 })
 export class ServiceProvidersComponent implements OnInit {
 
-  private page: number = 0;
+  private page = 0;
   serviceProviders: ServiceProviders[];
   serviceProvider = new ServiceProviders();
   private providerPage: Array<any>;
@@ -45,12 +45,12 @@ export class ServiceProvidersComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data);
-          let d = data;
+          const d = data;
           console.log(d);
-          //console.log("result = " + d.result);
-          this.providerPage = d['content'];
-          this.pages = new Array(d['totalPages']);
-          console.log(data['content']);
+          // console.log("result = " + d.result);
+          this.providerPage = d.content;
+          this.pages = new Array(d.totalPages);
+          console.log(data.content);
           console.log(this.pages);
           console.log(this.providerPage);
           console.log(data);

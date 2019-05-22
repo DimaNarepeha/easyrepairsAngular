@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
-import { ServiceProviders } from '../service-providers';
-import { ServiceProvidersService } from '../service-providers.service';
+import {ServiceProviders} from '../service-providers';
+import {ServiceProvidersService} from '../service-providers.service';
 
 @Component({
   selector: 'app-service-provider-one',
@@ -13,23 +13,24 @@ export class ServiceProviderOneComponent implements OnInit {
 
   serviceProvider = new ServiceProviders();
 
+
   constructor(private serviceProvidersService: ServiceProvidersService, private rout: ActivatedRoute) {
+
+  }
+
+
+  ngOnInit() {
     this.rout.params.subscribe(next => {
-      this.serviceProvidersService.getServiceProviderById(next['id']).subscribe(next => {
+      this.serviceProvidersService.getServiceProviderById(next.id).subscribe(next => {
         this.serviceProvider = next;
         console.log(this.serviceProvider);
       }, err => {
         console.log(err);
-      })
+      });
     }, err => {
-      console.log(err); 
-    })
+      console.log(err);
+    });
   }
 
-  ngOnInit() {
-  
-  }
-
-  
 
 }
