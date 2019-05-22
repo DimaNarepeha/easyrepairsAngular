@@ -43,9 +43,9 @@ export class CreateOfferComponent implements OnInit {
     this.offerDTO.id = 1;  // TODO
     this.offerDTO.customerDTO.id = 1;  // TODO
     this.offerDTO.locationDTO.id = 1;  // TODO
-    this.offerDTO.locationDTO.country = 'HGVHGvghvk';
-    this.offerDTO.locationDTO.region = 'HGVHGvghvk';
-    this.offerDTO.locationDTO.city = 'HGVHGvghvk';
+    this.offerDTO.locationDTO.country = 'Ukraine';
+    this.offerDTO.locationDTO.region = 'Lvivska';
+    this.offerDTO.locationDTO.city = 'Lviv';
 
     this.createOfferService.createOffer(this.offerDTO)
       .subscribe((x) => {
@@ -94,5 +94,16 @@ export class CreateOfferComponent implements OnInit {
     this.offerDTO.description = null;
     this.offerDTO.startDate = null;
     this.serviceDTOs.forEach(x => x.choose = false);
+    this.getOfferDTOs();
+  }
+
+  showServices(serviceDTOs: ServiceDTO[]) {
+    let services: string = ' ';
+    serviceDTOs.forEach(x => {
+      console.log(x.serviceName);
+      services.concat(x.serviceName);
+    });
+    console.log(services);
+    alert(services.toString());
   }
 }

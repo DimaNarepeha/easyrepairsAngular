@@ -37,19 +37,12 @@
         <p style="color: #FFC107">Enter description:</p><input
         class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text"
         [(ngModel)]="offerDTO.description" name="description"/><br/>
-        <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="createOfferDTO()">Create offer</button>
+        <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="createOfferDTO()">Create offer
+        </button>
       </form>
     </div>
   </div>
 </div>
-
-<!--<h2>List of services which has been chosen</h2>-->
-<!--<div *ngFor="let service of serviceDTOs">-->
-<!--  <div *ngIf="service.choose">-->
-<!--    <p>{{service.serviceName}}</p>-->
-<!--  </div>-->
-<!--</div>-->
-
 <div class="w3-container w3-yellow">
   <h2>Offers</h2>
 </div>
@@ -59,7 +52,7 @@
     <tr>
       <th>FirstName</th>
       <th>LastName</th>
-      <th>email</th>
+      <th>Email</th>
       <th>Country</th>
       <th>Region</th>
       <th>City</th>
@@ -79,6 +72,11 @@
       <td>{{offer.description}}</td>
       <td><!---<div class="form-group">-->
       <td>
+        <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom"
+                (click)="showServices(offer.serviceDTOs)">
+          Services
+        </button>
+      |
         <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom"
                 (click)="deleteOfferDTOById(offer.id)">
           Delete
