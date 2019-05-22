@@ -7,6 +7,7 @@ import {HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class CreateOfferService {
@@ -19,36 +20,20 @@ export class CreateOfferService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
-    return this.httpService.post('http://localhost:8080/offers/create', body, options)
+    return this.httpService.post(environment.baseURL + '/offers/create', body, options)
       .map((response: Response) => response.json());
   }
 
   getAllOffers(): Observable<OfferDTO[]> {
-    let headers = new Headers({'Access-Control-Allow-Origin': 'http://localhost:8080'});
+    let headers = new Headers({'Access-Control-Allow-Origin': environment.baseURL});
     let options = new RequestOptions({headers: headers});
-    return this.httpService.get('http://localhost:8080/offers/get-all', options)
+    return this.httpService.get(environment.baseURL + '/offers/get-all', options)
       .map((response: Response) => response.json())
       .catch(this.handleError);
-  }
-
-  getOfferById(id: number): Observable<OfferDTO> {
-    let headers = new Headers({'Access-Control-Allow-Origin': 'http://localhost:8080'});
-    let options = new RequestOptions({headers: headers});
-    return this.httpService.get('http://localhost:8080/offers/' + id, options)
-      .map((response: Response) => response.json())
-      .catch(this.handleError);
-  }
-
-  updateOffer(offerDTO: OfferDTO): Observable<OfferDTO> {
-    let body = JSON.stringify(offerDTO);
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
-    return this.httpService.put('http://localhost:8080/offers/update/' + body, options)
-      .map((response: Response) => response.json());
   }
 
   deleteOfferById(id: number) {
-    return this.httpService.delete('http://localhost:8080/offers/delete/' + id);
+    return this.httpService.delete(environment.baseURL + '/offers/delete/' + id);
   }
 
   private handleError(error: Response) {
@@ -56,9 +41,9 @@ export class CreateOfferService {
   }
 
   getAllServices(): Observable<ServiceDTO[]> {
-    let headers = new Headers({'Access-Control-Allow-Origin': 'http://localhost:8080'});
+    let headers = new Headers({'Access-Control-Allow-Origin': environment.baseURL});
     let options = new RequestOptions({headers: headers});
-    return this.httpService.get('http://localhost:8080/services/get-all', options)
+    return this.httpService.get(environment.baseURL + '/services/get-all', options)
       .map((response: Response) => response.json())
       .catch(this.handleError);
   }
