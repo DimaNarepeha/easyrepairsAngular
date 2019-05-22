@@ -51,6 +51,7 @@ export class RegistrationComponent implements OnInit {
         console.log(data);
         alert('successful!');
         this.CustomerForm.reset();
+        this.router.navigate(['/login']);
       },
       err => {
         alert('Email or username already exist!!!');
@@ -69,6 +70,7 @@ export class RegistrationComponent implements OnInit {
         this.provider = data;
         alert('successful!');
         this.ProviderForm.reset();
+        this.router.navigate(['/login']);
       },
     err => {
       alert('Email or username already exist!!!');
