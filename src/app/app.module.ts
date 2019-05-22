@@ -31,6 +31,8 @@ import {ApiService} from './core/api.service';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
 import {CreateOfferService} from "./create-offer/create-offer.service";
 import { NotificationComponent } from './notification/notification.component';
+import {RegistrationComponent} from './registration/registration.component';
+import {RegistrationService} from "./registration/registration.service";
 import { ListOffersComponent } from './list-offers/list-offers.component';
 import {ListOfferService} from "./list-offers/list-offer.service";
 
@@ -53,6 +55,9 @@ import {ListOfferService} from "./list-offers/list-offer.service";
     GooglePlacesDirective,
     LoginComponent,
     PasswordRecoveryComponent,
+    RegistrationComponent,
+    PasswordRecoveryComponent,
+    NotificationComponent,
     CreateOfferComponent,
     NotificationComponent,
     ListOffersComponent
@@ -66,7 +71,7 @@ import {ListOfferService} from "./list-offers/list-offer.service";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ServiceProvidersService, CustomerService, ApiService, CreateOfferService, ListOfferService],
+  providers: [ServiceProvidersService, CustomerService, ApiService, RegistrationService, CreateOfferService, ListOfferService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
