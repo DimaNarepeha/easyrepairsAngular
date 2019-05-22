@@ -4,12 +4,16 @@ import {Observable} from "rxjs";
 import {RequestOptions, Http, Response, Headers} from '@angular/http';
 import {HttpClient} from "@angular/common/http";
 import {Provider} from "./provider";
+import {environment} from "../../environments/environment";
 
 
 @Injectable()
 export class RegistrationService {
 
-  constructor(private httpService: Http , private http: HttpClient) {
+  private readonly baseURL;
+
+  constructor(private httpService: Http, private http: HttpClient) {
+    this.baseURL = environment.baseURL;
   }
 
   createCustomer(customer: Customer): Observable<Customer> {
@@ -17,16 +21,17 @@ export class RegistrationService {
     let headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
     let options = new RequestOptions({headers: headers});
 
-    return this.httpService.post('http://localhost:8080/register/customer', body, options)
+    return this.httpService.post(this.baseURL + '/register/customer', body, options)
       .map((response: Response) => response.json());
   }
+
   createProvider(provider: Provider): Observable<Provider> {
     {
       let body = JSON.stringify(provider);
       let headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
       let options = new RequestOptions({headers: headers});
 
-      return this.httpService.post('http://localhost:8080/register/provider', body, options)
+      return this.httpService.post(this.baseURL + '/register/provider', body, options)
         .map((response: Response) => response.json());
     }
   }

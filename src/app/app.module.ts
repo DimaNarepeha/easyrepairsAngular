@@ -28,9 +28,13 @@ import { GooglePlacesDirective } from './google-places.directive';
 import { LoginComponent } from './login/login.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import {ApiService} from './core/api.service';
+import { CreateOfferComponent } from './create-offer/create-offer.component';
+import {CreateOfferService} from "./create-offer/create-offer.service";
 import { NotificationComponent } from './notification/notification.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {RegistrationService} from "./registration/registration.service";
+import { ListOffersComponent } from './list-offers/list-offers.component';
+import {ListOfferService} from "./list-offers/list-offer.service";
 
 @NgModule({
   declarations: [
@@ -53,7 +57,10 @@ import {RegistrationService} from "./registration/registration.service";
     PasswordRecoveryComponent,
     RegistrationComponent,
     PasswordRecoveryComponent,
-    NotificationComponent
+    NotificationComponent,
+    CreateOfferComponent,
+    NotificationComponent,
+    ListOffersComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +71,7 @@ import {RegistrationService} from "./registration/registration.service";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ServiceProvidersService, CustomerService, ApiService, RegistrationService],
+  providers: [ServiceProvidersService, CustomerService, ApiService, RegistrationService, CreateOfferService, ListOfferService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
