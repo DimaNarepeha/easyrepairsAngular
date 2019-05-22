@@ -224,7 +224,7 @@ img {
   top: 15px;
   font-size: 1.2em;
   color: #fff;
-  z-index: 12;
+  z-index: 13;
 }
 
 .notification_icon_position {
@@ -236,7 +236,7 @@ img {
   height: 5%;
   font-size: 1.2em;
   color: #fff;
-  z-index: 12;
+  z-index: 13;
 }
 
 .avatar_container {

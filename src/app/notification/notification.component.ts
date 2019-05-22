@@ -22,7 +22,6 @@ export class NotificationComponent implements OnInit {
 
   openNotifications(divNotifications: HTMLDivElement) {
     this.isOpen = !this.isOpen;
-    divNotifications.scrollTop = 0;
   }
 
 
