@@ -1,38 +1,67 @@
-
-
-
 <div class="container py-4 px-5" style="width:30%; margin-left: 35%; margin-top:10%; background-color: #eaeaea8a;">
 
   <div class=" register-container" id="accordion">
     <h2 style="margin: auto; text-align: center">Registration </h2>
     <div class="choose-variant">
       <button class="btn btn-outline-warning btn-lg" id="headingOne"  style="width: 48%; margin-top: 10px;" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample2">
-        Like a customer
+        Customer
       </button>
       <button class="btn btn-outline-warning btn-lg" id="headingTwo"  style="width: 48%; margin-top: 10px; margin-left:4%;" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" >
-        Like a provider
+        Provider
       </button>
       <div class="collapse" id="collapseExample1" aria-labelledby="headingOne" data-parent="#accordion">
-        <form (ngSubmit)="registerCustomer()" >
+        <form [formGroup]="CustomerForm" (ngSubmit)="registerCustomer()">
           <div class="form-group mt-4">
-            <input type="text" class="form-control" [(ngModel)]="user.username" id="username1" name="username" autocomplete="off"
+            <input type="text" class="form-control" formControlName="username"  id="username1"  autocomplete="off"
                    placeholder="Username">
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="CustomerForm.controls['username'].hasError('required') && CustomerForm.controls['username'].touched">
+              Username is required field
+            </div>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control"  id="pwd1" [(ngModel)]="user.password" name="password" autocomplete="off"
+            <input type="password" class="form-control"  id="pwd1" formControlName="password" autocomplete="off"
                    placeholder="Password">
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="CustomerForm.controls['password'].hasError('required') && CustomerForm.controls['password'].touched">
+              Password is required field
+            </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control"  id="email1" [(ngModel)]="customer.email" name="email" autocomplete="off"
+            <input type="text" class="form-control"  id="email1" formControlName="email" name="email" autocomplete="off"
                    placeholder="Email">
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="CustomerForm.controls['email'].hasError('required') && CustomerForm.controls['email'].touched">
+              Email is required field
+            </div>
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="CustomerForm.controls['email'].hasError('email') && CustomerForm.controls['email'].dirty">
+              Email can be right
+            </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="customer.firstName" id="firstName1" name="firstname" autocomplete="off"
+            <input type="text" class="form-control" formControlName="firstName" id="firstName1" autocomplete="off"
                    placeholder="First name">
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="CustomerForm.controls['firstName'].hasError('required') && CustomerForm.controls['firstName'].touched">
+              First name is required field
+            </div>
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="CustomerForm.controls['firstName'].hasError('pattern') && CustomerForm.controls['firstName'].dirty">
+              Incorrect format of first name
+            </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="customer.lastName" id="LastName1" name="lastname" autocomplete="off"
+            <input type="text" class="form-control" formControlName="lastName" id="LastName1"  autocomplete="off"
                    placeholder="Last name">
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="CustomerForm.controls['lastName'].hasError('required') && CustomerForm.controls['lastName'].touched">
+              Last name is required field
+            </div>
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="CustomerForm.controls['lastName'].hasError('pattern') && CustomerForm.controls['lastName'].dirty">
+              Incorrect format of last name
+            </div>
           </div>
           <div class="text-right mt-4">
             <button class="btn btn-outline-warning btn-lg">Register</button>
@@ -40,26 +69,43 @@
         </form>
       </div>
       <div class="collapse" id="collapseExample2" aria-labelledby="headingTwo" data-parent="#accordion">
-        <form (ngSubmit)="registerProvider()">
+        <form [formGroup]="ProviderForm" (ngSubmit)="registerProvider()">
           <div class="form-group mt-4">
-            <input type="text" class="form-control" [(ngModel)]="user.username" name="username" id="username2" autocomplete="off"
+            <input type="text" class="form-control" formControlName="username" id="username2" autocomplete="off"
                    placeholder="Username">
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="ProviderForm.controls['username'].hasError('required') && ProviderForm.controls['username'].touched">
+              Username is required field
+            </div>
           </div>
-          <!--<div class="error" style="text-align: center; color: red;"
-               *ngIf="heroForm.">
-            Password is required field
-          </div>-->
+
           <div class="form-group">
-            <input type="password" class="form-control" [(ngModel)]="user.password" name="password" id="pwd2" autocomplete="off"
+            <input type="password" class="form-control" formControlName="password" id="pwd2" autocomplete="off"
                    placeholder="Password">
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="ProviderForm.controls['password'].hasError('required') && ProviderForm.controls['password'].touched">
+              Password is required field
+            </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="provider.email" name="email" id="email" autocomplete="off"
+            <input type="text" class="form-control" formControlName="email" id="email" autocomplete="off"
                    placeholder="Email">
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="ProviderForm.controls['email'].hasError('required') && ProviderForm.controls['email'].touched">
+              Email is required field
+            </div>
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="ProviderForm.controls['email'].hasError('email') && ProviderForm.controls['email'].dirty">
+              Email can be right
+            </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="provider.name" name="name" id="Name" autocomplete="off"
+            <input type="text" class="form-control" formControlName="name" id="Name" autocomplete="off"
                    placeholder="Name">
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="ProviderForm.controls['name'].hasError('required') && ProviderForm.controls['name'].touched">
+              Name is required field
+            </div>
           </div>
           <div class="text-right mt-4">
             <button class="btn btn-outline-warning btn-lg">Register</button>

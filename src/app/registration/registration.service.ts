@@ -4,7 +4,6 @@ import {Observable} from "rxjs";
 import {RequestOptions, Http, Response, Headers} from '@angular/http';
 import {HttpClient} from "@angular/common/http";
 import {Provider} from "./provider";
-import {_catch} from "rxjs-compat/operator/catch";
 
 
 @Injectable()
@@ -29,7 +28,6 @@ export class RegistrationService {
 
       return this.httpService.post('http://localhost:8080/register/provider', body, options)
         .map((response: Response) => response.json());
-
     }
   }
 }
