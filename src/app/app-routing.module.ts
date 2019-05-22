@@ -10,7 +10,8 @@ import {LoginComponent} from './login/login.component';
 import {PasswordRecoveryComponent} from './password-recovery/password-recovery.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {CreateOfferComponent} from './create-offer/create-offer.component';
-import {ListOffersComponent} from "./list-offers/list-offers.component";
+import {ListOffersComponent} from './list-offers/list-offers.component';
+import {LogoutComponent} from './logout/logout.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -24,7 +25,9 @@ const routes: Routes = [
   {path: 'register', component: RegistrationComponent},
   {path: 'recovery', component: PasswordRecoveryComponent},
   {path: 'create-offer', component: CreateOfferComponent},
-  {path: 'list-offers', component: ListOffersComponent}
+  {path: 'list-offers', component: ListOffersComponent},
+  {path: 'logout', component: LogoutComponent},
+  {path: 'recovery', component: PasswordRecoveryComponent}
 ];
 
 @NgModule({
