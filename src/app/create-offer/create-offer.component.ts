@@ -27,11 +27,9 @@ export class CreateOfferComponent implements OnInit {
     this.getOfferDTOs();
     this.offerDTO.locationDTO = new LocationDTO();
     this.offerDTO.customerDTO = new CustomerDTO();
-
-    // this.offerDTO.locationDTO.country = this.addr.country; // TODO
-    // this.offerDTO.locationDTO.region = this.addr.admin_area_l1;
-    // this.offerDTO.locationDTO.city = this.addr.city;
-    // this.offerDTO.locationDTO.id = 3;
+    this.offerDTO.locationDTO.country = '';
+    this.offerDTO.locationDTO.region = '';
+    this.offerDTO.locationDTO.city = '';
   }
 
   setAddress(addrObj) {
@@ -39,6 +37,7 @@ export class CreateOfferComponent implements OnInit {
       this.addr = addrObj;
       this.addrKeys = Object.keys(addrObj);
       console.log(this.addrKeys);
+      console.log(this.addr);
     });
   }
 
@@ -52,9 +51,12 @@ export class CreateOfferComponent implements OnInit {
 
     this.offerDTO.serviceDTOs = this.chosenServices;
     this.offerDTO.customerDTO.id = 2;  // TODO
-    this.offerDTO.locationDTO.country = 'Ukraine123';
-    this.offerDTO.locationDTO.region = 'Lvivska123';
-    this.offerDTO.locationDTO.city = 'Lviv123';
+    // @ts-ignore
+    this.offerDTO.locationDTO.country = this.addr.country;
+    // @ts-ignore
+    this.offerDTO.locationDTO.region = this.addr.admin_area_l1;
+    // @ts-ignore
+    this.offerDTO.locationDTO.city = this.addr.locality;
 
     this.createOfferService.createOffer(this.offerDTO)
       .subscribe((x) => {
@@ -117,15 +119,5 @@ export class CreateOfferComponent implements OnInit {
     this.offerDTO.startDate = null;
     this.serviceDTOs.forEach(x => x.choose = false);
     this.getOfferDTOs();
-  }
-
-  showServices(serviceDTOs: ServiceDTO[]) {
-    let services: string = ' ';
-    serviceDTOs.forEach(x => {
-      console.log(x.serviceName);
-      services.concat(x.serviceName);
-    });
-    console.log(services);
-    alert(services.toString());
   }
 }

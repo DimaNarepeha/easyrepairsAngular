@@ -14,17 +14,9 @@ export class ListOfferService {
   }
 
   getAllOffers(): Observable<OfferDTO[]> {
-    let headers = new Headers({'Access-Control-Allow-Origin': environment.baseURL});
-    let options = new RequestOptions({headers: headers});
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
     return this.httpService.get(environment.baseURL + '/offers/get-all', options)
-      .map((response: Response) => response.json())
-      .catch(this.handleError);
-  }
-
-  getOfferById(id: number): Observable<OfferDTO> {
-    let headers = new Headers({'Access-Control-Allow-Origin': environment.baseURL});
-    let options = new RequestOptions({headers: headers});
-    return this.httpService.get(environment.baseURL + '/offers/' + id, options)
       .map((response: Response) => response.json())
       .catch(this.handleError);
   }

@@ -28,16 +28,6 @@ export class ListOffersComponent implements OnInit {
         });
   }
 
-  getOfferDTOById(id: number) {
-    this.listOfferService.getOfferById(id)
-      .subscribe((x) => {
-          this.offerDTO = x;
-        },
-        (error) => {
-          console.log(error);
-        });
-  }
-
   chooseOfferDTOById(id: number) {  // TODO
     alert('You chose something but nothing happened. Sorry');
   }
