@@ -123,10 +123,17 @@ body {
   top: 16px;
   position: absolute;
   content: "\f08a";
+  color: #f5f528;
   font-family: FontAwesome;
   display: block;
 }
-.love:hover:before {
+.love:before {
   color: #f5f528;
   content: "\f004";
+}
+.right{
+  float: right;
+  margin-top: 16px;
+  margin-right: 52px;
+  color : #f5f528;
 }
