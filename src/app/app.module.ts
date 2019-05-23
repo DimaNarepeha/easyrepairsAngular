@@ -36,6 +36,8 @@ import {RegistrationComponent} from './registration/registration.component';
 import {RegistrationService} from './registration/registration.service';
 import {ListOffersComponent} from './list-offers/list-offers.component';
 import {ListOfferService} from './list-offers/list-offer.service';
+import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
+import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component';
 
 
 @NgModule({
@@ -63,7 +65,10 @@ import {ListOfferService} from './list-offers/list-offer.service';
     NotificationComponent,
     CreateOfferComponent,
     NotificationComponent,
-    ListOffersComponent
+
+    ListOffersComponent,
+    AdminApprovePageComponent,
+    MenuBarComponent
 
   ],
   imports: [
@@ -75,7 +80,7 @@ import {ListOfferService} from './list-offers/list-offer.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  
+
   providers: [ServiceProvidersService, CustomerService, ApiService, SpGeneralService, LandingPageService, RegistrationService, CreateOfferService, ListOfferService],
   bootstrap: [AppComponent]
 })
