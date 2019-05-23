@@ -8,9 +8,10 @@ import { FilterComponent } from './filter/filter.component';
 import { FooterComponent } from './footer/footer.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SpGeneralComponent } from './sp-general/sp-general.component';
+import { SpGeneralService } from './sp-general/sp-general.service';
 import { QuoteComponent } from './quote/quote.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-
+import { LandingPageService } from './landing-page/landing-page.service';
 import {HttpModule} from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -56,7 +57,7 @@ import {ApiService} from './core/api.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ServiceProvidersService, CustomerService, ApiService],
+  providers: [ServiceProvidersService, CustomerService, ApiService, SpGeneralService, LandingPageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

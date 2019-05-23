@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ServiceProviders } from '../service-providers/service-providers';
-import {ProvidersInfo} from './providers-info';
-import {ProvidersInfoService} from './sp-general.service';
+import {Component, OnInit} from '@angular/core';
+import {ProvidersInfo} from '../core/model/providers-info';
+import {SpGeneralService} from './sp-general.service';
+import {LandingPageService} from '../landing-page/landing-page.service';
+
 
 @Component({
   selector: 'app-sp-general',
@@ -10,21 +11,27 @@ import {ProvidersInfoService} from './sp-general.service';
 })
 export class SpGeneralComponent implements OnInit {
 
-   providersInfo: ProvidersInfo[];
-   provider = new ProvidersInfo();
+  private page: number = 3;
+  serviceProviders: ProvidersInfo[];
+  serviceProvider = new ProvidersInfo();
+  private providerPage: Array<any>;
+  private pages: Array<number>;
+  public userFile: any = File;
 
-   constructor( private _providerInfoService: ProvidersInfoService){}
-
-  ngOnInit():void{
-  //  this.getProvidersInfo();
+  constructor(private serviceProvidersService: LandingPageService) {
   }
 
+  ngOnInit() {
 
-  getProvidersInfo(): void{
-      this._providerInfoService.getAllProvidersInfo().subscribe(
-          (providerData)=>{this.provider=providerData,console.log(providerData)},
-           (error)=>{console.log(error);
-          }
-      );
+    // console.log(this.serviceProviders);
+
+    this.serviceProvidersService.getApprovedProviders()// TODO change hardcoded user here
+      .subscribe(data => this.serviceProviders = data);
+    this.serviceProviders = this.sortArrayProviders();
   }
+
+  sortArrayProviders(): ProvidersInfo[] {
+    return this.serviceProvidersService.sortProviders(this.serviceProviders, this.page);
+  }
+
 }

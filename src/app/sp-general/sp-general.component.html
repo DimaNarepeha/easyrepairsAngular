@@ -1,16 +1,16 @@
-<div class="blog_left_sidebar" *ngFor="let provider of providersInfo">
+<div class="blog_left_sidebar" *ngFor="let serviceProvider of serviceProviders ">
   <article class="blog_style1">
     <div class="blog_img">
-      <img class="img-fluid" src="{{provider.image}}" alt="">
+      <img class="img-fluid" src="http://localhost:8080/service-providers/image/{{serviceProvider.image}}" alt="">
     </div>
     <div class="blog_text">
       <div class="blog_text_inner">
         <div class="cat">
-          <a href="#"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{provider.city}}</a>
-          <a href="#"><i class="far fa-calendar-alt" aria-hidden="true"></i>{{provider.registrationDate}}</a>
-          <a href="#"><i class="far fa-comments" aria-hidden="true"></i> {{provider.countComment}}</a>
+          <a href="#"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{serviceProvider.city}}</a>
+          <a href="#"><i class="far fa-calendar-alt" aria-hidden="true"></i> {{serviceProvider.registrationDate}}</a>
+          <a href="#"><i class="far fa-comments" aria-hidden="true"></i> {{serviceProvider.countComment}}</a>
           <div class="right">
-            <span> {{provider.raiting}}</span>
+            <span> {{serviceProvider.raiting}}</span>
             <span class="fas fa-heart checked"></span>
             <span class="fas fa-heart checked"></span>
             <span class="fas fa-heart checked"></span>
@@ -18,44 +18,25 @@
             <span class="fas fa-heart"></span>
           </div>
         </div>
-
-        <a [routerLink]="['/service-providers',serviceProvider.id]">
-          <h4>{{provider.name}}</h4>
+        <a [routerLink] = "['/service-providers',serviceProvider.id]">
+          <h4>{{serviceProvider.name}}</h4>
         </a>
-        <p>{{provider.description}}</p>
+        <p>{{serviceProvider.description}}</p>
 
         <ul class="list-horizontal">
-          <li *ngFor="let service of provider.services">
-            <h5>{{service}}</h5>
+          <li *ngFor="let service of serviceProvider.services">
+            <h5>{{service}} </h5>
           </li>
+
+
         </ul>
-        <a [routerLink]="['/service-providers',provider.id]" class="right genric-btn primary">Read more</a>
+        <a [routerLink] = "['/service-providers',serviceProvider.id]" class="right genric-btn primary">Read more</a>
       </div>
     </div>
   </article>
-
 </div>
-<!--
-<nav class="blog-pagination justify-content-center d-flex">
-<ul class="pagination">
-  <li class="page-item">
-      <a href="#" class="page-link" aria-label="Previous">
-          <span aria-hidden="true">
-                <i class="fas fa-arrow-left"></i>
-          </span>
-      </a>
-  </li>
-  <li class="page-item" *ngFor="let p of pages; let i=index">
-    <a href="" class="page-link" (click)="setPage(i,$event)" >{{i+1}}</a>
-  </li>
-  <li class="page-item">
-      <a href="#" class="page-link" aria-label="Next">
-          <span aria-hidden="true">
-              <i class="fas fa-arrow-right"></i>
-          </span>
-      </a>
-  </li>
+<ul class="nav nav-pills">
+    <li class="nav-item" *ngFor="let p of pages; let i=index">
+      <a  class="nav-link " href="" (click)="setPage(i,$event)" >{{i+1}}</a>
+    </li>
 </ul>
-</nav>
-
--->

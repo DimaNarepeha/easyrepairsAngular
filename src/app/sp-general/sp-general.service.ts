@@ -1,25 +1,33 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions, Headers} from '@angular/http';
-import {HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
-import { ProvidersInfo } from './providers-info';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {HttpClient} from '@angular/common/http';
+import {ProvidersInfo} from '../core/model/providers-info';
+import {Feedback} from '../core/model/feedback';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import 'rxjs/Rx';
+import {RequestOptions, Http, Response, Headers} from '@angular/http';
+import {throwError} from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SpGeneralService {
+
+  private url = 'http://localhost:8080/landing-page/';
+  private allapproved = 'all-approved';
+  private comments = 'top-comment';
+
+  // TODO change hardcoded localhost
 
 
+  constructor(private http: HttpClient) {// TODO change to https here
+  }
 
-@Injectable()
-export class ProvidersInfoService{
+  getApprovedProviders(): Observable<ProvidersInfo[]> {
+    return this.http.get<ProvidersInfo[]>(this.url+ this.allapproved );
+  }
 
-    constructor(private _httpService: Http,private _sanitizer: DomSanitizer){};
-
-    getAllProvidersInfo(): Observable <ProvidersInfo>{
-           return this._httpService.get("http://localhost:8080/landing-page").
-            map( (response:Response) => response.json()).catch(this.handleError);
-    }
-private handleError(error: Response){
-            return Observable.throw(error);
-    }
+  getLatestComments(): Observable<Feedback[]> {
+    return this.http.get<Feedback[]>(this.url + this.comments);
+  }
 }
