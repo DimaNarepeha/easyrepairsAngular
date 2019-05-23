@@ -31,10 +31,8 @@ export class ServiceProvidersService {
   uploadImage(file: any, id: number) {
     const formData = new FormData();
     formData.append('imageFile', file);
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const options = new RequestOptions({headers});
 
-    return this.httpService.post(this.baseURL + '/service-providers/' + id, formData, options)
+    return this.httpService.post(this.baseURL + '/service-providers/' + id, formData)
       .subscribe(res => {
         console.log(res);
         alert('SUCCESS !!');
