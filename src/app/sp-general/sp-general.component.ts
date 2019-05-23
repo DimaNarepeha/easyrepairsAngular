@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ServiceProviders } from '../service-providers/service-providers';
-import { ServiceProvidersService } from '../service-providers/service-providers.service';
+import {Component, OnInit} from '@angular/core';
+import {ProvidersInfo} from '../core/model/providers-info';
+import {SpGeneralService} from './sp-general.service';
+import {LandingPageService} from '../landing-page/landing-page.service';
+
 
 @Component({
   selector: 'app-sp-general',
@@ -9,94 +11,27 @@ import { ServiceProvidersService } from '../service-providers/service-providers.
 })
 export class SpGeneralComponent implements OnInit {
 
-  private page:number =0;
-  serviceProviders: ServiceProviders[];
-  serviceProvider = new ServiceProviders();
+  private page: number = 3;
+  serviceProviders: ProvidersInfo[];
+  serviceProvider = new ProvidersInfo();
   private providerPage: Array<any>;
-  private  pages:Array<number>;
-  public userFile:any = File; 
+  private pages: Array<number>;
+  public userFile: any = File;
 
-  constructor(private serviceProvidersService: ServiceProvidersService) { }
+  constructor(private serviceProvidersService: LandingPageService) {
+  }
 
   ngOnInit() {
-    // this.serviceProviders = this.providerPage;
+
     // console.log(this.serviceProviders);
-    this.getServiceProvidersByPage();
+
+    this.serviceProvidersService.getApprovedProviders()// TODO change hardcoded user here
+      .subscribe(data => this.serviceProviders = data);
+    this.serviceProviders = this.sortArrayProviders();
   }
 
-  // setPage(i,event:any){
-  //   event.preventDefault();
-  //   this.page=i;
-  //   this.getServiceProvidersByPage();
-    
-  // }
-
-  onSelectFile(file1,id){
-    const file = file1;
-    console.log(file);
-    this.userFile=file; 
-    this.serviceProvidersService.uploadImage(file,id);
-}
-  getServiceProvidersByPage(){
-  this.serviceProvidersService.getServiceProvidersByPage(this.page)
-    .subscribe(
-      data=>{
-        console.log(data);
-        let d = data;
-         console.log(d);
-        //console.log("result = " + d.result);
-        this.providerPage= d['content'];
-        this.pages=new Array(d['totalPages']);
-        console.log(data['content']);
-        console.log( this.pages);
-        console.log( this.providerPage)
-        console.log(data)
-    },
-     (error)=>{console.log(error);
-    }
-  );
-}
-
-setPage(i,event:any){
-  event.preventDefault();
-  this.page=i;
-  this.getServiceProvidersByPage();
-  
-}
-
-  getServiceProviders(): void {
-    this.serviceProvidersService.getAllServiceProviders()
-      .subscribe((serviceProvidersData) => {
-          this.serviceProviders = serviceProvidersData, console.log(serviceProvidersData);
-        },
-        (error) => {
-          console.log(error);
-        });
+  sortArrayProviders(): ProvidersInfo[] {
+    return this.serviceProvidersService.sortProviders(this.serviceProviders, this.page);
   }
-
-  private reset() {
-    this.serviceProvider.id = null;
-    this.serviceProvider.name = null;
-  }
-
-  getServiceProviderById(id: number) {
-    this.serviceProvidersService.getServiceProviderById(id)
-    .subscribe((serviceProvidersData) => {
-      this.serviceProvider = serviceProvidersData;
-    },
-    (error) => {
-      console.log(error);
-    });
-  }
-
-  // deleteService(id: number) {
-  //   this.serviceProvidersService.deleteServiceProvider(id)
-  //     .subscribe((response) => {
-  //       console.log(response);
-  //       this.getServiceProvidersByPage();
-  //     }, (error) => {
-  //       console.log(error);
-  //     });
-  // }
 
 }
