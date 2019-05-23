@@ -1,4 +1,5 @@
 import {Location} from '../location/location';
+import {ProviderStatus} from './service-provider.status';
 
 export class  ServiceProviders {
   id: number;
@@ -8,4 +9,5 @@ export class  ServiceProviders {
   image: any = File;
   lastUpdate: string;
   location: Location;
+  status: ProviderStatus;
 }

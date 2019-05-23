@@ -1,16 +1,18 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {BannerComponent} from './banner/banner.component';
-import {NavComponent} from './nav/nav.component';
-import {FilterComponent} from './filter/filter.component';
-import {FooterComponent} from './footer/footer.component';
-import {PaginationComponent} from './pagination/pagination.component';
-import {SpGeneralComponent} from './sp-general/sp-general.component';
-import {QuoteComponent} from './quote/quote.component';
-import {LandingPageComponent} from './landing-page/landing-page.component';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BannerComponent } from './banner/banner.component';
+import { NavComponent } from './nav/nav.component';
+import { FilterComponent } from './filter/filter.component';
+import { FooterComponent } from './footer/footer.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { SpGeneralComponent } from './sp-general/sp-general.component';
+import { SpGeneralService } from './sp-general/sp-general.service';
+import { QuoteComponent } from './quote/quote.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LandingPageService } from './landing-page/landing-page.service';
 import {HttpModule} from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -34,6 +36,9 @@ import {RegistrationComponent} from './registration/registration.component';
 import {RegistrationService} from './registration/registration.service';
 import {ListOffersComponent} from './list-offers/list-offers.component';
 import {ListOfferService} from './list-offers/list-offer.service';
+import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
+import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component';
+
 
 @NgModule({
   declarations: [
@@ -60,7 +65,11 @@ import {ListOfferService} from './list-offers/list-offer.service';
     NotificationComponent,
     CreateOfferComponent,
     NotificationComponent,
-    ListOffersComponent
+
+    ListOffersComponent,
+    AdminApprovePageComponent,
+    MenuBarComponent
+
   ],
   imports: [
     BrowserModule,
@@ -71,7 +80,8 @@ import {ListOfferService} from './list-offers/list-offer.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ServiceProvidersService, CustomerService, ApiService, RegistrationService, CreateOfferService, ListOfferService],
+
+  providers: [ServiceProvidersService, CustomerService, ApiService, SpGeneralService, LandingPageService, RegistrationService, CreateOfferService, ListOfferService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
