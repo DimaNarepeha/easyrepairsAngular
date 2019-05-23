@@ -12,6 +12,7 @@ import {RegistrationComponent} from './registration/registration.component';
 import {CreateOfferComponent} from './create-offer/create-offer.component';
 import {ListOffersComponent} from './list-offers/list-offers.component';
 import {LogoutComponent} from './logout/logout.component';
+import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path: 'create-offer', component: CreateOfferComponent},
   {path: 'list-offers', component: ListOffersComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'recovery', component: PasswordRecoveryComponent}
+  {path: 'recovery', component: PasswordRecoveryComponent},
+  {path: 'admin-approve', component: AdminApprovePageComponent}
 ];
 
 @NgModule({

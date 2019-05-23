@@ -1,0 +1,6 @@
+export enum ProviderStatus {
+  APPROVED = 'APPROVED',
+  MODIFIED = 'MODIFIED',
+  BLOCKED = 'BLOCKED',
+  NOTAPPROVED = 'NOTAPPROVED'
+}
