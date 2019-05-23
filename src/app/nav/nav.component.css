@@ -25,7 +25,7 @@ main {
   height: 100%;
 }
 
-main>div {
+main > div {
   margin: auto;
   max-width: 600px;
 }
@@ -89,7 +89,7 @@ main p {
   transition: .3s;
 }
 
-.icon-bar+.icon-bar {
+.icon-bar + .icon-bar {
   margin-top: 5px;
 }
 
@@ -147,11 +147,11 @@ main p {
   color: #f8b600;
 }
 
-#nav-content li:not(.small)+.small {
+#nav-content li:not(.small) + .small {
   margin-top: auto;
 }
 
-.button:focus-within+#nav-content {
+.button:focus-within + #nav-content {
   display: block;
 }
 
@@ -212,6 +212,31 @@ img {
   font-size: 1.2em;
   color: #fff;
   z-index: 12;
+}
+
+.notification_icon {
+  display: block;
+  position: fixed;
+  width: 7%;
+  height: 7%;
+  align-items: center;
+  left: 85%;
+  top: 15px;
+  font-size: 1.2em;
+  color: #fff;
+  z-index: 13;
+}
+
+.notification_icon_position {
+  display: block;
+  position: fixed;
+  align-items: center;
+  left: 85%;
+  top: 15px;
+  height: 5%;
+  font-size: 1.2em;
+  color: #fff;
+  z-index: 13;
 }
 
 .avatar_container {

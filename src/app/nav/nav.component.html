@@ -1,5 +1,14 @@
+<div>
 <header tabindex="0"><span>easy</span><span class="orange">REPAIRS.COM</span> </header>
+<div class="notification_icon_position"><app-notification></app-notification></div>
 <div class="login"><a routerLink="/login"><span class="orange">Log</span>In</a></div>
+<header tabindex="0"><span>easy</span><span class="orange">REPAIRS.COM</span></header>
+<div class="login" *ngIf="isUser()==false">
+  <a routerLink="/login"><span class="orange">Log</span>In</a>
+</div>
+<div class="login" *ngIf="isUser()==true">
+  <a routerLink="/logout"><span class="orange">Log</span>Out</a>
+</div>
 <div class="button" tabindex="0" (click)="firstClick()">
   <span class="icon-bar"></span>
   <span class="icon-bar"></span>
@@ -8,26 +17,34 @@
 <div id="nav-container" [style.display]="displayOn?'block':'none'" (click)="closeMenu()">
   <div class="bg"></div>
   <div id="nav-content" [style.display]="displayOn?'block':'none'" (click)="closeMenu()">
-    <div class="avatar_container">
-      <img src="https://avatars2.githubusercontent.com/u/49271116?s=460&v=4" />
+    <div class="avatar_container" *ngIf="isUser()==false">
+      <img src="https://avatars2.githubusercontent.com/u/49271116?s=460&v=4"/>
       <div class="user_info">
-        <p>Vasya Pypkin</p>
-        <p>vasya.pupkin@gmail.com <span class="show_block"><i class="fas fa-caret-down"></i></span></p>
+        <p style="margin-left: 35%">Guest</p>
       </div>
     </div>
-    <div class="user_menu">
+    <div class="avatar_container" *ngIf="isUser()==true">
+      <img src="https://avatars2.githubusercontent.com/u/49271116?s=460&v=4"/>
+      <div class="user_info">
+        <p style="margin-left: 35%;">{{getName()}}</p>
+      </div>
+    </div>
+    <div class="user_menu" *ngIf="isUser()==true">
       <ul>
         <li><a routerLink=""><i class="fas fa-user"></i> My Profile</a></li>
         <li><a routerLink=""><i class="fas fa-heart"></i> Favorite</a></li>
-        <li><a routerLink=""><i class="fas fa-sign-out-alt"></i> Log out</a></li>
+        <li *ngIf="isAdmin()==true"><a routerLink=""><i class="fas fa-cog"></i>Administration page</a></li>
+        <li><a routerLink="/logout"><i class="fas fa-sign-out-alt"></i>Log out</a></li>
       </ul>
       <hr>
     </div>
     <ul>
       <li><a routerLink="/"><i class="fas fa-home"></i> Home</a></li>
-      <li><a routerLink="/service-providers"><i class="fas fa-cog"></i> Services</a></li>
+      <li><a routerLink="/service-providers"><i class="fas fa-cog"></i>Service providers</a></li>
+      <li><a routerLink="/customers"><i class="far fa-smile"></i> Customers</a></li>
       <li><a routerLink="#0"><i class="fas fa-blog"></i> Blog</a></li>
       <li><a routerLink="#0"><i class="fas fa-info-circle"></i> About</a></li>
     </ul>
   </div>
+</div>
 </div>

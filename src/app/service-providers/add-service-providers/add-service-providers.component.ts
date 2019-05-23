@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { ServiceProviders } from '../service-providers';
-import { ServiceProvidersService } from '../service-providers.service';
+import {Component, OnInit, NgZone} from '@angular/core';
+import {Validators} from '@angular/forms';
+import {ServiceProviders} from '../service-providers';
+import {ServiceProvidersService} from '../service-providers.service';
+import {ProviderLocatoin} from '../../location/provider-locatoin';
 
 @Component({
   selector: 'app-add-service-providers',
@@ -11,23 +12,48 @@ import { ServiceProvidersService } from '../service-providers.service';
 export class AddServiceProvidersComponent implements OnInit {
 
   serviceProvider = new ServiceProviders();
-  public userFile:any = File; 
+  public userFile: any = File;
 
-  constructor(private serviceProvidersService: ServiceProvidersService) { }
+  public title = 'Places';
+  public addrKeys: string[];
+  public addr: object;
+
+  providerLocation = new ProviderLocatoin();
+
+  setAddress(addrObj) {
+    this.zone.run(() => {
+      this.addr = addrObj;
+      this.addrKeys = Object.keys(addrObj);
+      console.log(this.addrKeys);
+      console.log(this.addr);
+    });
+  }
+
+  constructor(private serviceProvidersService: ServiceProvidersService, private zone: NgZone) {
+  }
 
   ngOnInit() {
   }
 
   addServicerovider(): void {
-    this.serviceProvidersService.addServiceProviders(this.serviceProvider)
+    this.providerLocation.id = this.serviceProvider.id;
+    this.providerLocation.name = this.serviceProvider.name;
+    this.providerLocation.email = this.serviceProvider.email;
+    this.providerLocation.description = this.serviceProvider.description;
+    // @ts-ignore
+    this.providerLocation.country = this.addr.country;
+    // @ts-ignore
+    this.providerLocation.city = this.addr.locality;
+    // @ts-ignore
+    this.providerLocation.region = this.addr.admin_area_l1;
+    this.serviceProvidersService.addServiceProviders(this.providerLocation)
       .subscribe((response) => {
         console.log(response);
-        alert("Provider saved!");
+        alert('Provider saved!');
       }, (error) => {
         console.log(error);
       });
   }
-
 
 
 }

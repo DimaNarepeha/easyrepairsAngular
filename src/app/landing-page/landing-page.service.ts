@@ -10,11 +10,12 @@ import {ProvidersInfo} from '../core/model/providers-info';
 import {Feedback} from '../core/model/feedback';
 import {Service} from '../core/model/service';
 import { ProvidersCriteria } from '../core/model/providers-criteria';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable()
 export class LandingPageService {
-  private url = 'http://localhost:8080/';
+  private url = environment.baseURL;
   private allapproved = 'landing-page/all-approved';
   private comments = 'landing-page/top-comment';
   private services = 'services/get-all';

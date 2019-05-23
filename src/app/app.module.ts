@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,17 +16,26 @@ import { LandingPageService } from './landing-page/landing-page.service';
 import {HttpModule} from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { ServiceProvidersComponent } from './service-providers/service-providers.component';
-import { ServiceProvidersService } from './service-providers/service-providers.service';
-import { ServiceProviderOneComponent } from './service-providers/service-provider-one/service-provider-one.component';
-import { AddServiceProvidersComponent } from './service-providers/add-service-providers/add-service-providers.component';
-import { UpdateServiceProviderComponent } from './service-providers/update-service-provider/update-service-provider.component';
-import { CustomerComponent } from './customer/customer.component';
-import { CustomerService } from './customer/customer.service';
-import { LoginComponent } from './login/login.component';
-import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
+import {RouterModule} from '@angular/router';
+import {ServiceProvidersComponent} from './service-providers/service-providers.component';
+import {ServiceProvidersService} from './service-providers/service-providers.service';
+import {ServiceProviderOneComponent} from './service-providers/service-provider-one/service-provider-one.component';
+import {AddServiceProvidersComponent} from './service-providers/add-service-providers/add-service-providers.component';
+import {UpdateServiceProviderComponent} from './service-providers/update-service-provider/update-service-provider.component';
+import {CustomerComponent} from './customer/customer.component';
+import {CustomerService} from './customer/customer.service';
+import {LoginComponent} from './login/login.component';
+import {PasswordRecoveryComponent} from './password-recovery/password-recovery.component';
+import {GooglePlacesDirective} from './google-places.directive';
 import {ApiService} from './core/api.service';
+import {LogoutComponent} from './logout/logout.component';
+import {CreateOfferComponent} from './create-offer/create-offer.component';
+import {CreateOfferService} from './create-offer/create-offer.service';
+import {NotificationComponent} from './notification/notification.component';
+import {RegistrationComponent} from './registration/registration.component';
+import {RegistrationService} from './registration/registration.service';
+import {ListOffersComponent} from './list-offers/list-offers.component';
+import {ListOfferService} from './list-offers/list-offer.service';
 
 
 @NgModule({
@@ -44,8 +54,16 @@ import {ApiService} from './core/api.service';
     AddServiceProvidersComponent,
     UpdateServiceProviderComponent,
     CustomerComponent,
+    GooglePlacesDirective,
     LoginComponent,
-    PasswordRecoveryComponent
+    PasswordRecoveryComponent,
+    LogoutComponent,
+    RegistrationComponent,
+    PasswordRecoveryComponent,
+    NotificationComponent,
+    CreateOfferComponent,
+    NotificationComponent,
+    ListOffersComponent
 
   ],
   imports: [
@@ -57,7 +75,9 @@ import {ApiService} from './core/api.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ServiceProvidersService, CustomerService, ApiService, SpGeneralService, LandingPageService],
+  
+  providers: [ServiceProvidersService, CustomerService, ApiService, SpGeneralService, LandingPageService, RegistrationService, CreateOfferService, ListOfferService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
