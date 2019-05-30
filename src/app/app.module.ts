@@ -29,6 +29,7 @@ import { LoginComponent } from './login/login.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import {ApiService} from './core/api.service';
 import { NotificationComponent } from './notification/notification.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { NotificationComponent } from './notification/notification.component';
     GooglePlacesDirective,
     LoginComponent,
     PasswordRecoveryComponent,
-    NotificationComponent
+    NotificationComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
