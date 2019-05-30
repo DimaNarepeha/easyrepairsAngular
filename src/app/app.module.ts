@@ -38,6 +38,7 @@ import {ListOffersComponent} from './list-offers/list-offers.component';
 import {ListOfferService} from './list-offers/list-offer.service';
 import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
 import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component';
+import { VerificationComponent } from './verification/verification.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component
 
     ListOffersComponent,
     AdminApprovePageComponent,
-    MenuBarComponent
+    MenuBarComponent,
+    VerificationComponent
 
   ],
   imports: [

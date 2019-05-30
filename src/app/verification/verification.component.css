@@ -1,0 +1,22 @@
+.bg {
+  background-image: url("../../assets/img/verification-bg.jpg");
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.position_static{
+  position: static;
+}
+.message_container{
+  padding-left: 27%;
+  width: 200%;
+}
+.border-3 {
+  border-width:3px !important;
+}
+
+.icon_d{
+  font-size: 300%;
+}
