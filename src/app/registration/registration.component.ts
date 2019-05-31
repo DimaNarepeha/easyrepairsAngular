@@ -20,24 +20,34 @@ export class RegistrationComponent implements OnInit {
     lastName: new FormControl('', [Validators.required, Validators.pattern('[A-Z][a-z]*')]),
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email])
+    email: new FormControl('', [Validators.required, Validators.email]),
+    recaptcha: new FormControl('', Validators.required)
   });
 
   ProviderForm = new FormGroup({
     name: new FormControl('', Validators.required),
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email])
+    email: new FormControl('', [Validators.required, Validators.email]),
+    recaptcha: new FormControl('', Validators.required)
   });
 
   customer = new Customer();
   user = new User();
   provider = new Provider();
+  siteKeyCaptcha;
+  isCaptchaSuccess: boolean;
 
-  constructor(private router: Router, private registration: RegistrationService) {}
+  constructor(private router: Router, private registration: RegistrationService) {
+  }
+
+  ngOnInit(): void {
+    this.siteKeyCaptcha = '6LffU6YUAAAAAOpyUKLFjB5yKXuuOPS_5MMFKP_N';
+  }
 
   registerCustomer() {
     if (this.CustomerForm.invalid) {
+      this.markCustomerFormAsTouched();
       return;
     }
     this.user.username = this.CustomerForm.controls.username.value;
@@ -55,8 +65,10 @@ export class RegistrationComponent implements OnInit {
         alert('Email or username already exist!!!');
       });
   }
+
   registerProvider() {
     if (this.ProviderForm.invalid) {
+      this.markProviderFormAsTouched();
       return;
     }
     this.user.username = this.ProviderForm.controls.username.value;
@@ -69,12 +81,32 @@ export class RegistrationComponent implements OnInit {
         alert('successful!');
         this.router.navigate(['/login']);
       },
-    err => {
-      alert('Email or username already exist!!!');
-    }
+      err => {
+        alert('Email or username already exist!!!');
+      }
     );
   }
 
-  ngOnInit(): void {
+  markProviderFormAsTouched() {
+    this.ProviderForm.controls.recaptcha.markAsTouched();
+    this.ProviderForm.controls.username.markAsTouched();
+    this.ProviderForm.controls.password.markAsTouched();
+    this.ProviderForm.controls.email.markAsTouched();
+    this.ProviderForm.controls.firstName.markAsTouched();
+    this.ProviderForm.controls.lastName.markAsTouched();
+    this.ProviderForm.controls.name.markAsTouched();
+  }
+
+  markCustomerFormAsTouched() {
+    this.ProviderForm.controls.recaptcha.markAsTouched();
+    this.ProviderForm.controls.username.markAsTouched();
+    this.ProviderForm.controls.password.markAsTouched();
+    this.ProviderForm.controls.email.markAsTouched();
+    this.ProviderForm.controls.firstName.markAsTouched();
+    this.ProviderForm.controls.lastName.markAsTouched();
+  }
+
+  captchaSuccess() {
+    this.isCaptchaSuccess = true;
   }
 }

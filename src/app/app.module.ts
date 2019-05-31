@@ -39,6 +39,7 @@ import {ListOfferService} from './list-offers/list-offer.service';
 import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
 import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component';
 import { VerificationComponent } from './verification/verification.component';
+import {NgxCaptchaModule} from 'ngx-captcha';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { VerificationComponent } from './verification/verification.component';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxCaptchaModule
   ],
 
   providers: [ServiceProvidersService, CustomerService, ApiService, SpGeneralService, LandingPageService, RegistrationService, CreateOfferService, ListOfferService],
