@@ -73,17 +73,12 @@
                  *ngIf="CustomerForm.controls['lastName'].hasError('pattern') && CustomerForm.controls['lastName'].dirty">
               Incorrect format of last name
             </div>
+            <br/>
+            <app-captcha></app-captcha>
             <div class="error" style="text-align: center; color: red;"
-                 *ngIf="ProviderForm.controls['recaptcha'].hasError('required') && ProviderForm.controls['recaptcha'].touched">
+                 *ngIf="CustomerForm.controls['recaptcha'].hasError('required') && CustomerForm.controls['recaptcha'].touched">
               CAPTCHA is required
             </div>
-            <ngx-recaptcha2 #captchaElem
-                            [siteKey]="siteKeyCaptcha"
-                            [useGlobalDomain]="false"
-                            (success)="captchaSuccess()"
-                            formControlName="recaptcha">
-            </ngx-recaptcha2>
-            <br/>
           </div>
           <div class="text-right mt-4">
             <button class="btn btn-outline-warning btn-lg">Register</button>
@@ -128,17 +123,12 @@
                  *ngIf="ProviderForm.controls['name'].hasError('required') && ProviderForm.controls['name'].touched">
               Name is required field
             </div>
+            <br/>
+            <app-captcha></app-captcha>
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="ProviderForm.controls['recaptcha'].hasError('required') && ProviderForm.controls['recaptcha'].touched">
               CAPTCHA is required
             </div>
-            <ngx-recaptcha2 #captchaElem2
-                            [siteKey]="siteKeyCaptcha"
-                            [useGlobalDomain]="true"
-                            (success)="captchaSuccess()"
-                            formControlName="recaptcha">
-            </ngx-recaptcha2>
-            <br/>
           </div>
           <div class="text-right mt-4">
             <button class="btn btn-outline-warning btn-lg">Register</button>

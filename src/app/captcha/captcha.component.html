@@ -1,0 +1,6 @@
+<ngx-recaptcha2 #captchaElem
+                [siteKey]="siteKeyCaptcha"
+                [useGlobalDomain]="false"
+                (success)="captchaSuccess()"
+                formControlName="recaptcha">
+</ngx-recaptcha2>

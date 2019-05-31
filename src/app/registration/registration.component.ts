@@ -35,14 +35,11 @@ export class RegistrationComponent implements OnInit {
   customer = new Customer();
   user = new User();
   provider = new Provider();
-  siteKeyCaptcha;
-  isCaptchaSuccess: boolean;
 
   constructor(private router: Router, private registration: RegistrationService) {
   }
 
   ngOnInit(): void {
-    this.siteKeyCaptcha = '6LffU6YUAAAAAOpyUKLFjB5yKXuuOPS_5MMFKP_N';
   }
 
   registerCustomer() {
@@ -88,25 +85,20 @@ export class RegistrationComponent implements OnInit {
   }
 
   markProviderFormAsTouched() {
-    this.ProviderForm.controls.recaptcha.markAsTouched();
     this.ProviderForm.controls.username.markAsTouched();
     this.ProviderForm.controls.password.markAsTouched();
     this.ProviderForm.controls.email.markAsTouched();
-    this.ProviderForm.controls.firstName.markAsTouched();
-    this.ProviderForm.controls.lastName.markAsTouched();
     this.ProviderForm.controls.name.markAsTouched();
+    this.ProviderForm.controls.recaptcha.markAsTouched();
   }
 
   markCustomerFormAsTouched() {
-    this.ProviderForm.controls.recaptcha.markAsTouched();
-    this.ProviderForm.controls.username.markAsTouched();
-    this.ProviderForm.controls.password.markAsTouched();
-    this.ProviderForm.controls.email.markAsTouched();
-    this.ProviderForm.controls.firstName.markAsTouched();
-    this.ProviderForm.controls.lastName.markAsTouched();
+    this.CustomerForm.controls.username.markAsTouched();
+    this.CustomerForm.controls.password.markAsTouched();
+    this.CustomerForm.controls.email.markAsTouched();
+    this.CustomerForm.controls.firstName.markAsTouched();
+    this.CustomerForm.controls.lastName.markAsTouched();
+    this.CustomerForm.controls.recaptcha.markAsTouched();
   }
 
-  captchaSuccess() {
-    this.isCaptchaSuccess = true;
-  }
 }

@@ -40,6 +40,7 @@ import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page
 import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component';
 import { VerificationComponent } from './verification/verification.component';
 import {NgxCaptchaModule} from 'ngx-captcha';
+import { CaptchaComponent } from './captcha/captcha.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import {NgxCaptchaModule} from 'ngx-captcha';
     ListOffersComponent,
     AdminApprovePageComponent,
     MenuBarComponent,
-    VerificationComponent
+    VerificationComponent,
+    CaptchaComponent
 
   ],
   imports: [
