@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpGeneralComponent } from './sp-general.component';
+import { ListOffersComponent } from './list-offers.component';
 
-describe('SpGeneralComponent', () => {
-  let component: SpGeneralComponent;
-  let fixture: ComponentFixture<SpGeneralComponent>;
+describe('ListOffersComponent', () => {
+  let component: ListOffersComponent;
+  let fixture: ComponentFixture<ListOffersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpGeneralComponent ]
+      declarations: [ ListOffersComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpGeneralComponent);
+    fixture = TestBed.createComponent(ListOffersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,3 +1,130 @@
-<p>
-  chat works!
-</p>
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+  <!--<title>Chat</title>-->
+
+  <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+  <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>-->
+  <!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div style="text-align:center">-->
+  <!--<h1>-->
+    <!--Welcome to {{title}}!-->
+  <!--</h1>-->
+  <!--<div class="chat-container">-->
+    <!--<div class="chat">-->
+      <!--<div class="message"></div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+
+
+<!--<div class="container">-->
+  <!--<h3 class=" text-center">Messaging</h3>-->
+  <!--<div class="messaging">-->
+    <!--<div class="inbox_msg">-->
+<!--<div class="mesgs"   >-->
+  <!--<div class="msg_history"  #scrollMe   >-->
+    <!--<div  *ngFor="let mes of messages">-->
+      <!--<div class="outgoing_msg"  *ngIf="mes.senderId == currentAccountId">-->
+        <!--<div class="sent_msg"  >-->
+          <!--<p  (click)="deleteMessage(mes); "  >{{mes.content}}</p>-->
+          <!--<span class="time_date"> {{mes.sendTime.substr(11,5)}}</span> </div>-->
+      <!--</div>-->
+      <!--<div class="incoming_msg" *ngIf="mes.senderId != currentAccountId">-->
+        <!--<div class="incoming_msg_img"> &lt;!&ndash;<app-image-details  [fileUpload]="getImageString(mes.senderId)"></app-image-details>&ndash;&gt; </div>-->
+        <!--<div class="received_msg">-->
+          <!--<div class="received_withd_msg">-->
+            <!--<p>{{mes.content}}</p>-->
+            <!--<span class="time_date">{{mes.sendTime.substr(11,5)}}</span></div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+    <!--</div></div>-->
+
+  <!--</div>-->
+  <!--<div class="type_msg">-->
+    <!--<div class="input_msg_write">-->
+      <!--&lt;!&ndash;<input type="text" class="write_msg" placeholder="Type a message" />&ndash;&gt;-->
+      <!--<input id="input" type="text" class="write_msg"  placeholder="Type a message"-->
+             <!--#input-->
+             <!--(keyup.enter)="sendMessage(input.value); input.value='' "/>-->
+      <!--<button class="msg_send_btn" type="button" (click)="sendMessage(input.value); input.value='' " ><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="container justify-content-center" style="height: 100%;">-->
+    <!--<div class="d-flex flex-column" style="height: 100%; max-height: 812px;">-->
+      <!--<div class="p-2 chat"></div>-->
+  <!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="footer">-->
+  <!--<div class="send-button">-->
+    <!--<div class="msj-rta macro">-->
+      <!--<div class="text text-r" style="background:whitesmoke !important">-->
+        <!--<div class="send" (click)="sendMessage(input.value)">-->
+        <!--</div>-->
+        <!--<input  id="input" type="text" #input>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!--<div style="text-align:center">-->
+  <!--<h1>-->
+    <!--Welcome to {{title}}!-->
+  <!--</h1>-->
+  <!--<div class="chat-container">-->
+    <!--<div class="chat">-->
+      <!--<div class="message"></div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+<!--<div class="footer">-->
+  <!--<div class="send-button">-->
+
+    <!--<div class="send" (click)="sendMessage(input.value)">-->
+    <!--</div>-->
+    <!--<input  id="input" type="text" #input>-->
+  <!--</div>-->
+
+<!--</div>-->
+<!DOCTYPE html>
+<html>
+<head>
+
+
+</head>
+<body>
+<div style="text-align:center">
+  <h1>
+    Welcome to {{title}}!
+  </h1>
+  <div class="chat-container">
+    <div class="chat">
+      <div class="message"></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="send-button">
+
+    <div class="send" (click)="sendMessage(input.value)">
+    </div>
+    <input  id="input" type="text" #input>
+  </div>
+
+</div>
+</body>

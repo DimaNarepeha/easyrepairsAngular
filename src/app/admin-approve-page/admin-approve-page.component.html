@@ -1,0 +1,68 @@
+<app-nav></app-nav>
+
+<app-menu-bar></app-menu-bar>
+
+
+<table class="table table-hover " align="center">
+  <tr *ngFor="let serviceProvider of serviceProviders">
+    <div class="rounded border border-dark" style="margin: 20px">
+      <td style="width: 23%;">
+        <div class="row" style="margin-left: auto;">
+          <div class="description">
+            <h4>Name  {{serviceProvider.name}}</h4>
+            <p>
+              <img alt="{{serviceProvider.image}}" class="img_styles rounded" width="100" height="100"
+                   src="http://localhost:8080/service-providers/image/{{serviceProvider.image}}"/>
+              {{serviceProvider.description}}
+            </p>
+          </div>
+          <div class="approve">
+            <select class="form-control status-select" placeholder="Select Status"
+                    name="selectedStatus" (change)="updateServiceProviderStatus(serviceProvider.id,$event.target.value)">
+              <option selected> Choose Status </option>
+              <option *ngFor="let selectedStatus of statuses" [value]="selectedStatus">
+                {{selectedStatus}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="send-mail">
+          <button type="button" [routerLink]="['/update-service-provider',serviceProvider.id]"
+                  class="btn btn-outline-light btn_menu">
+            <img src="http://cdn.onlinewebfonts.com/svg/img_300675.png" class="edit-send-submit-buttons" alt="img">
+          </button>
+          <button class="btn btn-outline-light email-buttom" type="button" data-toggle="collapse"
+                  attr.data-target="#collapseWriteEmail{{serviceProvider.id}}" aria-expanded="false"
+                  aria-controls="collapseWriteEmail{{serviceProvider.id}">
+            <img src="https://cdn3.iconfinder.com/data/icons/communication-148/44/communication-16-512.png"
+                 class="edit-send-submit-buttons" alt="img">
+          </button>
+          <div class="collapse write-menu" id="collapseWriteEmail{{serviceProvider.id}}">
+            <div class="from-to">
+              <p class="inline-p">From: </p><input type="text" readonly
+                                                   class="form-control-plaintext service-provider-email"
+                                                   value="easyrepairsofficial@gmail.com"/><br/>
+              <p class="inline-p">To: </p><input type="text" readonly
+                                                 class="form-control-plaintext service-provider-email"
+                                                 value="{{serviceProvider.email}}"/>
+            </div>
+            <div class="form-group">
+              <input class="form-control rounded-0" [(ngModel)]="emailTopic"/>
+              <textarea class="form-control rounded-0" rows="4" [(ngModel)]="emailText"></textarea>
+            </div>
+            <button class="btn btn-outline-light sent-button rounded-circle" type="button"
+                    attr.data-target="#collapseSent{{serviceProvider.id}}" aria-expanded="false"
+
+                    (click)="sendEmail(serviceProvider.email)">
+              <img
+                src="http://www.myiconfinder.com/uploads/iconsets/256-256-5149d17faeeffb6ebf2ff0ea5a6a5aaa-message.png"
+                alt="img" style="width: 50px; height: 50px;">
+            </button>
+          </div>
+        </div>
+      </td>
+    </div>
+  </tr>
+</table>
+<br/>
+<app-footer></app-footer>
