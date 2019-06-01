@@ -110,7 +110,11 @@ import { Component } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import * as $ from 'jquery';
-
+import {CustomerService} from "../customer/customer.service";
+import {DomSanitizer} from "@angular/platform-browser";
+import {Chat} from "./chat";
+import {Router, ActivatedRoute, Params} from '@angular/router';
+import {ChatService} from "./chat.service";
 @Component({
   selector: 'app-root',
   templateUrl: './chat.component.html',
@@ -120,27 +124,51 @@ export class ChatComponent {
   private serverUrl = 'http://localhost:8080/socket';
   private title = 'WebSockets chat';
   private stompClient;
-  public mes="";
-  constructor(){
+  public chat = new Chat();
+  public userId: any;
+  //public message:string;
+  constructor(private chatService: ChatService,private activatedRoute: ActivatedRoute) {
     this.initializeWebSocketConnection();
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.userId = params['serviceProvider.id'];
+      console.log(this.userId);
+    });
   }
 
-  initializeWebSocketConnection(){
+    initializeWebSocketConnection(){
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
-    this.stompClient.connect({}, function(frame) {
+    let messsage = '';
+      var self = this;
+      this.stompClient.connect({}, function(frame) {
       that.stompClient.subscribe("/chat", (message) => {
         if(message.body) {
           $(".chat").append("<div class='message'>"+message.body+"</div>")
           console.log(message.body);
+            self.chat.message = message.body;
+            self.chat.messageTo = self.userId;
+            self.chat.messageFrom = '7';
+          console.log('isdiisdsdidsiidsi');
+            self.chatService.addChat(self.chat).subscribe((response) => {
+              console.log(response);
+            });
+
         }
       });
+
     });
+
+
   }
 
   sendMessage(message){
     this.stompClient.send("/app/send/message" , {}, message);
+   /* this.chat.message = message.body;
+    this.chat.messageTo = this.userId;
+    this.mes = message;
+    this.chat.messageFrom = '128';
+    this.chatService.addChat(this.chat);*/
     $('#input').val('');
   }
 

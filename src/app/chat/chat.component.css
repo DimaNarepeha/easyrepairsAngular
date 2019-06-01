@@ -777,6 +777,11 @@
   /*margin-left: 5px;*/
 
 /*}*/
+
+
+
+
+
 .chat-container{
   height: 80vh;
   width: 100vw;
@@ -787,6 +792,7 @@
   width: 50%;
   height: 100%;
   border: 1px solid grey;
+  background-image: url("tool.jpg")!important;
 }
 
 .footer{
@@ -817,4 +823,36 @@ input{
   width: 30px;
   margin-left: 5px;
 
+}
+
+.tools{
+  background-image: url("tool.jpg")!important;
+}
+.w3-container{
+  text-align: left;
+  margin: 0 auto;
+  width: 50%;
+  min-height: 100%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+
+}
+body{
+  background-image: url("tool.jpg")!important;
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
 }

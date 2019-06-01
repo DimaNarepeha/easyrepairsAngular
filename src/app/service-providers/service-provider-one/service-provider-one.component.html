@@ -18,6 +18,8 @@
           <p class="card-text">Region: {{serviceProvider.location?.region}}</p>
           <p class="card-text">City: {{serviceProvider.location?.city}}</p>
           <p class="card-text"><small class="text-muted">Last updated at  {{serviceProvider.lastUpdate}}</small></p>
+          <button class="btn btn-success" [routerLink] = "['/chat',serviceProvider.id]">Communicate</button>
+
         </div>
       </div>
     </div>

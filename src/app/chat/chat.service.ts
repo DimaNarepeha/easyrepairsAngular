@@ -1,24 +1,31 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient} from '@angular/common/http';
-import {Message} from "./message.model";
+import {Headers, Http, RequestOptions, Response} from "@angular/http";
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/Rx';
+import {Chat} from "./chat";
 
 
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ChatService {
+  constructor(private httpService: Http) { }
 
-  constructor(private http: HttpClient) {
+  getAllChats(): Observable <Chat[]> {
+    return this.httpService.get("https://localhost:8080/message").
+    map( (response: Response) => response.json()).catch(this.handleError);
   }
+  addChat(chat: Chat) {
+    const body = JSON.stringify(chat);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.httpService.post("http://localhost:8080/message", body, options);
+    }
 
-  baseUrl: string = 'http://localhost:8080/messages/';
-
-  getMessagesByChatId(id: number): Observable<Message[]> {
-    return this.http.get<Message[]>(this.baseUrl + id);
+  private handleError(error: Response) {
+    return Observable.throw(error);
   }
-
 }
 
 
