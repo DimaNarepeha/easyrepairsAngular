@@ -9,7 +9,7 @@ import {Notification} from './notification';
   providedIn: 'root'
 })
 export class NotificationService {
-  private readonly baseURL; // TODO change hardcoded localhost
+  private readonly baseURL;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
