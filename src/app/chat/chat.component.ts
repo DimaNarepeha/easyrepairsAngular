@@ -106,7 +106,7 @@
 //
 //
 // }
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import * as $ from 'jquery';
@@ -120,22 +120,29 @@ import {ChatService} from "./chat.service";
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent {
+export class ChatComponent  implements OnInit {
   private serverUrl = 'http://localhost:8080/socket';
   private title = 'WebSockets chat';
   private stompClient;
   public chat = new Chat();
   public userId: any;
+  public chats: Chat [];
   //public message:string;
-  constructor(private chatService: ChatService,private activatedRoute: ActivatedRoute) {
+  constructor(private chatService: ChatService,private rout: ActivatedRoute) {
     this.initializeWebSocketConnection();
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.userId = params['serviceProvider.id'];
-      console.log(this.userId);
-    });
   }
 
-    initializeWebSocketConnection(){
+  ngOnInit(): void {
+    this.getChats();
+  }
+  initializeWebSocketConnection(){
+    this.rout.params.subscribe(next => {
+      console.log(next.id);
+      this.userId = next.id;
+
+    }, err => {
+      console.log(err);
+    });
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
@@ -150,9 +157,16 @@ export class ChatComponent {
             self.chat.messageTo = self.userId;
             self.chat.messageFrom = '7';
           console.log('isdiisdsdidsiidsi');
+          console.log(self.chat.message);
+          console.log(self.chat.messageTo);
+          console.log(self.chat.messageFrom);
             self.chatService.addChat(self.chat).subscribe((response) => {
               console.log(response);
+              self.getChats();
             });
+          // self.chatService.getAllChats().subscribe((response) => {
+          //   console.log(response);
+          // });
 
         }
       });
@@ -164,6 +178,9 @@ export class ChatComponent {
 
   sendMessage(message){
     this.stompClient.send("/app/send/message" , {}, message);
+    // this.chatService.getAllChats().subscribe((response) => {
+    //   console.log(response);
+    // });
    /* this.chat.message = message.body;
     this.chat.messageTo = this.userId;
     this.mes = message;
@@ -172,5 +189,9 @@ export class ChatComponent {
     $('#input').val('');
   }
 
-
+  getChats() {
+    this.chatService.getAllChats().subscribe((response) => {
+      this.chats = response;
+    });
+  }
 }

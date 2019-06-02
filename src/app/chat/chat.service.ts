@@ -13,7 +13,7 @@ export class ChatService {
   constructor(private httpService: Http) { }
 
   getAllChats(): Observable <Chat[]> {
-    return this.httpService.get("https://localhost:8080/message").
+    return this.httpService.get("http://localhost:8080/message").
     map( (response: Response) => response.json()).catch(this.handleError);
   }
   addChat(chat: Chat) {
