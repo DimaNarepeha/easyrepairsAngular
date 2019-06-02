@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-captcha',
@@ -6,18 +6,16 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./captcha.component.css']
 })
 export class CaptchaComponent implements OnInit {
-  siteKeyCaptcha;
+  siteKeyCaptcha = '6LffU6YUAAAAAOpyUKLFjB5yKXuuOPS_5MMFKP_N';
   public isCaptchaSuccess: boolean;
 
   constructor() {
   }
 
   ngOnInit() {
-    this.siteKeyCaptcha = '6LffU6YUAAAAAOpyUKLFjB5yKXuuOPS_5MMFKP_N';
   }
 
   captchaSuccess() {
-    alert('Captcha success');
     this.isCaptchaSuccess = true;
   }
 }

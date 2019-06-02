@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Customer} from './customer';
 import {RegistrationService} from './registration.service';
 import {User} from './user';
 import {Provider} from './provider';
+import {CaptchaComponent} from '../captcha/captcha.component';
 
 
 @Component({
@@ -20,18 +21,19 @@ export class RegistrationComponent implements OnInit {
     lastName: new FormControl('', [Validators.required, Validators.pattern('[A-Z][a-z]*')]),
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    recaptcha: new FormControl('', Validators.required)
+    email: new FormControl('', [Validators.required, Validators.email])
   });
 
   ProviderForm = new FormGroup({
     name: new FormControl('', Validators.required),
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    recaptcha: new FormControl('', Validators.required)
+    email: new FormControl('', [Validators.required, Validators.email])
   });
 
+  @ViewChild(CaptchaComponent)
+  private captchaComponent: CaptchaComponent;
+  private isCaptchaIgnored: boolean;
   customer = new Customer();
   user = new User();
   provider = new Provider();
@@ -43,7 +45,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   registerCustomer() {
-    if (this.CustomerForm.invalid) {
+    if (this.CustomerForm.invalid || this.captchaComponent.isCaptchaSuccess) {
       this.markCustomerFormAsTouched();
       return;
     }
@@ -64,7 +66,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   registerProvider() {
-    if (this.ProviderForm.invalid) {
+    if (this.ProviderForm.invalid || this.captchaComponent.isCaptchaSuccess) {
       this.markProviderFormAsTouched();
       return;
     }
@@ -89,7 +91,7 @@ export class RegistrationComponent implements OnInit {
     this.ProviderForm.controls.password.markAsTouched();
     this.ProviderForm.controls.email.markAsTouched();
     this.ProviderForm.controls.name.markAsTouched();
-    this.ProviderForm.controls.recaptcha.markAsTouched();
+    this.isCaptchaIgnored = !this.captchaComponent.isCaptchaSuccess;
   }
 
   markCustomerFormAsTouched() {
@@ -98,7 +100,7 @@ export class RegistrationComponent implements OnInit {
     this.CustomerForm.controls.email.markAsTouched();
     this.CustomerForm.controls.firstName.markAsTouched();
     this.CustomerForm.controls.lastName.markAsTouched();
-    this.CustomerForm.controls.recaptcha.markAsTouched();
+    this.isCaptchaIgnored = !this.captchaComponent.isCaptchaSuccess;
   }
 
 }
