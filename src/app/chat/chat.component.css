@@ -1021,6 +1021,16 @@ body,html{
   padding: 10px;
   position: relative;
 }
+
+.msg_cotainer1{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+  border-radius: 25px;
+  background-color: #FFFF00;
+  padding: 10px;
+  position: relative;
+}
 .msg_time{
   position: absolute;
   left: 0;

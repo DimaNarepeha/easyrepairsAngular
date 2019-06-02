@@ -32,7 +32,8 @@ const routes: Routes = [
   {path: 'recovery', component: PasswordRecoveryComponent},
   {path: 'admin-approve', component: AdminApprovePageComponent},
   {path: 'chat', component: ChatComponent},
-  {path: 'chat/:id', component: ChatComponent}
+  {path: 'chat/:id', component: ChatComponent},
+  {path: 'chat/:id/:sentBy', component: ChatComponent}
 ];
 
 @NgModule({

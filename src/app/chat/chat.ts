@@ -4,4 +4,5 @@ export class Chat {
     messageTo: string;
     messageFrom: string;
     message: string;
+    sentBy: string;
 }

@@ -126,6 +126,7 @@ export class ChatComponent  implements OnInit {
   private stompClient;
   public chat = new Chat();
   public userId: any;
+  public sent: any;
   public chats: Chat [];
   //public message:string;
   constructor(private chatService: ChatService,private rout: ActivatedRoute) {
@@ -139,6 +140,7 @@ export class ChatComponent  implements OnInit {
     this.rout.params.subscribe(next => {
       console.log(next.id);
       this.userId = next.id;
+      this.sent = next.sentBy;
 
     }, err => {
       console.log(err);
@@ -154,8 +156,12 @@ export class ChatComponent  implements OnInit {
           $(".chat").append("<div class='message'>"+message.body+"</div>")
           console.log(message.body);
             self.chat.message = message.body;
-            self.chat.messageTo = self.userId;
-            self.chat.messageFrom = '7';
+
+              self.chat.messageTo = self.userId;
+              self.chat.messageFrom = '7';
+              self.chat.sentBy = self.sent;
+
+
           console.log('isdiisdsdidsiidsi');
           console.log(self.chat.message);
           console.log(self.chat.messageTo);
