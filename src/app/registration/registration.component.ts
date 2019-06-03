@@ -45,7 +45,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   registerCustomer() {
-    if (this.CustomerForm.invalid || this.captchaComponent.isCaptchaSuccess) {
+    if (this.CustomerForm.invalid || !CaptchaComponent.isCaptchaSuccessForRegistration) {
       this.markCustomerFormAsTouched();
       return;
     }
@@ -66,7 +66,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   registerProvider() {
-    if (this.ProviderForm.invalid || this.captchaComponent.isCaptchaSuccess) {
+    if (this.ProviderForm.invalid || !CaptchaComponent.isCaptchaSuccessForRegistration) {
       this.markProviderFormAsTouched();
       return;
     }
@@ -91,7 +91,7 @@ export class RegistrationComponent implements OnInit {
     this.ProviderForm.controls.password.markAsTouched();
     this.ProviderForm.controls.email.markAsTouched();
     this.ProviderForm.controls.name.markAsTouched();
-    this.isCaptchaIgnored = !this.captchaComponent.isCaptchaSuccess;
+    this.isCaptchaIgnored = !CaptchaComponent.isCaptchaSuccessForRegistration;
   }
 
   markCustomerFormAsTouched() {
@@ -100,7 +100,7 @@ export class RegistrationComponent implements OnInit {
     this.CustomerForm.controls.email.markAsTouched();
     this.CustomerForm.controls.firstName.markAsTouched();
     this.CustomerForm.controls.lastName.markAsTouched();
-    this.isCaptchaIgnored = !this.captchaComponent.isCaptchaSuccess;
+    this.isCaptchaIgnored = !CaptchaComponent.isCaptchaSuccessForRegistration;
   }
 
 }
