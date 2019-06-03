@@ -5,7 +5,7 @@ const  baseURL1 = 'http://localhost:8080';
 export const environment = {
   production: false,
   customer_url: baseURL1 + '/customers/',
-    baseURL: 'http://localhost:8080'
+    baseURL: baseURL1
   }
 ;
 /*
