@@ -164,7 +164,8 @@ import {ChatService} from "./chat/chat.service";
 ChatComponent,
     ListOffersComponent,
     AdminApprovePageComponent,
-    MenuBarComponent
+    MenuBarComponent,
+
 
   ],
   imports: [

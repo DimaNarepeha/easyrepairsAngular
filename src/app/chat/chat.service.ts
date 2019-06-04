@@ -6,12 +6,16 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import {Chat} from "./chat";
+import {Messages} from "./Messages";
 
 
 @Injectable()
 export class ChatService {
   constructor(private httpService: Http) { }
-
+  getAllMessages(): Observable <Messages> {
+    return this.httpService.get("http://localhost:8080/message/getMessages").
+    map( (response: Response) => response.json()).catch(this.handleError);
+  }
   getAllChats(): Observable <Chat[]> {
     return this.httpService.get("http://localhost:8080/message").
     map( (response: Response) => response.json()).catch(this.handleError);

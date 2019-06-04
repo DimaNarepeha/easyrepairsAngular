@@ -115,6 +115,8 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {Chat} from "./chat";
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {ChatService} from "./chat.service";
+import {Messages} from './Messages';
+
 @Component({
   selector: 'app-root',
   templateUrl: './chat.component.html',
@@ -128,8 +130,9 @@ export class ChatComponent  implements OnInit {
   public userId: any;
   public sent: any;
   public chats: Chat [];
+  public messages: Messages;
   //public message:string;
-  constructor(private chatService: ChatService,private rout: ActivatedRoute) {
+  constructor(private chatService: ChatService, private rout: ActivatedRoute) {
     this.initializeWebSocketConnection();
   }
 
@@ -152,27 +155,34 @@ export class ChatComponent  implements OnInit {
       var self = this;
       this.stompClient.connect({}, function(frame) {
       that.stompClient.subscribe("/chat", (message) => {
+        self.getChats();
         if(message.body) {
           $(".chat").append("<div class='message'>"+message.body+"</div>")
-          console.log(message.body);
-            self.chat.message = message.body;
-
-              self.chat.messageTo = self.userId;
-              self.chat.messageFrom = '7';
-              self.chat.sentBy = self.sent;
-
-
-          console.log('isdiisdsdidsiidsi');
-          console.log(self.chat.message);
-          console.log(self.chat.messageTo);
-          console.log(self.chat.messageFrom);
-            self.chatService.addChat(self.chat).subscribe((response) => {
-              console.log(response);
-              self.getChats();
-            });
-          // self.chatService.getAllChats().subscribe((response) => {
-          //   console.log(response);
-          // });
+          self.getChats();
+          // console.log(message.body);
+          // self.chat.message = message.body;
+          //
+          // self.chat.messageTo = self.userId;
+          // self.chat.messageFrom = '7';
+          // self.chat.sentBy = self.sent;
+          //
+          //
+          // console.log('isdiisdsdidsiidsi');
+          // console.log(self.chat.message);
+          // console.log(self.chat.messageTo);
+          // console.log(self.chat.messageFrom);
+          // self.getMessages();
+          // if(self.messages) {
+          //   console.log('ppppppp' + self.messages.messages);
+          //   console.log(self.messages.messages.indexOf(self.chat.message) === -1);
+          //
+          //   if (self.messages.messages.indexOf(self.chat.message) === -1) {
+          //     self.chatService.addChat(self.chat).subscribe((response) => {
+          //       console.log(response);
+          //       self.getChats();
+          //     });
+          //   }
+          // }
 
         }
       });
@@ -183,7 +193,42 @@ export class ChatComponent  implements OnInit {
   }
 
   sendMessage(message){
+
+    //*******************************************************//
+
+    console.log('!!!!'+message);
+    this.chat.message = message;
+
+    this.chat.messageTo = this.userId;
+    this.chat.messageFrom = '7';
+    this.chat.sentBy = this.sent;
+
+
+    console.log('isdiisdsdidsiidsi');
+    console.log(this.chat.message);
+    console.log(this.chat.messageTo);
+    console.log(this.chat.messageFrom);
+    this.getMessages();
+    if(this.messages) {
+      console.log('ppppppp' + this.messages.messages);
+      console.log(this.messages.messages.indexOf(this.chat.message) === -1);
+    }
+     // if (self.messages.messages.indexOf(self.chat.message) === -1) {
+        this.chatService.addChat(this.chat).subscribe((response) => {
+          console.log(response);
+          this.getChats();
+        });
+   //   }
+
+
+
+
+
+
+
     this.stompClient.send("/app/send/message" , {}, message);
+
+    //*********************************************************//
     // this.chatService.getAllChats().subscribe((response) => {
     //   console.log(response);
     // });
@@ -199,5 +244,12 @@ export class ChatComponent  implements OnInit {
     this.chatService.getAllChats().subscribe((response) => {
       this.chats = response;
     });
+  }
+
+  getMessages(){
+    this.chatService.getAllMessages().subscribe((response) => {
+      this.messages = response;
+    });
+
   }
 }
