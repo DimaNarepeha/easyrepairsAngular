@@ -1,6 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {NotificationService} from './notification.service';
 import {Notification} from './notification';
+import {SecurityRolesService} from '../security-roles.service';
 
 @Component({
   selector: 'app-notification',
@@ -11,13 +12,17 @@ export class NotificationComponent implements OnInit {
   isOpen: boolean;
   notifications;
   private wasInside: boolean;
+  securityRolesService: SecurityRolesService;
 
   constructor(private notificationService: NotificationService) {
-    this.notificationService.getNotificationsForUser(1)// TODO change hardcoded user here
-      .subscribe(data => this.notifications = data);
+    this.securityRolesService = new SecurityRolesService();
   }
 
   ngOnInit() {
+    if (SecurityRolesService.isLoggedIn()) {
+      this.notificationService.getNotificationsForUser(SecurityRolesService.getUserId())// TODO change hardcoded user here
+        .subscribe(data => this.notifications = data);
+    }
   }
 
   openNotifications(divNotifications: HTMLDivElement) {
