@@ -38,6 +38,8 @@ import {ListOffersComponent} from './list-offers/list-offers.component';
 import {ListOfferService} from './list-offers/list-offer.service';
 import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
 import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import {FeedbackService} from "./feedback/feedback.service";
 
 
 @NgModule({
@@ -68,7 +70,8 @@ import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component
 
     ListOffersComponent,
     AdminApprovePageComponent,
-    MenuBarComponent
+    MenuBarComponent,
+    FeedbackComponent
 
   ],
   imports: [
@@ -81,7 +84,7 @@ import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component
     HttpClientModule
   ],
 
-  providers: [ServiceProvidersService, CustomerService, ApiService, SpGeneralService, LandingPageService, RegistrationService, CreateOfferService, ListOfferService],
+  providers: [ServiceProvidersService, CustomerService, ApiService, SpGeneralService, LandingPageService, RegistrationService, CreateOfferService, ListOfferService, FeedbackService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
