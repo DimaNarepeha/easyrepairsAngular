@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Customer} from './customer';
 import {RegistrationService} from './registration.service';
 import {User} from './user';
 import {Provider} from './provider';
+import {CaptchaComponent} from '../captcha/captcha.component';
 
 
 @Component({
@@ -30,14 +31,22 @@ export class RegistrationComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email])
   });
 
+  @ViewChild(CaptchaComponent)
+  private captchaComponent: CaptchaComponent;
+  private isCaptchaIgnored: boolean;
   customer = new Customer();
   user = new User();
   provider = new Provider();
 
-  constructor(private router: Router, private registration: RegistrationService) {}
+  constructor(private router: Router, private registration: RegistrationService) {
+  }
+
+  ngOnInit(): void {
+  }
 
   registerCustomer() {
-    if (this.CustomerForm.invalid) {
+    if (this.CustomerForm.invalid || !CaptchaComponent.isCaptchaSuccessForRegistration) {
+      this.markCustomerFormAsTouched();
       return;
     }
     this.user.username = this.CustomerForm.controls.username.value;
@@ -55,8 +64,10 @@ export class RegistrationComponent implements OnInit {
         alert('Email or username already exist!!!');
       });
   }
+
   registerProvider() {
-    if (this.ProviderForm.invalid) {
+    if (this.ProviderForm.invalid || !CaptchaComponent.isCaptchaSuccessForRegistration) {
+      this.markProviderFormAsTouched();
       return;
     }
     this.user.username = this.ProviderForm.controls.username.value;
@@ -69,12 +80,27 @@ export class RegistrationComponent implements OnInit {
         alert('successful!');
         this.router.navigate(['/login']);
       },
-    err => {
-      alert('Email or username already exist!!!');
-    }
+      err => {
+        alert('Email or username already exist!!!');
+      }
     );
   }
 
-  ngOnInit(): void {
+  markProviderFormAsTouched() {
+    this.ProviderForm.controls.username.markAsTouched();
+    this.ProviderForm.controls.password.markAsTouched();
+    this.ProviderForm.controls.email.markAsTouched();
+    this.ProviderForm.controls.name.markAsTouched();
+    this.isCaptchaIgnored = !CaptchaComponent.isCaptchaSuccessForRegistration;
   }
+
+  markCustomerFormAsTouched() {
+    this.CustomerForm.controls.username.markAsTouched();
+    this.CustomerForm.controls.password.markAsTouched();
+    this.CustomerForm.controls.email.markAsTouched();
+    this.CustomerForm.controls.firstName.markAsTouched();
+    this.CustomerForm.controls.lastName.markAsTouched();
+    this.isCaptchaIgnored = !CaptchaComponent.isCaptchaSuccessForRegistration;
+  }
+
 }
