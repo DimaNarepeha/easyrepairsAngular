@@ -3,7 +3,7 @@ export class Feedback {
   comment: string;
   rating: number;
   username: string;
-  // image: any = File;
+  image: any = File;
   // firstName: string;
   // lastName: string;
 }

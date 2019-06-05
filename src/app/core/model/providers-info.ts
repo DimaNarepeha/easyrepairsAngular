@@ -8,4 +8,5 @@ export class ProvidersInfo {
   city: string;
   raiting: any;
   countComment: number;
+  countContract: number;
 }
