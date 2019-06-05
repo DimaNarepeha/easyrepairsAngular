@@ -8,27 +8,27 @@ export class SecurityRolesService {
   constructor() {
   }
 
-  private static getRoles(role: string) {
+  private getRoles(role: string) {
     return JSON.parse(window.sessionStorage.getItem('user')).roles[0];
   }
 
-  public static getUserId() {
+  public getUserId() {
     return JSON.parse(window.sessionStorage.getItem('user')).id;
   }
 
-  public static isLoggedIn(): boolean {
+  public isLoggedIn(): boolean {
     return window.sessionStorage.getItem('user') != null;
   }
 
-  public static isAdmin(): boolean {
+  public isAdmin(): boolean {
     return this.getRoles('ADMIN') === 'ADMIN';
   }
 
-  public static isCustomer(): boolean {
+  public isCustomer(): boolean {
     return this.getRoles('CUSTOMER') === 'CUSTOMER';
   }
 
-  public static isProvider(): boolean {
+  public isProvider(): boolean {
     return this.getRoles('PROVIDER') === 'PROVIDER';
   }
 

@@ -30,4 +30,8 @@ export class NotificationService {
     return this.http.post<Notification>(this.baseURL + '/notification/add/' + id, JSON.stringify(notification), this.httpOptions);
   }
 
+  setNotificationAsSeenOnDb(notification) {
+    return this.http.put<Notification>(this.baseURL + '/notification/' + notification.id, JSON.stringify(notification), this.httpOptions);
+
+  }
 }
