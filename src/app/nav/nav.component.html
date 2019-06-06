@@ -1,51 +1,61 @@
 <div>
-<header tabindex="0"><span>easy</span><span class="orange">REPAIRS.COM</span> </header>
-<div class="notification_icon_position"><app-notification></app-notification></div>
-<div class="login"><a routerLink="/login"><span class="orange">Log</span>In</a></div>
-<header tabindex="0"><span>easy</span><span class="orange">REPAIRS.COM</span></header>
-<div class="login" *ngIf="isUser()==false">
-  <a routerLink="/login"><span class="orange">Log</span>In</a>
-</div>
-<div class="login" *ngIf="isUser()==true">
-  <a routerLink="/logout"><span class="orange">Log</span>Out</a>
-</div>
-<div class="button" tabindex="0" (click)="firstClick()">
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-</div>
-<div id="nav-container" [style.display]="displayOn?'block':'none'" (click)="closeMenu()">
-  <div class="bg"></div>
-  <div id="nav-content" [style.display]="displayOn?'block':'none'" (click)="closeMenu()">
-    <div class="avatar_container" *ngIf="isUser()==false">
-      <img src="https://avatars2.githubusercontent.com/u/49271116?s=460&v=4"/>
-      <div class="user_info">
-        <p style="margin-left: 35%">Guest</p>
-      </div>
-    </div>
-    <div class="avatar_container" *ngIf="isUser()==true">
-      <img src="https://avatars2.githubusercontent.com/u/49271116?s=460&v=4"/>
-      <div class="user_info">
-        <p style="margin-left: 35%;">{{getName()}}</p>
-      </div>
-    </div>
-    <div class="user_menu" *ngIf="isUser()==true">
-      <ul>
-        <li><a routerLink="/my-profile"><i class="fas fa-user"></i> My Profile</a></li>
-        <li><a routerLink=""><i class="fas fa-heart"></i> Favorite</a></li>
-        <li><a routerLink = "/feedback"><i class="fas fa-archive"></i>Feedbacks</a></li>
-        <li *ngIf="isAdmin()==true"><a routerLink="/admin-approve"><i class="fas fa-cog"></i>Administration page</a></li>
-        <li><a routerLink="/logout"><i class="fas fa-sign-out-alt"></i>Log out</a></li>
-      </ul>
-      <hr>
-    </div>
-    <ul>
-      <li><a routerLink="/"><i class="fas fa-home"></i> Home</a></li>
-      <li><a routerLink="/service-providers"><i class="fas fa-cog"></i>Service providers</a></li>
-      <li><a routerLink="/customers"><i class="far fa-smile"></i> Customers</a></li>
-      <li><a routerLink="#0"><i class="fas fa-blog"></i> Blog</a></li>
-      <li><a routerLink="#0"><i class="fas fa-info-circle"></i> About</a></li>
+  <header tabindex="0"><span>easy</span><span class="orange">REPAIRS.COM</span></header>
+  <div class="notification_icon_position">
+    <app-notification></app-notification>
+  </div>
+  <div class="login" *ngIf="isUser()==false"><a routerLink="/login"><span class="orange">Log</span>In</a></div>
+  <div class="login" *ngIf="isUser()==true">
+    <ul class="nav user_menu">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" style="color: #f5f528;width: 20%;">{{getName()}}</a>
+        <ul class="dropdown-menu lllll" style="width: 12em; top:10px">
+          <div>
+            <img src="https://www.hdwallpapers.in/download/yellow_blue_material_design_4k-wide.jpg">
+          </div>
+          <li style="margin: 10%"><a routerLink="/my-profile"><i class="fas fa-user"></i>My Profile</a></li>
+          <li style="margin: 10%"><a routerLink=""><i class="fas fa-heart"></i>Favorite</a></li>
+          <li style="margin: 10%"><a routerLink = "/feedback"><i class="fas fa-archive"></i>Feedbacks</a></li>
+          <div class="dropdown-divider"></div>
+          <li style="margin: 10%"><a routerLink="/logout"><i class="fas fa-sign-out-alt"></i>Log out</a></li>
+        </ul>
+      </li>
     </ul>
   </div>
-</div>
+  <div class="button" tabindex="0" (click)="firstClick()">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </div>
+  <div id="nav-container" [style.display]="displayOn?'block':'none'" (click)="closeMenu()">
+    <div class="bg"></div>
+    <div id="nav-content" [style.display]="displayOn?'block':'none'" (click)="closeMenu()">
+      <div class="avatar_container" *ngIf="isUser()==false">
+        <img src="https://avatars2.githubusercontent.com/u/49271116?s=460&v=4"/>
+        <div class="user_info">
+          <p style="margin-left: 35%">Guest</p>
+        </div>
+      </div>
+      <div class="avatar_container" *ngIf="isUser()==true">
+        <img src="https://avatars2.githubusercontent.com/u/49271116?s=460&v=4"/>
+        <div class="user_info">
+          <p style="margin-left: 35%;">{{getName()}}</p>
+        </div>
+      </div>
+      <div class="user_menu" *ngIf="isUser()==true">
+        <ul>
+          <li *ngIf="isAdmin()==true"><a routerLink="/admin-approve"><i class="fas fa-cog"></i>Administration page</a></li>
+          <li *ngIf="isUser()==true"><a routerLink="/service-providers"><i class="fas fa-cog"></i>Service providers</a>
+          </li>
+          <li *ngIf="isAdmin()==true"><a routerLink="/customers"><i class="far fa-smile"></i>Customers</a></li>
+          <!--          <li><a routerLink="/logout"><i class="fas fa-sign-out-alt"></i>Log out</a></li>-->
+        </ul>
+        <hr>
+      </div>
+      <ul>
+        <li><a routerLink="/"><i class="fas fa-home"></i> Home</a></li>
+        <li><a routerLink="#0"><i class="fas fa-blog"></i> Blog</a></li>
+        <li><a routerLink="#0"><i class="fas fa-info-circle"></i> About</a></li>
+      </ul>
+    </div>
+  </div>
 </div>
