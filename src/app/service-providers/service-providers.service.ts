@@ -11,7 +11,7 @@ import {ProviderLocatoin} from '../location/provider-locatoin';
 import {environment} from '../../environments/environment';
 import {ProviderStatus} from './service-provider.status';
 import {map} from 'rxjs/operators';
-import {ApiService} from "../core/api.service";
+import {ApiService} from '../core/api.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -46,6 +46,7 @@ export class ServiceProvidersService {
       .subscribe(res => {
         console.log(res);
         alert('SUCCESS !!');
+        location.reload();
       });
   }
 
@@ -85,6 +86,15 @@ export class ServiceProvidersService {
       .map((response: Response) => response.json())
       .catch(this.handleError);
 
+  }
+
+  getServiceProviderByUserId(id: any): Observable<ServiceProviders> {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers});
+    return this.httpService.get(this.baseURL + '/service-providers/find-by-userId/' + id + '?access_token='
+      + this.apiService.returnAccessToken(), options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
   }
 
   deleteServiceProvider(id: number) {

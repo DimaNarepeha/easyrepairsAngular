@@ -17,25 +17,10 @@ export class FilterComponent implements OnInit {
   constructor(private serviceService: LandingPageService) { }
 
   ngOnInit() {
-    // this.serviceProviders = this.providerPage;
-    // console.log(this.serviceProviders);
-
-
-    this.serviceService.getAllServices()// TODO change hardcoded user here
-      .subscribe(data => this.services = data);
-    this.providersCriteria.location = 'Lviv';
-    this.providersCriteria.minRating = 3;
 }
 
   addProvidersCriteria(): void {
 
-    this.providersCriteria.services = this.services.filter(x => x.choose === true);
-    this.serviceService.findProvidersByParams(this.providersCriteria)
-      .subscribe((response) => {
-        console.log(response);
-      }, (error) => {
-        console.log(error);
-      });
   }
 
 }

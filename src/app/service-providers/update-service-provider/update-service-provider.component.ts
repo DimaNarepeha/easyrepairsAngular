@@ -4,6 +4,7 @@ import {componentRefresh, refreshDescendantViews} from '@angular/core/src/render
 import {ServiceProviders} from '../service-providers';
 import {ServiceProvidersService} from '../service-providers.service';
 import {ProviderLocatoin} from '../../location/provider-locatoin';
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-update-service-provider',
@@ -14,6 +15,7 @@ export class UpdateServiceProviderComponent implements OnInit {
 
   serviceProvider = new ServiceProviders();
   public userFile: any = File;
+  private url = environment.baseURL + '/service-providers/image/';
 
   public title = 'Places';
   public addrKeys: string[];

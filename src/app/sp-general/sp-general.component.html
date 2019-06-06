@@ -1,42 +1,121 @@
-<div class="blog_left_sidebar" *ngFor="let serviceProvider of serviceProviders ">
-  <article class="blog_style1">
-    <div class="blog_img">
-      <img class="img-fluid" src="http://localhost:8080/service-providers/image/{{serviceProvider.image}}" alt="">
-    </div>
-    <div class="blog_text">
-      <div class="blog_text_inner">
-        <div class="cat">
-          <a href="#"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{serviceProvider.city}}</a>
-          <a href="#"><i class="far fa-calendar-alt" aria-hidden="true"></i> {{serviceProvider.registrationDate}}</a>
-          <a href="#"><i class="far fa-comments" aria-hidden="true"></i> {{serviceProvider.countComment}}</a>
-          <div class="right">
-            <span> {{serviceProvider.raiting}}</span>
-            <span class="fas fa-heart checked"></span>
-            <span class="fas fa-heart checked"></span>
-            <span class="fas fa-heart checked"></span>
-            <span class="fas fa-heart"></span>
-            <span class="fas fa-heart"></span>
-          </div>
-        </div>
-        <a [routerLink] = "['/service-providers',serviceProvider.id]">
-          <h4>{{serviceProvider.name}}</h4>
-        </a>
-        <p>{{serviceProvider.description}}</p>
-
-        <ul class="list-horizontal">
-          <li *ngFor="let service of serviceProvider.services">
-            <h5>{{service}} </h5>
-          </li>
-
-
-        </ul>
-        <a [routerLink] = "['/service-providers',serviceProvider.id]" class="right genric-btn primary">Read more</a>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8"
+         style="margin-top: 20px; font-size: 1.3em; color: #444422; margin-bottom: 10px; font-family:'Inconsolata', monospace">
+      About {{totalElements}} results
+      <div style="float: right;">
+        Show
+        <label>
+          <input
+            style="width: 40px; height:30px;font-size: 1em; line-height: 18px; padding: 2px; background: none; border:1px solid grey ;"
+            type="number" value="pageSize" min="1"
+            (change)="getServiceProvidersByPage()"
+            [(ngModel)]="pageSize">
+        </label>
+        elements on page
       </div>
     </div>
-  </article>
+  </div>
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="not_found" style="align-content: center;" *ngIf="providerPage?.length<1">
+        <h4> Sorry About This</h4>
+        <div>
+          <p>We can't found any providers for this parameters. Please, try change your search parameters.</p>
+        </div>
+        <img style="width: 350px;   margin-left: auto; margin-right: auto;"
+             src="https://brightestyoungthings.com/wp-content/uploads/2014/01/Sorry-Cat.jpg" alt="">
+      </div>
+      <div class="blog_left_sidebar" *ngFor="let serviceProvider of  providerPage">
+        <article class="blog_style1">
+          <div class="blog_img">
+            <img class="img-fluid" src="{{url+serviceProvider.image}}" alt="">
+          </div>
+          <div class="blog_text">
+            <div class="blog_text_inner">
+              <div class="cat">
+                <a href="#"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{serviceProvider.city}}</a>
+                <a href="#"><i class="far fa-calendar-alt" aria-hidden="true"></i> {{serviceProvider.registrationDate}}
+                </a>
+                <a href="#"><i class="fas fa-tools" aria-hidden="true"></i> {{serviceProvider.countContract}}</a>
+                <a href="#"><i class="far fa-comments" aria-hidden="true"></i> {{serviceProvider.countComment}}</a>
+                <div class="right">
+                  <a href="#"><i style=" color: #FFC107;" class="fas fa-star"
+                                 aria-hidden="true"></i> {{serviceProvider.raiting}}</a>
+                </div>
+              </div>
+              <a [routerLink]="['/service-providers',serviceProvider.id]">
+                <h4>{{serviceProvider.name}}</h4>
+              </a>
+              <p>{{serviceProvider.description}}</p>
+              <ul class="list-horizontal">
+                <li *ngFor="let service of serviceProvider.services">
+                  <h5>#{{service}} </h5>
+                </li>
+              </ul>
+              <a [routerLink]="['/service-providers',serviceProvider.id]" class="genric-btn primary">Read more</a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <nav class="blog-pagination justify-content-center d-flex">
+        <ul class="pagination">
+          <li class="page-item" *ngFor="let p of pages; let i=index">
+            <a href="" class="page-link" (click)="setPage(i,$event)">{{i + 1}}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="col-lg-4">
+      <div class="blog_right_sidebar">
+        <aside class="search_widget_title_area">
+          <div class="title_area">
+            <p>FIND YOUR <span class="orange">SERVICE</span> PROVIDER</p>
+          </div>
+        </aside>
+        <aside class="single_sidebar_widget search_widget">
+
+          <div class="input-group">
+            <input type="text" placeholder="location"
+                   class="google-place-input form-control"
+                   google-place
+                   (onSelect)="setAddress($event)" (input)="setProviderCriteria()" name="location">
+            <button class="btn sub-btn" type="button"><i class="fas fa-map-marker-alt"></i></button>
+
+
+            <select class="cu-select" name="sortby" [(ngModel)]="this.providersCriteria.sortByParam"
+                    (select)="setProviderCriteria()">
+              <option [ngValue]="'raiting'">sort by Star Rating</option>
+              <option [ngValue]="'registrationDate'">sort by Registration Date</option>
+              <option [ngValue]="'name'">sort by Provider Name</option>
+            </select>
+            <button class="btn sub-btn-order" type="button"><i class="fas fa-sort"></i></button>
+          </div>
+        </aside>
+
+        <aside style="padding-bottom: 20px;">
+          <h4 class="widget_title"><span class="orange">RATING</span> Range MORE THEN</h4>
+          <div class="slidecontainer">
+            <input type="range" min="1" max="4" value="providersCriteria.minRating" class="slider" id="myRange"
+                   [(ngModel)]="providersCriteria.minRating" (click)="setProviderCriteria()">
+          </div>
+          <div class="right-span"><span class="range-span"> {{providersCriteria.minRating}}</span></div>
+        </aside>
+        <aside class="single_sidebar_widget post_category_widget">
+          <h4 class="widget_title"><span class="orange">SERVICE</span> Categories</h4>
+          <form class="cat-list-form" action="/">
+            <div class="custom-control custom-checkbox" *ngFor="let service of services">
+              <input type="checkbox" class="custom-control-input" (change)="setCheckedServices()" [id]="service.id"
+                     [(ngModel)]="service.choose" [ngModelOptions]="{standalone: true}">
+              <label class="custom-control-label" [attr.for]="service.id">  {{service.serviceName}}</label>
+            </div>
+          </form>
+        </aside>
+      </div>
+      <aside>
+        <app-quote></app-quote>
+      </aside>
+    </div>
+  </div>
 </div>
-<ul class="nav nav-pills">
-    <li class="nav-item" *ngFor="let p of pages; let i=index">
-      <a  class="nav-link " href="" (click)="setPage(i,$event)" >{{i+1}}</a>
-    </li>
-</ul>
+

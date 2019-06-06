@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ServiceProviders} from './service-providers';
 import {ServiceProvidersService} from './service-providers.service';
 import 'rxjs/add/observable/throw';
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-service-providers',
@@ -17,6 +18,7 @@ export class ServiceProvidersComponent implements OnInit {
   private pages: Array<number>;
   public userFile: any = File;
   role: string;
+  private url = environment.baseURL + '/service-providers/image/';
 
   constructor(private serviceProvidersService: ServiceProvidersService) {
   }
