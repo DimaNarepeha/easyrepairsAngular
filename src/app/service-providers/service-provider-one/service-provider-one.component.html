@@ -17,6 +17,9 @@
           <p class="card-text">Country: {{serviceProvider.location?.country}}</p>
           <p class="card-text">Region: {{serviceProvider.location?.region}}</p>
           <p class="card-text">City: {{serviceProvider.location?.city}}</p>
+          <button [routerLink]="['/provider-portfolio',serviceProvider.id]" class="right genric-btn primary">
+            Portfolio
+          </button>
           <p class="card-text"><small class="text-muted">Last updated at  {{serviceProvider.lastUpdate}}</small></p>
         </div>
       </div>

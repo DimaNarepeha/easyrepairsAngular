@@ -1,0 +1,14 @@
+.genric-btn {
+  left: 80%;
+  position: relative;
+  line-height: 40px;
+  padding: 0 30px;
+  font-size: .8em;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  color: #fff;
+  background: #f8b600;
+  border: 1px solid transparent;
+}

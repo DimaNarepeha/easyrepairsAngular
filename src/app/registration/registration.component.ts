@@ -64,7 +64,7 @@ export class RegistrationComponent implements OnInit {
     this.provider.userDTO = this.user;
     this.provider.name = this.ProviderForm.controls.name.value;
     this.provider.email = this.ProviderForm.controls.email.value;
-    this.registration.createProvider(this.provider).subscribe(data => {
+      this.registration.createProvider(this.provider).subscribe(data => {
         this.provider = data;
         alert('successful!');
         this.router.navigate(['/login']);
@@ -75,6 +75,5 @@ export class RegistrationComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

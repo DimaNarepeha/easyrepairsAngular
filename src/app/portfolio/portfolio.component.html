@@ -1,0 +1,26 @@
+<app-nav></app-nav>
+<div class="main-content">
+  <div class="container" *ngFor="let post of posts, let index" id="portfolio">
+    <div class="card">
+      <div class="card-body">
+        <h3>{{post.header}}</h3>
+        <img  class="main-image" alt="{{post.mainPhoto}}" width="900" height="500" src="http://localhost:8080/customers/image/{{post.mainPhoto}}"/>
+        <p class="main-description">{{post.mainDescription}}</p>
+        <button class="right genric-btn primary" id="read-more-button" (click)="readMoreClick()" data-toggle="collapse" [attr.data-target]="'#post' + post.id"
+                aria-expanded="true" >{{readMoreField}}</button>
+        <div class="collapse" id="{{'post'+ post.id}}">
+          <div *ngFor="let info of post.postInfo">
+            <img class="secondary-photo" alt="{{info.photo}}" width="900" height="500"  src="http://localhost:8080/customers/image/{{info.photo}}"/>
+            <div class="addition-description">
+              {{info.description}}
+            </div>
+          </div>
+        </div>
+        <div class="created-date">{{post.createdDate}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="last-update">{{portfolio.lastUpdate}}</div>
+</div>
+
+<app-footer></app-footer>
