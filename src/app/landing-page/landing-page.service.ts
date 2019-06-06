@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {ServiceProviders} from '../service-providers/service-providers';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -9,58 +9,40 @@ import {throwError} from 'rxjs';
 import {ProvidersInfo} from '../core/model/providers-info';
 import {Feedback} from '../core/model/feedback';
 import {Service} from '../core/model/service';
-import { ProvidersCriteria } from '../core/model/providers-criteria';
-import { environment } from 'src/environments/environment';
+import {ProvidersCriteria} from '../core/model/providers-criteria';
+import {environment} from 'src/environments/environment';
+import {FilterComponent} from '../filter/filter.component';
 
 
 @Injectable()
 export class LandingPageService {
+
   private url = environment.baseURL;
-  private allapproved = 'landing-page/all-approved';
-  private comments = 'landing-page/top-comment';
-  private services = 'services/get-all';
-  private filter= 'landing-page/filter';
+  private comments = '/landing-page/top-four-comment';
+  private services = '/services';
+  private filterPage = '/landing-page/providers/search-param/?page=';
+  private filterPageSize = '&numberOfProvidersOnPage=';
 
   constructor(private http: HttpClient, private httpService: Http) {
+
+  }
+  getProviderInfoByPage(page: number, pageSize: number, params: HttpParams) {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers});
+    console.log(this.url + this.filterPage + page + this.filterPageSize + pageSize + '&' + params);
+    return this.httpService.get(this.url + this.filterPage + page + this.filterPageSize + pageSize + '&' + params)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
   }
 
-  getApprovedProviders(): Observable<ProvidersInfo[]> {
-    return this.http.get<ProvidersInfo[]>(this.url + this.allapproved );
+  private handleError(error: Response) {
+    return throwError(error);
   }
-
   getLatestComments(): Observable<Feedback[]> {
     return this.http.get<Feedback[]>(this.url + this.comments);
   }
 
   getAllServices(): Observable<Service[]> {
     return this.http.get<Service[]>(this.url + this.services);
-  }
-
-sortProviders(sortP:  ProvidersInfo[], orderby: number): ProvidersInfo[] {
-  console.log('dd1f');
-  if (orderby === 1) {
-    sortP.sort((a, b) => a.name.localeCompare(b.name));
-
-    }
-    if (orderby === 2) {
-    sortP.sort((a, b) => a.raiting.localeCompare(b.raiting));
-    console.log('ddf');
-  }
-    if (orderby === 3) {
-    sortP.sort((a, b) => a.registrationDate.localeCompare(b.registrationDate));
-  }
-    return sortP;
-}
-
-
-  findProvidersByParams(params: ProvidersCriteria): Observable<ProvidersInfo[]> {
-    params.location ='Lviv';
-    params.minRating = 3;
-
-    let body = JSON.stringify(params);
-    let headers = new Headers({'Content-Type':'application/json'});
-    let options = new RequestOptions({headers: headers});
-    return this.httpService.post(this.url + this.filter, body, options)
-      .map((response: Response) => response.json());
   }
 }
