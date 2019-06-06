@@ -8,7 +8,6 @@ import {FilterComponent} from './filter/filter.component';
 import {FooterComponent} from './footer/footer.component';
 import {PaginationComponent} from './pagination/pagination.component';
 import {SpGeneralComponent} from './sp-general/sp-general.component';
-import {SpGeneralService} from './sp-general/sp-general.service';
 import {QuoteComponent} from './quote/quote.component';
 import {LandingPageComponent} from './landing-page/landing-page.component';
 import {LandingPageService} from './landing-page/landing-page.service';
@@ -44,6 +43,7 @@ import {VerificationComponent} from './verification/verification.component';
 import {NgxCaptchaModule} from 'ngx-captcha';
 import {CaptchaComponent} from './captcha/captcha.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+
 
 
 @NgModule({
@@ -93,7 +93,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     NgxCaptchaModule
   ],
 
-  providers: [ServiceProvidersService, CustomerService, ApiService, SpGeneralService, LandingPageService,
+
+  providers: [ServiceProvidersService, CustomerService, ApiService, LandingPageService,
     RegistrationService, CreateOfferService, ListOfferService, FeedbackService],
   bootstrap: [AppComponent]
 })
