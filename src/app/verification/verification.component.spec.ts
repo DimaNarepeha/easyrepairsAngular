@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpGeneralComponent } from './sp-general.component';
+import { VerificationComponent } from './verification.component';
 
-describe('SpGeneralComponent', () => {
-  let component: SpGeneralComponent;
-  let fixture: ComponentFixture<SpGeneralComponent>;
+describe('VerificationComponent', () => {
+  let component: VerificationComponent;
+  let fixture: ComponentFixture<VerificationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpGeneralComponent ]
+      declarations: [ VerificationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpGeneralComponent);
+    fixture = TestBed.createComponent(VerificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

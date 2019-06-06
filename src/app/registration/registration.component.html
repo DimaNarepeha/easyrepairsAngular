@@ -1,18 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light text-center"
+     style="background-color: #222222; justify-content: center; height: 70px">
+  <a class="navbar-brand " href="/">
+    <span style="color: white; font-size: 1.6em;">easy</span>
+    <span style="color: #f5f528;font-size: 1.6em">REPAIRS.COM</span>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
 <div class="container py-4 px-5" style="width:30%; margin-left: 35%; margin-top:10%; background-color: #eaeaea8a;">
 
   <div class=" register-container" id="accordion">
     <h2 style="margin: auto; text-align: center">Registration </h2>
     <div class="choose-variant">
-      <button class="btn btn-outline-warning btn-lg" id="headingOne"  style="width: 48%; margin-top: 10px;" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample2">
+      <button class="btn btn-outline-warning btn-lg" id="headingOne" style="width: 48%; margin-top: 10px;" type="button"
+              data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false"
+              aria-controls="collapseExample2">
         Customer
       </button>
-      <button class="btn btn-outline-warning btn-lg" id="headingTwo"  style="width: 48%; margin-top: 10px; margin-left:4%;" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" >
+      <button class="btn btn-outline-warning btn-lg" id="headingTwo"
+              style="width: 48%; margin-top: 10px; margin-left:4%;" type="button" data-toggle="collapse"
+              data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
         Provider
       </button>
       <div class="collapse" id="collapseExample1" aria-labelledby="headingOne" data-parent="#accordion">
         <form [formGroup]="CustomerForm" (ngSubmit)="registerCustomer()">
           <div class="form-group mt-4">
-            <input type="text" class="form-control" formControlName="username"  id="username1"  autocomplete="off"
+            <input type="text" class="form-control" formControlName="username" id="username1" autocomplete="off"
                    placeholder="Username">
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="CustomerForm.controls['username'].hasError('required') && CustomerForm.controls['username'].touched">
@@ -20,7 +35,7 @@
             </div>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control"  id="pwd1" formControlName="password" autocomplete="off"
+            <input type="password" class="form-control" id="pwd1" formControlName="password" autocomplete="off"
                    placeholder="Password">
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="CustomerForm.controls['password'].hasError('required') && CustomerForm.controls['password'].touched">
@@ -28,7 +43,7 @@
             </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control"  id="email1" formControlName="email" name="email" autocomplete="off"
+            <input type="text" class="form-control" id="email1" formControlName="email" name="email" autocomplete="off"
                    placeholder="Email">
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="CustomerForm.controls['email'].hasError('required') && CustomerForm.controls['email'].touched">
@@ -52,7 +67,7 @@
             </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" formControlName="lastName" id="LastName1"  autocomplete="off"
+            <input type="text" class="form-control" formControlName="lastName" id="LastName1" autocomplete="off"
                    placeholder="Last name">
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="CustomerForm.controls['lastName'].hasError('required') && CustomerForm.controls['lastName'].touched">
@@ -61,6 +76,12 @@
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="CustomerForm.controls['lastName'].hasError('pattern') && CustomerForm.controls['lastName'].dirty">
               Incorrect format of last name
+            </div>
+            <br/>
+            <app-captcha></app-captcha>
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="isCaptchaIgnored">
+              Captcha is required
             </div>
           </div>
           <div class="text-right mt-4">
@@ -106,6 +127,12 @@
                  *ngIf="ProviderForm.controls['name'].hasError('required') && ProviderForm.controls['name'].touched">
               Name is required field
             </div>
+            <br/>
+            <app-captcha></app-captcha>
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="isCaptchaIgnored">
+              Captcha is required
+            </div>
           </div>
           <div class="text-right mt-4">
             <button class="btn btn-outline-warning btn-lg">Register</button>
@@ -113,7 +140,6 @@
         </form>
       </div>
     </div>
-
 
 
   </div>

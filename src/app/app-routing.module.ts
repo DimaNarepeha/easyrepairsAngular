@@ -12,9 +12,12 @@ import {RegistrationComponent} from './registration/registration.component';
 import {CreateOfferComponent} from './create-offer/create-offer.component';
 import {ListOffersComponent} from './list-offers/list-offers.component';
 import {LogoutComponent} from './logout/logout.component';
+import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
+import {VerificationComponent} from './verification/verification.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
+  {path: 'login/verify/:activationCode', component: VerificationComponent},
   {path: 'service-providers', component: ServiceProvidersComponent},
   {path: 'add-service-provider', component: AddServiceProvidersComponent},
   {path: 'service-providers/:id', component: ServiceProviderOneComponent},
@@ -27,7 +30,8 @@ const routes: Routes = [
   {path: 'create-offer', component: CreateOfferComponent},
   {path: 'list-offers', component: ListOffersComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'recovery', component: PasswordRecoveryComponent}
+  {path: 'recovery', component: PasswordRecoveryComponent},
+  {path: 'admin-approve', component: AdminApprovePageComponent}
 ];
 
 @NgModule({
