@@ -3,6 +3,7 @@ import {ServiceProviders} from './service-providers';
 import {ServiceProvidersService} from './service-providers.service';
 import 'rxjs/add/observable/throw';
 import {environment} from '../../environments/environment';
+import {NotifierService} from "angular-notifier";
 
 @Component({
   selector: 'app-service-providers',
@@ -20,8 +21,10 @@ export class ServiceProvidersComponent implements OnInit {
   role: string;
   currentId: any;
   private url = environment.baseURL + '/service-providers/image/';
+  private readonly notifier: NotifierService;
 
-  constructor(private serviceProvidersService: ServiceProvidersService) {
+  constructor(private serviceProvidersService: ServiceProvidersService, notifierService: NotifierService) {
+    this.notifier = notifierService;
   }
 
   ngOnInit() {
@@ -107,7 +110,7 @@ export class ServiceProvidersComponent implements OnInit {
   deleteService(id: number) {
     this.serviceProvidersService.deleteServiceProvider(id)
       .subscribe((response) => {
-        console.log(response);
+        this.notifier.notify('error', 'deleted!')
         this.getServiceProvidersByPage();
       }, (error) => {
         console.log(error);

@@ -12,6 +12,7 @@ import {environment} from '../../environments/environment';
 import {ProviderStatus} from './service-provider.status';
 import {map} from 'rxjs/operators';
 import {ApiService} from '../core/api.service';
+import {NotifierService} from 'angular-notifier';
 
 
 const headers = new HttpHeaders(
@@ -24,9 +25,11 @@ export class ServiceProvidersService {
 
 
   private readonly baseURL;
+  private readonly notifier: NotifierService;
 
-  constructor(private httpService: HttpClient, private apiService: ApiService) {
+  constructor(private httpService: HttpClient, private apiService: ApiService, notifierService: NotifierService) {
     this.baseURL = environment.baseURL;
+    this.notifier = notifierService;
   }
 
   getServiceProvidersByPage(page: number): Observable<any> {
@@ -43,7 +46,7 @@ export class ServiceProvidersService {
     return this.httpService.post(this.baseURL + '/service-providers/' + id, formData)
       .subscribe(res => {
         console.log(res);
-        alert('SUCCESS !!');
+        this.notifier.notify('success', 'photo updated');
         location.reload();
       });
   }
@@ -60,7 +63,8 @@ export class ServiceProvidersService {
   }
 
   updateServiceProvider(service: ServiceProviders): Observable<ServiceProviders> {
-    return this.httpService.put<ServiceProviders>(this.baseURL + '/service-providers/update', JSON.stringify(service), {headers});
+    return this.httpService.put<ServiceProviders>(this.baseURL + '/service-providers/update' + '?access_token='
+      + this.apiService.returnAccessToken(), JSON.stringify(service), {headers});
   }
 
   getServiceProviderById(id: number): Observable<ServiceProviders> {
