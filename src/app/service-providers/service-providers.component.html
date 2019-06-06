@@ -34,10 +34,13 @@
 <!--<br/>-->
 <!--<app-footer></app-footer>-->
 <app-nav></app-nav>
+<br/>
+<br/>
+<br/>
+<br/>
 <div class="container">
   <div class="row">
     <div class="col-lg-8">
-
       <div class="blog_left_sidebar" *ngFor="let serviceProvider of serviceProviders ">
         <article class="blog_style1">
           <div class="blog_img">
@@ -67,9 +70,11 @@
 
 
               </ul>
+              <br/>
+              <br/>
               <button *ngIf="isAdmin()==true" class="left genric-btn primary" (click) = "deleteService(serviceProvider.id)" style="margin-left: 10px; background-color: darkred;">Delete</button>
               <a [routerLink]="['/service-providers',serviceProvider.id]" class="right genric-btn primary">Read more</a>
-              <button *ngIf="isAdmin()==true" class="right genric-btn primary" [routerLink] = "['/update-service-provider',serviceProvider.id]" style="margin-right: 10px; background-color: darkgreen">Update</button>
+              <button *ngIf="isAdmin()==true || isCurentProvider(serviceProvider.userDTO.id)==true" class="right genric-btn primary" [routerLink] = "['/update-service-provider',serviceProvider.id]" style="margin-right: 10px; background-color: darkgreen">Update</button>
             </div>
           </div>
         </article>

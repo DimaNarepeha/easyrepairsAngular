@@ -11,15 +11,11 @@
             <div class="col-md-8">
               <div class="card-body">
                 <form>
-                  From: {{feedback.userFrom}}<br/>
-                  To: {{feedback.userTo}}<br/>
+                  From: {{feedback.addressedFrom.username}}<br/>
+                  To: {{feedback.addressedTo.username}}<br/>
                   <p class="card-text">
                     <small class="text-muted">Create at  {{feedback.createdDate}}</small>
                   </p>
-                  <p class="card-text">
-                    <small class="text-muted">End date at  {{feedback.endDate}}</small>
-                  </p>
-
                 </form>
               </div>
             </div>

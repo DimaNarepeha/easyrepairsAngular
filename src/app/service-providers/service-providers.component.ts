@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ServiceProviders} from './service-providers';
 import {ServiceProvidersService} from './service-providers.service';
 import 'rxjs/add/observable/throw';
-import {environment} from "../../environments/environment";
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-service-providers',
@@ -18,6 +18,7 @@ export class ServiceProvidersComponent implements OnInit {
   private pages: Array<number>;
   public userFile: any = File;
   role: string;
+  currentId: any;
   private url = environment.baseURL + '/service-providers/image/';
 
   constructor(private serviceProvidersService: ServiceProvidersService) {
@@ -36,6 +37,11 @@ export class ServiceProvidersComponent implements OnInit {
   public isAdmin() {
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
     return this.role == 'ADMIN';
+  }
+
+  public isCurentProvider(id: number) {
+    this.currentId = JSON.parse(window.sessionStorage.getItem('user')).id;
+    return this.currentId === id;
   }
 
   setPage(i, event: any) {
@@ -60,7 +66,7 @@ export class ServiceProvidersComponent implements OnInit {
           const d = data;
           console.log(d);
           // console.log("result = " + d.result);
-          this.serviceProviders = d.content;
+          this.serviceProviders = data.content;
           this.pages = new Array(d.totalPages);
           console.log(data.content);
           console.log(this.pages);
