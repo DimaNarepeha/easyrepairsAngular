@@ -29,11 +29,6 @@ export class SpGeneralComponent implements OnInit {
   public title = 'Places';
   public addrKeys: string[];
   public addr: object;
-  private element: HTMLElement;
-  @ViewChild('sel') myDiv: ElementRef;
-  select = 'select';
-
-
   constructor(private serviceProvidersService: LandingPageService,
               private http: HttpClient,
               private rout: ActivatedRoute,

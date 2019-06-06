@@ -83,9 +83,9 @@
             <label for="loc" class="btn sub-btn"> <i class="fas fa-map-marker-alt"></i> </label>
 
 
-            <label class="btn sub-btn-order" [attr.for]=[select]><i class="fas fa-sort"></i></label>
-            <select class="cu-select" name="sortby" [(ngModel)]="this.providersCriteria.sortByParam" [id]=[select]
-                    (select)="setProviderParam()">
+            <label class="btn sub-btn-order" for="sel"><i class="fas fa-sort"></i></label>
+            <select class="cu-select" name="sortby" [(ngModel)]="this.providersCriteria.sortByParam" id="sel"
+                    (click)="setProviderParam()">
               <option [ngValue]="'raiting'">sort by Star Rating</option>
               <option [ngValue]="'registrationDate'">sort by Registration Date</option>
               <option [ngValue]="'name'">sort by Provider Name</option>
