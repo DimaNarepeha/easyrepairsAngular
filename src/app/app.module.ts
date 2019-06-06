@@ -8,7 +8,6 @@ import {FilterComponent} from './filter/filter.component';
 import {FooterComponent} from './footer/footer.component';
 import {PaginationComponent} from './pagination/pagination.component';
 import {SpGeneralComponent} from './sp-general/sp-general.component';
-import {SpGeneralService} from './sp-general/sp-general.service';
 import {QuoteComponent} from './quote/quote.component';
 import {LandingPageComponent} from './landing-page/landing-page.component';
 import {LandingPageService} from './landing-page/landing-page.service';
@@ -87,6 +86,7 @@ const customNotifierOptions: NotifierOptions = {
   }
 };
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -135,7 +135,8 @@ const customNotifierOptions: NotifierOptions = {
     NotifierModule.withConfig(customNotifierOptions)
   ],
 
-  providers: [ServiceProvidersService, CustomerService, ApiService, SpGeneralService, LandingPageService,
+
+  providers: [ServiceProvidersService, CustomerService, ApiService, LandingPageService,
     RegistrationService, CreateOfferService, ListOfferService, FeedbackService],
   bootstrap:
     [AppComponent]

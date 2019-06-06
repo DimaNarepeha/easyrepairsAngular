@@ -3,10 +3,8 @@ import { Service } from './service';
 export class ProvidersCriteria {
   city: string;
   region: string;
-  country: string;
+  country: string ;
   services: Service[];
   minRating: number;
-  minOffers: number;
   sortByParam: string;
-
 }
