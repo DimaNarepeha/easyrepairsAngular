@@ -21,6 +21,13 @@ export class ApiService {
     return this.http.post(this.baseURL + '/oauth/token', loginPayload, {headers});
   }
 
+  password_recovery(loginPayload) {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/x-www-form-urlencoded'
+    });
+    return this.http.post(this.baseURL + '/recovery', loginPayload, {headers});
+  }
+
   get(): Observable<User> {
     // @ts-ignore
     return this.http.get(this.baseURL + '/user?access_token=' + this.returnAccessToken())
