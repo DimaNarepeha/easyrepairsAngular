@@ -11,20 +11,26 @@ import {ProviderLocatoin} from '../location/provider-locatoin';
 import {environment} from '../../environments/environment';
 import {ProviderStatus} from './service-provider.status';
 import {map} from 'rxjs/operators';
+import {ApiService} from '../core/api.service';
 
-const httpOptions = {headers: new HttpHeaders({'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'})};
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json'
+  })
+};
 
 @Injectable()
 export class ServiceProvidersService {
 
   private readonly baseURL;
 
-  constructor(private httpService: Http, private http: HttpClient) {
+  constructor(private httpService: Http, private http: HttpClient, private apiService: ApiService) {
     this.baseURL = environment.baseURL;
   }
 
   getServiceProvidersByPage(page: number) {
-    const headers = new Headers({'Content-Type': 'application/json', });
+    const headers = new Headers({'Content-Type': 'application/json',});
     const options = new RequestOptions({headers});
     return this.httpService.get(this.baseURL + '/service-providers/find-all/page/?page=' + page)
       .map((response: Response) => response.json())
@@ -35,13 +41,12 @@ export class ServiceProvidersService {
   uploadImage(file: any, id: number) {
     const formData = new FormData();
     formData.append('imageFile', file);
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const options = new RequestOptions({headers});
 
-    return this.httpService.post(this.baseURL + '/service-providers/' + id, formData, options)
+    return this.httpService.post(this.baseURL + '/service-providers/' + id, formData)
       .subscribe(res => {
         console.log(res);
         alert('SUCCESS !!');
+        location.reload();
       });
   }
 
@@ -54,7 +59,7 @@ export class ServiceProvidersService {
 
   }
 
-  addServiceProviders(service: ProviderLocatoin): Observable<ServiceProviders> {
+  addServiceProviders(service: ServiceProviders): Observable<ServiceProviders> {
     const body = JSON.stringify(service);
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers});
@@ -64,35 +69,45 @@ export class ServiceProvidersService {
 
   }
 
-  updateServiceProvider(id: number, service: ProviderLocatoin): Observable<ServiceProviders> {
+  updateServiceProvider(service: ServiceProviders): Observable<ServiceProviders> {
     const body = JSON.stringify(service);
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers});
 
-    return this.httpService.put(this.baseURL + '/service-providers/update/' + id, body, options)
+    return this.httpService.put(this.baseURL + '/service-providers/update', body, options)
       .map((response: Response) => response.json());
   }
 
   getServiceProviderById(id: number): Observable<ServiceProviders> {
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers});
-    return this.httpService.get(this.baseURL + '/service-providers/find-by-id/' + id, options)
+    return this.httpService.get(this.baseURL + '/service-providers/find-by-id/' + id + '?access_token='
+      + this.apiService.returnAccessToken(), options)
       .map((response: Response) => response.json())
       .catch(this.handleError);
 
+  }
+
+  getServiceProviderByUserId(id: any): Observable<ServiceProviders> {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers});
+    return this.httpService.get(this.baseURL + '/service-providers/find-by-userId/' + id + '?access_token='
+      + this.apiService.returnAccessToken(), options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
   }
 
   deleteServiceProvider(id: number) {
     return this.httpService.delete(this.baseURL + '/service-providers/delete/' + id);
   }
 
-  updateServiceProviderStatus(id: number ,providerDTO: ServiceProviders) {
+  updateServiceProviderStatus(id: number, providerDTO: ServiceProviders) {
     let status: string = ProviderStatus[providerDTO.status];
     let body = status;
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     console.log('id ' + id + '  status  ' + providerDTO.status);
-    return this.httpService.put(this.baseURL +'/service-providers/update-status/' + id, body)
+    return this.httpService.put(this.baseURL + '/service-providers/update-status/' + id, body)
       .map((response: Response) => response.json());
   }
 
@@ -100,7 +115,7 @@ export class ServiceProvidersService {
     let statusString: string = ProviderStatus[status];
     let params = new HttpParams().set('numberOfProvidersOnPage', String(numberOfProvidersOnPage))
       .set('page', String(page)).set('status', statusString);
-    return this.http.get<ServiceProviders[]>( this.baseURL + `/service-providers/find-all/status?` + params)
+    return this.http.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/status?` + params)
       .pipe(
         map(res => res['content']));
   }

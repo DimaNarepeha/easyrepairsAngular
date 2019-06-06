@@ -10,4 +10,6 @@ export class  ServiceProviders {
   lastUpdate: string;
   location: Location;
   status: ProviderStatus;
+  raiting: number;
+  registrationDate: string;
 }

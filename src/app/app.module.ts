@@ -36,9 +36,14 @@ import {ListOffersComponent} from './list-offers/list-offers.component';
 import {ListOfferService} from './list-offers/list-offer.service';
 import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
 import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component';
+import {FeedbackComponent} from './feedback/feedback.component';
+import {FeedbackService} from './feedback/feedback.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {VerificationComponent} from './verification/verification.component';
 import {NgxCaptchaModule} from 'ngx-captcha';
 import {CaptchaComponent} from './captcha/captcha.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
+
 
 
 @NgModule({
@@ -70,8 +75,10 @@ import {CaptchaComponent} from './captcha/captcha.component';
     ListOffersComponent,
     AdminApprovePageComponent,
     MenuBarComponent,
+    FeedbackComponent,
     VerificationComponent,
-    CaptchaComponent
+    CaptchaComponent,
+    MyProfileComponent
 
   ],
   imports: [
@@ -82,10 +89,13 @@ import {CaptchaComponent} from './captcha/captcha.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule,
     NgxCaptchaModule
   ],
 
-  providers: [ServiceProvidersService, CustomerService, ApiService, LandingPageService, RegistrationService, CreateOfferService, ListOfferService],
+
+  providers: [ServiceProvidersService, CustomerService, ApiService, LandingPageService,
+    RegistrationService, CreateOfferService, ListOfferService, FeedbackService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
