@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ServiceProviders} from './service-providers';
 import {ServiceProvidersService} from './service-providers.service';
 import 'rxjs/add/observable/throw';
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-service-providers',
@@ -16,14 +17,25 @@ export class ServiceProvidersComponent implements OnInit {
   private providerPage: Array<any>;
   private pages: Array<number>;
   public userFile: any = File;
+  role: string;
+  private url = environment.baseURL + '/service-providers/image/';
 
   constructor(private serviceProvidersService: ServiceProvidersService) {
   }
 
   ngOnInit() {
-    this.serviceProviders = this.providerPage;
-    console.log(this.serviceProviders);
     this.getServiceProvidersByPage();
+    // this.serviceProviders = this.providerPage;
+    // console.log(this.serviceProviders);
+  }
+
+  public isUser() {
+    return window.sessionStorage.getItem('user') != null;
+  }
+
+  public isAdmin() {
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    return this.role == 'ADMIN';
   }
 
   setPage(i, event: any) {
@@ -48,7 +60,7 @@ export class ServiceProvidersComponent implements OnInit {
           const d = data;
           console.log(d);
           // console.log("result = " + d.result);
-          this.providerPage = d.content;
+          this.serviceProviders = d.content;
           this.pages = new Array(d.totalPages);
           console.log(data.content);
           console.log(this.pages);
