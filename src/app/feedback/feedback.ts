@@ -8,4 +8,6 @@ export class Feedback {
   userTo: string;
   userFrom: string;
   endDate: string;
+  addressedFrom: User;
+  addressedTo: User;
 }

@@ -1,0 +1,142 @@
+.img_styles {
+  background: red;
+  width: 100px;
+  height: 100px;
+  margin: 5px 20px 5px 15px;
+  float: left;
+}
+
+.edit-send-submit-buttons {
+  height: 40px;
+  width: 40px;
+}
+
+
+.email-buttom {
+  float: right;
+  margin-bottom: 1%;
+  border: none;
+}
+
+.sent-button {
+  float: right;
+  margin-right: 1.5%;
+  margin-top: 0.7%;
+  border: none;
+}
+
+.service-provider-email {
+  display: inline-block;
+  width: 85%;
+  margin-left: 2%;
+}
+
+.input-email {
+  width: 69%;
+  float: right;
+  margin-right: 5%;
+}
+
+.from-to {
+  width: 22%;
+  display: inline-block;
+  float: left;
+  margin-top: 4%;
+}
+
+.description {
+  padding-top: 1%;
+  padding-left: 1%;
+  flex: 2;
+}
+
+.write-menu {
+  width: 100%;
+}
+
+.send-mail {
+  float: right;
+  margin-right: 20px;
+  width: 97%;
+}
+
+.approve {
+  float: right;
+  margin: 10px 25px 10px 20px;
+}
+
+#inputGroupSelect01 {
+  margin-bottom: 50px;
+}
+
+.btn_menu {
+  display: inline-block;
+  float: right;
+  border: none;
+}
+
+.form-group {
+  width: 69%;
+  float: left;
+}
+
+.inline-p {
+  display: inline-block;
+}
+
+.raiting {
+  position: absolute;
+  margin: 20px;
+  display: flex;
+  left: 15%;
+  transform: translate(-50%,-50%) rotateY(180deg);
+}
+
+.raiting input {
+  display: none;
+}
+
+.raiting label {
+  display: block;
+  cursor: pointer;
+  width: 50px;
+}
+
+.raiting label:before {
+   content: '\f005';
+   font-family: FontAwesome;
+   position: relative;
+   display: block;
+   font-size: 20px;
+   color: #101010;
+ }
+.raiting label:after {
+  content: '\f005';
+  font-family: FontAwesome;
+  position: absolute;
+  display: block;
+  font-size: 20px;
+  color: #FFC107;
+  top: 0;
+  opacity: 0;
+  transition: .5s;
+  text-shadow: 0 2px 5px rgba(0,0,0,.5);
+}
+.raiting label:hover:after,
+.raiting label:hover ~ label:after,
+.raiting input:checked ~ label:after{
+ opacity: 1;
+}
+.star {
+  font-size: 1.5rem;
+  color: #b0c4de;
+}
+.filled {
+  color: green;
+}
+.bad {
+  color: #deb0b0;
+}
+.filled.bad {
+  color: #ff1e1e;
+}

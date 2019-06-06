@@ -3,7 +3,8 @@ import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable, throwError} from 'rxjs';
-import {Feedback} from '../core/model/feedback';
+import {Feedback} from './feedback';
+
 
 @Injectable()
 export class FeedbackService {

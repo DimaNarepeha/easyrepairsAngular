@@ -39,7 +39,8 @@ import {ListOfferService} from './list-offers/list-offer.service';
 import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
 import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component';
 import { FeedbackComponent } from './feedback/feedback.component';
-import {FeedbackService} from "./feedback/feedback.service";
+import {FeedbackService} from './feedback/feedback.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import {FeedbackService} from "./feedback/feedback.service";
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
 
   providers: [ServiceProvidersService, CustomerService, ApiService, SpGeneralService, LandingPageService, RegistrationService, CreateOfferService, ListOfferService, FeedbackService],
