@@ -133,6 +133,7 @@ import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page
 import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component';
 import {ChatComponent} from "./chat/chat.component";
 import {ChatService} from "./chat/chat.service";
+import {ChatsComponent} from "./chat/chats/chats";
 
 
 
@@ -161,6 +162,7 @@ import {ChatService} from "./chat/chat.service";
     NotificationComponent,
     CreateOfferComponent,
     NotificationComponent,
+    ChatsComponent,
 ChatComponent,
     ListOffersComponent,
     AdminApprovePageComponent,

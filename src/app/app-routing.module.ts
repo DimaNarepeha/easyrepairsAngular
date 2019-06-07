@@ -14,9 +14,11 @@ import {ListOffersComponent} from './list-offers/list-offers.component';
 import {LogoutComponent} from './logout/logout.component';
 import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
 import {ChatComponent} from "./chat/chat.component";
+import {ChatsComponent} from "./chat/chats/chats";
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
+  {path: 'chats', component: ChatsComponent},
   {path: 'service-providers', component: ServiceProvidersComponent},
   {path: 'add-service-provider', component: AddServiceProvidersComponent},
   {path: 'service-providers/:id', component: ServiceProviderOneComponent},

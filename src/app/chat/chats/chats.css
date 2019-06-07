@@ -1,1 +1,17 @@
+body{
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('tool.jpg');
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
+  /*background-color: rgba(0, 0, 0, 0.5)!important;*/
+  /* background: #7F7FD5;
+   background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+   background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);*/
+  /*background-image: linear-gradient(to right top, #f2ff71, #f3fe7b, #f4fc86, #f5fb8f, #f6fa99);*/
+}
 

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProviderStatus} from '../../service-providers/service-provider.status';
+import {ChatService} from "../chat.service";
 
 
 @Component({
@@ -11,7 +12,7 @@ export class ChatsComponent implements OnInit {
   // providerStatus: typeof ProviderStatus;
 
 
-  constructor() {}
+  constructor(private chatService: ChatService) {}
 
 
 
