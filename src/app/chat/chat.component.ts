@@ -157,7 +157,7 @@ export class ChatComponent  implements OnInit {
       that.stompClient.subscribe("/chat", (message) => {
         self.getChats();
         if(message.body) {
-          $(".chat").append("<div class='message'>"+message.body+"</div>")
+        //  $(".chat").append("<div class='message'>"+message.body+"</div>")
           self.getChats();
           // console.log(message.body);
           // self.chat.message = message.body;
@@ -208,7 +208,7 @@ export class ChatComponent  implements OnInit {
     console.log(this.chat.message);
     console.log(this.chat.messageTo);
     console.log(this.chat.messageFrom);
-    this.getMessages();
+    //this.getMessages();
     if(this.messages) {
       console.log('ppppppp' + this.messages.messages);
       console.log(this.messages.messages.indexOf(this.chat.message) === -1);
@@ -246,10 +246,10 @@ export class ChatComponent  implements OnInit {
     });
   }
 
-  getMessages(){
+  /*getMessages(){
     this.chatService.getAllMessages().subscribe((response) => {
       this.messages = response;
     });
 
-  }
+  }*/
 }

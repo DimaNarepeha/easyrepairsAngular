@@ -11,13 +11,12 @@ import {Messages} from "./Messages";
 
 @Injectable()
 export class ChatService {
+  private customerId= "7";
+  private providerId= "1";
   constructor(private httpService: Http) { }
-  getAllMessages(): Observable <Messages> {
-    return this.httpService.get("http://localhost:8080/message/getMessages").
-    map( (response: Response) => response.json()).catch(this.handleError);
-  }
+
   getAllChats(): Observable <Chat[]> {
-    return this.httpService.get("http://localhost:8080/message").
+    return this.httpService.get("http://localhost:8080/message/" +this.customerId + "/" + this.providerId).
     map( (response: Response) => response.json()).catch(this.handleError);
   }
   addChat(chat: Chat) {
@@ -26,10 +25,14 @@ export class ChatService {
     const options = new RequestOptions({headers: headers});
     return this.httpService.post("http://localhost:8080/message", body, options);
     }
-
-  private handleError(error: Response) {
+  /*getAllMessages(): Observable <Messages> {
+    return this.httpService.get("http://localhost:8080/message/getMessages/"+ this.customerId + "/" + this.providerId).
+    map( (response: Response) => response.json()).catch(this.handleError);
+  }*/
+  private  handleError(error: Response) {
     return Observable.throw(error);
   }
+
 }
 
 

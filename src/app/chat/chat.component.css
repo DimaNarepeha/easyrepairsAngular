@@ -791,14 +791,15 @@
   margin: 0 auto;
   width: 50%;
   height: 100%;
-  border: 1px solid grey;
-  background-image: url("tool.jpg")!important;
+  /*border: 1px solid grey;*/
+  /*background-image: url("tool.jpg")!important;*/
+
 }
 
 .footer{
   background: #cccccc;
   margin: 0 auto;
-  position: absolute;
+  position:fixed;
   bottom: 0;
   height: 10vh;
   width: 100vw;
@@ -813,6 +814,7 @@ input{
   height: 30px;
   border-radius: 15px;
   font-size: 1.5em;
+  position:fixed;
 }
 .send{
   float: right;
@@ -822,7 +824,7 @@ input{
   height: 30px;
   width: 30px;
   margin-left: 5px;
-
+  position:fixed;
 }
 
 /*.tools{*/
@@ -856,22 +858,31 @@ input{
   /*top: 0;*/
   /*left: 0;*/
 /*}*/
+h1 {
+  color: #FFFF00;
+}
 body,html{
-  height: 100%;
+  height:400%!important;
   margin: 0;
-  background: #7F7FD5;
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('tool.jpg');
+  /*background-image: url("tool.jpg")!important;*/
+  /*background-color: rgba(0, 0, 0, 0.5)!important;*/
+ /* background: #7F7FD5;
   background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
-  background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+  background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);*/
+  /*background-image: linear-gradient(to right top, #f2ff71, #f3fe7b, #f4fc86, #f5fb8f, #f6fa99);*/
 }
 
 .chat{
+  height:400%;
   margin-top: auto;
   margin-bottom: auto;
 }
 .card{
-  height: 500px;
+  height: 575px;
   border-radius: 15px !important;
-  background-color: rgba(0,0,0,0.4) !important;
+  background-color: #EEE8AA!important;
+ /* background-image: linear-gradient(to right top, #f2ff71, #f3fe7b, #f4fc86, #f5fb8f, #f6fa99);*/
 }
 .contacts_body{
   padding:  0.75rem 0 !important;
@@ -1008,28 +1019,33 @@ body,html{
   margin-bottom: auto;
   margin-left: 10px;
   border-radius: 25px;
-  background-color: #82ccdd;
+  background-color: #FFA500;
   padding: 10px;
-  position: relative;
+ /* position: relative;*/
 }
 .msg_cotainer_send{
   margin-top: auto;
   margin-bottom: auto;
   margin-right: 10px;
   border-radius: 25px;
-  background-color: #78e08f;
+  background-color: #000000;
   padding: 10px;
-  position: relative;
+  color:#FFA500;
+  /*position: fixed;*/
 }
 
 .msg_cotainer1{
   margin-top: auto;
   margin-bottom: auto;
-  margin-left: 10px;
+  margin-left: 1400px;
   border-radius: 25px;
-  background-color: #FFFF00;
+  float: right;
+  background-color: #FFA500;
   padding: 10px;
-  position: relative;
+ /* margin-left:auto;*/ margin-right:0;
+  /*float: right!important;*/
+  /*position: relative;*/
+  /*position: fixed;*/
 }
 .msg_time{
   position: absolute;

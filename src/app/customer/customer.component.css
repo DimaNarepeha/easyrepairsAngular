@@ -9,3 +9,12 @@
   border-left-width: 15px!important;
   border-radius: 5px;
 }
+.text-lg-center{
+  font-size: 20px;
+}
+.sel{
+  position:fixed!important;
+  margin-left:1050px!important;
+  margin-right: 10px!important;
+ /* align:right;*/
+}

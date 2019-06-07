@@ -16,8 +16,8 @@
 <div class="w3-container w3-yellow">
 <h1>Welcome to  Api! </h1>
 </div>
-<div>
-     <form  class="w3-selection bg-dark w3-padding" [formGroup]="formGroup">
+<div class="floatcontainer">
+     <form  class="sel w3-left w3-selection bg-dark w3-padding " [formGroup]="formGroup">
         <input type="hidden" name="customer.id"/>
        <p class="text-white bg-dark"> Enter first name:</p> <input formControlName="firstname" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text" [(ngModel)]= "customer.firstName" name ="firstName"/><br/>
        <p class="text-white bg-dark">   Enter last name:</p><input formControlName="lastname" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text" [(ngModel)]= "customer.lastName" name ="lastName"/><br/>
@@ -30,9 +30,9 @@
         <h2>Customers</h2>
     </div>
 <div>
-<table class="table table-hover table-dark">
-                <thead>
-        <tr>
+<!--<table class="table table-hover table-dark">
+                <thead>-->
+   <!--    <tr>
 
             <th>FirstName</th>
             <th>LastName</th>
@@ -42,25 +42,37 @@
             <th>Image</th>
             <th>Actions</th>
             
-        </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor = "let customer1 of customerPage ">
-            
+        </tr>-->
+ <!--   </thead>
+    <tbody>-->
+    <div class=" w3-container  w3-black" *ngFor = "let customer1 of customerPage ">
+      <div class="container-fluid w3-yellow">
+      <img class="rounded float-left" alt="{{customer1.image}}" width="300" height="300" src= "http://localhost:8080/customers/image/{{customer1.image}}" />
 
-        <td>{{customer1.firstName}}</td>
-        <td>{{customer1.lastName}}</td>
-        <td>{{customer1.email}}</td>
-        <td>{{customer1.updated}}</td>
-        <td><!---<div class="form-group">-->
-            <label for="file">File upload:</label>
-            <input type="file" class="form-control" accept="image/" (change)="onSelectFile($event,customer1.id)" style="height:100%" />
-      <!--- </div>--></td>
-       <img  alt="{{customer1.image}}" width="100" height="100" src= "http://localhost:8080/customers/image/{{customer1.image}}" />
-        <td><button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="getCustomerById(customer1.id)" >Update</button>|<button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="deleteCustomer(customer1.id)">Delete</button> </td>
-    </tr>
-</tbody>
-    </table>
+        <div  class="text-lg-center">{{customer1.firstName}}</div>
+        <div class="text-lg-center">{{customer1.lastName}}</div>
+        <div class="text-lg-center">{{customer1.email}}</div>
+        <div class="text-lg-center">{{customer1.updated}}</div>
+        <div class="text-lg-center"><!---<div class="form-group">-->
+            <!--<label for="file">File upload:</label>-->
+            <!--<input type="file" class="form-control" accept="image/" (change)="onSelectFile($event,customer1.id)" style="height:100%" />-->
+
+
+      <!--- </div>--></div>
+
+        <div><button class="w3-btn w3-yellow w3-round-large-center w3-margin-bottom" (click)="getCustomerById(customer1.id)" >Update</button>|<button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="deleteCustomer(customer1.id)">Delete</button> </div>
+      <form>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="customFile" (change)="onSelectFile($event,customer1.id)">
+          <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+      </form>
+
+      </div>
+      <div class="clearfix"></div>
+    </div>
+<!--</tbody>
+    </table>-->
 
     
     <ul class="nav nav-pills">
