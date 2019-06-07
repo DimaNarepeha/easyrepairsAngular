@@ -42,8 +42,49 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {VerificationComponent} from './verification/verification.component';
 import {NgxCaptchaModule} from 'ngx-captcha';
 import {CaptchaComponent} from './captcha/captcha.component';
-import { MyProfileComponent } from './my-profile/my-profile.component';
+import {MyProfileComponent} from './my-profile/my-profile.component';
+import {NotifierModule, NotifierOptions} from 'angular-notifier';
 
+const customNotifierOptions: NotifierOptions = {
+  position: {
+    horizontal: {
+      position: 'right',
+      distance: 12
+    },
+    vertical: {
+      position: 'top',
+      distance: 12,
+      gap: 10
+    }
+  },
+  theme: 'material',
+  behaviour: {
+    autoHide: 5000,
+    onClick: 'hide',
+    onMouseover: 'pauseAutoHide',
+    showDismissButton: true,
+    stacking: 4
+  },
+  animations: {
+    enabled: true,
+    show: {
+      preset: 'slide',
+      speed: 300,
+      easing: 'ease'
+    },
+    hide: {
+      preset: 'fade',
+      speed: 300,
+      easing: 'ease',
+      offset: 50
+    },
+    shift: {
+      speed: 300,
+      easing: 'ease'
+    },
+    overlap: 150
+  }
+};
 
 
 @NgModule({
@@ -90,13 +131,16 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    NotifierModule.withConfig(customNotifierOptions)
   ],
 
 
   providers: [ServiceProvidersService, CustomerService, ApiService, LandingPageService,
     RegistrationService, CreateOfferService, ListOfferService, FeedbackService],
-  bootstrap: [AppComponent]
+  bootstrap:
+    [AppComponent]
 })
+
 export class AppModule {
 }
