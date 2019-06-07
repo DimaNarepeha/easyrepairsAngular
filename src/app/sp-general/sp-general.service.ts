@@ -24,7 +24,7 @@ export class SpGeneralService {
   }
 
   getApprovedProviders(): Observable<ProvidersInfo[]> {
-    return this.http.get<ProvidersInfo[]>(this.url+ this.allapproved );
+    return this.http.get<ProvidersInfo[]>(this.url + this.allapproved );
   }
 
   getLatestComments(): Observable<Feedback[]> {

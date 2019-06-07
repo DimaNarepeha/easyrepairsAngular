@@ -38,8 +38,13 @@ import {ListOffersComponent} from './list-offers/list-offers.component';
 import {ListOfferService} from './list-offers/list-offer.service';
 import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
 import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component';
-import {PortfolioComponent} from "./portfolio/portfolio.component";
-import {PortfolioService} from "./portfolio/portfolio.service";
+import {PortfolioComponent} from './portfolio/portfolio.component';
+import {PortfolioService} from './portfolio/portfolio.service';
+import { VerificationComponent } from './verification/verification.component';
+import {NgxCaptchaModule} from 'ngx-captcha';
+import { CaptchaComponent } from './captcha/captcha.component';
+import {EditPostComponent} from './portfolio/edit-post/edit-post.component';
+import {AddPostComponent} from "./portfolio/add-post/add-post.component";
 
 
 @NgModule({
@@ -70,7 +75,11 @@ import {PortfolioService} from "./portfolio/portfolio.service";
     PortfolioComponent,
     ListOffersComponent,
     AdminApprovePageComponent,
-    MenuBarComponent
+    MenuBarComponent,
+    VerificationComponent,
+    CaptchaComponent,
+    EditPostComponent,
+    AddPostComponent
 
   ],
   imports: [
@@ -80,7 +89,8 @@ import {PortfolioService} from "./portfolio/portfolio.service";
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxCaptchaModule
   ],
 
   providers: [ServiceProvidersService, PortfolioService, CustomerService, ApiService, SpGeneralService, LandingPageService, RegistrationService, CreateOfferService, ListOfferService],

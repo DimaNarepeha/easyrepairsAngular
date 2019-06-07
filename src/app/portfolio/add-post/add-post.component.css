@@ -1,0 +1,53 @@
+.main-content {
+  padding-top: 70px;
+
+}
+
+.card {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.card-body{
+  width: 100%;
+}
+
+
+.header {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#back-button{
+  margin-left: 15px;
+  position: relative;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  font-size: .8em;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  color: #fff;
+  background: #f8b600;
+  border: 1px solid transparent;
+}
+
+#button-conteiner{
+  margin-top: 100px;
+  position: fixed;
+  width: 100%;
+}
+
+.header textarea{
+  width: 100%;
+}
+
+.main-description textarea{
+  width: 100%;
+}
+
+
+

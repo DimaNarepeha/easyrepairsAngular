@@ -3,9 +3,50 @@
 
 }
 
-.genric-btn {
-  left: 80%;
+#back-button{
+  margin-left: 15px;
+  position: relative;
   width: 150px;
+  height: 40px;
+  line-height: 40px;
+  font-size: .8em;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  color: #fff;
+  background: #f8b600;
+  border: 1px solid transparent;
+}
+
+#add-button{
+  margin-right: 15px;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  font-size: .8em;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  color: #fff;
+  background: #f8b600;
+  border: 1px solid transparent;
+}
+
+#button-conteiner{
+  margin-top: 100px;
+  position: fixed;
+  width: 100%;
+}
+
+.button1.add{
+  float: right;
+}
+
+.genric-btn {
+  width: 150px;
+  height: 40px;
   position: relative;
   line-height: 40px;
   padding: 0 30px;
@@ -22,8 +63,14 @@
 .card {
   margin-top: 20px;
   margin-bottom: 20px;
-  align-items: center;
+}
 
+.card-body{
+  align-items: center;
+}
+
+#edit-button{
+  position: relative;
 }
 
 .card h3 {
@@ -58,5 +105,28 @@
   margin-left: 50%;
   width: 90%;
 }
+
+h1{
+  font-size: 60px;
+  color: #a09b9f;
+}
+
+.button1{
+  display: inline-block;
+}
+
+#post-no-added{
+  width: 600px;
+  transform: translate(-50%);
+  margin-left: 50%;
+  text-align: center;
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
+
+.button1.read{
+  float: right;
+}
+
 
 

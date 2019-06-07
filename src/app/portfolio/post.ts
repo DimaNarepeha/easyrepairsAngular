@@ -5,6 +5,7 @@ export class Post {
   header: string;
   mainDescription: string;
   mainPhoto: string;
+  portfolioId: number;
   postInfo: Array<PostInfo>;
   createdDate: string;
 }

@@ -1,3 +1,7 @@
+const  baseURL1 = 'https://easyrepairs.herokuapp.com';
 export const environment = {
-  production: true
-};
+    production: true,
+    customer_url: baseURL1 + '/customers/',
+    baseURL: baseURL1
+  }
+;

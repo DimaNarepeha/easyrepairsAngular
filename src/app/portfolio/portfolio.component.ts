@@ -33,7 +33,9 @@ export class PortfolioComponent implements OnInit {
     this.rout.params.subscribe(next => {
         this.portfolioService.getPortfolioById(next.id).subscribe(next => {
           this.portfolio = next;
-          this.posts = this.portfolio.posts;
+          this.posts = this.portfolio.postDTOs;
+          console.log(this.portfolio);
+          console.log(this.portfolio.postDTOs[2]);
         }, error1 => {
           console.log(error1);
         });
@@ -42,7 +44,6 @@ export class PortfolioComponent implements OnInit {
       error2 => {
         console.log(error2);
       }
-    )
-    ;
+    );
   }
 }

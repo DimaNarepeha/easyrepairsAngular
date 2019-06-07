@@ -1,0 +1,62 @@
+.main-content {
+  padding-top: 70px;
+
+}
+
+.genric-btn {
+  left: 80%;
+  width: 150px;
+  position: relative;
+  line-height: 40px;
+  padding: 0 30px;
+  font-size: .8em;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  color: #fff;
+  background: #f8b600;
+  border: 1px solid transparent;
+}
+
+.card {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  align-items: center;
+
+}
+
+.card h3 {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.card-body .main-image {
+  margin-left: 50%;
+  transform: translate(-50%);
+}
+
+.secondary-photo {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 50%;
+  transform: translate(-50%);
+  width: 900px;
+  height: 500px;
+}
+
+.main-description {
+  margin-top: 15px;
+  transform: translate(-50%);
+  margin-left: 50%;
+  width: 90%;
+}
+
+.addition-description{
+  margin-top: 15px;
+  transform: translate(-50%);
+  margin-left: 50%;
+  width: 90%;
+}
+
+
