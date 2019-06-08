@@ -48,6 +48,7 @@ import {QuoteComponent} from "./quote/quote.component";
 import {LandingPageComponent} from "./landing-page/landing-page.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {LandingPageService} from "./landing-page/landing-page.service";
+import { ChatListComponent } from './chat-list/chat-list.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -124,7 +125,8 @@ const customNotifierOptions: NotifierOptions = {
     FeedbackComponent,
     VerificationComponent,
     CaptchaComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    ChatListComponent
 
 
   ],

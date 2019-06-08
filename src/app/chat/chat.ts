@@ -5,5 +5,4 @@ export class Chat {
     messageFrom: string;
     message: string;
     sentBy: string;
-
 }
