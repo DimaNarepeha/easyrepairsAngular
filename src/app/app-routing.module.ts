@@ -17,7 +17,8 @@ import {ChatComponent} from "./chat/chat.component";
 import {ChatsComponent} from "./chat/chats/chats";
 import {FeedbackComponent} from './feedback/feedback.component';
 import {VerificationComponent} from './verification/verification.component';
-import {MyProfileComponent} from "./my-profile/my-profile.component";
+import {MyProfileComponent} from './my-profile/my-profile.component';
+import {NotFoundComponent} from './not-found/not-found.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -37,15 +38,14 @@ const routes: Routes = [
   {path: 'logout', component: LogoutComponent},
   {path: 'recovery', component: PasswordRecoveryComponent},
   {path: 'admin-approve', component: AdminApprovePageComponent},
-
   {path: 'chat', component: ChatComponent},
   {path: 'chat/:id', component: ChatComponent},
   {path: 'chat/:id/:sentBy', component: ChatComponent},
-
   {path: 'feedback', component: FeedbackComponent},
   {path: 'my-profile', component: MyProfileComponent},
   {path: '', component: LandingPageComponent},
   {path: 'chats', component: ChatsComponent},
+  {path: 'not-found', component: NotFoundComponent}
 
 ];
 

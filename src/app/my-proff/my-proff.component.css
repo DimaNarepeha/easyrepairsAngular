@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700");
 
 .container{
-  padding-top: 0px;
+  padding-top: 90px;
 }
 
 .list {
@@ -323,7 +323,8 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   margin-right: 20px;
   line-height: 40px;
-  padding: 0 20px;
+  padding: 0 30px;
+  width: 150px;
   font-size: 1.0em;
   text-align: center;
   text-decoration: none;
@@ -950,8 +951,6 @@ body {
   border-radius: 7px;
   box-sizing: border-box;
   color: #fff;
-  height: 200px;
-  width: auto;
   margin-top: -120px;
   float: right;
 

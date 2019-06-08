@@ -31,8 +31,6 @@ export class ChatComponent implements OnInit {
 
   initializeWebSocketConnection() {
     this.rout.params.subscribe(next => {
-      console.log(next.id);
-      // this.userId = next.id;
       this.userId = "20002";
       this.sent = next.sentBy;
 
@@ -42,13 +40,12 @@ export class ChatComponent implements OnInit {
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
-    let messsage = '';
-    var self = this;
+
     this.stompClient.connect({}, function (frame) {
       that.stompClient.subscribe("/chat", (message) => {
-        self.getChats();
+        that.getChats();
         if (message.body) {
-          self.getChats();
+          that.getChats();
         }
       });
     });

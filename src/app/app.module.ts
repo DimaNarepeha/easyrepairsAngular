@@ -49,6 +49,8 @@ import {LandingPageComponent} from "./landing-page/landing-page.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {LandingPageService} from "./landing-page/landing-page.service";
 import { ChatListComponent } from './chat-list/chat-list.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -126,7 +128,8 @@ const customNotifierOptions: NotifierOptions = {
     VerificationComponent,
     CaptchaComponent,
     MyProfileComponent,
-    ChatListComponent
+    ChatListComponent,
+    NotFoundComponent
 
 
   ],
