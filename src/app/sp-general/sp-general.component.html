@@ -18,7 +18,7 @@
   </div>
   <div class="row">
     <div class="col-lg-8">
-      <div class="not_found" style="align-content: center;" *ngIf="providerPage.length<1">
+      <div class="not_found" style="align-content: center;" *ngIf="providerPage?.length<1">
         <h4> Sorry About This</h4>
         <div>
           <p>We can't found any providers for this parameters. Please, try change your search parameters.</p>
@@ -76,20 +76,21 @@
         <aside class="single_sidebar_widget search_widget">
 
           <div class="input-group">
-            <input type="text" placeholder="location"
+            <input type="text" placeholder="location" id="loc"
                    class="google-place-input form-control"
                    google-place
-                   (onSelect)="setAddress($event)" (input)="setProviderCriteria()" name="location">
-            <button class="btn sub-btn" type="button"><i class="fas fa-map-marker-alt"></i></button>
+                   (onSelect)="setAddress($event)" (input)="setProviderParam()" name="location">
+            <label for="loc" class="btn sub-btn"> <i class="fas fa-map-marker-alt"></i> </label>
 
 
-            <select class="cu-select" name="sortby" [(ngModel)]="this.providersCriteria.sortByParam"
-                    (select)="setProviderCriteria()">
+            <label class="btn sub-btn-order" for="sel"><i class="fas fa-sort"></i></label>
+            <select class="cu-select" name="sortby" [(ngModel)]="this.providersCriteria.sortByParam" id="sel"
+                    (click)="setProviderParam()">
               <option [ngValue]="'raiting'">sort by Star Rating</option>
               <option [ngValue]="'registrationDate'">sort by Registration Date</option>
               <option [ngValue]="'name'">sort by Provider Name</option>
             </select>
-            <button class="btn sub-btn-order" type="button"><i class="fas fa-sort"></i></button>
+
           </div>
         </aside>
 
@@ -97,7 +98,7 @@
           <h4 class="widget_title"><span class="orange">RATING</span> Range MORE THEN</h4>
           <div class="slidecontainer">
             <input type="range" min="1" max="4" value="providersCriteria.minRating" class="slider" id="myRange"
-                   [(ngModel)]="providersCriteria.minRating" (click)="setProviderCriteria()">
+                   [(ngModel)]="providersCriteria.minRating" (click)="setProviderParam()">
           </div>
           <div class="right-span"><span class="range-span"> {{providersCriteria.minRating}}</span></div>
         </aside>

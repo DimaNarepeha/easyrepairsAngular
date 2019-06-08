@@ -1,36 +1,90 @@
+<!--<app-nav></app-nav>-->
+<!--<h1>Welcome!</h1>-->
+<!--<br/>-->
+<!--<br/>-->
+
+<!--<div>-->
+<!--<table class="table table-hover table-dark" align="center">-->
+<!--<tr>-->
+<!--<th>Id</th>-->
+<!--<th>Name</th>-->
+<!--<th>Photo</th>-->
+<!--<th>Actions</th>-->
+<!--<th>Show more</th>-->
+
+<!--</tr>-->
+<!--<tr *ngFor="let serviceProvider of providerPage">-->
+<!--<td>{{serviceProvider.id}}</td>-->
+<!--<td>{{serviceProvider.name}}</td>-->
+<!--<td><img  alt="{{serviceProvider.image}}" width="100" height="100" src= "http://localhost:8080/service-providers/image/{{serviceProvider.image}}" /></td>-->
+<!--<td><button class="btn btn-success" [routerLink] = "['/update-service-provider',serviceProvider.id]">Update</button><button class="btn btn-danger" (click) = "deleteService(serviceProvider.id)">Delete</button></td>-->
+<!--<td><button class="btn btn-success" [routerLink] = "['/service-providers',serviceProvider.id]">Show More</button></td>-->
+<!--</tr>-->
+<!--</table>-->
+<!--<ul class="nav nav-pills">-->
+<!--<li class="nav-item" *ngFor="let p of pages; let i=index">-->
+<!--<a  class="nav-link " href="" (click)="setPage(i,$event)" >{{i+1}}</a>-->
+<!--</li>-->
+<!--</ul> -->
+
+<!--</div>-->
+
+<!--<button routerLink = "/add-service-provider"  class="btn btn-success">Create new providers</button>-->
+<!--<br/>-->
+<!--<br/>-->
+<!--<app-footer></app-footer>-->
 <app-nav></app-nav>
-<h1>Welcome!</h1>
 <br/>
 <br/>
+<br/>
+<br/>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="blog_left_sidebar" *ngFor="let serviceProvider of serviceProviders ">
+        <article class="blog_style1">
+          <div class="blog_img">
+            <img class="img-fluid" src="{{url+serviceProvider.image}}" alt="">
+          </div>
+          <div class="blog_text">
+            <div class="blog_text_inner">
+              <div class="cat">
+                <a><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{serviceProvider.location.city}}</a>
+                <a><i class="far fa-calendar-alt" aria-hidden="true"></i> {{serviceProvider.registrationDate}}
+                </a>
+                <a href="#"><i class="far fa-comments" aria-hidden="true"></i> {{serviceProvider.countComment}}</a>
+                <div class="right">
+                  <a><i style=" color: #FFC107;" class="fas fa-star"
+                                 aria-hidden="true"></i> {{serviceProvider.raiting}}</a>
+                </div>
+              </div>
+              <a [routerLink]="['/service-providers',serviceProvider.id]">
+                <h4>{{serviceProvider.name}}</h4>
+              </a>
+              <p>{{serviceProvider.description}}</p>
 
-<div>
-  <table class="table table-hover table-dark" align="center">
-      <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Photo</th>
-        <th>Actions</th>
-        <th>Show more</th>
+              <ul class="list-horizontal">
+                <li *ngFor="let service of serviceProvider.services">
+                  <h5>{{service}} </h5>
+                </li>
 
-      </tr>
-    <tr *ngFor="let serviceProvider of providerPage">
-      <td>{{serviceProvider.id}}</td>
-      <td>{{serviceProvider.name}}</td>
-      <td><img  alt="{{serviceProvider.image}}" width="100" height="100" src= "http://localhost:8080/service-providers/image/{{serviceProvider.image}}" /></td>
-      <td><button class="btn btn-success" [routerLink] = "['/update-service-provider',serviceProvider.id]">Update</button><button class="btn btn-danger" (click) = "deleteService(serviceProvider.id)">Delete</button></td>
-      <td><button class="btn btn-success" [routerLink] = "['/service-providers',serviceProvider.id]">Show More</button></td>
-    </tr>
-  </table>
-<ul class="nav nav-pills">
+
+              </ul>
+              <br/>
+              <br/>
+              <button *ngIf="isAdmin()==true" class="left genric-btn primary" (click) = "deleteService(serviceProvider.id)" style="margin-left: 10px; background-color: darkred;">Delete</button>
+              <a [routerLink]="['/service-providers',serviceProvider.id]" class="right genric-btn primary">Read more</a>
+              <button *ngIf="isAdmin()==true || isCurentProvider(serviceProvider.userDTO.id)==true" class="right genric-btn primary" [routerLink] = "['/update-service-provider',serviceProvider.id]" style="margin-right: 10px; background-color: darkgreen">Update</button>
+            </div>
+          </div>
+        </article>
+      </div>
+      <ul class="nav nav-pills">
         <li class="nav-item" *ngFor="let p of pages; let i=index">
-          <a  class="nav-link " href="" (click)="setPage(i,$event)" >{{i+1}}</a>
+          <a class="nav-link " href="" (click)="setPage(i,$event)">{{i + 1}}</a>
         </li>
-    </ul> 
-
+      </ul>
+    </div>
+  </div>
 </div>
-
-<button routerLink = "/add-service-provider"  class="btn btn-success">Create new providers</button>
-<br/>
-<br/>
 <app-footer></app-footer>
-

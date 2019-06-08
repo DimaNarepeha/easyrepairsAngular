@@ -1,18 +1,16 @@
-
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BannerComponent } from './banner/banner.component';
-import { NavComponent } from './nav/nav.component';
-import { FilterComponent } from './filter/filter.component';
-import { FooterComponent } from './footer/footer.component';
-import { PaginationComponent } from './pagination/pagination.component';
-import { SpGeneralComponent } from './sp-general/sp-general.component';
-import { SpGeneralService } from './sp-general/sp-general.service';
-import { QuoteComponent } from './quote/quote.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
-import { LandingPageService } from './landing-page/landing-page.service';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {BannerComponent} from './banner/banner.component';
+import {NavComponent} from './nav/nav.component';
+import {FilterComponent} from './filter/filter.component';
+import {FooterComponent} from './footer/footer.component';
+import {PaginationComponent} from './pagination/pagination.component';
+import {SpGeneralComponent} from './sp-general/sp-general.component';
+import {QuoteComponent} from './quote/quote.component';
+import {LandingPageComponent} from './landing-page/landing-page.component';
+import {LandingPageService} from './landing-page/landing-page.service';
 import {HttpModule} from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -40,11 +38,56 @@ import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page
 import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component';
 import {PortfolioComponent} from './portfolio/portfolio.component';
 import {PortfolioService} from './portfolio/portfolio.service';
-import { VerificationComponent } from './verification/verification.component';
+import {FeedbackComponent} from './feedback/feedback.component';
+import {FeedbackService} from './feedback/feedback.service';
+import {VerificationComponent} from './verification/verification.component';
 import {NgxCaptchaModule} from 'ngx-captcha';
-import { CaptchaComponent } from './captcha/captcha.component';
 import {EditPostComponent} from './portfolio/edit-post/edit-post.component';
-import {AddPostComponent} from "./portfolio/add-post/add-post.component";
+import {AddPostComponent} from './portfolio/add-post/add-post.component';
+import {CaptchaComponent} from './captcha/captcha.component';
+import {MyProfileComponent} from './my-profile/my-profile.component';
+import {NotifierModule, NotifierOptions} from 'angular-notifier';
+
+const customNotifierOptions: NotifierOptions = {
+  position: {
+    horizontal: {
+      position: 'right',
+      distance: 12
+    },
+    vertical: {
+      position: 'top',
+      distance: 12,
+      gap: 10
+    }
+  },
+  theme: 'material',
+  behaviour: {
+    autoHide: 5000,
+    onClick: 'hide',
+    onMouseover: 'pauseAutoHide',
+    showDismissButton: true,
+    stacking: 4
+  },
+  animations: {
+    enabled: true,
+    show: {
+      preset: 'slide',
+      speed: 300,
+      easing: 'ease'
+    },
+    hide: {
+      preset: 'fade',
+      speed: 300,
+      easing: 'ease',
+      offset: 50
+    },
+    shift: {
+      speed: 300,
+      easing: 'ease'
+    },
+    overlap: 150
+  }
+};
 
 
 @NgModule({
@@ -76,10 +119,13 @@ import {AddPostComponent} from "./portfolio/add-post/add-post.component";
     ListOffersComponent,
     AdminApprovePageComponent,
     MenuBarComponent,
+    FeedbackComponent,
     VerificationComponent,
     CaptchaComponent,
     EditPostComponent,
-    AddPostComponent
+    AddPostComponent,
+    CaptchaComponent,
+    MyProfileComponent
 
   ],
   imports: [
@@ -90,11 +136,13 @@ import {AddPostComponent} from "./portfolio/add-post/add-post.component";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    NotifierModule.withConfig(customNotifierOptions)
   ],
 
-  providers: [ServiceProvidersService, PortfolioService, CustomerService, ApiService, SpGeneralService, LandingPageService, RegistrationService, CreateOfferService, ListOfferService],
+  providers: [ServiceProvidersService, PortfolioService, CustomerService, ApiService, LandingPageService, RegistrationService, CreateOfferService, ListOfferService, FeedbackService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

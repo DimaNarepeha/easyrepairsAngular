@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {SpGeneralService} from '../sp-general/sp-general.service';
 import {Feedback} from '../core/model/feedback';
 import {LandingPageService} from '../landing-page/landing-page.service';
 import {environment} from '../../environments/environment';
@@ -20,11 +19,7 @@ export class QuoteComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.serviceProviders = this.providerPage;
-    // console.log(this.serviceProviders);
-
-
-    this.feedbackService.getLatestComments()// TODO change hardcoded user here
+    this.feedbackService.getLatestComments()
       .subscribe(data => this.feedbacks = data);
   }
 

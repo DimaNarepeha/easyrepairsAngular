@@ -13,10 +13,12 @@ import {CreateOfferComponent} from './create-offer/create-offer.component';
 import {ListOffersComponent} from './list-offers/list-offers.component';
 import {LogoutComponent} from './logout/logout.component';
 import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
+import {FeedbackComponent} from './feedback/feedback.component';
 import {VerificationComponent} from './verification/verification.component';
 import {PortfolioComponent} from './portfolio/portfolio.component';
 import {EditPostComponent} from "./portfolio/edit-post/edit-post.component";
 import {AddPostComponent} from "./portfolio/add-post/add-post.component";
+import {MyProfileComponent} from "./my-profile/my-profile.component";
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -34,6 +36,9 @@ const routes: Routes = [
   {path: 'list-offers', component: ListOffersComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'recovery', component: PasswordRecoveryComponent},
+  {path: 'admin-approve', component: AdminApprovePageComponent},
+  {path: 'feedback', component: FeedbackComponent},
+  {path: 'my-profile', component: MyProfileComponent},
   {path: 'admin-approve', component: AdminApprovePageComponent},
   {path: 'provider-portfolio/:id', component: PortfolioComponent},
   {path: 'portfolio/edit-post/:id', component: EditPostComponent},
