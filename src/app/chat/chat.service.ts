@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import {Chat} from "./chat";
+import {environment} from "../../environments/environment";
 
 
 
@@ -18,14 +19,14 @@ export class ChatService {
   }
 
   getAllChats(): Observable<Chat[]> {
-    return this.httpService.get("http://localhost:8080/message/" + this.customerId + "/" + this.providerId).map((response: Response) => response.json()).catch(this.handleError);
+    return this.httpService.get(environment.baseURL+"/message/" + this.customerId + "/" + this.providerId).map((response: Response) => response.json()).catch(this.handleError);
   }
 
   addChat(chat: Chat) {
     const body = JSON.stringify(chat);
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.httpService.post("http://localhost:8080/message", body, options);
+    return this.httpService.post(environment.baseURL+"/message", body, options);
   }
 
   private handleError(error: Response) {
