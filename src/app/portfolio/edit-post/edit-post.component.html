@@ -1,18 +1,17 @@
 <app-nav></app-nav>
 <div class="main-content">
-  <div class="container" *ngFor="let post of posts, let index" id="portfolio">
+  <div class="container" id="portfolio">
     <div class="card">
       <div class="card-body">
-        <h3>{{post.header}}hello</h3>
-        <img  class="main-image" alt="{{post.mainPhoto}}" width="900" height="500" src="http://localhost:8080/customers/image/{{post.mainPhoto}}"/>
-        <p class="main-description">{{post.mainDescription}}</p>
-        <div>
-          <div *ngFor="let info of post.postInfo">
-            <img class="secondary-photo" alt="{{info.photo}}" width="900" height="500"  src="http://localhost:8080/customers/image/{{info.photo}}"/>
-            <div class="addition-description">
-              {{info.description}}
-            </div>
-          </div>
+        <div class="header">
+          <h3><textarea maxlength="199" rows="2" style="text-align: center" placeholder="Header"
+                        [(ngModel)]="post.header"></textarea></h3>
+        </div>
+        <img class="main-image" alt="{{post.mainPhoto}}" width="900" height="500"
+             src="http://localhost:8080/customers/image/{{post.mainPhoto}}"/>
+        <div class="main-description">
+          Description:
+          <textarea maxlength="999" rows="9" [(ngModel)]="post.mainDescription" placeholder="Max length 1000 symbols"></textarea>
         </div>
       </div>
     </div>

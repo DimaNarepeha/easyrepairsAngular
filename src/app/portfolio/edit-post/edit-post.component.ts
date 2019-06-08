@@ -13,8 +13,8 @@ import {Post} from '../post';
 
 export class EditPostComponent implements OnInit {
 
-  portfolio = new Portfolio();
-  posts = new Array<Post>();
+  portfolioId: number;
+  post = new Post();
 
   constructor(private portfolioService: PortfolioService, private rout: ActivatedRoute) {
   }
@@ -22,8 +22,8 @@ export class EditPostComponent implements OnInit {
   ngOnInit() {
     this.rout.params.subscribe(next => {
         this.portfolioService.getPostById(next.id).subscribe(next => {
-          this.portfolio = next;
-          this.posts = this.portfolio.postDTOs;
+          this.post = next;
+          this.portfolioId = this.post.portfolioId;
         }, error1 => {
           console.log(error1);
         });

@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {Portfolio} from './portfolio';
+import {Post} from "./post";
 
 
 
@@ -20,6 +21,12 @@ export class PortfolioService {
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers});
     return this.httpService.get(this.baseURL + '/provider-portfolio/' + id, options)
+      .map((response: Response) => response.json());
+  }
+  getPostById(id: number): Observable<Post> {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers});
+    return this.httpService.get(this.baseURL + '/portfolio/edit-post' + id, options)
       .map((response: Response) => response.json());
   }
 }
