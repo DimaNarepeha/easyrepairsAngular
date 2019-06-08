@@ -56,7 +56,8 @@
                   <h5>#{{service}} </h5>
                 </li>
               </ul>
-              <a [routerLink]="['/service-providers',serviceProvider.id]" class="genric-btn primary">Read more</a>
+              <a *ngIf="isUser()" [routerLink]="['/service-providers',serviceProvider.id]" class="genric-btn primary">Read more</a>
+              <a *ngIf="!isUser()" routerLink='/not-found' class="genric-btn primary">Read more</a>
             </div>
           </div>
         </article>
