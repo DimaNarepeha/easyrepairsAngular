@@ -15,7 +15,8 @@ import {LogoutComponent} from './logout/logout.component';
 import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
 import {FeedbackComponent} from './feedback/feedback.component';
 import {VerificationComponent} from './verification/verification.component';
-import {MyProfileComponent} from "./my-profile/my-profile.component";
+import {MyProfileComponent} from './my-profile/my-profile.component';
+import {NotFoundComponent} from './not-found/not-found.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -35,7 +36,8 @@ const routes: Routes = [
   {path: 'recovery', component: PasswordRecoveryComponent},
   {path: 'admin-approve', component: AdminApprovePageComponent},
   {path: 'feedback', component: FeedbackComponent},
-  {path: 'my-profile', component: MyProfileComponent}
+  {path: 'my-profile', component: MyProfileComponent},
+  {path: 'not-found', component: NotFoundComponent}
 ];
 
 @NgModule({

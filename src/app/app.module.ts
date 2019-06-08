@@ -44,6 +44,7 @@ import {NgxCaptchaModule} from 'ngx-captcha';
 import {CaptchaComponent} from './captcha/captcha.component';
 import {MyProfileComponent} from './my-profile/my-profile.component';
 import {NotifierModule, NotifierOptions} from 'angular-notifier';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -119,7 +120,8 @@ const customNotifierOptions: NotifierOptions = {
     FeedbackComponent,
     VerificationComponent,
     CaptchaComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    NotFoundComponent
 
   ],
   imports: [

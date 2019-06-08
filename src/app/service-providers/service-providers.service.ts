@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {ServiceProviders} from './service-providers';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import {RequestOptions, Http, Response, Headers} from '@angular/http';
+import {Response} from '@angular/http';
 import {throwError} from 'rxjs';
-import {ProviderLocatoin} from '../location/provider-locatoin';
 import {environment} from '../../environments/environment';
 import {ProviderStatus} from './service-provider.status';
 import {map} from 'rxjs/operators';
@@ -17,7 +16,7 @@ import {NotifierService} from 'angular-notifier';
 
 const headers = new HttpHeaders(
   {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json;charset=UTF-8'
   });
 
 @Injectable()
@@ -54,7 +53,6 @@ export class ServiceProvidersService {
   getAllServiceProviders(): Observable<ServiceProviders[]> {
     return this.httpService.get<ServiceProviders[]>(this.baseURL + '/service-providers/find-all', {headers})
       .catch(this.handleError);
-
   }
 
   addServiceProviders(service: ServiceProviders): Observable<ServiceProviders> {
@@ -63,8 +61,7 @@ export class ServiceProvidersService {
   }
 
   updateServiceProvider(service: ServiceProviders): Observable<ServiceProviders> {
-    return this.httpService.put<ServiceProviders>(this.baseURL + '/service-providers/update' + '?access_token='
-      + this.apiService.returnAccessToken(), JSON.stringify(service), {headers});
+    return this.httpService.put<ServiceProviders>(this.baseURL + '/service-providers/update', JSON.stringify(service), {headers});
   }
 
   getServiceProviderById(id: number): Observable<ServiceProviders> {

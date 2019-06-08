@@ -29,6 +29,7 @@ export class SpGeneralComponent implements OnInit {
   public title = 'Places';
   public addrKeys: string[];
   public addr: object;
+  private role: any;
   constructor(private serviceProvidersService: LandingPageService,
               private http: HttpClient,
               private rout: ActivatedRoute,
@@ -47,6 +48,15 @@ export class SpGeneralComponent implements OnInit {
       .set('minRating', this.providersCriteria.minRating.toString())
       .set('sortBy', this.providersCriteria.sortByParam.toString());
     this.getServiceProvidersByPage();
+  }
+
+  public isUser() {
+    return window.sessionStorage.getItem('user') != null;
+  }
+
+  public isAdmin() {
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    return this.role == 'ADMIN';
   }
 
   setPage(i, event: any) {
