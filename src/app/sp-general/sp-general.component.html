@@ -6,8 +6,8 @@
       <div style="float: right;">
         Show
         <label>
-          <input
-            style="width: 40px; height:30px;font-size: 1em; line-height: 18px; padding: 2px; background: none; border:1px solid grey ;"
+          <input class="input-number"
+            style="width: 40px;    height:30px;font-size: 1em; line-height: 18px; padding: 2px; background: none; border:1px solid grey ;"
             type="number" value="pageSize" min="1"
             (change)="getServiceProvidersByPage()"
             [(ngModel)]="pageSize">
@@ -18,13 +18,16 @@
   </div>
   <div class="row">
     <div class="col-lg-8">
-      <div class="not_found" style="align-content: center;" *ngIf="providerPage?.length<1">
-        <h4> Sorry About This</h4>
+      <div class="not_found "  *ngIf="providerPage?.length<1">
+        <h4 style="text-align: center;">  Sorry About This</h4>
+        <br>
+
         <div>
-          <p>We can't found any providers for this parameters. Please, try change your search parameters.</p>
+          <div> We can't find any providers according to the selected parameters. Please, try changing your search paramenters.</div>
         </div>
-        <img style="width: 350px;   margin-left: auto; margin-right: auto;"
-             src="https://brightestyoungthings.com/wp-content/uploads/2014/01/Sorry-Cat.jpg" alt="">
+<!--        <img  class="twPc-avatarImg" src="https://brightestyoungthings.com/wp-content/uploads/2014/01/Sorry-Cat.jpg" alt="">-->
+        <img  class="twPc-avatarImg" src="https://media1.tenor.com/images/09a6add88eafb9ca4462b2fe662e0617/tenor.gif?itemid=4427267" alt="">
+
       </div>
       <div class="blog_left_sidebar" *ngFor="let serviceProvider of  providerPage">
         <article class="blog_style1">

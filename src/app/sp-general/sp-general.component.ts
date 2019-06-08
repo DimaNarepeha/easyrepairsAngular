@@ -63,6 +63,7 @@ export class SpGeneralComponent implements OnInit {
     event.preventDefault();
     this.page = i;
     this.getServiceProvidersByPage();
+    window.scroll(0, 570);
   }
 
   getServiceProvidersByPage() {
@@ -165,5 +166,6 @@ export class SpGeneralComponent implements OnInit {
       }
     }
     this.getServiceProvidersByPage();
+    this.page = 0;
   }
 }
