@@ -1,0 +1,20 @@
+
+<app-menu-bar [showForCustomers]="true"></app-menu-bar>
+<table class="table table-hover " align="center">
+  <tr *ngFor="let customer of customers">
+    <div class="rounded border border-dark" style="margin: 20px">
+      <td style="width: 23%;">
+        <p>
+          {{customer.lastName}}
+        </p>
+        <img  alt="{{customer.userDTO.image}}" width="100" height="100" src= "http://localhost:8080/customers/image/{{customer.userDTO.image}}" />
+      </td>
+    </div>
+  </tr>
+</table>
+<ul class="nav nav-pills">
+  <li class="nav-item" *ngFor="let p of pages; let i=index">
+    <a  class="nav-link " href="" (click)="setPage(i,$event)" >{{i+1}}</a>
+  </li>
+</ul>
+
