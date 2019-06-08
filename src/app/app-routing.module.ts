@@ -15,10 +15,14 @@ import {LogoutComponent} from './logout/logout.component';
 import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
 import {ChatComponent} from "./chat/chat.component";
 import {ChatsComponent} from "./chat/chats/chats";
+import {FeedbackComponent} from './feedback/feedback.component';
+import {VerificationComponent} from './verification/verification.component';
+import {MyProfileComponent} from "./my-profile/my-profile.component";
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
-  {path: 'chats', component: ChatsComponent},
+  {path: 'login/verify/:activationCode', component: VerificationComponent},
+
   {path: 'service-providers', component: ServiceProvidersComponent},
   {path: 'add-service-provider', component: AddServiceProvidersComponent},
   {path: 'service-providers/:id', component: ServiceProviderOneComponent},
@@ -33,9 +37,16 @@ const routes: Routes = [
   {path: 'logout', component: LogoutComponent},
   {path: 'recovery', component: PasswordRecoveryComponent},
   {path: 'admin-approve', component: AdminApprovePageComponent},
+
   {path: 'chat', component: ChatComponent},
   {path: 'chat/:id', component: ChatComponent},
-  {path: 'chat/:id/:sentBy', component: ChatComponent}
+  {path: 'chat/:id/:sentBy', component: ChatComponent},
+
+  {path: 'feedback', component: FeedbackComponent},
+  {path: 'my-profile', component: MyProfileComponent},
+  {path: '', component: LandingPageComponent},
+  {path: 'chats', component: ChatsComponent},
+
 ];
 
 @NgModule({

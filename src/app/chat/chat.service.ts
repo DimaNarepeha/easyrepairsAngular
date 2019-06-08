@@ -11,8 +11,8 @@ import {Messages} from "./Messages";
 
 @Injectable()
 export class ChatService {
-  private customerId= "7";
-  private providerId= "1";
+  private customerId= "1";
+  private providerId= "20002";
   constructor(private httpService: Http) { }
 
   getAllChats(): Observable <Chat[]> {

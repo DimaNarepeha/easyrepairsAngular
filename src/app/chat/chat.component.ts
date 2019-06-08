@@ -142,7 +142,8 @@ export class ChatComponent  implements OnInit {
   initializeWebSocketConnection(){
     this.rout.params.subscribe(next => {
       console.log(next.id);
-      this.userId = next.id;
+     // this.userId = next.id;
+      this.userId = "20002";
       this.sent = next.sentBy;
 
     }, err => {
@@ -200,7 +201,7 @@ export class ChatComponent  implements OnInit {
     this.chat.message = message;
 
     this.chat.messageTo = this.userId;
-    this.chat.messageFrom = '7';
+    this.chat.messageFrom = '1';
     this.chat.sentBy = this.sent;
 
 

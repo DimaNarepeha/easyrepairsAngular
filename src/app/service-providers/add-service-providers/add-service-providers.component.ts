@@ -17,8 +17,9 @@ export class AddServiceProvidersComponent implements OnInit {
   public title = 'Places';
   public addrKeys: string[];
   public addr: object;
-
   providerLocation = new ProviderLocatoin();
+  location = new Location();
+
 
   setAddress(addrObj) {
     this.zone.run(() => {
@@ -46,7 +47,8 @@ export class AddServiceProvidersComponent implements OnInit {
     this.providerLocation.city = this.addr.locality;
     // @ts-ignore
     this.providerLocation.region = this.addr.admin_area_l1;
-    this.serviceProvidersService.addServiceProviders(this.providerLocation)
+    console.log(this.providerLocation);
+    this.serviceProvidersService.addServiceProviders(this.serviceProvider)
       .subscribe((response) => {
         console.log(response);
         alert('Provider saved!');

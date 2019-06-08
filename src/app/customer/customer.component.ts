@@ -3,6 +3,7 @@ import {Customer} from './customer';
 import {CustomerService} from './customer.service';
 import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {NotifierService} from "angular-notifier";
 
 @Component({
   selector: 'customers',
@@ -15,12 +16,15 @@ export class CustomerComponent implements OnInit {
   private page: number = 0;
   customers: Customer[];
   customer = new Customer();
+  private readonly notifier: NotifierService;
   private customerPage: Array<any>;
   private pages: Array<number>;
   public userFile: any = File;
   public im: any;
+  role: string;
+  constructor(private customerService: CustomerService, private _sanitizer: DomSanitizer, notifierService: NotifierService) {
 
-  constructor(private customerService: CustomerService, private _sanitizer: DomSanitizer) {
+    this.notifier = notifierService;
   }
 
   ngOnInit(): void {
@@ -114,14 +118,21 @@ export class CustomerComponent implements OnInit {
           console.log(response);
           this.reset();
           this.getCustomersByPage();
-          alert('customer added/updated!');
+          this.notifier.notify('success', 'Customer successfuly updated!');
         },
         (error) => {
-          alert('Invalid data provided!');
+          this.notifier.notify('error', 'Invalid data provided!');
           console.log(error);
         });
   }
+  public isUser() {
+    return window.sessionStorage.getItem('user') != null;
+  }
 
+  public isAdmin() {
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    return this.role == 'ADMIN';
+  }
   private reset() {
     this.customer.firstName = null;
     this.customer.lastName = null;
@@ -133,11 +144,11 @@ export class CustomerComponent implements OnInit {
     this.customerService.deleteCustomer(customerId)
       .subscribe((response) => {
           console.log(response);
-          alert('customer deleted!');
+          this.notifier.notify('success', 'Customer deleted!');
           this.getCustomersByPage();
         },
         (error) => {
-          alert('Invalid data provided!');
+          this.notifier.notify('error', 'Invalid data provided!');
           console.log(error);
         });
 
@@ -150,7 +161,7 @@ export class CustomerComponent implements OnInit {
         this.customer = customerData;
         this.getCustomers();
       }, (error) => {
-        alert('Invalid data provided!');
+        this.notifier.notify('error', 'Invalid data provided!');
         console.log(error);
       });
   }
