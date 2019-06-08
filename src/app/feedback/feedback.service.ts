@@ -24,8 +24,8 @@ export class FeedbackService {
 
   }
 
-  addFeedback(feedbck: Feedback): Observable<Feedback> {
-    const body = JSON.stringify(feedbck);
+  addFeedback(feedback: Feedback): Observable<Feedback> {
+    const body = JSON.stringify(feedback);
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers});
 
