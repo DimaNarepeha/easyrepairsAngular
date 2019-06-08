@@ -54,6 +54,7 @@ export class AdminApprovePageComponent implements OnInit {
     this.serviceProvider.status = status;
     console.log(this.serviceProvider);
     this.serviceProvidersService.updateServiceProviderStatus(id, this.serviceProvider).subscribe((serviceProvidersData) => {
+        // @ts-ignore
         this.serviceProviders = serviceProvidersData;
         window.location.reload();
       },

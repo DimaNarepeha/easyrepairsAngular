@@ -3,9 +3,8 @@ import {ServiceProviders} from '../service-providers/service-providers';
 import {environment} from '../../environments/environment';
 import {ServiceProvidersService} from '../service-providers/service-providers.service';
 import {ActivatedRoute} from '@angular/router';
-import {el} from "@angular/platform-browser/testing/src/browser_util";
-import {Customer} from "../customer/customer";
-import {CustomerService} from "../customer/customer.service";
+import {Customer} from '../customer/customer';
+import {CustomerService} from '../customer/customer.service';
 
 @Component({
   selector: 'app-my-profile',

@@ -11,15 +11,11 @@
             <div class="col-md-8">
               <div class="card-body">
                 <form>
-                  From: {{feedback.userFrom}}<br/>
-                  To: {{feedback.userTo}}<br/>
+                  From: {{feedback.addressedFrom.username}}<br/>
+                  To: {{feedback.addressedTo.username}}<br/>
                   <p class="card-text">
                     <small class="text-muted">Create at  {{feedback.createdDate}}</small>
                   </p>
-                  <p class="card-text">
-                    <small class="text-muted">End date at  {{feedback.endDate}}</small>
-                  </p>
-
                 </form>
               </div>
             </div>
@@ -36,14 +32,6 @@
           <div class="form-group">
             Enter comment: <br/> <textarea class="form-control" cols="500" rows="5"
                                            [(ngModel)]="feedback.comment"></textarea><br/>
-            <!--<div class="raiting">-->
-              <!--<input type="radio" name="star" id="star1 "><label for="star1 "></label>-->
-              <!--<input type="radio" name="star" id="star2 "><label for="star2 "></label>-->
-              <!--<input type="radio" name="star" id="star3 "><label for="star3 "></label>-->
-              <!--<input type="radio" name="star" id="star4 "><label for="star4 "></label>-->
-              <!--<input type="radio" name="star" id="star5 "><label for="star5 "></label>-->
-            <!--</div>-->
-
             <ngb-rating [(rate)]="currentRate" max="5">
               <ng-template let-fill="fill" let-index="index">
                 <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>

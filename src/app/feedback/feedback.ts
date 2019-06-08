@@ -5,8 +5,6 @@ export class Feedback {
   comment: string;
   rating: number;
   createdDate: string;
-  userTo: string;
-  userFrom: string;
   endDate: string;
   addressedFrom: User;
   addressedTo: User;
