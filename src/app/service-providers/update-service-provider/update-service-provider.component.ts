@@ -1,9 +1,9 @@
-import {Component, OnInit, NgZone} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {componentRefresh, refreshDescendantViews} from '@angular/core/src/render3/instructions';
 import {ServiceProviders} from '../service-providers';
 import {ServiceProvidersService} from '../service-providers.service';
-import {ProviderLocatoin} from '../../location/provider-locatoin';
+import {environment} from '../../../environments/environment';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-update-service-provider',
@@ -14,24 +14,15 @@ export class UpdateServiceProviderComponent implements OnInit {
 
   serviceProvider = new ServiceProviders();
   public userFile: any = File;
-
-  public title = 'Places';
+  private url = environment.baseURL + '/service-providers/image/';
+  private readonly notifier: NotifierService;
   public addrKeys: string[];
   public addr: object;
 
-  providerLocation = new ProviderLocatoin();
 
-
-  constructor(private serviceProvidersService: ServiceProvidersService, private rout: ActivatedRoute, private zone: NgZone) {
-    // this.rout.params.subscribe(next => {
-    //   this.serviceProvidersService.getServiceProviderById(next['id']).subscribe(next => {
-    //     this.serviceProvider = next;
-    //   }, err => {
-    //     console.log(err);
-    //   });
-    // }, err => {
-    //   console.log(err);
-    // });
+  constructor(private serviceProvidersService: ServiceProvidersService, private rout: ActivatedRoute,
+              private zone: NgZone, notifierService: NotifierService) {
+    this.notifier = notifierService;
   }
 
   setAddress(addrObj) {
@@ -56,18 +47,11 @@ export class UpdateServiceProviderComponent implements OnInit {
   }
 
 
-  updateService(id: number): void {
-    this.providerLocation.id = this.serviceProvider.id;
-    this.providerLocation.name = this.serviceProvider.name;
-    this.providerLocation.email = this.serviceProvider.email;
-    this.providerLocation.description = this.serviceProvider.description;
-    this.providerLocation.country = this.serviceProvider.location.country;
-    this.providerLocation.city = this.serviceProvider.location.city;
-    this.providerLocation.region = this.serviceProvider.location.region;
-    this.serviceProvidersService.updateServiceProvider(id, this.providerLocation)
+  updateService(): void {
+    this.serviceProvidersService.updateServiceProvider(this.serviceProvider)
       .subscribe((response) => {
         console.log(response);
-        alert('Provider updated!');
+        this.notifier.notify('success', 'Provider updated!');
         this.ngOnInit();
       }, (error) => {
         console.log(error);
@@ -75,6 +59,7 @@ export class UpdateServiceProviderComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scroll(0, 0);
     this.rout.params.subscribe(next => {
       this.serviceProvidersService.getServiceProviderById(next.id).subscribe(next => {
         this.serviceProvider = next;

@@ -1,5 +1,7 @@
 import {Location} from '../location/location';
 import {ProviderStatus} from './service-provider.status';
+import {User} from '../login/user';
+import {Feedback} from '../feedback/feedback';
 
 export class  ServiceProviders {
   id: number;
@@ -10,4 +12,10 @@ export class  ServiceProviders {
   lastUpdate: string;
   location: Location;
   status: ProviderStatus;
+  raiting: number;
+  registrationDate: string;
+  services: string[];
+  countComment: number;
+  userDTO: User;
+  feedbacks: Feedback[];
 }

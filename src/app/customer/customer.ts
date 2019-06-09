@@ -1,4 +1,5 @@
 
+
 export class Customer {
     id: string;
     firstName: string;
@@ -8,5 +9,4 @@ export class Customer {
     updated: string;
     image:string = '1.jpg';
     logo: any;
-
 }

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light text-center"
      style="background-color: #222222; justify-content: center; height: 70px">
-  <a class="navbar-brand " href="/">
+  <a class="navbar-brand" href="/">
     <span style="color: white; font-size: 1.6em;">easy</span>
     <span style="color: #f5f528;font-size: 1.6em">REPAIRS.COM</span>
   </a>
@@ -9,15 +9,13 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 </nav>
-
 <div class="container py-4 px-5" style="width:30%; margin-left: 35%; margin-top: 6%; background-color: #eaeaea8a;">
-
   <div class=" login-container">
     <h2 style="margin: auto; text-align: center">Login </h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-group mt-4">
         <input type="text" class="form-control" formControlName="username" id="username" autocomplete="off"
-               placeholder="User name">
+               placeholder="User name"/>
         <div class="error" style="text-align: center; color: red;"
              *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched">
           User name is required field
@@ -25,7 +23,7 @@
       </div>
       <div class="form-group">
         <input type="password" class="form-control" formControlName="password" id="pwd" autocomplete="off"
-               placeholder="Password">
+               placeholder="Password"/>
         <div class="error" style="text-align: center; color: red;"
              *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">
           Password is required field
@@ -39,7 +37,7 @@
       <div class="text-right mt-4">
         <button class="btn btn-outline-warning btn-lg">Login</button>
         <div *ngIf="invalidLogin" class="error" style="text-align: center; color: red;">
-          <div>Wrong login or password</div>
+           {{msg}}
         </div>
       </div>
     </form>

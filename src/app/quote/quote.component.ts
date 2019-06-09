@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { SpGeneralService } from '../sp-general/sp-general.service';
+import {Component, OnInit} from '@angular/core';
 import {Feedback} from '../core/model/feedback';
 import {LandingPageService} from '../landing-page/landing-page.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-quote',
@@ -11,15 +11,15 @@ import {LandingPageService} from '../landing-page/landing-page.service';
 export class QuoteComponent implements OnInit {
 
   private feedback: Feedback;
-  private  feedbacks: Feedback[];
-  constructor(private feedbackService: LandingPageService) { }
+  private feedbacks: Feedback[];
+  private url = environment.baseURL + '/service-providers/image/';
+
+
+  constructor(private feedbackService: LandingPageService) {
+  }
 
   ngOnInit() {
-    // this.serviceProviders = this.providerPage;
-    // console.log(this.serviceProviders);
-
-
-    this.feedbackService.getLatestComments()// TODO change hardcoded user here
+    this.feedbackService.getLatestComments()
       .subscribe(data => this.feedbacks = data);
   }
 
