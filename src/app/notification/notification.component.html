@@ -1,4 +1,5 @@
-<div *ngIf="securityRolesService.isLoggedIn()"><p><img width="40px" (click)="openNotifications(divNotifications)" src="../../assets/img/bell-icon.png"></p>
+<div *ngIf="securityRolesService.isLoggedIn()"><p *ngIf="!isNewNotifications"><img width="40px" (click)="openNotifications(divNotifications)" src="../../assets/img/bell-icon.png"></p>
+  <p *ngIf="isNewNotifications"><img width="40px" (click)="openNotifications(divNotifications)" src="../../assets/img/bell-icon-new-notification.png"></p>
 <div [hidden]="!isOpen" class="notification-block card text-dark overflow-auto">
   <p [hidden]="notifications?.length" class="text-center">There are no notifications yet! :(</p>
   <div #divNotifications *ngFor="let notification of notifications" class="border-top border-bottom notification-card">
