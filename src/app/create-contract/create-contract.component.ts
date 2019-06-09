@@ -28,6 +28,7 @@ export class CreateContractComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scroll(0, 0);
     if (JSON.parse(window.sessionStorage.getItem('user')) == null) {
       console.log('Stop loading!!!');
       alert('Something wrong. Maybe you have not login yet!');
@@ -38,11 +39,11 @@ export class CreateContractComponent implements OnInit {
     if (this.isCustomer()) {
       this.getCustomerDTOByUserId(this.userId);
     }
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if (params.proveder_id == null) {
-        this.router.navigate(['./list-contracts']);  // TODO
+    this.activatedRoute.params.subscribe((params) => {
+      if (params.id == null) {
+        this.router.navigate(['./']);  // TODO
       }
-      this.providerId = params.proveder_id;
+      this.providerId = params.id;
       this.getProviderById(this.providerId);
       console.log('proveder_id=' + this.providerId);
 
@@ -75,6 +76,10 @@ export class CreateContractComponent implements OnInit {
       alert('You should chose some services!');
       return;
     }
+    if (this.orderDTO.description == null) {
+      alert('You should write some description!');
+      return;
+    }
     if (!this.checkInputDates(this.orderDTO.startDate, this.orderDTO.endDate)) {
       alert('Please, select a valid date!');
       return;
@@ -90,12 +95,12 @@ export class CreateContractComponent implements OnInit {
     this.createOrderService.createOrder(this.orderDTO)
       .subscribe((x) => {
         console.log(x);
-        alert('Order was created!');
+        alert('Contract was created!');
       }, (error) => {
         console.log(error);
         alert(error);
       });
-      this.router.navigate(['./list-contracts']);
+    this.router.navigate(['./list-contracts']);
   }
 
   private getCustomerDTOByUserId(id: number): void {
@@ -136,19 +141,10 @@ export class CreateContractComponent implements OnInit {
     return this.role.toString() === 'CUSTOMER';
   }
 
-  private reset() {
-    this.serviceDTOs.forEach(x => x.choose = false);
-    // location.reload();  // TODO
-  }
-
   private checkInputDates(startDate: string, endDate: string): boolean {
     const cDate = new Date(this.currentDate);
     const sDate = new Date(startDate);
     const eDate = new Date(endDate);
     return ((sDate.getTime() <= eDate.getTime()) && (cDate.getTime() <= sDate.getTime()));
-  }
-
-  private async delay(ms: number) {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log('fired'));
   }
 }

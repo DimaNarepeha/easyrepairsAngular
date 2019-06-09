@@ -48,7 +48,7 @@ const routes: Routes = [
   {path: 'chats', component: ChatsComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'admin-approve', component: AdminApprovePageComponent},
-  {path: 'create-contract', component: CreateContractComponent},
+  {path: 'create-contract/:id', component: CreateContractComponent},
   {path: 'list-contracts', component: ListContractsComponent}
 ];
 

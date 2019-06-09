@@ -26,10 +26,11 @@ export class CreateOfferComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scroll(0, 0);
     if (JSON.parse(window.sessionStorage.getItem('user')) == null) {
       console.log('Stop loading!!!');
       alert('Something wrong. Maybe you have not login yet!');
-      return;
+      this.router.navigate(['./']);  // TODO
     }
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
@@ -38,7 +39,7 @@ export class CreateOfferComponent implements OnInit {
     }
     this.getServiceDTOs();
     this.offerDTO.locationDTO = new LocationDTO();
-    let d = new Date();
+    const d = new Date();
     this.currentDate = formatDate(d.setDate(d.getDate() - 1), 'yyyy-MM-dd', 'en');
   }
 
@@ -52,7 +53,6 @@ export class CreateOfferComponent implements OnInit {
   }
 
   private createOfferDTO(): void {
-    console.log('--3-------------------------------');  // TODO
     // @ts-ignore
     if (this.addr === null || this.addrKeys === null) {
       alert('Enter location!');
@@ -85,7 +85,7 @@ export class CreateOfferComponent implements OnInit {
         console.log(error);
         alert(error);
       });
-      this.router.navigate(['./list-offers']);
+    this.router.navigate(['./list-offers']);
   }
 
   private getCustomerDTOByUserId(id: number): void {
@@ -120,9 +120,5 @@ export class CreateOfferComponent implements OnInit {
     const sDate = new Date(startDate);
     const eDate = new Date(endDate);
     return ((sDate.getTime() <= eDate.getTime()) && (cDate.getTime() <= sDate.getTime()));
-  }
-
-  private async delay(ms: number) {
-    await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=> console.log("fired"));
   }
 }

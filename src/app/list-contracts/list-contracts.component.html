@@ -40,7 +40,7 @@
                         (click)="deleteOrderDTOById(order.id)"
                         class="right genric-btn primary">Delete
                 </button>
-                <button *ngIf="isProvider()" style="margin-right: 20px" (click)="chooseOrderDTOById(order.id)"
+                <button *ngIf="isProvider() && false" style="margin-right: 20px" (click)="chooseOrderDTOById(order.id)"
                         class="right genric-btn primary">Contact with customer
                 </button>
                 <button *ngIf="compareWithCustomerId(order.customerDTO.id) && order.customerApproved !== 'approved'"
