@@ -3,7 +3,8 @@ import {OfferDTO} from './models/offerDTO';
 import {CreateOfferService} from './create-offer.service';
 import {ServiceDTO} from './models/serviceDTO';
 import {LocationDTO} from './models/locationDTO';
-import {CustomerDTO} from './models/customerDTO';
+import {formatDate} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-offer',
@@ -12,27 +13,36 @@ import {CustomerDTO} from './models/customerDTO';
 })
 export class CreateOfferComponent implements OnInit {
 
-  offerDTOs: OfferDTO[];
-  offerDTO: OfferDTO = new OfferDTO();
-  serviceDTOs: ServiceDTO[];
-  chosenServices: ServiceDTO[];
-  public addrKeys: string[];
-  public addr: object;
+  private offerDTO: OfferDTO = new OfferDTO();
+  private serviceDTOs: ServiceDTO[];
+  private chosenServices: ServiceDTO[];
+  private addrKeys: string[] = null;
+  private addr: object = null;
+  private currentDate: string;
+  private userId: number;
+  private role: string;
 
-  constructor(private createOfferService: CreateOfferService, private zone: NgZone) {
+  constructor(private createOfferService: CreateOfferService, private zone: NgZone, private router: Router) {
   }
 
   ngOnInit() {
+    if (JSON.parse(window.sessionStorage.getItem('user')) == null) {
+      console.log('Stop loading!!!');
+      alert('Something wrong. Maybe you have not login yet!');
+      return;
+    }
+    this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    if (this.isCustomer()) {
+      this.getCustomerDTOByUserId(this.userId);
+    }
     this.getServiceDTOs();
-    this.getOfferDTOs();
     this.offerDTO.locationDTO = new LocationDTO();
-    this.offerDTO.customerDTO = new CustomerDTO();
-    this.offerDTO.locationDTO.country = '';
-    this.offerDTO.locationDTO.region = '';
-    this.offerDTO.locationDTO.city = '';
+    let d = new Date();
+    this.currentDate = formatDate(d.setDate(d.getDate() - 1), 'yyyy-MM-dd', 'en');
   }
 
-  setAddress(addrObj) {
+  private setAddress(addrObj) {
     this.zone.run(() => {
       this.addr = addrObj;
       this.addrKeys = Object.keys(addrObj);
@@ -41,16 +51,25 @@ export class CreateOfferComponent implements OnInit {
     });
   }
 
-  createOfferDTO(): void {
+  private createOfferDTO(): void {
+    console.log('--3-------------------------------');  // TODO
+    // @ts-ignore
+    if (this.addr === null || this.addrKeys === null) {
+      alert('Enter location!');
+      return;
+    }
+
     this.chosenServices = this.serviceDTOs.filter(x => x.choose === true);
-    console.log(this.chosenServices.length);
     if (this.chosenServices.length < 1) {
       alert('You should chose some services!');
       return;
     }
+    if (!this.checkInputDates(this.offerDTO.startDate, this.offerDTO.endDate)) {
+      alert('Please, select a valid date!');
+      return;
+    }
 
     this.offerDTO.serviceDTOs = this.chosenServices;
-    this.offerDTO.customerDTO.id = 2;  // TODO
     // @ts-ignore
     this.offerDTO.locationDTO.country = this.addr.country;
     // @ts-ignore
@@ -62,48 +81,26 @@ export class CreateOfferComponent implements OnInit {
       .subscribe((x) => {
         console.log(x);
         alert('Offer was created!');
-        this.getOfferDTOs();
       }, (error) => {
         console.log(error);
         alert(error);
       });
-    this.reset();
+      this.router.navigate(['./list-offers']);
   }
 
-  getOfferDTOs(): void {
-    this.createOfferService.getAllOffers()
+  private getCustomerDTOByUserId(id: number): void {
+    this.createOfferService.getCustomerByUserId(id)
       .subscribe((x) => {
-          this.offerDTOs = x;
-          console.log(x);
-        },
+        this.offerDTO.customerDTO = x;
+        console.log('customer:');
+        console.log(x.id);  // TODO
+      },
         (error) => {
           console.log(error);
         });
   }
 
-  getOfferDTOsByCustomerId(id: number): void {
-    this.createOfferService.getOffersByCustomerId(id)
-      .subscribe((x) => {
-          this.offerDTOs = x;
-          console.log(x);
-        },
-        (error) => {
-          console.log(error);
-        });
-  }
-
-  deleteOfferDTOById(id: number) {
-    console.log(id);
-    this.createOfferService.deleteOfferById(id)
-      .subscribe((x) => {
-        console.log(x);
-        this.getOfferDTOs();
-      }, (error) => {
-        console.log(error);
-      });
-  }
-
-  getServiceDTOs(): void {
+  private getServiceDTOs(): void {
     this.createOfferService.getAllServices()
       .subscribe((x) => {
           this.serviceDTOs = x;
@@ -114,10 +111,18 @@ export class CreateOfferComponent implements OnInit {
         });
   }
 
-  private reset() {
-    this.offerDTO.description = null;
-    this.offerDTO.startDate = null;
-    this.serviceDTOs.forEach(x => x.choose = false);
-    this.getOfferDTOs();
+  private isCustomer(): boolean {
+    return this.role.toString() === 'CUSTOMER';
+  }
+
+  private checkInputDates(startDate: string, endDate: string): boolean {
+    const cDate = new Date(this.currentDate);
+    const sDate = new Date(startDate);
+    const eDate = new Date(endDate);
+    return ((sDate.getTime() <= eDate.getTime()) && (cDate.getTime() <= sDate.getTime()));
+  }
+
+  private async delay(ms: number) {
+    await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=> console.log("fired"));
   }
 }
