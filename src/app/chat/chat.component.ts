@@ -49,22 +49,18 @@ export class ChatComponent implements OnInit {
         }
       });
     });
-
   }
 
   sendMessage(message) {
     this.chat.message = message;
-    this.chat.messageTo = this.userId;
-    this.chat.messageFrom = '1';
+    this.chat.providerId = this.userId;
+    this.chat.customerId = '1';
     this.chat.sentBy = this.sent;
-
     this.chatService.addChat(this.chat).subscribe((response) => {
       console.log(response);
       this.getChats();
     });
-
     this.stompClient.send("/app/send/message", {}, message);
-
     $('#input').val('');
   }
 
