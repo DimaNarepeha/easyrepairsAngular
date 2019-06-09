@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ServiceProviders} from '../service-providers';
 import {ServiceProvidersService} from '../service-providers.service';
 import {environment} from '../../../environments/environment';
@@ -18,7 +18,7 @@ export class ServiceProviderOneComponent implements OnInit {
   private userId: any;
 
 
-  constructor(private serviceProvidersService: ServiceProvidersService, private rout: ActivatedRoute) {
+  constructor(private serviceProvidersService: ServiceProvidersService, private rout: ActivatedRoute, private router: Router) {
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
   }
 
@@ -59,4 +59,12 @@ export class ServiceProviderOneComponent implements OnInit {
   }
 
 
+  getPortfolioByProviderId() {
+    this.serviceProvidersService.getPortfolio(this.serviceProvider.id)
+      .subscribe(
+        data => {
+          this.router.navigate(['/provider-portfolio/' + data.id]);
+        },
+      );
+  }
 }

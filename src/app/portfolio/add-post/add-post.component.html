@@ -1,0 +1,31 @@
+<app-nav></app-nav>
+<div id="button-conteiner">
+  <button [routerLink]="['/provider-portfolio',portfolioId]" id="back-button"><- Back to portfolio</button>
+</div>
+<div class="main-content">
+  <div class="container" id="portfolio">
+    <div class="card">
+      <div class="card-body">
+        <form>
+          <div class="header">
+            <h3><textarea required maxlength="199" name="123123" rows="2" style="text-align: center" placeholder="Header"
+                          [(ngModel)]="post.header"></textarea></h3>
+          </div>
+          <div>
+            <label for="file" style="margin-left: 10px;">Edit image:</label>
+            <input type="file" class="form-control" name="1213" accept="image/" (change)="onSelectFile($event)"
+                   style="height:100%"/>
+          </div>
+          <div class="main-description">
+            Description:
+            <textarea required  maxlength="999" name="12312" rows="9" [(ngModel)]="post.mainDescription" placeholder="Max length 1000 symbols"></textarea>
+          </div>
+          <div style="width: 100%">
+            <button  class="genric-btn" (click)="createPost()">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

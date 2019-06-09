@@ -12,6 +12,7 @@ import {ProviderStatus} from './service-provider.status';
 import {map} from 'rxjs/operators';
 import {ApiService} from '../core/api.service';
 import {NotifierService} from 'angular-notifier';
+import {Portfolio} from "../portfolio/portfolio";
 
 
 const headers = new HttpHeaders(
@@ -32,7 +33,7 @@ export class ServiceProvidersService {
   }
 
   getServiceProvidersByPage(page: number): Observable<any> {
-    return this.httpService.get<any>(this.baseURL + '/service-providers/find-all/page/?page=' + page + '?access_token='
+    return this.httpService.get<any>(this.baseURL + '/service-providers/find-all/page/?page=' + page + '&access_token='
       + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
   }
@@ -96,6 +97,10 @@ export class ServiceProvidersService {
     return this.httpService.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/status?` + params)
       .pipe(
         map(res => res['content']));
+  }
+
+  getPortfolio(id: number): Observable<Portfolio> {
+    return this.httpService.get<Portfolio>(this.baseURL + '/provider-portfolio/provider/' + id);
   }
 
 
