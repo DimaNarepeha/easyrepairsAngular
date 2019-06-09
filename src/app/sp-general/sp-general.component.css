@@ -1,5 +1,20 @@
 @import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700");
 
+.twPc-avatarImg {
+  border: 2px solid #dddddd;
+  border-radius: 7px;
+  box-sizing: border-box;
+  color: #fff;
+  height: auto;
+  width: 50%;
+  margin-top:20px;
+  float: right;
+  margin-right: 27%;
+
+
+}
+
+
 .list {
   list-style: none;
   margin: 0px;
@@ -50,6 +65,11 @@ h1, h2, h3, h4, h5, h6 {
   height: auto;
 }
 
+.input-number::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .blog_style1 .blog_text {
   padding-left: 40px;
   padding-right: 40px;
@@ -61,6 +81,8 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-box-shadow: 0px 10px 20px 0px rgba(153, 153, 153, 0.1);
   box-shadow: 0px 10px 20px 0px rgba(9, 9, 9, 0.2);
   padding: 30px 30px 70px 30px;
+  height: auto;
+  padding-bottom: 350px;
 }
 
 .blog_style1 .blog_text .blog_text_inner {
