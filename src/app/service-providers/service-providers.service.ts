@@ -12,6 +12,7 @@ import {ProviderStatus} from './service-provider.status';
 import {map} from 'rxjs/operators';
 import {ApiService} from '../core/api.service';
 import {NotifierService} from 'angular-notifier';
+import {Portfolio} from "../portfolio/portfolio";
 
 
 const headers = new HttpHeaders(
@@ -100,6 +101,10 @@ export class ServiceProvidersService {
       + this.apiService.returnAccessToken())
       .pipe(
         map(res => res['content']));
+  }
+
+  getPortfolio(id: number): Observable<Portfolio> {
+    return this.httpService.get<Portfolio>(this.baseURL + '/provider-portfolio/provider/' + id);
   }
 
 

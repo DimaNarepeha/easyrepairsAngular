@@ -1,8 +1,8 @@
 
 export class Chat {
     id: string;
-    messageTo: string;
-    messageFrom: string;
+    customerId: string;
+    providerId: string;
     message: string;
     sentBy: string;
 }

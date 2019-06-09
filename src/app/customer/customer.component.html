@@ -71,7 +71,7 @@
       <div class="blog_left_sidebar" *ngFor="let customer1 of customerPage ">
         <article class="blog_style1">
           <div class="blog_img">
-            <img class="img-fluid" src= "http://localhost:8080/customers/image/{{customer1.image}}" alt="">
+            <img class="img-fluid" src= "{{url}}{{customer1.image}}" alt="">
           </div>
           <div class="blog_text">
             <div class="blog_text_inner">
