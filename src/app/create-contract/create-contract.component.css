@@ -76,6 +76,20 @@
   color: #ffed1a;
 }
 
+.x4 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.xradiolabel {
+  color: #FFC107;
+}
+
+.x2radiolabel {
+  color: #FFC107;
+  padding-left: 45%
+}
+
 .image {
-  background-image: url("~res/bg_img2.jpg");
+  background: url("~res/slider-3-slide-1-1920x850.jpg") fixed;
 }

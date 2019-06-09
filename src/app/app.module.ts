@@ -48,9 +48,12 @@ import {QuoteComponent} from "./quote/quote.component";
 import {LandingPageComponent} from "./landing-page/landing-page.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {LandingPageService} from "./landing-page/landing-page.service";
-import { ChatListComponent } from './chat-list/chat-list.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-
+import {ChatListComponent} from './chat-list/chat-list.component';
+import {NotFoundComponent} from './not-found/not-found.component';
+import {CreateContractComponent} from './create-contract/create-contract.component';
+import {CreateOrderService} from './create-contract/create-contract.service';
+import {ListContractsComponent} from './list-contracts/list-contracts.component';
+import {ListOrderService} from './list-contracts/list-contracts.service';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -129,8 +132,9 @@ const customNotifierOptions: NotifierOptions = {
     CaptchaComponent,
     MyProfileComponent,
     ChatListComponent,
-    NotFoundComponent
-
+    NotFoundComponent,
+    CreateContractComponent,
+    ListContractsComponent
 
   ],
   imports: [
@@ -146,7 +150,7 @@ const customNotifierOptions: NotifierOptions = {
     NotifierModule.withConfig(customNotifierOptions)
   ],
   providers: [ChatService, ServiceProvidersService, CustomerService, ApiService, LandingPageService,
-    RegistrationService, CreateOfferService, ListOfferService, FeedbackService],
+    RegistrationService, CreateOfferService, ListOfferService, FeedbackService, CreateOrderService, ListOrderService],
   bootstrap:
     [AppComponent]
 

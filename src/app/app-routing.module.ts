@@ -19,11 +19,12 @@ import {FeedbackComponent} from './feedback/feedback.component';
 import {VerificationComponent} from './verification/verification.component';
 import {MyProfileComponent} from './my-profile/my-profile.component';
 import {NotFoundComponent} from './not-found/not-found.component';
+import {CreateContractComponent} from './create-contract/create-contract.component';
+import {ListContractsComponent} from './list-contracts/list-contracts.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
   {path: 'login/verify/:activationCode', component: VerificationComponent},
-
   {path: 'service-providers', component: ServiceProvidersComponent},
   {path: 'add-service-provider', component: AddServiceProvidersComponent},
   {path: 'service-providers/:id', component: ServiceProviderOneComponent},
@@ -45,8 +46,10 @@ const routes: Routes = [
   {path: 'my-profile', component: MyProfileComponent},
   {path: '', component: LandingPageComponent},
   {path: 'chats', component: ChatsComponent},
-  {path: 'not-found', component: NotFoundComponent}
-
+  {path: 'not-found', component: NotFoundComponent},
+  {path: 'admin-approve', component: AdminApprovePageComponent},
+  {path: 'create-contract', component: CreateContractComponent},
+  {path: 'list-contracts', component: ListContractsComponent}
 ];
 
 @NgModule({
