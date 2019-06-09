@@ -16,7 +16,7 @@ import {NotifierService} from 'angular-notifier';
 
 const headers = new HttpHeaders(
   {
-    'Content-Type': 'application/json;charset=UTF-8'
+    'Content-Type': 'application/json;'
   });
 
 @Injectable()
@@ -32,7 +32,7 @@ export class ServiceProvidersService {
   }
 
   getServiceProvidersByPage(page: number): Observable<any> {
-    return this.httpService.get<any>(this.baseURL + '/service-providers/find-all/page/?page=' + page + '?access_token='
+    return this.httpService.get<any>(this.baseURL + '/service-providers/find-all/page/?page=' + page + '&access_token='
       + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
   }
@@ -56,12 +56,14 @@ export class ServiceProvidersService {
   }
 
   addServiceProviders(service: ServiceProviders): Observable<ServiceProviders> {
-    return this.httpService.post<ServiceProviders>(this.baseURL + '/service-providers/save', JSON.stringify(service), {headers});
+    return this.httpService.post<ServiceProviders>(this.baseURL + '/service-providers/save' + '?access_token='
+      + this.apiService.returnAccessToken(), JSON.stringify(service), {headers});
 
   }
 
   updateServiceProvider(service: ServiceProviders): Observable<ServiceProviders> {
-    return this.httpService.put<ServiceProviders>(this.baseURL + '/service-providers/update', JSON.stringify(service), {headers});
+    return this.httpService.put<ServiceProviders>(this.baseURL + '/service-providers/update' + '?access_token='
+    + this.apiService.returnAccessToken(), JSON.stringify(service), {headers});
   }
 
   getServiceProviderById(id: number): Observable<ServiceProviders> {
@@ -86,14 +88,16 @@ export class ServiceProvidersService {
     const status: string = ProviderStatus[providerDTO.status];
     const body = status;
     console.log('id ' + id + '  status  ' + providerDTO.status);
-    return this.httpService.put<ServiceProviders>(this.baseURL + '/service-providers/update-status/' + id, body);
+    return this.httpService.put<ServiceProviders>(this.baseURL + '/service-providers/update-status/' + id + '?access_token='
+      + this.apiService.returnAccessToken(), body);
   }
 
   getServiceProvidersByStatus(page: number, numberOfProvidersOnPage: number, status: ProviderStatus): Observable<ServiceProviders[]> {
     const statusString: string = ProviderStatus[status];
     const params = new HttpParams().set('numberOfProvidersOnPage', String(numberOfProvidersOnPage))
       .set('page', String(page)).set('status', statusString);
-    return this.httpService.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/status?` + params)
+    return this.httpService.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/status?` + params + '&access_token='
+      + this.apiService.returnAccessToken())
       .pipe(
         map(res => res['content']));
   }

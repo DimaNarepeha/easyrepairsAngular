@@ -84,10 +84,15 @@
           <div class='slide'>
             <div class='quote'>{{feedback.comment}}</div>
           </div>
-          <div class='author'>
-            <img src="{{url+serviceProvider.image}}">
+          <div class='author' style="margin-left: -60px;">
+            <img src="{{url+feedback.addressedFrom.image}}">
 
-            {{serviceProvider.name}}
+            From: {{feedback.addressedFrom.username}}
+          </div>
+          <div class='author' style="margin-left: 120px;">
+            <img src="{{url+feedback.addressedTo.image}}">
+
+            To: {{feedback.addressedTo.username}}
           </div>
         </div>
 
@@ -97,7 +102,7 @@
 </div>
   <br/>
   <br/>
-  <button class="btn btn-danger" routerLink="/service-providers" style="margin: 25px;"> Previos page</button>
+  <button class="btn btn-danger" routerLink="/" style="margin: 25px;"> Home page</button>
   <br/>
   <br/>
   <app-footer></app-footer>
