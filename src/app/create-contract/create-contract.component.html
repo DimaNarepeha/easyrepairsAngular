@@ -1,0 +1,102 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Super app!</title>
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--    <script src="https://maps.googleapis.com/maps/api/js?key=<Your API KEY>&libraries=places&language=en"></script>-->
+</head>
+<div class="image">
+<app-nav></app-nav>
+<div class="container col-md-6 xxx">
+  <div>
+    <div style="background-color: #222222">
+      <div>
+        <!-- Default panel contents -->
+        <div id="map" style="background-color: #222222">
+          <br>
+          <div class="container col-md-4">
+            <h1 style="color: #FFC107">Contract</h1>
+          </div>
+          <hr>
+          <form class="w3-selection w3-padding">
+            <br>
+            <div class="container">
+              <div class="row">
+
+                <label class="col-md-4 container2 xlabel" *ngFor="let service of serviceDTOs">{{service.serviceName}}
+                  <input type="checkbox" [(ngModel)]="service.choose" [ngModelOptions]="{standalone: true}">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+            <h3 style="color: #FFC107">Provider name: {{orderDTO.providerDTO.name}}</h3>
+            <br>
+            <p style="color: #FFC107">Enter your location:</p>
+            <input type="text"
+                   class="google-place-input w3-input w3-border w3-round-large container"
+                   google-place
+                   (onSelect)="setAddress($event)"
+                   placeholder="Type to search..">
+            <br>
+            <p style="color: #FFC107">Enter description:</p>
+            <textarea [(ngModel)]="orderDTO.description" name="description"
+                      maxlength="1000" class="w3-input w3-border w3-round-large container">
+            </textarea>
+            <br>
+            <div class="justify-content-center">
+              <label class="x2radiolabel">Time frame: </label>
+              <div style="padding-left: 25%" class="row">
+                <label class="col-md-6 xradiolabel">
+                  <input [(ngModel)]="orderDTO.timeRequirement" type="radio" name="group1" value="approximate">
+                  Approximate
+                </label>
+                <label class="col-md-6 xradiolabel">
+                  <input [(ngModel)]="orderDTO.timeRequirement" type="radio" name="group1" value="strict">
+                  Strict
+                </label>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="container col-md-4">
+                <p class="container col-md-8" style="color: #FFC107">Start date</p>
+                <input [(ngModel)]="orderDTO.startDate" class="w3-round-large container" type="date"
+                       name="startDate" min="{{currentDate}}" max="3000-12-31">
+              </div>
+              <div class="container col-md-4">
+                <p class="container col-md-8" style="color: #FFC107">End date</p>
+                <input [(ngModel)]="orderDTO.endDate" class="w3-round-large container" type="date"
+                       name="endDate" min="{{currentDate}}" max="3000-12-31">
+              </div>
+            </div>
+            <br>
+            <p style="color: #FFC107">Price:</p>
+            <textarea [(ngModel)]="orderDTO.price" name="description"
+                      maxlength="1000" class="w3-input w3-border w3-round-large container">
+            </textarea>
+            <br>
+            <p style="color: #FFC107">Extra details:</p>
+            <textarea [(ngModel)]="orderDTO.extraDetails" name="description"
+                      maxlength="1000" class="w3-input w3-border w3-round-large container">
+            </textarea>
+            <br>
+            <div class="row justify-content-center">
+              <button class="w3-btn w3-yellow w3-round-large" (click)="createOrderDTO()">Create contract
+              </button>
+            </div>
+            <br>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+</div>

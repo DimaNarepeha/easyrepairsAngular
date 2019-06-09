@@ -37,13 +37,7 @@ export class CustomerService {
     const body = JSON.stringify(customer);
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    if (customer.id) {
-      const c = customer.id;
-      customer.id = null;
-      return this.httpService.put(environment.customer_url + c, body, options);
-    } else {
-      return this.httpService.post(environment.customer_url, body, options);
-    }
+    return this.httpService.put(environment.customer_url, body, options);
   }
 
   deleteCustomer(customerId: string) {
