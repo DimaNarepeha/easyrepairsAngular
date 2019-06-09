@@ -20,7 +20,8 @@ export class ChatComponent implements OnInit {
   public userId: any;
   public sent: any;
   public chats: Chat [];
-
+  public man1 = environment.baseURL +"/customers/image/man1";
+  public man2 = environment.baseURL +"/customers/image/man2";
   constructor(private chatService: ChatService, private rout: ActivatedRoute) {
     this.initializeWebSocketConnection();
   }
