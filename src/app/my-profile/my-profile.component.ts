@@ -42,6 +42,7 @@ export class MyProfileComponent implements OnInit {
 
 
   ngOnInit() {
+    window.scroll(0, 0);
     if (this.role == 'PROVIDER') {
       this.rout.params.subscribe(next => {
         this.serviceProvidersService.getServiceProviderByUserId(this.userId).subscribe(next => {
