@@ -4,7 +4,8 @@ import {ServiceDTO} from '../create-offer/models/serviceDTO';
 import {LocationDTO} from '../create-offer/models/locationDTO';
 import {formatDate} from '@angular/common';
 import {CreateOrderService} from './create-contract.service';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-create-contract',
@@ -24,14 +25,15 @@ export class CreateContractComponent implements OnInit {
   private providerId = 0;
 
   constructor(private createOrderService: CreateOrderService, private zone: NgZone,
-              private activatedRoute: ActivatedRoute, private router: Router) {
+              private activatedRoute: ActivatedRoute, private router: Router,
+              private readonly notifier: NotifierService) {
   }
 
   ngOnInit() {
     window.scroll(0, 0);
     if (JSON.parse(window.sessionStorage.getItem('user')) == null) {
       console.log('Stop loading!!!');
-      alert('Something wrong. Maybe you have not login yet!');
+      this.notifier.notify('success', 'Something wrong. Maybe you have not login yet!');
       this.router.navigate(['./']);  // TODO
     }
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
@@ -68,20 +70,20 @@ export class CreateContractComponent implements OnInit {
   private createOrderDTO(): void {
     console.log(this.orderDTO.providerDTO);
     if (this.addr === null || this.addrKeys === null) {
-      alert('Enter location!');
+      this.notifier.notify('success', 'Enter location!');
       return;
     }
     this.chosenServices = this.serviceDTOs.filter(x => x.choose === true);
     if (this.chosenServices.length < 1) {
-      alert('You should chose some services!');
+      this.notifier.notify('success', 'You should chose some services!');
       return;
     }
     if (this.orderDTO.description == null) {
-      alert('You should write some description!');
+      this.notifier.notify('success', 'You should write some description!');
       return;
     }
     if (!this.checkInputDates(this.orderDTO.startDate, this.orderDTO.endDate)) {
-      alert('Please, select a valid date!');
+      this.notifier.notify('success', 'Please, select a valid date!');
       return;
     }
     this.orderDTO.serviceDTOs = this.chosenServices;
@@ -95,10 +97,10 @@ export class CreateContractComponent implements OnInit {
     this.createOrderService.createOrder(this.orderDTO)
       .subscribe((x) => {
         console.log(x);
-        alert('Contract was created!');
+        this.notifier.notify('success', 'Contract was created!');
       }, (error) => {
         console.log(error);
-        alert(error);
+        this.notifier.notify('success', error);
       });
     this.router.navigate(['./list-contracts']);
   }

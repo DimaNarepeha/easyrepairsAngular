@@ -1,14 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import {Chat} from "./chat";
 import {environment} from "../../environments/environment";
-
-
 
 @Injectable()
 export class ChatService {
@@ -26,7 +23,7 @@ export class ChatService {
     const body = JSON.stringify(chat);
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.httpService.post(environment.baseURL+"/message", body, options);
+    return this.httpService.post(environment.baseURL + "/message", body, options);
   }
 
   private handleError(error: Response) {

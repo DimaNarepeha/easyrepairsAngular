@@ -5,13 +5,13 @@
 <br/>
 <div class="container">
   <div class="row">
-    <div class="col-lg-8">
-      <div class="blog_left_sidebar" *ngFor="let serviceProvider of serviceProviders ">
+    <div class="col-lg-6" *ngFor="let serviceProvider of serviceProviders">
+      <div class="blog_left_sidebar">
         <article class="blog_style1">
           <div class="blog_img">
-            <img class="img-fluid" src="{{url+serviceProvider.image}}" alt="">
+            <img class="img-fluid" style="height: 400px; width: auto;" src="{{url+serviceProvider.image}}" alt="">
           </div>
-          <div class="blog_text">
+          <div class="blog_text" style="height: 600px;">
             <div class="blog_text_inner">
               <div class="cat">
                 <a><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{serviceProvider.location.city}}</a>
@@ -24,7 +24,7 @@
                 </div>
               </div>
               <a [routerLink]="['/service-providers',serviceProvider.id]">
-                <h4>{{serviceProvider.name}}</h4>
+                <h5>{{serviceProvider.name}}</h5>
               </a>
               <p>{{serviceProvider.description}}</p>
 
@@ -47,12 +47,14 @@
           </div>
         </article>
       </div>
-      <ul class="nav nav-pills">
-        <li class="nav-item" *ngFor="let p of pages; let i=index">
-          <a class="nav-link " href="" (click)="setPage(i,$event)">{{i + 1}}</a>
-        </li>
-      </ul>
     </div>
   </div>
+  <br/>
+  <ul class="nav nav-pills">
+    <li class="nav-item" *ngFor="let p of pages; let i=index">
+      <a class="nav-link " href="" (click)="setPage(i,$event)">{{i + 1}}</a>
+    </li>
+  </ul>
+  <br/>
 </div>
 <app-footer></app-footer>
