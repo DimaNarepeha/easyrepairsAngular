@@ -8,6 +8,7 @@ import {environment} from '../../environments/environment';
 export class ApiService {
 
   private readonly baseURL;
+  role: string;
 
   constructor(private http: HttpClient) {
     this.baseURL = environment.baseURL;
@@ -38,6 +39,20 @@ export class ApiService {
     if (window.sessionStorage.getItem('token') != null) {
       return JSON.parse(window.sessionStorage.getItem('token')).access_token;
     }
+  }
+  public isAdmin(): boolean {
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    return this.role.toString() === 'ADMIN';
+  }
+
+  public isCustomer(): boolean {
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    return this.role.toString() === 'CUSTOMER';
+  }
+
+  public isProvider(): boolean {
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    return this.role.toString() === 'PROVIDER';
   }
 
 }

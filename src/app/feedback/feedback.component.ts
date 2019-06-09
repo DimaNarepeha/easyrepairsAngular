@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FeedbackService} from './feedback.service';
 import {Feedback} from './feedback';
+import {NotifierService} from "angular-notifier";
 
 @Component({
   selector: 'app-feedback',
@@ -12,11 +13,13 @@ export class FeedbackComponent implements OnInit {
   feedbacks: Feedback[];
   oneFeedback = new Feedback();
   userId: any;
+  private readonly notifier: NotifierService;
 
   currentRate = 5;
 
-  constructor(private feedbackService: FeedbackService) {
+  constructor(private feedbackService: FeedbackService, notifier: NotifierService) {
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
+    this.notifier = notifier;
     console.log(this.userId);
   }
 
@@ -35,20 +38,12 @@ export class FeedbackComponent implements OnInit {
   }
 
   sendFeedback(feedback: Feedback) {
-    // this.oneFeedback.id = id;
-    // this.oneFeedback.comment = comment;
-    // this.oneFeedback.userFrom = userFrom;
-    // this.oneFeedback.userTo = userTo;
-    // this.oneFeedback.rating = rating;
-    // this.oneFeedback.addressedTo = addressedTo;
-    // this.oneFeedback.addressedFrom = addressedFrom;
-    // console.log(this.oneFeedback);
     feedback.rating = this.currentRate;
     console.log(feedback);
     this.feedbackService.updateFeedback(feedback)
       .subscribe((response) => {
         console.log(response);
-        alert('Feedback added!');
+        this.notifier.notify('success', 'Feedback added')
         this.ngOnInit();
       }, (error) => {
         console.log(error);

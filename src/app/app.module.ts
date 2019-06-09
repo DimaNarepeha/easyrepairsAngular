@@ -47,6 +47,7 @@ import {AddPostComponent} from './portfolio/add-post/add-post.component';
 import {CaptchaComponent} from './captcha/captcha.component';
 import {MyProfileComponent} from './my-profile/my-profile.component';
 import {NotifierModule, NotifierOptions} from 'angular-notifier';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -136,6 +137,7 @@ const customNotifierOptions: NotifierOptions = {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule,
     NgxCaptchaModule,
     NotifierModule.withConfig(customNotifierOptions)
   ],

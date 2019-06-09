@@ -33,7 +33,7 @@ export class ServiceProvidersService {
   }
 
   getServiceProvidersByPage(page: number): Observable<any> {
-    return this.httpService.get<any>(this.baseURL + '/service-providers/find-all/page/?page=' + page + '?access_token='
+    return this.httpService.get<any>(this.baseURL + '/service-providers/find-all/page/?page=' + page + '&access_token='
       + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
   }

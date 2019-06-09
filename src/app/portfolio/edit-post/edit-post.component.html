@@ -1,18 +1,30 @@
 <app-nav></app-nav>
+<div id="button-conteiner">
+  <button [routerLink]="['/provider-portfolio',portfolioId]" id="back-button"><- Back to portfolio</button>
+  <button (click)="deletePost()" id="delete-button">Delete post</button>
+</div>
 <div class="main-content">
   <div class="container" id="portfolio">
     <div class="card">
       <div class="card-body">
-        <div class="header">
-          <h3><textarea maxlength="199" rows="2" style="text-align: center" placeholder="Header"
-                        [(ngModel)]="post.header"></textarea></h3>
-        </div>
-        <img class="main-image" alt="{{post.mainPhoto}}" width="900" height="500"
-             src="http://localhost:8080/customers/image/{{post.mainPhoto}}"/>
-        <div class="main-description">
-          Description:
-          <textarea maxlength="999" rows="9" [(ngModel)]="post.mainDescription" placeholder="Max length 1000 symbols"></textarea>
-        </div>
+          <div class="header">
+            <h3><textarea required maxlength="199"  rows="2" style="text-align: center" placeholder="Header"
+                          [(ngModel)]="post.header"></textarea></h3>
+          </div>
+          <img class="main-image"  alt="{{post.mainPhoto}}" width="900" height="500"
+               src="{{imageUrl+post.mainPhoto}}"/>
+          <div>
+            <label for="file" style="margin-left: 10px;">Edit image:</label>
+            <input type="file" class="form-control" accept="image/" (change)="onSelectFile($event,post.id)"
+                   style="height:100%"/>
+          </div>
+          <div class="main-description">
+            Description:
+            <textarea required maxlength="999" rows="9" class="form-control" [(ngModel)]="post.mainDescription" placeholder="Max length 1000 symbols"></textarea>
+          </div>
+          <div style="width: 100%">
+            <button  class="genric-btn" (click)="editPost()">Update</button>
+          </div>
       </div>
     </div>
   </div>

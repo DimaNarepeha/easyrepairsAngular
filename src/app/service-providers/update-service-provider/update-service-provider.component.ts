@@ -14,7 +14,6 @@ import {NotifierService} from 'angular-notifier';
 export class UpdateServiceProviderComponent implements OnInit {
 
   serviceProvider = new ServiceProviders();
-  public userFile: any = File;
   private url = environment.baseURL + '/service-providers/image/';
   private readonly notifier: NotifierService;
 
@@ -47,7 +46,6 @@ export class UpdateServiceProviderComponent implements OnInit {
   onSelectFile(event, id) {
     const file = event.target.files[0];
     console.log(file);
-    this.userFile = file;
     this.serviceProvidersService.uploadImage(file, id);
   }
 

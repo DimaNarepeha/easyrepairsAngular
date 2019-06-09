@@ -3,7 +3,7 @@ import {ServiceProviders} from './service-providers';
 import {ServiceProvidersService} from './service-providers.service';
 import 'rxjs/add/observable/throw';
 import {environment} from '../../environments/environment';
-import {NotifierService} from "angular-notifier";
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-service-providers',

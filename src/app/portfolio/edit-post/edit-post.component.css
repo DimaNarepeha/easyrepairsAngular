@@ -3,9 +3,63 @@
 
 }
 
-.genric-btn {
-  left: 80%;
+.card {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.card-body{
+  width: 100%;
+}
+
+
+.header {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#back-button{
+  margin-left: 15px;
+  position: relative;
   width: 150px;
+  height: 40px;
+  line-height: 40px;
+  font-size: .8em;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  color: #fff;
+  background: #f8b600;
+  border: 1px solid transparent;
+}
+
+#button-conteiner{
+  margin-top: 100px;
+  position: fixed;
+  width: 100%;
+}
+
+.header textarea{
+  width: 100%;
+}
+
+.main-image{
+  margin-left: 50%;
+  transform: translate(-50%);
+}
+
+.main-description textarea{
+  width: 100%;
+}
+
+.genric-btn {
+  margin-left: 50%;
+  margin-top: 10px;
+  transform: translate(-50%);
+  width: 150px;
+  height: 40px;
   position: relative;
   line-height: 40px;
   padding: 0 30px;
@@ -19,44 +73,41 @@
   border: 1px solid transparent;
 }
 
-.card {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  align-items: center;
+#back-button{
+   margin-left: 15px;
+   position: relative;
+   width: 150px;
+   height: 40px;
+   line-height: 40px;
+   font-size: .8em;
+   text-align: center;
+   text-decoration: none;
+   font-weight: 500;
+   cursor: pointer;
+   color: #fff;
+   background: #f8b600;
+   border: 1px solid transparent;
+ }
 
-}
-
-.card h3 {
+#delete-button{
+  float: right;
+  margin-right: 15px;
+  position: relative;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  font-size: .8em;
   text-align: center;
-  padding-bottom: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  color: #fff;
+  background: #c10015;
+  border: 1px solid transparent;
 }
 
-.card-body .main-image {
-  margin-left: 50%;
-  transform: translate(-50%);
+#button-conteiner{
+  margin-top: 100px;
+  position: fixed;
+  width: 100%;
 }
-
-.secondary-photo {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 50%;
-  transform: translate(-50%);
-  width: 900px;
-  height: 500px;
-}
-
-.main-description {
-  margin-top: 15px;
-  transform: translate(-50%);
-  margin-left: 50%;
-  width: 90%;
-}
-
-.addition-description{
-  margin-top: 15px;
-  transform: translate(-50%);
-  margin-left: 50%;
-  width: 90%;
-}
-
-

@@ -3,8 +3,8 @@
   <div class="button1">
     <button [routerLink]="['/service-providers/',portfolio.providerId]" id="back-button"><- Back to profile</button>
   </div>
-  <div class="button1 add">
-    <button [routerLink]="['/portfolio/add-post',portfolio.providerId]" id="add-button">Add post</button>
+  <div class="button1 add" *ngIf="isProvider || isAdmin">
+    <button [routerLink]="['/portfolio/add-post',portfolio.id]" id="add-button">Add post</button>
   </div>
 </div>
 <div class="main-content">
@@ -19,8 +19,8 @@
              src="http://localhost:8080/customers/image/{{post.mainPhoto}}"/>
         <p class="main-description">{{post.mainDescription}}</p>
         <div class="button-conteiner">
-          <div class="button1 edit">
-            <button [routerLink]="['portfolio/edit-post',portfolio.id]" id="edit-button" class="left genric-btn primary">Edit</button>
+          <div class="button1 edit" *ngIf="isProvider || isAdmin">
+            <button [routerLink]="['/portfolio/edit-post',post.id]" id="edit-button" class="left genric-btn primary">Edit</button>
           </div>
           <div class="button1 read">
             <button class="right genric-btn primary" id="read-more-button" (click)="readMoreClick()"
