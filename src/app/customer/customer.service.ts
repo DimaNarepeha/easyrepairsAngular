@@ -1,18 +1,24 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, RequestOptions, Headers} from '@angular/http';
-import {HttpClient, HttpClientModule, HttpParams} from '@angular/common/http';
+import {Headers, Http, RequestOptions, Response} from '@angular/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Customer} from './customer';
-import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import {environment} from 'src/environments/environment';
+import {CustomerStatus} from "./CustomerStatus";
+import {ServiceProviders} from "../service-providers/service-providers";
+import {ProviderStatus} from "../service-providers/service-provider.status";
 
+const headers = new HttpHeaders(
+  {
+    'Content-Type': 'application/json'
+  });
 
 @Injectable()
 export class CustomerService {
-  constructor(private httpService: Http) {
+  constructor(private httpService: Http, private http: HttpClient) {
   }
 
   uploadImage(file: any, id: number) {
@@ -62,7 +68,30 @@ export class CustomerService {
       .catch(this.handleError);
   }
 
+  getCustomersByStatus(page: any, numberOfCustomersOnPage: any, status: CustomerStatus): Observable<Customer[]> {
+    const statusString: string = CustomerStatus[status];
+    const params = new HttpParams().set('pageSize', String(numberOfCustomersOnPage))
+      .set('pageNumber', String(page)).set('status', statusString);
+    return this.httpService.get( environment.customer_url + 'status?' + params).
+    // return this.httpService.get( environment.customer_url + 'status?' + params + '&access_token=' + this.returnAccessToken()).
+    map( (response: Response) => response.json()).catch(this.handleError);
+  }
+
   private handleError(error: Response) {
     return Observable.throw(error);
+  }
+
+  updateStatus(id: number, status: CustomerStatus): Observable<any> {
+    const body  = CustomerStatus[status];
+    return this.http.put<any>(environment.customer_url + 'update-status/' +  id, body,{headers});
+  }
+
+  getCustomersByFirstName(page: any, numberOfCustomersOnPage: any, status: CustomerStatus, firstName: string): Observable<Customer[]> {
+    const statusString: string = CustomerStatus[status];
+    const params = new HttpParams().set('firstName', firstName).set('pageSize', String(numberOfCustomersOnPage))
+      .set('pageNumber', String(page)).set('status', statusString);
+    console.log(environment.customer_url + 'status/searchByFirstName?' + params);
+    return this.http.get<Customer[]>( environment.customer_url + 'status/searchByFirstName?' + params, {headers})
+      .catch(this.handleError);
   }
 }

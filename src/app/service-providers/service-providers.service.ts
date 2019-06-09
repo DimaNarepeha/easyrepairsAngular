@@ -13,6 +13,7 @@ import {ProviderStatus} from './service-provider.status';
 import {map} from 'rxjs/operators';
 import {ApiService} from '../core/api.service';
 import {NotifierService} from 'angular-notifier';
+import {Email} from "../admin-approve-page/Email";
 
 
 const headers = new HttpHeaders(
@@ -96,11 +97,22 @@ export class ServiceProvidersService {
     const statusString: string = ProviderStatus[status];
     const params = new HttpParams().set('numberOfProvidersOnPage', String(numberOfProvidersOnPage))
       .set('page', String(page)).set('status', statusString);
-    return this.httpService.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/status?` + params)
-      .pipe(
-        map(res => res['content']));
+    return this.httpService.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/status?` + params);
   }
 
+  getServiceProvidersByName(searchName: string, page: any, numberOfProvidersOnPage: any, status: string) {
+    const statusString: string = ProviderStatus[status];
+    const params = new HttpParams().set('numberOfProvidersOnPage', String(numberOfProvidersOnPage))
+      .set('page', String(page)).set('status', statusString).set("searchName", searchName);
+    return this.httpService.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/searchByName?` + params);
+  }
+
+  sendEmailToUser( email: Email) : Observable<any> {
+    let body = JSON.stringify(email);
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.httpService.post('http://localhost:8080/email/', body);
+  }
 
   private handleError(error: Response) {
     return throwError(error);

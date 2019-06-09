@@ -4,6 +4,7 @@ import {ServiceProvidersService} from 'src/app/service-providers/service-provide
 import {ActivatedRoute, Router} from '@angular/router';
 import {Email} from "../Email";
 import {ProviderStatus} from "../../service-providers/service-provider.status";
+import {NotifierService} from "angular-notifier";
 
 
 @Component({
@@ -29,7 +30,8 @@ export class ServiceProviderViewComponent implements OnInit {
   private selectedStatus: ProviderStatus = this.status;
   statuses: ProviderStatus [] = [ProviderStatus.NOTAPPROVED, ProviderStatus.APPROVED, ProviderStatus.MODIFIED, ProviderStatus.BLOCKED];
 
-  constructor(private serviceProvidersService: ServiceProvidersService ,private router: Router, private rout: ActivatedRoute) {
+  constructor(private serviceProvidersService: ServiceProvidersService ,private router: Router,
+              private rout: ActivatedRoute, private notifier: NotifierService) {
     this.router.routeReuseStrategy.shouldReuseRoute = function() {
       return false;
     };
@@ -71,7 +73,8 @@ export class ServiceProviderViewComponent implements OnInit {
     this.email.addressedTo = addressedTo;
     this.serviceProvidersService.sendEmailToUser(this.email).subscribe((response) => {
       console.log(response);
-      alert('Email sended!');
+      // alert('Email sended!');
+      this.notifier.notify('success','Email sent!' );
     }, (error) => {
       console.log(error);
     });

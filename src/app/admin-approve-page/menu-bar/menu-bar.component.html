@@ -24,5 +24,8 @@
   </select>
 
   <h3 class="bar_text" [hidden]="!showForServiceProviders">Search by Name:</h3>
-  <input type="text" class="form-control input-name" [hidden]="!showForServiceProviders" [(ngModel)]="searchName" (ngModelChange)="serviceProviderViewComponent.getServiceProvidersByName(searchName)"/>
+  <input type="text" placeholder="Enter Name" class="form-control input-name" [hidden]="!showForServiceProviders" [(ngModel)]="searchName" (ngModelChange)="serviceProviderViewComponent.getServiceProvidersByName(searchName)"/>
+
+  <h3 class="bar_text" [hidden]="!showForCustomers">Search by First Name</h3>
+  <input type="text" placeholder="Enter First Name" class="form-control input-name" [hidden]="!showForCustomers" [(ngModel)]="searchName" (ngModelChange)="customerViewComponent.getCustomersByFirstName(searchName)"/>
 </div>

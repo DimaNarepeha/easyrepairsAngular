@@ -14,6 +14,7 @@ export class CustomerViewComponent implements OnInit {
   private pageNumber = 0;
   private numberOfCustomersOnPage = 4;
   private status: CustomerStatus;
+  customerStatuses: CustomerStatus [] = [CustomerStatus.ACTIVE, CustomerStatus.BLOCKED];
 
   constructor(private customerService: CustomerService) {
     this.status = CustomerStatus.ACTIVE;
@@ -31,7 +32,6 @@ export class CustomerViewComponent implements OnInit {
   }
 
   getCustomersByStatus (page: number, numberOfCustomersOnPage: number, status: CustomerStatus): void {
-    console.log(status);
     this.customerService.getCustomersByStatus(page, numberOfCustomersOnPage, status).subscribe((customersData) => {
         this.customers = customersData['content'],
           this.pages = new Array(customersData['totalPages']);
@@ -42,9 +42,29 @@ export class CustomerViewComponent implements OnInit {
       });
   }
 
+  updateCustomerStatus(id: number,status: CustomerStatus) {
+    console.log(status);
+    this.customerService.updateStatus(id, status).subscribe((customers) => {
+        this.customers = customers;
+        this.setPage(this.pageNumber,event)
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+
   setStatusForAllCustomers(customerStatus: CustomerStatus) {
     this.status = customerStatus;
     this.getCustomersByStatus(this.pageNumber, this.numberOfCustomersOnPage, this.status);
+  }
 
+  getCustomersByFirstName(firstName: string) {
+    this.customerService.getCustomersByFirstName(this.pageNumber, this.numberOfCustomersOnPage, this.status, firstName).subscribe((customersData) => {
+        this.customers = customersData['content'],
+          this.pages = new Array(customersData['totalPages']);
+      },
+      (error) => {
+        console.log(error);
+      });
   }
 }

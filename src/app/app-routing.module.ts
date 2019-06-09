@@ -16,6 +16,10 @@ import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page
 import {FeedbackComponent} from './feedback/feedback.component';
 import {VerificationComponent} from './verification/verification.component';
 import {MyProfileComponent} from "./my-profile/my-profile.component";
+import {AdminApproveStartComponent} from "./admin-approve-page/admin-approve-start/admin-approve-start.component";
+import {ServiceProviderViewComponent} from "./admin-approve-page/service-provider-view/service-provider-view.component";
+import {CustomerViewComponent} from "./admin-approve-page/customer-view/customer-view.component";
+import {FavoriteComponent} from "./favorite/favorite.component";
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -33,9 +37,14 @@ const routes: Routes = [
   {path: 'list-offers', component: ListOffersComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'recovery', component: PasswordRecoveryComponent},
-  {path: 'admin-approve', component: AdminApprovePageComponent},
+  {path: 'admin-approve', component: AdminApprovePageComponent, children:[
+      {path: '', component: AdminApproveStartComponent},
+      {path: 'service-providers', component: ServiceProviderViewComponent},
+      {path: 'customers', component: CustomerViewComponent}
+    ]},
   {path: 'feedback', component: FeedbackComponent},
-  {path: 'my-profile', component: MyProfileComponent}
+  {path: 'my-profile', component: MyProfileComponent},
+  {path: 'favorite', component: FavoriteComponent}
 ];
 
 @NgModule({

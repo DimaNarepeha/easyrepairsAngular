@@ -44,6 +44,10 @@ import {NgxCaptchaModule} from 'ngx-captcha';
 import {CaptchaComponent} from './captcha/captcha.component';
 import {MyProfileComponent} from './my-profile/my-profile.component';
 import {NotifierModule, NotifierOptions} from 'angular-notifier';
+import { AdminApproveStartComponent } from './admin-approve-page/admin-approve-start/admin-approve-start.component';
+import { CustomerViewComponent } from './admin-approve-page/customer-view/customer-view.component';
+import { ServiceProviderViewComponent } from './admin-approve-page/service-provider-view/service-provider-view.component';
+import { FavoriteComponent } from './favorite/favorite.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -112,14 +116,17 @@ const customNotifierOptions: NotifierOptions = {
     NotificationComponent,
     CreateOfferComponent,
     NotificationComponent,
-
     ListOffersComponent,
     AdminApprovePageComponent,
     MenuBarComponent,
     FeedbackComponent,
     VerificationComponent,
     CaptchaComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    AdminApproveStartComponent,
+    CustomerViewComponent,
+    ServiceProviderViewComponent,
+    FavoriteComponent
 
   ],
   imports: [
@@ -136,7 +143,7 @@ const customNotifierOptions: NotifierOptions = {
   ],
 
 
-  providers: [ServiceProvidersService, CustomerService, ApiService, LandingPageService,
+  providers: [ServiceProvidersService, ServiceProviderViewComponent, CustomerViewComponent, CustomerService, ApiService, LandingPageService,
     RegistrationService, CreateOfferService, ListOfferService, FeedbackService],
   bootstrap:
     [AppComponent]
