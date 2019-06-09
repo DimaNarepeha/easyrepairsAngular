@@ -50,7 +50,7 @@
                   </p>
                   <hr>
                   <p class="card-text">
-                    <small class="text-muted">Last updated at  {{serviceProvider.lastUpdate}}</small>
+                    <small class="text-muted">Last updated at {{serviceProvider.lastUpdate}}</small>
                   </p>
 
 
@@ -75,31 +75,34 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-lg-4" *ngFor="let feedback of serviceProvider.feedbacks ">
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <div class='slider center'>
-          <div class='love fa fa-heart-o'></div>
-          <span class="right">{{feedback.rating}}</span>
-          <div class='slide'>
-            <div class='quote'>{{feedback.comment}}</div>
-          </div>
-          <div class='author' style="margin-left: -60px;">
-            <img src="{{url+feedback.addressedFrom.image}}">
+      <div class="row">
+        <div class="col-lg-4" *ngFor="let feedback of serviceProvider.feedbacks ">
+          <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+          <div class='slider center'>
+            <div class='love fa fa-heart-o'></div>
+            <span class="right">{{feedback.rating}}</span>
+            <div class='slide'>
+              <div class='quote'>{{feedback.comment}}</div>
+            </div>
+            <div class='author' style="margin-left: -60px;">
+              <img src="{{url+feedback.addressedFrom.image}}">
 
-            From: {{feedback.addressedFrom.username}}
-          </div>
-          <div class='author' style="margin-left: 120px;">
-            <img src="{{url+feedback.addressedTo.image}}">
+              From: {{feedback.addressedFrom.username}}
+            </div>
+            <div class='author' style="margin-left: 120px;">
+              <img src="{{url+feedback.addressedTo.image}}">
 
-            To: {{feedback.addressedTo.username}}
+              To: {{feedback.addressedTo.username}}
+            </div>
+
+            <button class="btn btn-success" [routerLink]="['/chat','20002','1']">Communicate</button>
+
           </div>
+
         </div>
-
+        </div>
       </div>
     </div>
-  </div>
-</div>
   <br/>
   <br/>
   <button class="btn btn-danger" routerLink="/" style="margin: 25px;"> Home page</button>
