@@ -8,21 +8,23 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import {environment} from 'src/environments/environment';
+import {ApiService} from "../core/api.service";
 
 
 @Injectable()
 export class CustomerService {
-  constructor(private httpService: Http) {
+  constructor(private httpService: Http, private apiService: ApiService) {
+
   }
 
   uploadImage(file: any, id: number) {
     const formData = new FormData();
     formData.append('imageFile', file);
-    return this.httpService.post(environment.customer_url + id + '/image', formData);
+    return this.httpService.post(environment.customer_url + id + '/image?access_token=' + this.apiService.returnAccessToken(), formData);
   }
 
   getImage(image: string): Observable<any> {
-    return this.httpService.get(environment.customer_url + 'image/' + image);
+    return this.httpService.get(environment.customer_url + 'image/' + image + '?access_token=' + this.apiService.returnAccessToken());
   }
 
   getCustomersPage(page: number) {
