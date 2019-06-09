@@ -1,26 +1,27 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import {Observable} from 'rxjs';
-import {OfferDTO} from './models/offerDTO';
-import {ServiceDTO} from './models/serviceDTO';
 import {HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
-import { environment } from 'src/environments/environment';
-import {CustomerDTO} from './models/customerDTO';
+import {environment} from 'src/environments/environment';
+import {OrderDTO} from '../create-offer/models/orderDTO';
+import {ServiceDTO} from '../create-offer/models/serviceDTO';
+import {CustomerDTO} from '../create-offer/models/customerDTO';
+import {ProviderDTO} from '../create-offer/models/providerDTO';
 
 @Injectable()
-export class CreateOfferService {
+export class CreateOrderService {
 
   constructor(private httpService: Http) {
   }
 
-  createOffer(offerDTO: OfferDTO): Observable<OfferDTO> {
-    const body = JSON.stringify(offerDTO);
+  createOrder(orderDTO: OrderDTO): Observable<OrderDTO> {
+    const body = JSON.stringify(orderDTO);
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.httpService.post(environment.baseURL + '/offers/', body, options)
+    return this.httpService.post(environment.baseURL + '/orders/', body, options)
       .map((response: Response) => response.json());
   }
 
@@ -32,13 +33,21 @@ export class CreateOfferService {
       .catch(this.handleError);
   }
 
-  private handleError(error: Response) {
-    return Observable.throw(error);
+  getProviderById(id: number): Observable<ProviderDTO> {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.httpService.get(environment.baseURL + '/service-providers/find-by-id/' + id, options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
   }
 
   getAllServices(): Observable<ServiceDTO[]> {
     return this.httpService.get(environment.baseURL + '/services/')
       .map((response: Response) => response.json())
       .catch(this.handleError);
+  }
+
+  private handleError(error: Response) {
+    return Observable.throw(error);
   }
 }
