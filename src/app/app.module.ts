@@ -1,17 +1,7 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {BannerComponent} from './banner/banner.component';
-import {NavComponent} from './nav/nav.component';
-import {FilterComponent} from './filter/filter.component';
-import {FooterComponent} from './footer/footer.component';
-import {PaginationComponent} from './pagination/pagination.component';
-import {SpGeneralComponent} from './sp-general/sp-general.component';
-import {QuoteComponent} from './quote/quote.component';
-import {LandingPageComponent} from './landing-page/landing-page.component';
-import {LandingPageService} from './landing-page/landing-page.service';
+
 import {HttpModule} from '@angular/http';
+import {BannerComponent} from './banner/banner.component';
+import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
@@ -36,18 +26,43 @@ import {ListOffersComponent} from './list-offers/list-offers.component';
 import {ListOfferService} from './list-offers/list-offer.service';
 import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
 import {MenuBarComponent} from './admin-approve-page/menu-bar/menu-bar.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {ChatComponent} from './chat/chat.component';
+import {ChatService} from './chat/chat.service';
+import {ChatsComponent} from './chat/chats/chats';
+import {PortfolioComponent} from './portfolio/portfolio.component';
+import {PortfolioService} from './portfolio/portfolio.service';
 import {FeedbackComponent} from './feedback/feedback.component';
 import {FeedbackService} from './feedback/feedback.service';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {VerificationComponent} from './verification/verification.component';
 import {NgxCaptchaModule} from 'ngx-captcha';
+import {EditPostComponent} from './portfolio/edit-post/edit-post.component';
+import {AddPostComponent} from './portfolio/add-post/add-post.component';
 import {CaptchaComponent} from './captcha/captcha.component';
 import {MyProfileComponent} from './my-profile/my-profile.component';
 import {NotifierModule, NotifierOptions} from 'angular-notifier';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {AppComponent} from './app.component';
+import {NavComponent} from './nav/nav.component';
+import {FilterComponent} from './filter/filter.component';
+import {FooterComponent} from './footer/footer.component';
+import {PaginationComponent} from './pagination/pagination.component';
+import {SpGeneralComponent} from './sp-general/sp-general.component';
+import {QuoteComponent} from './quote/quote.component';
+import {LandingPageComponent} from './landing-page/landing-page.component';
+import {AppRoutingModule} from './app-routing.module';
+import {LandingPageService} from './landing-page/landing-page.service';
+import {ChatListComponent} from './chat-list/chat-list.component';
+import {NotFoundComponent} from './not-found/not-found.component';
+import {CreateContractComponent} from './create-contract/create-contract.component';
+import {CreateOrderService} from './create-contract/create-contract.service';
+import {ListContractsComponent} from './list-contracts/list-contracts.component';
+import {ListOrderService} from './list-contracts/list-contracts.service';
 import { AdminApproveStartComponent } from './admin-approve-page/admin-approve-start/admin-approve-start.component';
 import { CustomerViewComponent } from './admin-approve-page/customer-view/customer-view.component';
 import { ServiceProviderViewComponent } from './admin-approve-page/service-provider-view/service-provider-view.component';
 import { FavoriteComponent } from './favorite/favorite.component';
+import {FavouriteService} from "./favorite/favourite.service";
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -116,17 +131,26 @@ const customNotifierOptions: NotifierOptions = {
     NotificationComponent,
     CreateOfferComponent,
     NotificationComponent,
+    PortfolioComponent,
+    ChatsComponent,
+    ChatComponent,
     ListOffersComponent,
     AdminApprovePageComponent,
     MenuBarComponent,
     FeedbackComponent,
     VerificationComponent,
-    CaptchaComponent,
     MyProfileComponent,
     AdminApproveStartComponent,
     CustomerViewComponent,
     ServiceProviderViewComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    EditPostComponent,
+    AddPostComponent,
+    CaptchaComponent,
+    ChatListComponent,
+    NotFoundComponent,
+    CreateContractComponent,
+    ListContractsComponent
 
   ],
   imports: [
@@ -143,8 +167,8 @@ const customNotifierOptions: NotifierOptions = {
   ],
 
 
-  providers: [ServiceProvidersService, ServiceProviderViewComponent, CustomerViewComponent, CustomerService, ApiService, LandingPageService,
-    RegistrationService, CreateOfferService, ListOfferService, FeedbackService],
+  providers: [ServiceProvidersService, ServiceProviderViewComponent, FavouriteService, CustomerViewComponent, CustomerService, ChatService, PortfolioService, ApiService, LandingPageService,
+    RegistrationService, CreateOfferService, ListOfferService, FeedbackService,CreateOrderService, ListOrderService],
   bootstrap:
     [AppComponent]
 })

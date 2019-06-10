@@ -8,8 +8,6 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import {environment} from 'src/environments/environment';
 import {CustomerStatus} from "./CustomerStatus";
-import {ServiceProviders} from "../service-providers/service-providers";
-import {ProviderStatus} from "../service-providers/service-provider.status";
 
 const headers = new HttpHeaders(
   {
@@ -43,13 +41,7 @@ export class CustomerService {
     const body = JSON.stringify(customer);
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    if (customer.id) {
-      const c = customer.id;
-      customer.id = null;
-      return this.httpService.put(environment.customer_url + c, body, options);
-    } else {
-      return this.httpService.post(environment.customer_url, body, options);
-    }
+    return this.httpService.put(environment.customer_url, body, options);
   }
 
   deleteCustomer(customerId: string) {
@@ -62,10 +54,11 @@ export class CustomerService {
       .catch(this.handleError);
   }
 
-  getCustomerByUserId(id: any): Observable<Customer> {
-    return this.httpService.get(environment.customer_url + 'find-by-userId/' + id)
-      .map((response: Response) => response.json())
+  getCustomerByUserId(id: any): any {
+    console.log(environment.customer_url + 'find-by-userId/' + id);
+    return this.http.get(environment.customer_url + 'find-by-userId/' + id, {headers})
       .catch(this.handleError);
+
   }
 
   getCustomersByStatus(page: any, numberOfCustomersOnPage: any, status: CustomerStatus): Observable<Customer[]> {

@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import { environment } from 'src/environments/environment';
+import {CustomerDTO} from './models/customerDTO';
 
 @Injectable()
 export class CreateOfferService {
@@ -16,24 +17,19 @@ export class CreateOfferService {
   }
 
   createOffer(offerDTO: OfferDTO): Observable<OfferDTO> {
-    let body = JSON.stringify(offerDTO);
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
-
-    return this.httpService.post(environment.baseURL + '/offers/create', body, options)
+    const body = JSON.stringify(offerDTO);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.httpService.post(environment.baseURL + '/offers/', body, options)
       .map((response: Response) => response.json());
   }
 
-  getAllOffers(): Observable<OfferDTO[]> {
-    let headers = new Headers({'Access-Control-Allow-Origin': environment.baseURL});
-    let options = new RequestOptions({headers: headers});
-    return this.httpService.get(environment.baseURL + '/offers/get-all', options)
+  getCustomerByUserId(id: number): Observable<CustomerDTO> {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.httpService.get(environment.baseURL + '/customers/find-by-userId/' + id, options)
       .map((response: Response) => response.json())
       .catch(this.handleError);
-  }
-
-  deleteOfferById(id: number) {
-    return this.httpService.delete(environment.baseURL + '/offers/delete/' + id);
   }
 
   private handleError(error: Response) {
@@ -41,9 +37,7 @@ export class CreateOfferService {
   }
 
   getAllServices(): Observable<ServiceDTO[]> {
-    let headers = new Headers({'Access-Control-Allow-Origin': environment.baseURL});
-    let options = new RequestOptions({headers: headers});
-    return this.httpService.get(environment.baseURL + '/services/get-all', options)
+    return this.httpService.get(environment.baseURL + '/services/')
       .map((response: Response) => response.json())
       .catch(this.handleError);
   }

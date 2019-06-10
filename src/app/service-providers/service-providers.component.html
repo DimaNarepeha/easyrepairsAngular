@@ -18,6 +18,8 @@
                 <a><i class="far fa-calendar-alt" aria-hidden="true"></i> {{serviceProvider.registrationDate}}
                 </a>
                 <a href="#"><i class="far fa-comments" aria-hidden="true"></i> {{serviceProvider.countComment}}</a>
+                <a><i class="fa fa-heart" *ngIf="checkFavouriteProvider(serviceProvider)" (click)="addToFavourite(serviceProvider)"></i></a>
+                <a><i class="fa fa-heart-o" *ngIf="!checkFavouriteProvider(serviceProvider)" (click)="addToFavourite(serviceProvider)"></i></a>
                 <div class="right">
                   <a><i style=" color: #FFC107;" class="fas fa-star"
                                  aria-hidden="true"></i> {{serviceProvider.raiting}}</a>
@@ -40,6 +42,8 @@
               <button *ngIf="isAdmin()==true" class="left genric-btn primary" (click) = "deleteService(serviceProvider.id)" style="margin-left: 10px; background-color: darkred;">Delete</button>
               <a [routerLink]="['/service-providers',serviceProvider.id]" class="right genric-btn primary">Read more</a>
               <button *ngIf="isAdmin()==true || isCurentProvider(serviceProvider.userDTO.id)==true" class="right genric-btn primary" [routerLink] = "['/update-service-provider',serviceProvider.id]" style="margin-right: 10px; background-color: darkgreen">Update</button>
+
+
             </div>
           </div>
         </article>

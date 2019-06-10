@@ -9,9 +9,11 @@
       <img width="400" height="400" src="{{url+serviceProvider.image}}" class="rounded" alt="{{serviceProvider.image}}">
       <div class="form-group">
         <br/>
-        <label for="file" style="margin-left: 10px;">File upload:</label>
-        <input type="file" class="form-control" accept="image/" (change)="onSelectFile($event,serviceProvider.id)"
-               style="height:100%"/>
+        <label class="custom-file-upload">
+          <input type="file" class="btn btn-outline-info" accept="image/" (change)="onSelectFile($event,serviceProvider.id)"
+                 style="height:100%"/>
+          <i class="fa fa-cloud-upload"></i> Change image
+        </label>
       </div>
     </div>
     <div class="col-md-8">

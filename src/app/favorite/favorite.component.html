@@ -2,4 +2,47 @@
 <br>
 <br>
 <br>
-d
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+
+      <div class="blog_left_sidebar" *ngFor="let serviceProvider of serviceProviders ">
+        <article class="blog_style1">
+          <div class="blog_text">
+            <div class="blog_text_inner" style="margin-bottom: 13%;">
+              <div class="cat">
+                <a><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{serviceProvider.location.city}}</a>
+                <a><i class="far fa-calendar-alt" aria-hidden="true"></i> {{serviceProvider.registrationDate}}
+                </a>
+                <a href="#"><i class="far fa-comments" aria-hidden="true"></i> {{serviceProvider.countComment}}</a>
+                <a><i class="fa fa-heart" *ngIf="this.checkFavourite(serviceProvider)" (click)="addToFavourite(serviceProvider)"></i></a>
+                <a><i class="fa fa-heart-o" *ngIf="!this.checkFavourite(serviceProvider)" (click)="addToFavourite(serviceProvider)"></i></a>
+                <div class="right">
+                  <a><i style=" color: #FFC107;" class="fas fa-star"
+                        aria-hidden="true"></i> {{serviceProvider.raiting}}</a>
+                </div>
+              </div>
+              <a [routerLink]="['/service-providers',serviceProvider.id]">
+                <h4>{{serviceProvider.name}}</h4>
+              </a>
+              <p>{{serviceProvider.description}}</p>
+              <br/>
+              <br/>
+              <a [routerLink]="['/service-providers',serviceProvider.id]" class="right genric-btn primary">Read more</a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <ul class="nav nav-pills">
+        <li class="nav-item" *ngFor="let p of pages; let i=index">
+          <a class="nav-link " href="" (click)="setPage(i,$event)">{{i + 1}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,7 @@
-import {Component, OnInit, NgZone} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ServiceProviders} from '../service-providers';
 import {ServiceProvidersService} from '../service-providers.service';
-import {ProviderLocatoin} from '../../location/provider-locatoin';
 import {environment} from '../../../environments/environment';
 import {NotifierService} from 'angular-notifier';
 
@@ -14,15 +13,10 @@ import {NotifierService} from 'angular-notifier';
 export class UpdateServiceProviderComponent implements OnInit {
 
   serviceProvider = new ServiceProviders();
-  public userFile: any = File;
   private url = environment.baseURL + '/service-providers/image/';
   private readonly notifier: NotifierService;
-
-  public title = 'Places';
   public addrKeys: string[];
   public addr: object;
-
-  providerLocation = new ProviderLocatoin();
 
 
   constructor(private serviceProvidersService: ServiceProvidersService, private rout: ActivatedRoute,
@@ -47,19 +41,11 @@ export class UpdateServiceProviderComponent implements OnInit {
   onSelectFile(event, id) {
     const file = event.target.files[0];
     console.log(file);
-    this.userFile = file;
     this.serviceProvidersService.uploadImage(file, id);
   }
 
 
   updateService(): void {
-    // this.providerLocation.id = this.serviceProvider.id;
-    // this.providerLocation.name = this.serviceProvider.name;
-    // this.providerLocation.email = this.serviceProvider.email;
-    // this.providerLocation.description = this.serviceProvider.description;
-    // this.providerLocation.country = this.serviceProvider.location.country;
-    // this.providerLocation.city = this.serviceProvider.location.city;
-    // this.providerLocation.region = this.serviceProvider.location.region;
     this.serviceProvidersService.updateServiceProvider(this.serviceProvider)
       .subscribe((response) => {
         console.log(response);
@@ -71,6 +57,7 @@ export class UpdateServiceProviderComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scroll(0, 0);
     this.rout.params.subscribe(next => {
       this.serviceProvidersService.getServiceProviderById(next.id).subscribe(next => {
         this.serviceProvider = next;

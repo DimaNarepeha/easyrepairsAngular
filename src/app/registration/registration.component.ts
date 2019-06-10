@@ -6,6 +6,7 @@ import {RegistrationService} from './registration.service';
 import {User} from './user';
 import {Provider} from './provider';
 import {CaptchaComponent} from '../captcha/captcha.component';
+import {NotifierService} from 'angular-notifier';
 
 
 @Component({
@@ -37,8 +38,10 @@ export class RegistrationComponent implements OnInit {
   customer = new Customer();
   user = new User();
   provider = new Provider();
+  notifier: NotifierService;
 
-  constructor(private router: Router, private registration: RegistrationService) {
+  constructor(private router: Router, private registration: RegistrationService, notifierService: NotifierService) {
+    this.notifier = notifierService;
   }
 
   ngOnInit(): void {
@@ -57,13 +60,14 @@ export class RegistrationComponent implements OnInit {
     this.customer.email = this.CustomerForm.controls.email.value;
     this.registration.createCustomer(this.customer).subscribe(data => {
         this.customer = data;
-        alert('successful!');
+        this.notifier.notify('success', 'You has been registered as customer');
         this.router.navigate(['/login']);
       },
       err => {
-        alert('Email or username already exist!!!');
+        this.notifier.notify('success', 'Email or username already exist!');
       });
   }
+
 
   registerProvider() {
     if (this.ProviderForm.invalid || !CaptchaComponent.isCaptchaSuccessForRegistration) {
@@ -77,11 +81,11 @@ export class RegistrationComponent implements OnInit {
     this.provider.email = this.ProviderForm.controls.email.value;
     this.registration.createProvider(this.provider).subscribe(data => {
         this.provider = data;
-        alert('successful!');
+        this.notifier.notify('success', 'You has been registered as provider');
         this.router.navigate(['/login']);
       },
       err => {
-        alert('Email or username already exist!!!');
+        this.notifier.notify('error', 'Email or username already exist!');
       }
     );
   }
@@ -102,5 +106,6 @@ export class RegistrationComponent implements OnInit {
     this.CustomerForm.controls.lastName.markAsTouched();
     this.isCaptchaIgnored = !CaptchaComponent.isCaptchaSuccessForRegistration;
   }
+
 
 }

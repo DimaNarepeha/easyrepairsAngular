@@ -4,6 +4,8 @@ import {ServiceProvidersService} from './service-providers.service';
 import 'rxjs/add/observable/throw';
 import {environment} from '../../environments/environment';
 import {NotifierService} from 'angular-notifier';
+import {FavouriteService} from "../favorite/favourite.service";
+import {CustomerService} from "../customer/customer.service";
 
 @Component({
   selector: 'app-service-providers',
@@ -20,21 +22,25 @@ export class ServiceProvidersComponent implements OnInit {
   public userFile: any = File;
   role: string;
   currentId: any;
+  private userId: number;
+  private customerId: number;
   private url = environment.baseURL + '/service-providers/image/';
   private readonly notifier: NotifierService;
 
-  constructor(private serviceProvidersService: ServiceProvidersService, notifierService: NotifierService) {
+  constructor(private serviceProvidersService: ServiceProvidersService,private customerService:CustomerService,private favouriteService :FavouriteService,notifierService: NotifierService) {
     this.notifier = notifierService;
   }
 
   ngOnInit() {
     this.getServiceProvidersByPage();
-    // this.serviceProviders = this.providerPage;
-    // console.log(this.serviceProviders);
+    this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
+    this.customerService.getCustomerByUserId(this.userId).subscribe((serviceProvidersData) => {
+      this.customerId = serviceProvidersData.id;
+    });
   }
 
-  public isUser() {
-    return window.sessionStorage.getItem('user') != null;
+  checkFavouriteProvider(serviceProvider: ServiceProviders): boolean {
+    return this.favouriteService.checkFavourite(serviceProvider, this.customerId);
   }
 
   public isAdmin() {
@@ -54,12 +60,6 @@ export class ServiceProvidersComponent implements OnInit {
 
   }
 
-  onSelectFile(file1, id) {
-    const file = file1;
-    console.log(file);
-    this.userFile = file;
-    this.serviceProvidersService.uploadImage(file, id);
-  }
 
   getServiceProvidersByPage() {
     this.serviceProvidersService.getServiceProvidersByPage(this.page)
@@ -82,35 +82,11 @@ export class ServiceProvidersComponent implements OnInit {
       );
   }
 
-  getServiceProviders(): void {
-    this.serviceProvidersService.getAllServiceProviders()
-      .subscribe((serviceProvidersData) => {
-          this.serviceProviders = serviceProvidersData, console.log(serviceProvidersData);
-        },
-        (error) => {
-          console.log(error);
-        });
-  }
-
-  private reset() {
-    this.serviceProvider.id = null;
-    this.serviceProvider.name = null;
-  }
-
-  getServiceProviderById(id: number) {
-    this.serviceProvidersService.getServiceProviderById(id)
-      .subscribe((serviceProvidersData) => {
-          this.serviceProvider = serviceProvidersData;
-        },
-        (error) => {
-          console.log(error);
-        });
-  }
 
   deleteService(id: number) {
     this.serviceProvidersService.deleteServiceProvider(id)
       .subscribe((response) => {
-        this.notifier.notify('error', 'deleted!')
+        this.notifier.notify('error', 'Deleted')
         this.getServiceProvidersByPage();
       }, (error) => {
         console.log(error);
@@ -118,4 +94,10 @@ export class ServiceProvidersComponent implements OnInit {
   }
 
 
+  addToFavourite(serviceProvider: ServiceProviders) {
+    this.favouriteService.addToFavourite(this.customerId, serviceProvider).subscribe(data => {
+      console.log("favoritService: "+data);
+    });
+    this.ngOnInit();
+  }
 }

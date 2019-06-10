@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FeedbackService} from './feedback.service';
 import {Feedback} from './feedback';
-import {NotifierService} from "angular-notifier";
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-feedback',
@@ -11,7 +11,6 @@ import {NotifierService} from "angular-notifier";
 export class FeedbackComponent implements OnInit {
 
   feedbacks: Feedback[];
-  oneFeedback = new Feedback();
   userId: any;
   private readonly notifier: NotifierService;
 

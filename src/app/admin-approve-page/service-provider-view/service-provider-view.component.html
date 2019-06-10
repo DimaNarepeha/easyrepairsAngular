@@ -12,7 +12,7 @@
                    src="http://localhost:8080/service-providers/image/{{serviceProvider.image}}"/>
               {{serviceProvider.description}}<br>
               <br>
-              <span> City: <b>{{serviceProvider.location.city}}</b> Country: <b>{{serviceProvider.location.country}}</b> </span>
+              <!--<span> City: <b>{{serviceProvider.location.city}}</b> Country: <b>{{serviceProvider.location.country}}</b> </span>-->
               <br>
                Last Update:<b>{{serviceProvider.lastUpdate}}</b>
             </p>
@@ -53,7 +53,6 @@
             </div>
             <button class="btn btn-outline-light sent-button rounded-circle" type="button"
                     attr.data-target="#collapseSent{{serviceProvider.id}}" aria-expanded="false"
-
                     (click)="sendEmail(serviceProvider.email)">
               <img
                 src="http://www.myiconfinder.com/uploads/iconsets/256-256-5149d17faeeffb6ebf2ff0ea5a6a5aaa-message.png"

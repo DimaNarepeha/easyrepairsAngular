@@ -1,77 +1,121 @@
 <app-nav></app-nav>
 <div *ngIf="isCustomer()==true">
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <div class="card mb-3" style="max-width: 1200px; margin: 25px; ">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img width="400" height="400" src="{{urlCustomer+customer.userDTO?.image}}" class="rounded"
-             alt="{{customer.userDTO?.image}}">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h2 class="card-title">Name: {{customer.firstName}},{{customer.lastName}}</h2>
-          <h4 class="card-text">Email: {{customer.userDTO?.email}}</h4>
-          <p class="card-text">
-            <small class="text-muted">Last updated at  {{customer.updated}}</small>
-          </p>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="blog_left_sidebar">
+          <article class="blog_style1">
+
+            <div class="blog_img">
+              <img class="img-fluid"
+                   src="http://handymanwalthamstow.com/wp-content/uploads/2016/09/odd-jobs-slider-background.jpg"
+                   alt="">
+            </div>
+            <div class="blog_text">
+              <div class="blog_text_inner">
+                <a href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
+                  <img alt="" src="{{urlCustomer+customer.userDTO?.image}}"
+                       class="twPc-avatarImg">
+                </a>
+                <div class="cat">
+                  <a><i class="far fa-calendar-alt" aria-hidden="true"></i> {{customer.updated}}
+                  </a>
+
+                </div>
+
+                <button style="background-color: darkgreen"
+                        [routerLink]="['/update-service-provider',serviceProvider.id]"
+                        class="genric-btn primary">Update
+                </button>
+                <button style="background-color: darkred" (click)="deleteService(serviceProvider.id)"
+                        class="genric-btn primary">Delete
+                </button>
+
+                <br>
+                <br>
+                <br>
+                <b>Name:</b> {{customer.firstName}}
+                <br>
+                <b>e-mail:</b> {{customer.userDTO.email}}
+
+
+
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </div>
   </div>
-  <br/>
-  <br/>
-  <button class="btn btn-danger" routerLink="/" style="margin: 25px;"> Previos page</button>
-  <br/>
-  <br/>
 </div>
 
 <div *ngIf="isProvider()==true">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="blog_left_sidebar">
-            <article class="blog_style1">
-              <div class="blog_img">
-                <img class="img-fluid"
-                     src="http://handymanwalthamstow.com/wp-content/uploads/2016/09/odd-jobs-slider-background.jpg"
-                     alt="">
-              </div>
-              <div class="row no-gutters">
-                <div class="blog_text">
-                  <div class="blog_text_inner">
-                    <div class="cat">
-                      <a><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{serviceProvider.location.city}}
-                        ,{{serviceProvider.location.country}}</a>
-                      <a><i class="far fa-calendar-alt" aria-hidden="true"></i> {{serviceProvider.registrationDate}}
-                      </a>
-                      <a><i class="far fa-comments" aria-hidden="true"></i> {{serviceProvider.countComment}}</a>
-                      <a><i style=" color: #FFC107;" class="fas fa-star"
-                            aria-hidden="true"></i> {{serviceProvider.raiting}}</a>
-                    </div>
-                    <br/>
-                    <button style="background-color: darkgreen" [routerLink]="['/update',1]"
-                            class="genric-btn primary">Update
-                    </button>
-                    <button style="background-color: darkred" [routerLink]="['/service-providers',1]"
-                            class="genric-btn primary">Delete
-                    </button>
-                    <button style="float: right; margin-right: 0px;" [routerLink]="['/service-providers',1]"
-                            class="genric-btn primary">My Portfolio
-                    </button>
-                    <div class="card-body">
-                      <h1 class="card-title">{{serviceProvider.name}}</h1>
-                      <h3 class="card-text">{{serviceProvider.email}}</h3>
-                      <p class="card-text">Description: {{serviceProvider?.description}}</p>
-                      <p class="card-text">
-                        <small class="text-muted">Last updated at  {{serviceProvider.lastUpdate}}</small>
-                      </p>
-                    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="blog_left_sidebar">
+          <article class="blog_style1">
 
+            <div class="blog_img">
+              <img class="img-fluid"
+                   src="http://handymanwalthamstow.com/wp-content/uploads/2016/09/odd-jobs-slider-background.jpg"
+                   alt="">
+            </div>
+            <div class="blog_text">
+              <div class="blog_text_inner">
+                <a href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
+                  <img alt="" src="{{url+serviceProvider.userDTO?.image}}"
+                       class="twPc-avatarImg">
+                </a>
+                <div class="cat">
+                  <a><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{serviceProvider.location?.city}}</a>
+                  <a><i class="far fa-calendar-alt" aria-hidden="true"></i> {{serviceProvider.registrationDate}}
+                  </a>
+                  <a><i class="far fa-comments" aria-hidden="true"></i> {{serviceProvider.countComment}}</a>
+                  <a><i style=" color: #FFC107;" class="fas fa-star" aria-hidden="true"></i> {{serviceProvider.raiting}}
+                  </a>
 
+                </div>
+
+                <button style="background-color: darkgreen"
+                        [routerLink]="['/update-service-provider',serviceProvider.id]"
+                        class="genric-btn primary">Update
+                </button>
+                <button style="background-color: darkred" (click)="deleteService(serviceProvider.id)"
+                        class="genric-btn primary">Delete
+                </button>
+                <button [routerLink]="['/service-providers',1]" class="genric-btn primary">My Portfolio
+                </button>
+
+                <br>
+                <br>
+                <br>
+                <b>Name:</b> {{serviceProvider.name}}
+                <br>
+                <b>e-mail:</b> {{serviceProvider.email}}
+
+                <hr>
+                <b>Description:</b>
+                <p>
+                  {{serviceProvider.description}}
+                </p>
+                <hr>
+
+                <div class="services text-center">
+                  <h2>Our SERVICES</h2>
+
+                  <div class="row">
+                    <div class="col-lg-4 " *ngFor="let service of serviceProvider.services">
+                      <div class="service-block text-center">
+
+                        <span>{{service.serviceName}} </span>
+                      </div>
+                    </div>
                   </div>
+
+                </div>
+
+
               </div>
             </div>
           </article>

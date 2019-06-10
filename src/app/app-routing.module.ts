@@ -13,6 +13,8 @@ import {CreateOfferComponent} from './create-offer/create-offer.component';
 import {ListOffersComponent} from './list-offers/list-offers.component';
 import {LogoutComponent} from './logout/logout.component';
 import {AdminApprovePageComponent} from './admin-approve-page/admin-approve-page.component';
+import {ChatComponent} from './chat/chat.component';
+import {ChatsComponent} from './chat/chats/chats';
 import {FeedbackComponent} from './feedback/feedback.component';
 import {VerificationComponent} from './verification/verification.component';
 import {MyProfileComponent} from "./my-profile/my-profile.component";
@@ -20,6 +22,11 @@ import {AdminApproveStartComponent} from "./admin-approve-page/admin-approve-sta
 import {ServiceProviderViewComponent} from "./admin-approve-page/service-provider-view/service-provider-view.component";
 import {CustomerViewComponent} from "./admin-approve-page/customer-view/customer-view.component";
 import {FavoriteComponent} from "./favorite/favorite.component";
+import {PortfolioComponent} from './portfolio/portfolio.component';
+import {EditPostComponent} from './portfolio/edit-post/edit-post.component';
+import {NotFoundComponent} from './not-found/not-found.component';
+import {CreateContractComponent} from './create-contract/create-contract.component';
+import {ListContractsComponent} from './list-contracts/list-contracts.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -42,9 +49,17 @@ const routes: Routes = [
       {path: 'service-providers', component: ServiceProviderViewComponent},
       {path: 'customers', component: CustomerViewComponent}
     ]},
+  {path: 'chat', component: ChatComponent},
+  {path: 'chat/:id', component: ChatComponent},
+  {path: 'chat/:id/:sentBy', component: ChatComponent},
   {path: 'feedback', component: FeedbackComponent},
+  {path: 'favorite', component: FavoriteComponent},
   {path: 'my-profile', component: MyProfileComponent},
-  {path: 'favorite', component: FavoriteComponent}
+  {path: 'provider-portfolio/:id', component: PortfolioComponent},
+  {path: 'portfolio/edit-post/:id', component: EditPostComponent},
+  {path: 'not-found', component: NotFoundComponent},
+  {path: 'create-contract', component: CreateContractComponent},
+  {path: 'list-contracts', component: ListContractsComponent}
 ];
 
 @NgModule({

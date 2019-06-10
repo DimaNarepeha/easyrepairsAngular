@@ -48,7 +48,6 @@ export class ServiceProviderViewComponent implements OnInit {
     this.serviceProvidersService.getServiceProvidersByStatus(page, numberOfProvidersOnPage, status).subscribe((serviceProvidersData) => {
         this.serviceProviders = serviceProvidersData['content'],
           this.pages = new Array(serviceProvidersData['totalPages']);
-        console.log('serviceProviders = ' + this.serviceProviders);
       },
       (error) => {
         console.log(error);
@@ -57,7 +56,6 @@ export class ServiceProviderViewComponent implements OnInit {
 
   updateServiceProviderStatus(id: number, status: ProviderStatus) {
     this.serviceProvider.status= status;
-    console.log(this.serviceProvider);
     this.serviceProvidersService.updateServiceProviderStatus(id, this.serviceProvider).subscribe((serviceProvidersData) => {
         this.serviceProvider = serviceProvidersData;
         this.setPage(this.pageNumber,event)
@@ -68,12 +66,11 @@ export class ServiceProviderViewComponent implements OnInit {
   }
 
   sendEmail(addressedTo: string) {
+    console.log("email" + this.email.addressedTo);
     this.email.subject = this.emailTopic;
     this.email.text = this.emailText;
     this.email.addressedTo = addressedTo;
     this.serviceProvidersService.sendEmailToUser(this.email).subscribe((response) => {
-      console.log(response);
-      // alert('Email sended!');
       this.notifier.notify('success','Email sent!' );
     }, (error) => {
       console.log(error);
@@ -91,7 +88,6 @@ export class ServiceProviderViewComponent implements OnInit {
     this.serviceProvidersService.getServiceProvidersByName(searchName,this.pageNumber, this.numberOfProvidersOnPage, this.status).subscribe((serviceProvidersData) => {
         this.serviceProviders = serviceProvidersData['content'],
           this.pages = new Array(serviceProvidersData['totalPages']);
-        console.log('serviceProvidersData = ' + serviceProvidersData);
       },
       (error) => {
         console.log(error);
