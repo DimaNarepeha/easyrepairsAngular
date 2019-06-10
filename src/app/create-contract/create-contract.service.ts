@@ -3,11 +3,11 @@ import {Response} from '@angular/http';
 import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
+import {ApiService} from '../core/api.service';
 import {OrderDTO} from '../create-offer/models/orderDTO';
 import {ServiceDTO} from '../create-offer/models/serviceDTO';
 import {CustomerDTO} from '../create-offer/models/customerDTO';
 import {ProviderDTO} from '../create-offer/models/providerDTO';
-import {ApiService} from '../core/api.service';
 
 const headers = new HttpHeaders(
   {

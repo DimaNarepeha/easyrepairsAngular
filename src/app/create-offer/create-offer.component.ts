@@ -85,7 +85,6 @@ export class CreateOfferComponent implements OnInit {
         this.notifier.notify('success', 'Offer was created!');
       }, (error) => {
         console.log(error);
-        this.notifier.notify('success', error);
       });
     this.router.navigate(['./list-offers']);
   }

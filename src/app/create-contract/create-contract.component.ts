@@ -100,7 +100,6 @@ export class CreateContractComponent implements OnInit {
         this.notifier.notify('success', 'Contract was created!');
       }, (error) => {
         console.log(error);
-        this.notifier.notify('success', error);
       });
     this.router.navigate(['./list-contracts']);
   }
