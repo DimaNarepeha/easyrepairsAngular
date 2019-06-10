@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-my-proff',
@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyProffComponent implements OnInit {
 
-  constructor() { }
+  displayOn: boolean;
 
-  ngOnInit() {
+  constructor() {
   }
 
+  ngOnInit() {
+    this.displayOn = false;
+  }
+
+  openUpdate() {
+    this.displayOn = true;
+  }
+
+  closeUpdate() {
+    this.displayOn = false;
+  }
 }
