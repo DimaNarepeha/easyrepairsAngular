@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ApiService} from '../core/api.service';
+import {FormGroup} from '@angular/forms';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-nav',
@@ -9,8 +12,21 @@ export class NavComponent implements OnInit {
   displayOn = false;
   role: string;
   name: string;
+  image: string;
+  log: FormGroup;
+  private readonly baseURL;
 
-  constructor() {
+
+  constructor(private service: ApiService) {
+    this.baseURL = environment.baseURL;
+  }
+
+  onSubmit() {
+    this.logout();
+  }
+
+  logout() {
+    this.service.logoutme();
   }
 
   public isUser() {
@@ -23,19 +39,24 @@ export class NavComponent implements OnInit {
     return this.name;
   }
 
+  public getImage(): string {
+    this.image = JSON.parse(window.sessionStorage.getItem('user')).image;
+    return this.image;
+  }
+
   public isAdmin(): boolean {
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
-    return this.role == 'ADMIN';
+    return this.role.toString() === 'ROLE_ADMIN';
   }
 
   public isCustomer(): boolean {
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
-    return this.role == 'CUSTOMER';
+    return this.role.toString() === 'ROLE_CUSTOMER';
   }
 
   public isProvider(): boolean {
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
-    return this.role == 'PROVIDER';
+    return this.role.toString() === 'ROLE_PROVIDER';
   }
 
   ngOnInit() {

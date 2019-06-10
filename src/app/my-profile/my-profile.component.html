@@ -30,7 +30,6 @@
                 <button style="background-color: darkred" (click)="deleteService(serviceProvider.id)"
                         class="genric-btn primary">Delete
                 </button>
-
                 <br>
                 <br>
                 <br>
@@ -84,7 +83,7 @@
                 <button style="background-color: darkred" (click)="deleteService(serviceProvider.id)"
                         class="genric-btn primary">Delete
                 </button>
-                <button [routerLink]="['/service-providers',1]" class="genric-btn primary">My Portfolio
+                <button (click)="getPortfolioByProviderId()" class="genric-btn primary">My Portfolio
                 </button>
 
                 <br>

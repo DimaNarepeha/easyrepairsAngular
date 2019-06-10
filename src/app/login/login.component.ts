@@ -3,6 +3,7 @@ import {ApiService} from '../core/api.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse, HttpParams} from '@angular/common/http';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   invalidLogin = false;
   msg: string;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, private notifier: NotifierService) {
   }
 
   onSubmit() {
@@ -54,6 +55,7 @@ export class LoginComponent implements OnInit {
   handleError(error: any) {
     if (error instanceof HttpErrorResponse) {
       this.msg = error.error.error_description;
+      this.notifier.notify('error', this.msg);
     }
   }
 }
