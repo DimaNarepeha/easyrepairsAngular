@@ -4,6 +4,5 @@ export class Feedback {
   rating: number;
   username: string;
   image: any = File;
-  // firstName: string;
-  // lastName: string;
+  createdDate: string;
 }

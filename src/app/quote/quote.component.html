@@ -1,6 +1,10 @@
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 <div class='slider center' *ngFor="let feedback of feedbacks">
-  <div class='love fa fa-heart-o'></div> <span class="right">{{feedback.rating}}</span>
+
+
+  <div class='love fa fa-heart-o'></div>
+  <span class="right">{{feedback.rating}}</span>
+  <div style="margin-top: 15px; margin-left:15px; color: #f5f528">{{feedback.createdDate}}</div>
   <div class='slide'>
     <div class='quote'>{{feedback.comment}}</div>
   </div>
@@ -8,4 +12,5 @@
     <img src="{{url+feedback.image}}">
     {{feedback.username}}
   </div>
+
 </div>
