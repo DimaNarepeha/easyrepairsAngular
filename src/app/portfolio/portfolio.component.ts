@@ -4,6 +4,7 @@ import {PortfolioService} from './portfolio.service';
 import {Portfolio} from './portfolio';
 import {Post} from './post';
 import {ApiService} from "../core/api.service";
+import {environment} from "../../environments/environment";
 
 
 @Component({
@@ -19,7 +20,7 @@ export class PortfolioComponent implements OnInit {
   readMoreField = 'Read more';
   isProvider: boolean;
   isAdmin: boolean;
-  msg: string;
+  private imageUrl = environment.baseURL + '/service-providers/image/';
 
   constructor(private portfolioService: PortfolioService, private rout: ActivatedRoute, private apiService: ApiService) {
     this.isAdmin = apiService.isAdmin();
