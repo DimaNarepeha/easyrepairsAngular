@@ -46,7 +46,7 @@ export class ServiceProviderViewComponent implements OnInit {
 
   getServiceProvidersByStatus(page: number, numberOfProvidersOnPage: number, status: ProviderStatus): void {
     this.serviceProvidersService.getServiceProvidersByStatus(page, numberOfProvidersOnPage, status).subscribe((serviceProvidersData) => {
-        this.serviceProviders = serviceProvidersData['content'],
+        this.serviceProviders = serviceProvidersData,
           this.pages = new Array(serviceProvidersData['totalPages']);
       },
       (error) => {

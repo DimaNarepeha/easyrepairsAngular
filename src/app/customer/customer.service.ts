@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import {environment} from 'src/environments/environment';
+import {ApiService} from '../core/api.service';
 import {CustomerStatus} from "./CustomerStatus";
 
 const headers = new HttpHeaders(
@@ -16,8 +17,7 @@ const headers = new HttpHeaders(
 
 @Injectable()
 export class CustomerService {
-  constructor(private httpService: Http, private http: HttpClient) {
-  }
+  constructor(private httpService: Http, private http: HttpClient,private service: ApiService) {}
 
   uploadImage(file: any, id: number) {
     const formData = new FormData();
@@ -30,33 +30,34 @@ export class CustomerService {
   }
 
   getCustomersPage(page: number) {
-    return this.httpService.get(environment.customer_url + 'list?page=' + page);
+    return this.httpService.get(environment.customer_url + 'list?page=' + page + '&access_token=' + this.service.returnAccessToken());
   }
 
   getAllCustomers(): Observable<Customer[]> {
-    return this.httpService.get(environment.customer_url).map((response: Response) => response.json()).catch(this.handleError);
+    return this.httpService.get(environment.customer_url + '?access_token=' + this.service.returnAccessToken())
+      .map((response: Response) => response.json()).catch(this.handleError);
   }
 
   addCustomer(customer: Customer) {
     const body = JSON.stringify(customer);
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.httpService.put(environment.customer_url, body, options);
+    return this.httpService.put(environment.customer_url + '?access_token=' + this.service.returnAccessToken(), body, options);
   }
 
   deleteCustomer(customerId: string) {
-    return this.httpService.delete(environment.customer_url + customerId);
+    return this.httpService.delete(environment.customer_url + customerId + '?access_token=' + this.service.returnAccessToken());
   }
 
   getCustomerById(customerId: string): Observable<Customer> {
-    return this.httpService.get(environment.customer_url + customerId)
+    return this.httpService.get(environment.customer_url + customerId + '?access_token=' + this.service.returnAccessToken())
       .map((response: Response) => response.json())
       .catch(this.handleError);
   }
 
   getCustomerByUserId(id: any): any {
     console.log(environment.customer_url + 'find-by-userId/' + id);
-    return this.http.get(environment.customer_url + 'find-by-userId/' + id, {headers})
+    return this.http.get(environment.customer_url + 'find-by-userId/' + id + '?access_token=' + this.service.returnAccessToken(), {headers})
       .catch(this.handleError);
 
   }
@@ -65,26 +66,25 @@ export class CustomerService {
     const statusString: string = CustomerStatus[status];
     const params = new HttpParams().set('pageSize', String(numberOfCustomersOnPage))
       .set('pageNumber', String(page)).set('status', statusString);
-    return this.httpService.get( environment.customer_url + 'status?' + params).
-    // return this.httpService.get( environment.customer_url + 'status?' + params + '&access_token=' + this.returnAccessToken()).
+    return this.httpService.get( environment.customer_url + 'status?' + params + '&access_token=' + this.service.returnAccessToken()).
     map( (response: Response) => response.json()).catch(this.handleError);
-  }
-
-  private handleError(error: Response) {
-    return Observable.throw(error);
   }
 
   updateStatus(id: number, status: CustomerStatus): Observable<any> {
     const body  = CustomerStatus[status];
-    return this.http.put<any>(environment.customer_url + 'update-status/' +  id, body,{headers});
+    return this.http.put<any>(environment.customer_url + 'update-status/' +  id +  '?access_token=' + this.service.returnAccessToken(), body,{headers});
   }
 
   getCustomersByFirstName(page: any, numberOfCustomersOnPage: any, status: CustomerStatus, firstName: string): Observable<Customer[]> {
     const statusString: string = CustomerStatus[status];
     const params = new HttpParams().set('firstName', firstName).set('pageSize', String(numberOfCustomersOnPage))
       .set('pageNumber', String(page)).set('status', statusString);
-    console.log(environment.customer_url + 'status/searchByFirstName?' + params);
+    console.log(environment.customer_url + 'status/searchByFirstName?' + params + '&access_token=' + this.service.returnAccessToken());
     return this.http.get<Customer[]>( environment.customer_url + 'status/searchByFirstName?' + params, {headers})
       .catch(this.handleError);
+  }
+
+  private handleError(error: Response) {
+    return Observable.throw(error);
   }
 }

@@ -9,6 +9,7 @@ import {Response} from '@angular/http';
 import {throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {ProviderStatus} from './service-provider.status';
+import {map} from 'rxjs/operators';
 import {ApiService} from '../core/api.service';
 import {NotifierService} from 'angular-notifier';
 import {Email} from "../admin-approve-page/Email";
@@ -17,7 +18,7 @@ import {Portfolio} from "../portfolio/portfolio";
 
 const headers = new HttpHeaders(
   {
-    'Content-Type': 'application/json;charset=UTF-8'
+    'Content-Type': 'application/json;'
   });
 
 @Injectable()
@@ -33,7 +34,8 @@ export class ServiceProvidersService {
   }
 
   getServiceProvidersByPage(page: number): Observable<any> {
-    return this.httpService.get<any>(this.baseURL + '/service-providers/find-all/page/?page=' + page)
+    return this.httpService.get<any>(this.baseURL + '/service-providers/find-all/page/?page=' + page + '&access_token='
+      + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
   }
 
@@ -51,64 +53,71 @@ export class ServiceProvidersService {
   }
 
   getAllServiceProviders(): Observable<ServiceProviders[]> {
-    return this.httpService.get<ServiceProviders[]>(this.baseURL + '/service-providers/find-all')
+    return this.httpService.get<ServiceProviders[]>(this.baseURL + '/service-providers/find-all', {headers})
       .catch(this.handleError);
   }
 
   addServiceProviders(service: ServiceProviders): Observable<ServiceProviders> {
-    return this.httpService.post<ServiceProviders>(this.baseURL + '/service-providers/save', JSON.stringify(service));
-
+    return this.httpService.post<ServiceProviders>(this.baseURL + '/service-providers/save' + '?access_token='
+      + this.apiService.returnAccessToken(), JSON.stringify(service), {headers});
   }
 
   updateServiceProvider(service: ServiceProviders): Observable<ServiceProviders> {
-    return this.httpService.put<ServiceProviders>(this.baseURL + '/service-providers/update', JSON.stringify(service));
+    return this.httpService.put<ServiceProviders>(this.baseURL + '/service-providers/update' + '?access_token='
+      + this.apiService.returnAccessToken(), JSON.stringify(service), {headers});
   }
 
   getServiceProviderById(id: number): Observable<ServiceProviders> {
-    return this.httpService.get<ServiceProviders>(this.baseURL + '/service-providers/find-by-id/' + id )
+    return this.httpService.get<ServiceProviders>(this.baseURL + '/service-providers/find-by-id/' + id + '?access_token='
+      + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
-
   }
 
   getServiceProviderByUserId(id: any): Observable<ServiceProviders> {
-    return this.httpService.get<ServiceProviders>(this.baseURL + '/service-providers/find-by-userId/' + id )
+    return this.httpService.get<ServiceProviders>(this.baseURL + '/service-providers/find-by-userId/' + id + '?access_token='
+      + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
   }
 
   deleteServiceProvider(id: number) {
-    return this.httpService.delete(this.baseURL + '/service-providers/delete/' + id );
+    return this.httpService.delete(this.baseURL + '/service-providers/delete/' + id + '?access_token='
+      + this.apiService.returnAccessToken());
   }
 
   updateServiceProviderStatus(id: number, serviceProvider: ServiceProviders): Observable<ServiceProviders> {
-    const body = ProviderStatus[serviceProvider.status];
+    const status: string = ProviderStatus[serviceProvider.status];
+    const body = status;
     console.log('id ' + id + '  status  ' + serviceProvider.status);
-    return this.httpService.put<ServiceProviders>(this.baseURL + '/service-providers/update-status/' + id, body);
+    return this.httpService.put<ServiceProviders>(this.baseURL + '/service-providers/update-status/' + id + '?access_token='
+      + this.apiService.returnAccessToken(), body);
   }
 
   getServiceProvidersByStatus(page: number, numberOfProvidersOnPage: number, status: ProviderStatus): Observable<ServiceProviders[]> {
     const statusString: string = ProviderStatus[status];
     const params = new HttpParams().set('numberOfProvidersOnPage', String(numberOfProvidersOnPage))
       .set('page', String(page)).set('status', statusString);
-    return this.httpService.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/status?` + params);
+    return this.httpService.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/status?` + params + '&access_token='
+      + this.apiService.returnAccessToken())
+      .pipe(
+        map(res => res['content']));
   }
 
   getServiceProvidersByName(searchName: string, page: number, numberOfProvidersOnPage: number, status: ProviderStatus): Observable<ServiceProviders[]>{
     const statusString: string = ProviderStatus[status];
     const params = new HttpParams().set('numberOfProvidersOnPage', String(numberOfProvidersOnPage))
       .set('page', String(page)).set('status', statusString).set("searchName", searchName);
-    return this.httpService.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/searchByName?` + params);
-    // + '&access_token=' + this.apiService.returnAccessToken(), {headers}
-  }
-
-  sendEmailToUser( email: Email) : Observable<any> {
-    let body = JSON.stringify(email);
-    return this.httpService.post('http://localhost:8080/email/', body , {headers} );
+    return this.httpService.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/searchByName?` + params
+      + '&access_token=' + this.apiService.returnAccessToken(), {headers});
   }
 
   getPortfolio(id: number): Observable<Portfolio> {
     return this.httpService.get<Portfolio>(this.baseURL + '/provider-portfolio/provider/' + id);
   }
 
+  sendEmailToUser( email: Email) : Observable<any> {
+    let body = JSON.stringify(email);
+    return this.httpService.post('http://localhost:8080/email/', body , {headers} );
+  }
 
   private handleError(error: Response) {
     return throwError(error);

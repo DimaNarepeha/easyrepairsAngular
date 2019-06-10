@@ -14,7 +14,7 @@
             <div class="blog_text">
               <div class="blog_text_inner">
                 <a href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
-                  <img alt="" src="{{urlCustomer+customer.userDTO?.image}}"
+                  <img style="margin-top: 5px;" alt="" src="{{urlCustomer+customer.image}}"
                        class="twPc-avatarImg">
                 </a>
                 <div class="cat">
@@ -30,7 +30,6 @@
                 <button style="background-color: darkred" (click)="deleteService(serviceProvider.id)"
                         class="genric-btn primary">Delete
                 </button>
-
                 <br>
                 <br>
                 <br>
@@ -64,7 +63,7 @@
             <div class="blog_text">
               <div class="blog_text_inner">
                 <a href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
-                  <img alt="" src="{{url+serviceProvider.userDTO?.image}}"
+                  <img style="margin-top: 1px;" alt="" src="{{url+serviceProvider.image}}"
                        class="twPc-avatarImg">
                 </a>
                 <div class="cat">
@@ -84,7 +83,7 @@
                 <button style="background-color: darkred" (click)="deleteService(serviceProvider.id)"
                         class="genric-btn primary">Delete
                 </button>
-                <button [routerLink]="['/service-providers',1]" class="genric-btn primary">My Portfolio
+                <button (click)="getPortfolioByProviderId()" class="genric-btn primary">My Portfolio
                 </button>
 
                 <br>

@@ -3,7 +3,7 @@
 <div class="container x1">
   <div class="row">
     <div class="col-lg-12">
-      <div class="blog_left_sidebar x2" *ngFor="let offer of offerDTOs">
+      <div class="blog_left_sidebar x2" *ngFor="let offer of offerDTOs.reverse()">
         <article class="blog_style1">
           <div class="blog_text">
             <div class="blog_text_inner">
@@ -29,7 +29,7 @@
               <button *ngIf="(isAdmin() || compareWithCustomerId(offer.customerDTO.id))" (click)="deleteOfferDTOById(offer.id)"
                       class="right genric-btn primary">Delete
               </button>
-              <button *ngIf="isProvider()" style="margin-right: 20px" (click)="chooseOfferDTOById(offer.id)"
+              <button *ngIf="isProvider()" [routerLink] = "['/chat','1','2']" style="margin-right: 20px"
                       class="right genric-btn primary">Contact with customer
               </button>
             </div>

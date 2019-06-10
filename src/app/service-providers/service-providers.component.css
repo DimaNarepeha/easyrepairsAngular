@@ -98,7 +98,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 15px;
   font-weight: normal;
   font-family: "Inconsolata", monospace;
-  margin-right: 25px;
+  margin-right: 15px;
   -webkit-transition: all 300ms linear 0s;
   -o-transition: all 300ms linear 0s;
   transition: all 300ms linear 0s;

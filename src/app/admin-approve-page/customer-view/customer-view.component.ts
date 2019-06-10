@@ -45,7 +45,7 @@ export class CustomerViewComponent implements OnInit {
   updateCustomerStatus(id: number,status: CustomerStatus) {
     console.log(status);
     this.customerService.updateStatus(id, status).subscribe((customers) => {
-        this.customers = customers;
+        this.customers = customers['content'];
         this.setPage(this.pageNumber,event)
       },
       (error) => {

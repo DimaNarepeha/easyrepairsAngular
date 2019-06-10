@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OrderDTO} from '../create-offer/models/orderDTO';
 import {CustomerDTO} from '../create-offer/models/customerDTO';
 import {ListOrderService} from './list-contracts.service';
 import {ProviderDTO} from '../create-offer/models/providerDTO';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-list-contracts',
@@ -17,13 +18,14 @@ export class ListContractsComponent implements OnInit {
   private role: string;
   private providerDTO: ProviderDTO;
 
-  constructor(private listOrderService: ListOrderService) { }
+  constructor(private listOrderService: ListOrderService, private readonly notifier: NotifierService) { }
 
   ngOnInit() {
+    window.scroll(0, 0);
     this.delay(1000);
     if (JSON.parse(window.sessionStorage.getItem('user')) == null) {
       console.log('Stop loading!!!');
-      alert('Something wrong. Maybe you have not login yet!');
+      this.notifier.notify('success', 'Something wrong. Maybe you have not login yet!');
       return;
     }
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
@@ -52,6 +54,7 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.deleteOrderById(id)
       .subscribe((x) => {
         console.log(x);
+        this.notifier.notify('success', 'Contract was deleted!');
         this.getOrderDTOs();
       }, (error) => {
         console.log(error);
@@ -103,17 +106,17 @@ export class ListContractsComponent implements OnInit {
   }
 
   private chooseOrderDTOById(id: number) {  // TODO
-    alert('Sorry, but this function have not been created yet!');
+    this.notifier.notify('success', 'Sorry, but this function have not been created yet!');
   }
 
   private customerApproveOrderDTO(order: OrderDTO) {
     order.customerApproved = 'approved';
     this.listOrderService.updateOrder(order)
       .subscribe((x) => {
-          alert('Order approved!:');
+          this.notifier.notify('success', 'Order approved!:');
         },
         (error) => {
-          alert(error);
+          this.notifier.notify('success', error);
         });
   }
 
@@ -121,10 +124,10 @@ export class ListContractsComponent implements OnInit {
     order.providerApproved = 'approved';
     this.listOrderService.updateOrder(order)
       .subscribe((x) => {
-          alert('Order approved!:');
+          this.notifier.notify('success', 'Order approved!:');
         },
         (error) => {
-          alert(error);
+          this.notifier.notify('success', error);
         });
   }
 

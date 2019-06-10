@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ServiceProviders} from '../service-providers/service-providers';
 import {environment} from '../../environments/environment';
 import {ServiceProvidersService} from '../service-providers/service-providers.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Customer} from '../customer/customer';
 import {CustomerService} from '../customer/customer.service';
 import {NotifierService} from 'angular-notifier';
@@ -23,7 +23,7 @@ export class MyProfileComponent implements OnInit {
   private readonly notifier: NotifierService;
 
   constructor(private serviceProvidersService: ServiceProvidersService, private customerService: CustomerService,
-              private rout: ActivatedRoute, private notifierService: NotifierService) {
+              private rout: ActivatedRoute, private notifierService: NotifierService, private router: Router) {
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
     this.notifier = notifierService;
@@ -42,6 +42,7 @@ export class MyProfileComponent implements OnInit {
 
 
   ngOnInit() {
+    window.scroll(0, 0);
     if (this.role == 'PROVIDER') {
       this.rout.params.subscribe(next => {
         this.serviceProvidersService.getServiceProviderByUserId(this.userId).subscribe(next => {
@@ -74,6 +75,15 @@ export class MyProfileComponent implements OnInit {
       }, (error) => {
         console.log(error);
       });
+  }
+
+  getPortfolioByProviderId() {
+    this.serviceProvidersService.getPortfolio(this.serviceProvider.id)
+      .subscribe(
+        data => {
+          this.router.navigate(['/provider-portfolio/' + data.id]);
+        },
+      );
   }
 
 }

@@ -43,6 +43,11 @@ export class ServiceProvidersComponent implements OnInit {
     return this.favouriteService.checkFavourite(serviceProvider, this.customerId);
   }
 
+  private isCustomer(): boolean {
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    return this.role == 'CUSTOMER';
+  }
+
   public isAdmin() {
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
     return this.role == 'ADMIN';

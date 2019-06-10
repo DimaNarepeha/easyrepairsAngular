@@ -14,6 +14,8 @@ const headers = new HttpHeaders(
 
 @Injectable()
 export class FavouriteService {
+  private serviceProviders: ServiceProviders[];
+  private provider: ServiceProviders;
   constructor( private http: HttpClient,customerService :CustomerService,private httpService: Http) {
   }
 
@@ -22,13 +24,17 @@ export class FavouriteService {
     return this.http.get<any>( environment.favourite_url + 'findAll/?customerId=' + customerId);
   }
 
-  checkFavourite(serviceProvider: ServiceProviders,customerId :number): boolean {
-    // serviceProviders = this.http.get<ServiceProviders[]>(environment.favourite_url + 'findAll/?customerId=' + customerId, {headers});
-    // for (let provider in serviceProviders) {
-    //   if (provider == serviceProvider) {
+  checkFavourite(checkedServiceProvider: ServiceProviders,customerId :number): boolean {
+
+    this.http.get<ServiceProviders[]>(environment.favourite_url + 'findAll/?customerId=' + customerId, {headers}).subscribe(customer => {
+      this.serviceProviders = customer['favourite'];
+    });
+    // for (const serviceProvider of this.serviceProviders) {
+    //   if (serviceProvider == checkedServiceProvider) {
         return true;
     //   }
     // }
+    // return false;
   }
 
   addToFavourite(customerId: number, serviceProvider: ServiceProviders): any {

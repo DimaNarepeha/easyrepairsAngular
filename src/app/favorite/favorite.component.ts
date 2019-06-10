@@ -21,7 +21,7 @@ export class FavoriteComponent implements OnInit {
   }
 
   checkFavourite(serviceProvider: ServiceProviders): boolean {
-    return this.favouriteService.checkFavourite(serviceProvider, this.customerId);
+    return true;
   }
 
   addToFavourite(serviceProvider: ServiceProviders) {

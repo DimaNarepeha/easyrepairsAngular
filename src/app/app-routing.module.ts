@@ -53,12 +53,12 @@ const routes: Routes = [
   {path: 'chat/:id', component: ChatComponent},
   {path: 'chat/:id/:sentBy', component: ChatComponent},
   {path: 'feedback', component: FeedbackComponent},
-  {path: 'favorite', component: FavoriteComponent},
+  {path: 'favourite', component: FavoriteComponent},
   {path: 'my-profile', component: MyProfileComponent},
   {path: 'provider-portfolio/:id', component: PortfolioComponent},
   {path: 'portfolio/edit-post/:id', component: EditPostComponent},
   {path: 'not-found', component: NotFoundComponent},
-  {path: 'create-contract', component: CreateContractComponent},
+  {path: 'create-contract/:id', component: CreateContractComponent},
   {path: 'list-contracts', component: ListContractsComponent}
 ];
 

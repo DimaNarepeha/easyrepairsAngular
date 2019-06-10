@@ -4,6 +4,9 @@ import {PortfolioService} from './portfolio.service';
 import {Portfolio} from './portfolio';
 import {Post} from './post';
 import {ApiService} from "../core/api.service";
+import {environment} from "../../environments/environment";
+import {ServiceProviderOneComponent} from "../service-providers/service-provider-one/service-provider-one.component";
+import {ServiceProviders} from "../service-providers/service-providers";
 
 
 @Component({
@@ -17,9 +20,11 @@ export class PortfolioComponent implements OnInit {
   portfolio = new Portfolio();
   posts = new Array<Post>();
   readMoreField = 'Read more';
+  provider = new ServiceProviders();
   isProvider: boolean;
   isAdmin: boolean;
-  msg: string;
+  private currentId: number;
+  private imageUrl = environment.baseURL + '/service-providers/image/';
 
   constructor(private portfolioService: PortfolioService, private rout: ActivatedRoute, private apiService: ApiService) {
     this.isAdmin = apiService.isAdmin();
@@ -39,12 +44,8 @@ export class PortfolioComponent implements OnInit {
         this.portfolioService.getPortfolioById(next.id).subscribe(next => {
           this.portfolio = next;
           this.posts = this.portfolio.postDTOs;
-          console.log(this.portfolio);
-          console.log(this.portfolio.postDTOs[2]);
-        }, error => {
         });
       }
     );
   }
-
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {OfferDTO} from '../create-offer/models/offerDTO';
 import {ListOfferService} from './list-offer.service';
 import {CustomerDTO} from '../create-offer/models/customerDTO';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-list-offers',
@@ -15,13 +16,14 @@ export class ListOffersComponent implements OnInit {
   private userId: number;
   private role: string;
 
-  constructor(private listOfferService: ListOfferService) { }
+  constructor(private listOfferService: ListOfferService, private readonly notifier: NotifierService) { }
 
   ngOnInit() {
+    window.scroll(0, 0);
     this.delay(1200);
     if (JSON.parse(window.sessionStorage.getItem('user')) == null) {
       console.log('Stop loading!!!');
-      alert('Something wrong. Maybe you have not login yet!');
+      this.notifier.notify('success', 'Something wrong. Maybe you have not login yet!');
       return;
     }
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
@@ -46,6 +48,7 @@ export class ListOffersComponent implements OnInit {
     this.listOfferService.deleteOfferById(id)
       .subscribe((x) => {
         console.log(x);
+        this.notifier.notify('success', 'Offer was deleted!');
         this.getOfferDTOs();
       }, (error) => {
         console.log(error);
@@ -82,9 +85,5 @@ export class ListOffersComponent implements OnInit {
 
   private async delay(ms: number) {
     await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => this.getOfferDTOs());
-  }
-
-  private chooseOfferDTOById(id: number) {  // TODO
-    alert('Sorry, but this function have not been created yet!');
   }
 }
