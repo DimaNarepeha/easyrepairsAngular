@@ -30,6 +30,7 @@ export class NotificationComponent extends SecurityRolesService implements OnIni
         .subscribe(data => {
           this.notifications = data;
           this.checkForNewNotifications();
+          this.notifications = this.notifications.reverse();
         });
     }
   }
