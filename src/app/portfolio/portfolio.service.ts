@@ -7,6 +7,7 @@ import {Portfolio} from './portfolio';
 import {Post} from './post';
 import {NotifierService} from 'angular-notifier';
 import {ApiService} from "../core/api.service";
+import {ServiceProviders} from "../service-providers/service-providers";
 
 const headers = new HttpHeaders(
   {
