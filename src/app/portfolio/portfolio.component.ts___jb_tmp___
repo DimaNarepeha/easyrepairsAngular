@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PortfolioService} from './portfolio.service';
 import {Portfolio} from './portfolio';
 import {Post} from './post';
-import {ApiService} from "../core/api.service";
+import {ApiService} from '../core/api.service';
 import {environment} from "../../environments/environment";
 
 
