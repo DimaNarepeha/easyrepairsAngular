@@ -30,6 +30,7 @@ export class SpGeneralComponent implements OnInit {
   public addrKeys: string[];
   public addr: object;
   private role: any;
+
   constructor(private serviceProvidersService: LandingPageService,
               private http: HttpClient,
               private rout: ActivatedRoute,
@@ -56,7 +57,7 @@ export class SpGeneralComponent implements OnInit {
 
   public isAdmin() {
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
-    return this.role == 'ADMIN';
+    return this.role.toString() === 'ADMIN';
   }
 
   setPage(i, event: any) {
@@ -165,7 +166,7 @@ export class SpGeneralComponent implements OnInit {
           .set('country', this.providersCriteria.country.toString());
       }
     }
-    this.getServiceProvidersByPage();
     this.page = 0;
+    this.getServiceProvidersByPage();
   }
 }
