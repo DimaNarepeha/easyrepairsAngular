@@ -18,7 +18,8 @@ export class ListOrderService {
   constructor(private httpService: HttpClient, private apiService: ApiService) {
   }
   getAllOrders(): Observable<OrderDTO[]> {
-    return this.httpService.get<OrderDTO[]>(environment.baseURL + '/orders/', {headers})
+    return this.httpService.get<OrderDTO[]>(environment.baseURL + '/orders?access_token='
+      + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
   }
 
@@ -35,7 +36,7 @@ export class ListOrderService {
   }
 
   updateOrder(order: OrderDTO): Observable<OrderDTO> {
-    return this.httpService.put<OrderDTO>(environment.baseURL + '/orders/' + '?access_token='
+    return this.httpService.put<OrderDTO>(environment.baseURL + '/orders' + '?access_token='
       + this.apiService.returnAccessToken(), JSON.stringify(order), {headers});
   }
 

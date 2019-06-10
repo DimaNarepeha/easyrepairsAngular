@@ -54,7 +54,7 @@
           </li>
           <li *ngIf="isUser()==true"><a routerLink="/service-providers"><i class="fas fa-cog"></i>Service providers</a>
           </li>
-          <li *ngIf="isAdmin()==true"><a routerLink="/customers"><i class="far fa-smile"></i>Customers</a></li>
+          <li *ngIf="isAdmin()"><a routerLink="/customers"><i class="far fa-smile"></i>Customers</a></li>
 
           <li><a [routerLink] = "['/chat','1','2']"><i class="far fa-smile"></i> Messages</a></li>
           <!--          <li><a routerLink="/logout"><i class="fas fa-sign-out-alt"></i>Log out</a></li>-->
