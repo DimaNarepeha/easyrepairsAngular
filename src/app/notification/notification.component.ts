@@ -2,7 +2,6 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {NotificationService} from './notification.service';
 import {Notification} from './notification';
 import {SecurityRolesService} from '../security-roles.service';
-import {__values} from 'tslib';
 
 @Component({
   selector: 'app-notification',
@@ -12,24 +11,33 @@ import {__values} from 'tslib';
 export class NotificationComponent extends SecurityRolesService implements OnInit {
   isOpen: boolean;
   notifications: Notification[];
-  private wasInside: boolean;
+  wasInside: boolean;
   securityRolesService: SecurityRolesService;
+  isNewNotifications = false;
 
   constructor(private notificationService: NotificationService) {
     super();
     this.securityRolesService = new SecurityRolesService();
+    this.loadNotifications();
   }
 
   ngOnInit() {
+  }
+
+  loadNotifications() {
     if (this.securityRolesService.isLoggedIn()) {
       this.notificationService.getNotificationsForUser(this.securityRolesService.getUserId())
-        .subscribe(data => this.notifications = data);
+        .subscribe(data => {
+          this.notifications = data;
+          this.checkForNewNotifications();
+          this.notifications = this.notifications.reverse();
+        });
     }
   }
 
   openNotifications(divNotifications: HTMLDivElement) {
     this.isOpen = !this.isOpen;
-    if(!this.isOpen){
+    if (!this.isOpen) {
       this.markAllNotificationsAsSeen();
     }
   }
@@ -55,18 +63,16 @@ export class NotificationComponent extends SecurityRolesService implements OnIni
         this.notificationService.setNotificationAsSeenOnDb(notification).subscribe();
       }
     });
+    this.isNewNotifications = false;
   }
 
-  sendNotifications() {
-    const x: Notification = {
-      id: 0,
-      header: 'HI!',
-      message: 'Here we go!',
-      time: new Date(),
-      seen: false
-    };
-    console.log('Send notifications');
-    this.notificationService.addNotificationForUser(1, x).subscribe();
+  checkForNewNotifications() {
+    this.notifications.forEach((notification) => {
+      if (!notification.seen) {
+        this.isNewNotifications = true;
+        return;
+      }
+    });
   }
 
 }

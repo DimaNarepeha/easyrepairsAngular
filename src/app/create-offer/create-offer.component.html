@@ -10,81 +10,60 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <script src="https://maps.googleapis.com/maps/api/js?key=<Your API KEY>&libraries=places&language=en"></script>
+<!--  <script src="https://maps.googleapis.com/maps/api/js?key=<Your API KEY>&libraries=places&language=en"></script>-->
 </head>
-<div class="w3-container w3-yellow">
-  <h1>Creating offer!</h1>
-</div>
-<div>
-  <div style="background-color: #222222">
-    <div class="card">
-      <!-- Default panel contents -->
-      <div class="card-header" style="color: #FFC107; background-color: #222222">Select services which you want</div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item" *ngFor="let service of serviceDTOs"
-            style="color: #FFC107; background-color: #222222">
-          {{service.serviceName}}
-          <label class="switch ">
-            <div>
-              <input type="checkbox" class="warning" [(ngModel)]="service.choose">
-              <span class="slider round"></span>
+<div class="image">
+<app-nav></app-nav>
+<div class="container col-md-6 xxx">
+  <div>
+    <div style="background-color: #222222">
+      <div>
+        <div id="map" style="background-color: #222222">
+          <form class="w3-selection w3-padding">
+            <br>
+            <div class="container">
+              <div class="row">
+                <label class="col-md-4 container2 xlabel" *ngFor="let service of serviceDTOs">{{service.serviceName}}
+                  <input type="checkbox" [(ngModel)]="service.choose" [ngModelOptions]="{standalone: true}">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
             </div>
-          </label>
-        </li>
-      </ul>
-      <form class="w3-selection w3-padding" style="background-color: #222222">
-        <input type="hidden" name="offerDTO.id"/>
-        <p style="color: #FFC107">Enter description:</p><input
-        class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text"
-        [(ngModel)]="offerDTO.description" name="description"/><br/>
-        <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="createOfferDTO()">Create offer
-        </button>
-      </form>
+            <p style="color: #FFC107">Enter your location:</p>
+            <input type="text"
+                   class="google-place-input w3-input w3-border w3-round-large container"
+                   google-place
+                   (onSelect)="setAddress($event)"
+                   placeholder="Type to search..">
+            <br>
+            <p style="color: #FFC107">Enter description:</p>
+            <textarea [(ngModel)]="offerDTO.description" name="description"
+                      maxlength="1000" class="w3-input w3-border w3-round-large container">
+            </textarea>
+            <br>
+            <div class="row">
+              <div class="container col-md-4">
+                <p class="container col-md-8" style="color: #FFC107">Start date</p>
+                <input [(ngModel)]="offerDTO.startDate" class="w3-round-large container" type="date"
+                       name="startDate" min="{{currentDate}}" max="3000-12-31">
+              </div>
+              <div class="container col-md-4">
+                <p class="container col-md-8" style="color: #FFC107">End date</p>
+                <input [(ngModel)]="offerDTO.endDate" class="w3-round-large container" type="date"
+                       name="endDate" min="{{currentDate}}" max="3000-12-31">
+              </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <button class="w3-btn w3-yellow w3-round-large" (click)="createOfferDTO()">Create offer
+              </button>
+            </div>
+            <br>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="w3-container w3-yellow">
-  <h2>Offers</h2>
-</div>
-<div>
-  <table class="table table-hover table-dark">
-    <thead>
-    <tr>
-      <th>FirstName</th>
-      <th>LastName</th>
-      <th>Email</th>
-      <th>Country</th>
-      <th>Region</th>
-      <th>City</th>
-      <th>Date</th>
-      <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let offer of offerDTOs ">
-      <td>{{offer.customerDTO.firstName}}</td>
-      <td>{{offer.customerDTO.lastName}}</td>
-      <td>{{offer.customerDTO.email}}</td>
-      <td>{{offer.locationDTO.country}}</td>
-      <td>{{offer.locationDTO.region}}</td>
-      <td>{{offer.locationDTO.city}}</td>
-      <td>{{offer.startDate}}</td>
-      <td>{{offer.description}}</td>
-      <td><!---<div class="form-group">-->
-      <td>
-        <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom"
-                (click)="showServices(offer.serviceDTOs)">
-          Services
-        </button>
-      |
-        <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom"
-                (click)="deleteOfferDTOById(offer.id)">
-          Delete
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
 <app-footer></app-footer>
-
+</div>

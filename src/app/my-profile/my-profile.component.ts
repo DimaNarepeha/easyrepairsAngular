@@ -3,9 +3,9 @@ import {ServiceProviders} from '../service-providers/service-providers';
 import {environment} from '../../environments/environment';
 import {ServiceProvidersService} from '../service-providers/service-providers.service';
 import {ActivatedRoute} from '@angular/router';
-import {el} from "@angular/platform-browser/testing/src/browser_util";
-import {Customer} from "../customer/customer";
-import {CustomerService} from "../customer/customer.service";
+import {Customer} from '../customer/customer';
+import {CustomerService} from '../customer/customer.service';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-my-profile',
@@ -20,10 +20,13 @@ export class MyProfileComponent implements OnInit {
   private urlCustomer = environment.baseURL + '/customers/image/';
   private userId: any;
   private role: string;
+  private readonly notifier: NotifierService;
 
-  constructor(private serviceProvidersService: ServiceProvidersService, private customerService: CustomerService, private rout: ActivatedRoute) {
+  constructor(private serviceProvidersService: ServiceProvidersService, private customerService: CustomerService,
+              private rout: ActivatedRoute, private notifierService: NotifierService) {
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
+    this.notifier = notifierService;
   }
 
 
@@ -39,6 +42,7 @@ export class MyProfileComponent implements OnInit {
 
 
   ngOnInit() {
+    window.scroll(0, 0);
     if (this.role == 'PROVIDER') {
       this.rout.params.subscribe(next => {
         this.serviceProvidersService.getServiceProviderByUserId(this.userId).subscribe(next => {
@@ -62,6 +66,15 @@ export class MyProfileComponent implements OnInit {
         console.log(err);
       });
     }
+  }
+
+  deleteService(id: number) {
+    this.serviceProvidersService.deleteServiceProvider(id)
+      .subscribe((response) => {
+        this.notifier.notify('error', 'Deleted');
+      }, (error) => {
+        console.log(error);
+      });
   }
 
 }

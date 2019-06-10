@@ -3,7 +3,7 @@ import {ServiceProviders} from './service-providers';
 import {ServiceProvidersService} from './service-providers.service';
 import 'rxjs/add/observable/throw';
 import {environment} from '../../environments/environment';
-import {NotifierService} from "angular-notifier";
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-service-providers',
@@ -33,8 +33,9 @@ export class ServiceProvidersComponent implements OnInit {
     // console.log(this.serviceProviders);
   }
 
-  public isUser() {
-    return window.sessionStorage.getItem('user') != null;
+  private isCustomer(): boolean {
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    return this.role == 'CUSTOMER';
   }
 
   public isAdmin() {
@@ -54,12 +55,6 @@ export class ServiceProvidersComponent implements OnInit {
 
   }
 
-  onSelectFile(file1, id) {
-    const file = file1;
-    console.log(file);
-    this.userFile = file;
-    this.serviceProvidersService.uploadImage(file, id);
-  }
 
   getServiceProvidersByPage() {
     this.serviceProvidersService.getServiceProvidersByPage(this.page)
@@ -82,35 +77,11 @@ export class ServiceProvidersComponent implements OnInit {
       );
   }
 
-  getServiceProviders(): void {
-    this.serviceProvidersService.getAllServiceProviders()
-      .subscribe((serviceProvidersData) => {
-          this.serviceProviders = serviceProvidersData, console.log(serviceProvidersData);
-        },
-        (error) => {
-          console.log(error);
-        });
-  }
-
-  private reset() {
-    this.serviceProvider.id = null;
-    this.serviceProvider.name = null;
-  }
-
-  getServiceProviderById(id: number) {
-    this.serviceProvidersService.getServiceProviderById(id)
-      .subscribe((serviceProvidersData) => {
-          this.serviceProvider = serviceProvidersData;
-        },
-        (error) => {
-          console.log(error);
-        });
-  }
 
   deleteService(id: number) {
     this.serviceProvidersService.deleteServiceProvider(id)
       .subscribe((response) => {
-        this.notifier.notify('error', 'deleted!')
+        this.notifier.notify('error', 'Deleted')
         this.getServiceProvidersByPage();
       }, (error) => {
         console.log(error);
