@@ -123,7 +123,7 @@ export class CreateContractComponent implements OnInit {
           console.log('provider: ' + x.id);
         },
         (error) => {
-          console.log(error);
+        console.log(error);
         });
   }
 

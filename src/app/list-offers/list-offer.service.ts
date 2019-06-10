@@ -18,7 +18,8 @@ export class ListOfferService {
   }
 
   getAllOffers(): Observable<OfferDTO[]> {
-    return this.httpService.get<OfferDTO[]>(environment.baseURL + '/offers/', {headers})
+    return this.httpService.get<OfferDTO[]>(environment.baseURL + '/offers?access_token='
+      + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
   }
 

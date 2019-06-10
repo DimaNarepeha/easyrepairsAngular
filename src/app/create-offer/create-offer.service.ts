@@ -20,7 +20,7 @@ export class CreateOfferService {
   }
 
   createOffer(offerDTO: OfferDTO): Observable<OfferDTO> {
-    return this.httpService.post<OfferDTO>(environment.baseURL + '/offers/' + '?access_token='
+    return this.httpService.post<OfferDTO>(environment.baseURL + '/offers' + '?access_token='
       + this.apiService.returnAccessToken(), JSON.stringify(offerDTO), {headers})
       .catch(this.handleError);
   }
@@ -36,7 +36,7 @@ export class CreateOfferService {
   }
 
   getAllServices(): Observable<ServiceDTO[]> {
-    return this.httpService.get<ServiceDTO[]>(environment.baseURL + '/services/', {headers})
+    return this.httpService.get<ServiceDTO[]>(environment.baseURL + '/services', {headers})
       .catch(this.handleError);
   }
 }
