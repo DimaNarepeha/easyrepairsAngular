@@ -57,7 +57,7 @@ export class SpGeneralComponent implements OnInit {
 
   public isAdmin() {
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
-    return this.role === 'ADMIN';
+    return this.role.toString() === 'ADMIN';
   }
 
   setPage(i, event: any) {

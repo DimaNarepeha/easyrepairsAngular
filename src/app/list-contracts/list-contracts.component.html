@@ -1,0 +1,62 @@
+<div class="image">
+  <app-nav></app-nav>
+  <div class="container x1">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="blog_left_sidebar x2" *ngFor="let order of orderDTOs">
+          <article class="blog_style1">
+            <div class="blog_text">
+              <div class="blog_text_inner">
+                <div class="cat">
+                  <div class="row">
+                    <p class="col far fa-calendar-alt" aria-hidden="true"> created: {{order.createDate}} </p>
+                    <p class="col far fa-calendar-alt" aria-hidden="true"> start date: {{order.startDate}} </p>
+                    <p class="col far fa-calendar-alt" aria-hidden="true"> end date: {{order.endDate}} </p>
+                  </div>
+                  <h4 class="container">Contract</h4>
+                  <h6>Provider: {{order.providerDTO.name}}</h6>
+                  <h6>Customer: {{order.customerDTO.firstName}} {{order.customerDTO.lastName}}</h6>
+                  <h6>ProviderApproved: {{order.providerApproved}}</h6>
+                  <h6>CustomerApproved: {{order.customerApproved}}</h6>
+                  <h6>Price: {{order.price}}</h6>
+                  <h6>TimeRequirement: {{order.timeRequirement}}</h6>
+                  <div class="row">
+                    <a href="https://www.google.com/maps/place/
+                  {{order.locationDTO.country}}, + {{order.locationDTO.region}}, + {{order.locationDTO.city}}">
+                      <i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{order.locationDTO.country}},
+                      {{order.locationDTO.region}}, {{order.locationDTO.city}}</a>
+                  </div>
+                  <br>
+                  <p class="far fa-comments" aria-hidden="true">Description: {{order.description}} </p>
+                  <p class="far fa-comments" aria-hidden="true">ExtraDetails: {{order.extraDetails}} </p>
+                  <h5>Services: </h5>
+                  <ul class="list">
+                    <li *ngFor="let service of order.serviceDTOs" [id]="service.id">
+                      <h6>{{service.serviceName}}</h6>
+                    </li>
+                  </ul>
+                </div>
+                <button *ngIf="(isAdmin() || (compareWithCustomerId(order.customerDTO.id) && order.providerApproved !== 'approved'))"
+                        (click)="deleteOrderDTOById(order.id)"
+                        class="right genric-btn primary">Delete
+                </button>
+                <button *ngIf="isProvider()" [routerLink] = "['/chat','1','2']" style="margin-right: 20px"
+                        class="right genric-btn primary">Contact with customer
+                </button>
+                <button *ngIf="compareWithCustomerId(order.customerDTO.id) && order.customerApproved !== 'approved'"
+                        style="margin-right: 20px" (click)="customerApproveOrderDTO(order)"
+                        class="right genric-btn primary">Approve by Customer
+                </button>
+                <button *ngIf="compareWithProviderId(order.providerDTO.id)  && order.providerApproved !== 'approved'"
+                        style="margin-right: 20px" (click)="providerApproveOrderDTO(order)"
+                        class="right genric-btn primary">Approve by Provider
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

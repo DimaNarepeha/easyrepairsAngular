@@ -1,0 +1,51 @@
+<app-nav></app-nav>
+<div id="button-conteiner">
+  <div class="button1">
+    <button [routerLink]="['/service-providers/',portfolio.providerId]" id="back-button"><- Back to profile</button>
+  </div>
+  <div class="button1 add" *ngIf="isProvider || isAdmin">
+    <button [routerLink]="['/portfolio/add-post',portfolio.id]" id="add-button">Add post</button>
+  </div>
+</div>
+<div class="main-content">
+  <div id="post-no-added" *ngIf="portfolio.postDTOs.length===0">
+    <h1>Posts haven`t been added yet</h1>
+  </div>
+  <div class="container" *ngFor="let post of posts, let index" id="portfolio">
+    <div class="card">
+      <div class="card-body">
+        <h3>{{post.header}}</h3>
+        <img class="main-image" alt="{{post.mainPhoto}}" width="900" height="500"
+             src="http://localhost:8080/customers/image/{{post.mainPhoto}}"/>
+        <p class="main-description">{{post.mainDescription}}</p>
+        <div class="button-conteiner">
+          <div class="button1 edit" *ngIf="isProvider || isAdmin">
+            <button [routerLink]="['/portfolio/edit-post',post.id]" id="edit-button" class="left genric-btn primary">Edit</button>
+          </div>
+          <div class="button1 read">
+            <button class="right genric-btn primary" id="read-more-button" (click)="readMoreClick()"
+                    data-toggle="collapse" [attr.data-target]="'#post' + post.id"
+                    aria-expanded="true">{{readMoreField}}
+            </button>
+          </div>
+        </div>
+        <div class="collapse" id="{{'post'+ post.id}}">
+          <div *ngFor="let info of post.postInfo">
+            <img class="secondary-photo" alt="{{info.photo}}" width="900" height="500"
+                 src="http://localhost:8080/customers/image/{{info.photo}}"/>
+            <div class="addition-description">
+              {{info.description}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <small class="text-muted" align="left">Created date {{post.createdDate}}</small>
+      </div>
+    </div>
+  </div>
+  <p class="card-text" align="right">
+    <small class="text-muted">Last updated at {{portfolio.lastUpdate}}</small>
+  </p>
+</div>
+<app-footer></app-footer>

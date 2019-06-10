@@ -4,6 +4,8 @@ import {CustomerService} from './customer.service';
 import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NotifierService} from "angular-notifier";
+import {environment} from "../../environments/environment";
+
 
 @Component({
   selector: 'customers',
@@ -13,6 +15,7 @@ import {NotifierService} from "angular-notifier";
 
 
 export class CustomerComponent implements OnInit {
+  url = environment.baseURL +"/customers/image/";
   private page: number = 0;
   customers: Customer[];
   customer = new Customer();
