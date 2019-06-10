@@ -12,6 +12,10 @@
           <div>
             <img src="https://www.hdwallpapers.in/download/yellow_blue_material_design_4k-wide.jpg">
           </div>
+          <li style="margin: 10%"><a routerLink="/my-profile"><i class="fas fa-user"></i>My Profile</a></li>
+          <li style="margin: 10%"><a routerLink=""><i class="fas fa-heart"></i>Favorite</a></li>
+          <li style="margin: 10%"><a routerLink="/feedback"><i class="fas fa-archive"></i>Feedbacks</a></li>
+
           <li style="margin: 10%" *ngIf="isCustomer() || isProvider()"><a routerLink="/my-profile"><i
             class="fas fa-user"></i>My Profile</a></li>
           <li style="margin: 10%" *ngIf="isCustomer() || isProvider()"><a routerLink=""><i class="fas fa-heart"></i>Favorite</a>
@@ -39,7 +43,7 @@
         </div>
       </div>
       <div class="avatar_container" *ngIf="isUser()==true">
-        <img src="https://avatars2.githubusercontent.com/u/49271116?s=460&v=4"/>
+        <img src="{{this.baseURL}} + '/service-providers/image/' + {{getImage()}}"/>
         <div class="user_info">
           <p style="margin-left: 35%;">{{getName()}}</p>
         </div>
@@ -51,6 +55,7 @@
           <li *ngIf="isUser()==true"><a routerLink="/service-providers"><i class="fas fa-cog"></i>Service providers</a>
           </li>
           <li *ngIf="isAdmin()==true"><a routerLink="/customers"><i class="far fa-smile"></i>Customers</a></li>
+
           <li><a [routerLink] = "['/chat','1','2']"><i class="far fa-smile"></i> Messages</a></li>
           <!--          <li><a routerLink="/logout"><i class="fas fa-sign-out-alt"></i>Log out</a></li>-->
           <li *ngIf="isCustomer()"><a routerLink="/create-offer"><i class="far fa-smile"></i>Create offer</a></li>

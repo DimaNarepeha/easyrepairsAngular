@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ApiService} from '../core/api.service';
 import {HttpErrorResponse, HttpParams} from '@angular/common/http';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-password-recovery',
@@ -14,7 +15,7 @@ export class PasswordRecoveryComponent implements OnInit {
   invalidForm = false;
   msg: string;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, private notifier: NotifierService) {
   }
 
   onSubmit() {
@@ -36,13 +37,14 @@ export class PasswordRecoveryComponent implements OnInit {
 
   ngOnInit() {
     this.recoveryForm = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.required])]
+      email: ['', Validators.compose([Validators.required, Validators.email])]
     });
   }
 
   handleError(error: any) {
     if (error instanceof HttpErrorResponse) {
       this.msg = error.error.error_description;
+      this.notifier.notify('error', this.msg);
     }
   }
 }
