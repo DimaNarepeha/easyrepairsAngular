@@ -75,6 +75,8 @@
       </div>
     </div>
 
+    <button class="btn btn-success" [routerLink]="['/chat','20002','1']">Communicate with service provider</button>
+
       <div class="row">
         <div class="col-lg-4" *ngFor="let feedback of serviceProvider.feedbacks ">
           <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -94,9 +96,6 @@
 
               To: {{feedback.addressedTo.username}}
             </div>
-
-            <button class="btn btn-success" [routerLink]="['/chat','20002','1']">Communicate</button>
-
           </div>
 
         </div>
