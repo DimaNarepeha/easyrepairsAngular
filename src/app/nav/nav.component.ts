@@ -46,17 +46,17 @@ export class NavComponent implements OnInit {
 
   public isAdmin(): boolean {
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
-    return this.role.toString() === 'ROLE_ADMIN';
+    return this.role.toString() === 'ADMIN';
   }
 
   public isCustomer(): boolean {
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
-    return this.role.toString() === 'ROLE_CUSTOMER';
+    return this.role.toString() === 'CUSTOMER';
   }
 
   public isProvider(): boolean {
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
-    return this.role.toString() === 'ROLE_PROVIDER';
+    return this.role.toString() === 'PROVIDER';
   }
 
   ngOnInit() {
