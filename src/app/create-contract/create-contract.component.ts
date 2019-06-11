@@ -17,8 +17,8 @@ export class CreateContractComponent implements OnInit {
   private orderDTO: OrderDTO = new OrderDTO();
   private serviceDTOs: ServiceDTO[];
   private chosenServices: ServiceDTO[];
-  private addrKeys: string[];
-  private addr: object;
+  private addrKeys: string[] = null;
+  private addr: object = null;
   private currentDate: string;
   private userId: number;
   private role: string;
