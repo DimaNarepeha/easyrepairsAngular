@@ -19,6 +19,7 @@ export class ListOffersComponent implements OnInit {
   constructor(private listOfferService: ListOfferService, private readonly notifier: NotifierService) { }
 
   ngOnInit() {
+    window.scroll(0, 0);
     this.delay(1200);
     if (JSON.parse(window.sessionStorage.getItem('user')) == null) {
       console.log('Stop loading!!!');
@@ -47,6 +48,7 @@ export class ListOffersComponent implements OnInit {
     this.listOfferService.deleteOfferById(id)
       .subscribe((x) => {
         console.log(x);
+        this.notifier.notify('success', 'Offer was deleted!');
         this.getOfferDTOs();
       }, (error) => {
         console.log(error);
@@ -83,9 +85,5 @@ export class ListOffersComponent implements OnInit {
 
   private async delay(ms: number) {
     await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => this.getOfferDTOs());
-  }
-
-  private chooseOfferDTOById(id: number) {  // TODO
-    this.notifier.notify('success', 'Sorry, but this function have not been created yet!');
   }
 }

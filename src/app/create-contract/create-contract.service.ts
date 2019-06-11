@@ -21,7 +21,7 @@ export class CreateOrderService {
   }
 
   createOrder(orderDTO: OrderDTO): Observable<OrderDTO> {
-    return this.httpService.post<OrderDTO>(environment.baseURL + '/orders/' + '?access_token='
+    return this.httpService.post<OrderDTO>(environment.baseURL + '/orders' + '?access_token='
       + this.apiService.returnAccessToken(), JSON.stringify(orderDTO), {headers})
       .catch(this.handleError);
   }
@@ -39,7 +39,7 @@ export class CreateOrderService {
   }
 
   getAllServices(): Observable<ServiceDTO[]> {
-    return this.httpService.get<ServiceDTO[]>(environment.baseURL + '/services/', {headers})
+    return this.httpService.get<ServiceDTO[]>(environment.baseURL + '/services', {headers})
       .catch(this.handleError);
   }
 
