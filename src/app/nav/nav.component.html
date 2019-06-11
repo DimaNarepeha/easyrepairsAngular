@@ -7,15 +7,16 @@
   <div class="login" *ngIf="isUser()==true">
     <ul class="nav user_menu">
       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" style="color: #f5f528;width: 20%;">{{getName()}}</a>
+        <a class="dropdown-toggle " data-toggle="dropdown" style="color: #f5f528;width: 20%;"><img style="border-radius: 50%; height: 50px; width: 50px" src="{{avatarUrl}}{{getImage()}}"/></a>
+
         <ul class="dropdown-menu lllll" style="width: 12em; top:10px">
           <div>
             <img src="https://www.hdwallpapers.in/download/yellow_blue_material_design_4k-wide.jpg">
           </div>
-          <li style="margin: 10%"><a routerLink="/my-profile"><i class="fas fa-user"></i>My Profile</a></li>
-          <li style="margin: 10%"><a routerLink=""><i class="fas fa-heart"></i>Favorite</a></li>
-          <li style="margin: 10%"><a routerLink="/feedback"><i class="fas fa-archive"></i>Feedbacks</a></li>
 
+          <li style="margin: 10%"><a routerLink="/"><i
+            class="fas fa-user"></i> {{getName()}}</a></li>
+          <hr>
           <li style="margin: 10%" *ngIf="isCustomer() || isProvider()"><a routerLink="/my-profile"><i
             class="fas fa-user"></i>My Profile</a></li>
           <li style="margin: 10%" *ngIf="isCustomer() || isProvider()"><a routerLink=""><i class="fas fa-heart"></i>Favorite</a>
@@ -43,7 +44,7 @@
         </div>
       </div>
       <div class="avatar_container" *ngIf="isUser()==true">
-        <img src="{{this.baseURL}} + '/service-providers/image/' + {{getImage()}}"/>
+        <img src="{{avatarUrl}}{{getImage()}}"/>
         <div class="user_info">
           <p style="margin-left: 35%;">{{getName()}}</p>
         </div>
