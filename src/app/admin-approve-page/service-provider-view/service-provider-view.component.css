@@ -23,6 +23,7 @@
   margin-right: 1.5%;
   margin-top: 0.7%;
   border: none;
+  size: 10px;
 }
 
 .service-provider-email {
@@ -73,6 +74,7 @@
   display: inline-block;
   float: right;
   border: none;
+  size: 10px;
 }
 
 .form-group {

@@ -79,8 +79,7 @@ export class CustomerService {
     const statusString: string = CustomerStatus[status];
     const params = new HttpParams().set('firstName', firstName).set('pageSize', String(numberOfCustomersOnPage))
       .set('pageNumber', String(page)).set('status', statusString);
-    console.log(environment.customer_url + 'status/searchByFirstName?' + params + '&access_token=' + this.service.returnAccessToken());
-    return this.http.get<Customer[]>( environment.customer_url + 'status/searchByFirstName?' + params, {headers})
+    return this.http.get<Customer[]>( environment.customer_url + 'status/searchByFirstName?' + params + '&access_token=' + this.service.returnAccessToken(), {headers})
       .catch(this.handleError);
   }
 

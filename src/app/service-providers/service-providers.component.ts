@@ -40,7 +40,8 @@ export class ServiceProvidersComponent implements OnInit {
   }
 
   checkFavouriteProvider(serviceProvider: ServiceProviders): boolean {
-    return this.favouriteService.checkFavourite(serviceProvider, this.customerId);
+    // return this.favouriteService.checkFavourite(serviceProvider, this.customerId);
+    return false;
   }
 
   private isCustomer(): boolean {
