@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Email} from "../Email";
 import {ProviderStatus} from "../../service-providers/service-provider.status";
 import {NotifierService} from "angular-notifier";
+import {environment} from "../../../environments/environment";
+
 
 
 @Component({
@@ -24,6 +26,7 @@ export class ServiceProviderViewComponent implements OnInit {
   providerPage: Array<any>;
   private pages: Array<number>;
   public userFile: any = File;
+  private url = environment.baseURL;
   private pageNumber = 0;
   private numberOfProvidersOnPage = 4;
   private status: ProviderStatus;

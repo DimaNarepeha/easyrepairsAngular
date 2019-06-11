@@ -4,7 +4,7 @@
 <div class="row rounded border border-dark" style="margin: 20px; padding: 20px" *ngFor="let customer of customers">
   <div class="col-lg-2">
     <img class="img_styles rounded" alt="{{customer.userDTO.image}}" width="100" height="100"
-         src="http://localhost:8080/customers/image/{{customer.userDTO.image}}"/>
+         src="{{url}}image/{{customer.userDTO.image}}"/>
   </div>
   <div class="col-lg-6">
 

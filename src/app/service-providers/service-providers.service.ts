@@ -116,7 +116,7 @@ export class ServiceProvidersService {
 
   sendEmailToUser( email: Email) : Observable<any> {
     let body = JSON.stringify(email);
-    return this.httpService.post('http://localhost:8080/email/', body , {headers} );
+    return this.httpService.post(environment.baseURL + '/email/', body , {headers} );
   }
 
   private handleError(error: Response) {

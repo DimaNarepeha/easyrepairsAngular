@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CustomerStatus} from "../../customer/CustomerStatus";
 import {CustomerService} from "../../customer/customer.service";
 import {Customer} from "../../customer/customer";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-customer-view',
@@ -14,6 +15,7 @@ export class CustomerViewComponent implements OnInit {
   private pageNumber = 0;
   private numberOfCustomersOnPage = 4;
   private status: CustomerStatus;
+  private url = environment.customer_url;
   customerStatuses: CustomerStatus [] = [CustomerStatus.ACTIVE, CustomerStatus.BLOCKED];
 
   constructor(private customerService: CustomerService) {

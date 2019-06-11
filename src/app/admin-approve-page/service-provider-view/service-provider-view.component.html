@@ -9,10 +9,9 @@
             <h4>{{serviceProvider.name}}</h4>
             <p>
               <img alt="{{serviceProvider.image}}" class="img_styles rounded" width="100" height="100"
-                   src="http://localhost:8080/service-providers/image/{{serviceProvider.image}}"/>
+                   src="{{url}}/service-providers/image/{{serviceProvider.image}}"/>
               {{serviceProvider.description}}<br>
               <br>
-              <!--<span> City: <b>{{serviceProvider.location.city}}</b> Country: <b>{{serviceProvider.location.country}}</b> </span>-->
               <br>
                Last Update:<b>{{serviceProvider.lastUpdate}}</b>
             </p>
