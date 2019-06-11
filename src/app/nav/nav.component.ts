@@ -15,6 +15,7 @@ export class NavComponent implements OnInit {
   image: string;
   log: FormGroup;
   private readonly baseURL;
+  avatarUrl: string = environment.baseURL + '/service-providers/image/';
 
 
   constructor(private service: ApiService) {
