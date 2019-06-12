@@ -5,6 +5,7 @@ import {ServiceDTO} from './models/serviceDTO';
 import {LocationDTO} from './models/locationDTO';
 import {formatDate} from '@angular/common';
 import {Router} from '@angular/router';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-create-offer',
@@ -22,14 +23,16 @@ export class CreateOfferComponent implements OnInit {
   private userId: number;
   private role: string;
 
-  constructor(private createOfferService: CreateOfferService, private zone: NgZone, private router: Router) {
+  constructor(private createOfferService: CreateOfferService, private zone: NgZone, private router: Router,
+              private readonly notifier: NotifierService) {
   }
 
   ngOnInit() {
+    window.scroll(0, 0);
     if (JSON.parse(window.sessionStorage.getItem('user')) == null) {
       console.log('Stop loading!!!');
-      alert('Something wrong. Maybe you have not login yet!');
-      return;
+      this.notifier.notify('success', 'Something wrong. Maybe you have not login yet!');
+      this.router.navigate(['./']);  // TODO
     }
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
@@ -38,7 +41,7 @@ export class CreateOfferComponent implements OnInit {
     }
     this.getServiceDTOs();
     this.offerDTO.locationDTO = new LocationDTO();
-    let d = new Date();
+    const d = new Date();
     this.currentDate = formatDate(d.setDate(d.getDate() - 1), 'yyyy-MM-dd', 'en');
   }
 
@@ -52,20 +55,19 @@ export class CreateOfferComponent implements OnInit {
   }
 
   private createOfferDTO(): void {
-    console.log('--3-------------------------------');  // TODO
     // @ts-ignore
     if (this.addr === null || this.addrKeys === null) {
-      alert('Enter location!');
+      this.notifier.notify('success', 'Enter location!');
       return;
     }
 
     this.chosenServices = this.serviceDTOs.filter(x => x.choose === true);
     if (this.chosenServices.length < 1) {
-      alert('You should chose some services!');
+      this.notifier.notify('success', 'You should chose some services!');
       return;
     }
     if (!this.checkInputDates(this.offerDTO.startDate, this.offerDTO.endDate)) {
-      alert('Please, select a valid date!');
+      this.notifier.notify('success', 'Please, select a valid date!');
       return;
     }
 
@@ -80,12 +82,11 @@ export class CreateOfferComponent implements OnInit {
     this.createOfferService.createOffer(this.offerDTO)
       .subscribe((x) => {
         console.log(x);
-        alert('Offer was created!');
+        this.notifier.notify('success', 'Offer was created!');
       }, (error) => {
         console.log(error);
-        alert(error);
       });
-      this.router.navigate(['./list-offers']);
+    this.router.navigate(['./list-offers']);
   }
 
   private getCustomerDTOByUserId(id: number): void {
@@ -120,9 +121,5 @@ export class CreateOfferComponent implements OnInit {
     const sDate = new Date(startDate);
     const eDate = new Date(endDate);
     return ((sDate.getTime() <= eDate.getTime()) && (cDate.getTime() <= sDate.getTime()));
-  }
-
-  private async delay(ms: number) {
-    await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=> console.log("fired"));
   }
 }

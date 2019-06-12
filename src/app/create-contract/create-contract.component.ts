@@ -4,7 +4,8 @@ import {ServiceDTO} from '../create-offer/models/serviceDTO';
 import {LocationDTO} from '../create-offer/models/locationDTO';
 import {formatDate} from '@angular/common';
 import {CreateOrderService} from './create-contract.service';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-create-contract',
@@ -16,21 +17,23 @@ export class CreateContractComponent implements OnInit {
   private orderDTO: OrderDTO = new OrderDTO();
   private serviceDTOs: ServiceDTO[];
   private chosenServices: ServiceDTO[];
-  private addrKeys: string[];
-  private addr: object;
+  private addrKeys: string[] = null;
+  private addr: object = null;
   private currentDate: string;
   private userId: number;
   private role: string;
   private providerId = 0;
 
   constructor(private createOrderService: CreateOrderService, private zone: NgZone,
-              private activatedRoute: ActivatedRoute, private router: Router) {
+              private activatedRoute: ActivatedRoute, private router: Router,
+              private readonly notifier: NotifierService) {
   }
 
   ngOnInit() {
+    window.scroll(0, 0);
     if (JSON.parse(window.sessionStorage.getItem('user')) == null) {
       console.log('Stop loading!!!');
-      alert('Something wrong. Maybe you have not login yet!');
+      this.notifier.notify('success', 'Something wrong. Maybe you have not login yet!');
       this.router.navigate(['./']);  // TODO
     }
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
@@ -38,11 +41,11 @@ export class CreateContractComponent implements OnInit {
     if (this.isCustomer()) {
       this.getCustomerDTOByUserId(this.userId);
     }
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if (params.proveder_id == null) {
-        this.router.navigate(['./list-contracts']);  // TODO
+    this.activatedRoute.params.subscribe((params) => {
+      if (params.id == null) {
+        this.router.navigate(['./']);  // TODO
       }
-      this.providerId = params.proveder_id;
+      this.providerId = params.id;
       this.getProviderById(this.providerId);
       console.log('proveder_id=' + this.providerId);
 
@@ -67,16 +70,20 @@ export class CreateContractComponent implements OnInit {
   private createOrderDTO(): void {
     console.log(this.orderDTO.providerDTO);
     if (this.addr === null || this.addrKeys === null) {
-      alert('Enter location!');
+      this.notifier.notify('success', 'Enter location!');
       return;
     }
     this.chosenServices = this.serviceDTOs.filter(x => x.choose === true);
     if (this.chosenServices.length < 1) {
-      alert('You should chose some services!');
+      this.notifier.notify('success', 'You should chose some services!');
+      return;
+    }
+    if (this.orderDTO.description == null) {
+      this.notifier.notify('success', 'You should write some description!');
       return;
     }
     if (!this.checkInputDates(this.orderDTO.startDate, this.orderDTO.endDate)) {
-      alert('Please, select a valid date!');
+      this.notifier.notify('success', 'Please, select a valid date!');
       return;
     }
     this.orderDTO.serviceDTOs = this.chosenServices;
@@ -90,12 +97,11 @@ export class CreateContractComponent implements OnInit {
     this.createOrderService.createOrder(this.orderDTO)
       .subscribe((x) => {
         console.log(x);
-        alert('Order was created!');
+        this.notifier.notify('success', 'Contract was created!');
       }, (error) => {
         console.log(error);
-        alert(error);
       });
-      this.router.navigate(['./list-contracts']);
+    this.router.navigate(['./list-contracts']);
   }
 
   private getCustomerDTOByUserId(id: number): void {
@@ -117,7 +123,7 @@ export class CreateContractComponent implements OnInit {
           console.log('provider: ' + x.id);
         },
         (error) => {
-          console.log(error);
+        console.log(error);
         });
   }
 
@@ -136,19 +142,10 @@ export class CreateContractComponent implements OnInit {
     return this.role.toString() === 'CUSTOMER';
   }
 
-  private reset() {
-    this.serviceDTOs.forEach(x => x.choose = false);
-    // location.reload();  // TODO
-  }
-
   private checkInputDates(startDate: string, endDate: string): boolean {
     const cDate = new Date(this.currentDate);
     const sDate = new Date(startDate);
     const eDate = new Date(endDate);
     return ((sDate.getTime() <= eDate.getTime()) && (cDate.getTime() <= sDate.getTime()));
-  }
-
-  private async delay(ms: number) {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log('fired'));
   }
 }

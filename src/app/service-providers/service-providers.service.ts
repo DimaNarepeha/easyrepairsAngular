@@ -71,7 +71,6 @@ export class ServiceProvidersService {
     return this.httpService.get<ServiceProviders>(this.baseURL + '/service-providers/find-by-id/' + id + '?access_token='
       + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
-
   }
 
   getServiceProviderByUserId(id: any): Observable<ServiceProviders> {

@@ -14,7 +14,7 @@ export class  ServiceProviders {
   status: ProviderStatus;
   raiting: number;
   registrationDate: string;
-  services: string[];
+  servicesDTO: string[];
   countComment: number;
   userDTO: User;
   feedbacks: Feedback[];

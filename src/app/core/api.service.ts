@@ -30,8 +30,21 @@ export class ApiService {
   }
 
   get(): Observable<User> {
-    // @ts-ignore
-    return this.http.get(this.baseURL + '/user?access_token=' + this.returnAccessToken())
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + this.returnAccessToken()
+    });
+    console.log(headers);
+    return this.http.get<User>(this.baseURL + '/user', {headers})
+      .catch(err => Observable.throw(err));
+  }
+
+  logoutme() {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + this.returnAccessToken()
+    });
+    console.log(this.returnAccessToken());
+    console.log(headers);
+    return this.http.get(this.baseURL + '/logmeout', {headers})
       .catch(err => Observable.throw(err));
   }
 

@@ -1,53 +1,49 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptions, Response} from '@angular/http';
-import {Observable} from 'rxjs';
-import {HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/Rx';
+import {Response} from '@angular/http';
+import {Observable, throwError} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
+import {ApiService} from '../core/api.service';
 import {OrderDTO} from '../create-offer/models/orderDTO';
 import {ServiceDTO} from '../create-offer/models/serviceDTO';
 import {CustomerDTO} from '../create-offer/models/customerDTO';
 import {ProviderDTO} from '../create-offer/models/providerDTO';
 
+const headers = new HttpHeaders(
+  {
+    'Content-Type': 'application/json;'
+  });
+
 @Injectable()
 export class CreateOrderService {
 
-  constructor(private httpService: Http) {
+  constructor(private httpService: HttpClient, private apiService: ApiService) {
   }
 
   createOrder(orderDTO: OrderDTO): Observable<OrderDTO> {
-    const body = JSON.stringify(orderDTO);
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const options = new RequestOptions({headers: headers});
-    return this.httpService.post(environment.baseURL + '/orders/', body, options)
-      .map((response: Response) => response.json());
+    return this.httpService.post<OrderDTO>(environment.baseURL + '/orders' + '?access_token='
+      + this.apiService.returnAccessToken(), JSON.stringify(orderDTO), {headers})
+      .catch(this.handleError);
   }
 
   getCustomerByUserId(id: number): Observable<CustomerDTO> {
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const options = new RequestOptions({headers: headers});
-    return this.httpService.get(environment.baseURL + '/customers/find-by-userId/' + id, options)
-      .map((response: Response) => response.json())
+    return this.httpService.get<CustomerDTO>(environment.baseURL + '/customers/find-by-userId/' + id + '?access_token='
+      + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
   }
 
   getProviderById(id: number): Observable<ProviderDTO> {
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const options = new RequestOptions({headers: headers});
-    return this.httpService.get(environment.baseURL + '/service-providers/find-by-id/' + id, options)
-      .map((response: Response) => response.json())
+    return this.httpService.get<ProviderDTO>(environment.baseURL + '/service-providers/find-by-id/' + id + '?access_token='
+      + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
   }
 
   getAllServices(): Observable<ServiceDTO[]> {
-    return this.httpService.get(environment.baseURL + '/services/')
-      .map((response: Response) => response.json())
+    return this.httpService.get<ServiceDTO[]>(environment.baseURL + '/services', {headers})
       .catch(this.handleError);
   }
 
   private handleError(error: Response) {
-    return Observable.throw(error);
+    return throwError(error);
   }
 }
