@@ -34,6 +34,7 @@
                           [routerLink]="['/service-providers',1]"
                           class="genric-btn primary">Delete
                   </button>
+                  <button class="btn btn-success" [routerLink]="['/chat',serviceProvider.userDTO.id,'1']">Communicate with service provider</button>
                   <button style="float: right; margin-right: 0px; margin-top: -40px;"
                           (click)="getPortfolioByProviderId()"
                           class="genric-btn primary"> Portfolio
@@ -60,7 +61,6 @@
                     <div class="row">
                       <div class="col-lg-4 " *ngFor="let service of serviceProvider.services">
                         <div class="service-block text-center">
-
                           <span>{{service.serviceName}} </span>
                         </div>
                       </div>

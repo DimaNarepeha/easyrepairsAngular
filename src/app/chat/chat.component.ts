@@ -6,6 +6,7 @@ import {Chat} from "./chat";
 import {ActivatedRoute} from '@angular/router';
 import {ChatService} from "./chat.service";
 import {environment} from "../../environments/environment";
+import {SecurityRolesService} from "../security-roles.service";
 
 @Component({
   selector: 'app-root',
@@ -18,11 +19,13 @@ export class ChatComponent implements OnInit {
   private stompClient;
   public chat = new Chat();
   public userId: any;
+  public messageTo: any;
+  public messageFrom: any;
   public sent: any;
   public chats: Chat [];
   public man1 = environment.baseURL +"/customers/image/man1";
   public man2 = environment.baseURL +"/customers/image/man2";
-  constructor(private chatService: ChatService, private rout: ActivatedRoute) {
+  constructor(private chatService: ChatService, private rout: ActivatedRoute, private src: SecurityRolesService) {
     this.initializeWebSocketConnection();
   }
 
@@ -32,8 +35,15 @@ export class ChatComponent implements OnInit {
 
   initializeWebSocketConnection() {
     this.rout.params.subscribe(next => {
+      let usr = next.id;
+      console.log("USR "+usr);
+      this.messageTo = usr;
       this.userId = "20002";
+      this.messageFrom = this.src.getUserId();
+      console.log(this.src.getUserId());
       this.sent = next.sentBy;
+      console.log("messageTo: "+ this.messageTo);
+      console.log("messageFrom: "+ this.messageFrom);
 
     }, err => {
       console.log(err);
@@ -56,7 +66,11 @@ export class ChatComponent implements OnInit {
     this.chat.message = message;
     this.chat.providerId = this.userId;
     this.chat.customerId = '1';
+    this.chat.messageTo = this.messageTo;
+    this.chat.messageFrom = this.messageFrom;
     this.chat.sentBy = this.sent;
+    console.log("CHATmessageTo: "+ this.chat.messageTo);
+    console.log("CHATmessageFrom: "+ this.chat.messageFrom);
     this.chatService.addChat(this.chat).subscribe((response) => {
       console.log(response);
       this.getChats();
@@ -66,7 +80,7 @@ export class ChatComponent implements OnInit {
   }
 
   getChats() {
-    this.chatService.getAllChats().subscribe((response) => {
+    this.chatService.getAllChats(this.messageTo, this.messageFrom).subscribe((response) => {
       this.chats = response;
     });
   }

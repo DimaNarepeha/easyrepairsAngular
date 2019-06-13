@@ -6,17 +6,18 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import {Chat} from "./chat";
 import {environment} from "../../environments/environment";
+import {SecurityRolesService} from "../security-roles.service";
 
 @Injectable()
 export class ChatService {
   private customerId = "1";
   private providerId = "20002";
 
-  constructor(private httpService: Http) {
+  constructor(private httpService: Http, private src: SecurityRolesService) {
   }
 
-  getAllChats(): Observable<Chat[]> {
-    return this.httpService.get(environment.baseURL+"/message/" + this.customerId + "/" + this.providerId).map((response: Response) => response.json()).catch(this.handleError);
+  getAllChats(sendTo:any,sendFrom:any): Observable<Chat[]> {
+    return this.httpService.get(environment.baseURL+"/message/" +sendTo /*this.customerId*/ + "/" + sendFrom/*this.providerId*/).map((response: Response) => response.json()).catch(this.handleError);
   }
 
   addChat(chat: Chat) {

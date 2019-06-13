@@ -44,21 +44,21 @@
   <div class="card">
     <div class="card-body msg_card_body">
       <div *ngFor="let chat1 of chats ">
-        <div *ngIf="chat1.sentBy==1">
+        <div *ngIf="chat1.messageFrom==messageFrom">
           <div class="d-flex justify-content-start mb-4">
             <div class="img_cont_msg">
               <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg"
                    class="rounded-circle user_img_msg">
             </div>
             <div class="msg_cotainer">
-              {{chat1.message}}
+              {{chat1.message}} {{chat1.messageFrom}} {{messageFrom}}
             </div>
           </div>
         </div>
-        <div *ngIf="chat1.sentBy==2">
+        <div *ngIf="chat1.messageFrom!==messageFrom">
           <div class="d-flex justify-content-end mb-4">
             <div class="msg_cotainer_send">
-              {{chat1.message}}
+              {{chat1.message}} {{chat1.messageFrom}} {{messageFrom}}
             </div>
             <div class="img_cont_msg">
               <img
