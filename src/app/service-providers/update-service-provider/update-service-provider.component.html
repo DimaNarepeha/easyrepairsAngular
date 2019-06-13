@@ -3,49 +3,56 @@
 <br/>
 <br/>
 <br/>
-<div class="card mb-3" style="max-width: 1200px; margin: 25px; ">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img width="400" height="400" src="{{url+serviceProvider.image}}" class="rounded" alt="{{serviceProvider.image}}">
-      <div class="form-group">
-        <br/>
-        <label class="custom-file-upload">
-          <input type="file" class="btn btn-outline-info" accept="image/" (change)="onSelectFile($event,serviceProvider.id)"
-                 style="height:100%"/>
-          <i class="fa fa-cloud-upload"></i> Change image
-        </label>
+<div *ngIf="isCurrentProvider(serviceProvider.userDTO.id) || isAdmin()">
+  <div class="card mb-3" style="max-width: 1200px; margin: 25px; ">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img width="400" height="400" src="{{url+serviceProvider.image}}" class="rounded"
+             alt="{{serviceProvider.image}}">
+        <div class="form-group">
+          <br/>
+          <label class="custom-file-upload">
+            <input type="file" class="btn btn-outline-info" accept="image/"
+                   (change)="onSelectFile($event,serviceProvider.id)"
+                   style="height:100%"/>
+            <i class="fa fa-cloud-upload"></i> Change image
+          </label>
+        </div>
       </div>
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <form>
-          Enter name: <input type="text" class="form-control" [(ngModel)]="serviceProvider.name" name="name"
-                             value="serviceProvider.name"><br/>
-          Enter email: <input type="text" class="form-control" [(ngModel)]="serviceProvider.email" name="email"
-                              value="serviceProvider.email"><br/>
-          Enter description: <textarea class="form-control" [(ngModel)]="serviceProvider.description" name="description"
-                                       value="serviceProvider.description" cols="500" rows="5"></textarea><br/>
-          <h3>Your location:</h3>
-          <p class="card-text">Country: {{serviceProvider.location?.country}}</p>
-          <p class="card-text">Region: {{serviceProvider.location?.region}}</p>
-          <p class="card-text">City: {{serviceProvider.location?.city}}</p>
-          <div class="input-container">
-            Enter your location: <input
-            type="text"
-            class="google-place-input"
-            google-place
-            (onSelect)="setAddress($event)"
-            placeholder="Type to search..">
-          </div>
-          <button style="margin-top: 54px;" class="btn btn-success" (click)="updateService()">Update</button>
-        </form>
+      <div class="col-md-8">
+        <div class="card-body">
+          <form>
+            Enter name: <input type="text" class="form-control" [(ngModel)]="serviceProvider.name" name="name"
+                               value="serviceProvider.name"><br/>
+            Enter email: <input type="text" class="form-control" [(ngModel)]="serviceProvider.email" name="email"
+                                value="serviceProvider.email"><br/>
+            Enter description: <textarea class="form-control" [(ngModel)]="serviceProvider.description"
+                                         name="description"
+                                         value="serviceProvider.description" cols="500" rows="5"></textarea><br/>
+            <h3>Your location:</h3>
+            <p class="card-text">Country: {{serviceProvider.location?.country}}</p>
+            <p class="card-text">Region: {{serviceProvider.location?.region}}</p>
+            <p class="card-text">City: {{serviceProvider.location?.city}}</p>
+            <div class="input-container">
+              Enter your location: <input
+              type="text"
+              class="google-place-input"
+              google-place
+              (onSelect)="setAddress($event)"
+              placeholder="Type to search..">
+            </div>
+            <button *ngIf="isCurrentProvider(serviceProvider.userDTO.id) || isAdmin()" style="margin-top: 54px;"
+                    class="btn btn-success" (click)="updateService()">Update
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
+  <br/>
+  <br/>
+  <button class="btn btn-danger" routerLink="/" style="margin: 25px;"> Home page</button>
 </div>
-<br/>
-<br/>
-<button class="btn btn-danger" routerLink="/" style="margin: 25px;"> Home page</button>
 <br/>
 <br/>
 <app-footer></app-footer>

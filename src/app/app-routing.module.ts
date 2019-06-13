@@ -21,9 +21,10 @@ import {PortfolioComponent} from './portfolio/portfolio.component';
 import {EditPostComponent} from './portfolio/edit-post/edit-post.component';
 import {AddPostComponent} from './portfolio/add-post/add-post.component';
 import {MyProfileComponent} from './my-profile/my-profile.component';
-import {NotFoundComponent} from './not-found/not-found.component';
+import {NotFoundComponent} from './error-page/not-found/not-found.component';
 import {CreateContractComponent} from './create-contract/create-contract.component';
 import {ListContractsComponent} from './list-contracts/list-contracts.component';
+import {InternalServerErrorComponent} from "./error-page/internal-server-error/internal-server-error.component";
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -57,7 +58,8 @@ const routes: Routes = [
   {path: 'not-found', component: NotFoundComponent},
   {path: 'admin-approve', component: AdminApprovePageComponent},
   {path: 'create-contract/:id', component: CreateContractComponent},
-  {path: 'list-contracts', component: ListContractsComponent}
+  {path: 'list-contracts', component: ListContractsComponent},
+  {path: 'server-error', component: InternalServerErrorComponent}
 ];
 
 @NgModule({

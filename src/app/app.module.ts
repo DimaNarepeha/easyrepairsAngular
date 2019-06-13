@@ -53,11 +53,13 @@ import {LandingPageComponent} from './landing-page/landing-page.component';
 import {AppRoutingModule} from './app-routing.module';
 import {LandingPageService} from './landing-page/landing-page.service';
 import {ChatListComponent} from './chat-list/chat-list.component';
-import {NotFoundComponent} from './not-found/not-found.component';
+import {NotFoundComponent} from './error-page/not-found/not-found.component';
 import {CreateContractComponent} from './create-contract/create-contract.component';
 import {CreateOrderService} from './create-contract/create-contract.service';
 import {ListContractsComponent} from './list-contracts/list-contracts.component';
 import {ListOrderService} from './list-contracts/list-contracts.service';
+import { InternalServerErrorComponent } from './error-page/internal-server-error/internal-server-error.component';
+import {ExceptionHandler} from "./global-exception-handler/exception-handler";
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -142,7 +144,8 @@ const customNotifierOptions: NotifierOptions = {
     ChatListComponent,
     NotFoundComponent,
     CreateContractComponent,
-    ListContractsComponent
+    ListContractsComponent,
+    InternalServerErrorComponent
 
   ],
   imports: [
@@ -159,7 +162,7 @@ const customNotifierOptions: NotifierOptions = {
   ],
 
   providers: [ServiceProvidersService, ChatService, PortfolioService, CustomerService, ApiService, LandingPageService,
-    RegistrationService, CreateOfferService, ListOfferService, FeedbackService, CreateOrderService, ListOrderService],
+    RegistrationService, CreateOfferService, ListOfferService, FeedbackService, CreateOrderService, ListOrderService, ExceptionHandler],
   bootstrap:
     [AppComponent]
 

@@ -1,5 +1,5 @@
 import {Component, NgZone, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ServiceProviders} from '../service-providers';
 import {ServiceProvidersService} from '../service-providers.service';
 import {environment} from '../../../environments/environment';
@@ -17,11 +17,23 @@ export class UpdateServiceProviderComponent implements OnInit {
   private readonly notifier: NotifierService;
   public addrKeys: string[];
   public addr: object;
+  private currentId: any;
+  private role: any;
 
 
   constructor(private serviceProvidersService: ServiceProvidersService, private rout: ActivatedRoute,
-              private zone: NgZone, notifierService: NotifierService) {
+              private zone: NgZone, notifierService: NotifierService, private router: Router) {
     this.notifier = notifierService;
+  }
+
+  public isCurrentProvider(id: number) {
+    this.currentId = JSON.parse(window.sessionStorage.getItem('user')).id;
+    return this.currentId === id;
+  }
+
+  public isAdmin() {
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    return this.role == 'ADMIN';
   }
 
   setAddress(addrObj) {
@@ -60,9 +72,14 @@ export class UpdateServiceProviderComponent implements OnInit {
     window.scroll(0, 0);
     this.rout.params.subscribe(next => {
       this.serviceProvidersService.getServiceProviderById(next.id).subscribe(next => {
-        this.serviceProvider = next;
-        console.log(next);
-        console.log(this.serviceProvider);
+        if (this.isAdmin() || this.isCurrentProvider(next.userDTO.id)) {
+          this.serviceProvider = next;
+          console.log(next);
+          console.log(this.serviceProvider);
+        } else {
+          this.router.navigate(['/']);
+          this.notifier.notify('error', 'Access denied');
+        }
       }, err => {
         console.log(err);
       });
