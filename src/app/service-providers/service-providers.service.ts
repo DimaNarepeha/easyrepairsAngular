@@ -12,7 +12,8 @@ import {ProviderStatus} from './service-provider.status';
 import {map} from 'rxjs/operators';
 import {ApiService} from '../core/api.service';
 import {NotifierService} from 'angular-notifier';
-import {Portfolio} from "../portfolio/portfolio";
+import {Portfolio} from '../portfolio/portfolio';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 const headers = new HttpHeaders(
@@ -27,7 +28,7 @@ export class ServiceProvidersService {
   private readonly baseURL;
   private readonly notifier: NotifierService;
 
-  constructor(private httpService: HttpClient, private apiService: ApiService, notifierService: NotifierService) {
+  constructor(private httpService: HttpClient, private apiService: ApiService, notifierService: NotifierService, private router: Router) {
     this.baseURL = environment.baseURL;
     this.notifier = notifierService;
   }
@@ -35,7 +36,7 @@ export class ServiceProvidersService {
   getServiceProvidersByPage(page: number): Observable<any> {
     return this.httpService.get<any>(this.baseURL + '/service-providers/find-all/page/?page=' + page + '&access_token='
       + this.apiService.returnAccessToken(), {headers})
-      .catch(this.handleError);
+      .catch(err => this.handleError(err));
   }
 
 
@@ -53,7 +54,7 @@ export class ServiceProvidersService {
 
   getAllServiceProviders(): Observable<ServiceProviders[]> {
     return this.httpService.get<ServiceProviders[]>(this.baseURL + '/service-providers/find-all', {headers})
-      .catch(this.handleError);
+      .catch(err => this.handleError(err));
   }
 
   addServiceProviders(service: ServiceProviders): Observable<ServiceProviders> {
@@ -64,19 +65,19 @@ export class ServiceProvidersService {
 
   updateServiceProvider(service: ServiceProviders): Observable<ServiceProviders> {
     return this.httpService.put<ServiceProviders>(this.baseURL + '/service-providers/update' + '?access_token='
-    + this.apiService.returnAccessToken(), JSON.stringify(service), {headers});
+      + this.apiService.returnAccessToken(), JSON.stringify(service), {headers});
   }
 
   getServiceProviderById(id: number): Observable<ServiceProviders> {
     return this.httpService.get<ServiceProviders>(this.baseURL + '/service-providers/find-by-id/' + id + '?access_token='
       + this.apiService.returnAccessToken(), {headers})
-      .catch(this.handleError);
+      .catch(err => this.handleError(err));
   }
 
   getServiceProviderByUserId(id: any): Observable<ServiceProviders> {
     return this.httpService.get<ServiceProviders>(this.baseURL + '/service-providers/find-by-userId/' + id + '?access_token='
       + this.apiService.returnAccessToken(), {headers})
-      .catch(this.handleError);
+      .catch(err => this.handleError(err));
   }
 
   deleteServiceProvider(id: number) {
@@ -107,7 +108,14 @@ export class ServiceProvidersService {
   }
 
 
-  private handleError(error: Response) {
+  private handleError(error: Response): Observable<any> {
+    if ((error.status === 404) || (error.status === 400)) {
+      console.log(error);
+      this.notifier.notify('error', 'This page not found, sorry try again');
+      this.router.navigate(['/not-found']);
+    } else {
+      console.log(error);
+    }
     return throwError(error);
   }
 }
