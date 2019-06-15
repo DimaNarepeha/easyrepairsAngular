@@ -57,7 +57,10 @@ export class ListContractsComponent implements OnInit {
         this.notifier.notify('success', 'Contract was deleted!');
         this.getOrderDTOs();
       }, (error) => {
+        console.log('----------------------');
+        console.log('deleteOrderDTOById:');
         console.log(error);
+        console.log('----------------------');
       });
   }
 
@@ -65,8 +68,10 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.getCustomerByUserId(id)
       .subscribe((x) => {
           this.customerDTO = x;
+          console.log('----------------------------');
           console.log('customer:');
           console.log(x);
+          console.log('----------------------------');
         },
         (error) => {
           console.log(error);
@@ -77,8 +82,10 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.getProviderByUserId(id)
       .subscribe((x) => {
           this.providerDTO = x;
-          console.log('customer:');
+          console.log('----------------------------');
+          console.log('provider:');
           console.log(x);
+          console.log('----------------------------');
         },
         (error) => {
           console.log(error);
@@ -117,6 +124,10 @@ export class ListContractsComponent implements OnInit {
         },
         (error) => {
           this.notifier.notify('success', error);
+          console.log('--------------------------');
+          console.log('customerApproveOrderDTO');
+          console.log(error);
+          console.log('--------------------------');
         });
   }
 
@@ -128,6 +139,10 @@ export class ListContractsComponent implements OnInit {
         },
         (error) => {
           this.notifier.notify('success', error);
+          console.log('--------------------------');
+          console.log('providerApproveOrderDTO');
+          console.log(error);
+          console.log('--------------------------');
         });
   }
 

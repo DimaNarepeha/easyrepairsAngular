@@ -94,6 +94,9 @@ export class CreateContractComponent implements OnInit {
     // @ts-ignore
     this.orderDTO.locationDTO.city = this.addr.locality;
 
+    console.log('-------------------');
+    console.log(this.orderDTO);
+    console.log('-------------------');
     this.createOrderService.createOrder(this.orderDTO)
       .subscribe((x) => {
         console.log(x);
