@@ -58,6 +58,7 @@ import {CreateContractComponent} from './create-contract/create-contract.compone
 import {CreateOrderService} from './create-contract/create-contract.service';
 import {ListContractsComponent} from './list-contracts/list-contracts.component';
 import {ListOrderService} from './list-contracts/list-contracts.service';
+import { ChatNotifyComponent } from './chat-notify/chat-notify.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -129,6 +130,8 @@ const customNotifierOptions: NotifierOptions = {
     PortfolioComponent,
     ChatsComponent,
     ChatComponent,
+    ChatListComponent,
+    ChatNotifyComponent,
     ListOffersComponent,
     AdminApprovePageComponent,
     MenuBarComponent,
@@ -142,7 +145,8 @@ const customNotifierOptions: NotifierOptions = {
     ChatListComponent,
     NotFoundComponent,
     CreateContractComponent,
-    ListContractsComponent
+    ListContractsComponent,
+    ChatNotifyComponent
 
   ],
   imports: [

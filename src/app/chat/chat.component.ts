@@ -23,6 +23,7 @@ export class ChatComponent implements OnInit {
   public messageFrom: any;
   public sent: any;
   public chats: Chat [];
+  public unreadChats: Chat []; public unreadChatsForUser: Chat [];
   public man1 = environment.baseURL +"/customers/image/man1";
   public man2 = environment.baseURL +"/customers/image/man2";
   constructor(private chatService: ChatService, private rout: ActivatedRoute, private src: SecurityRolesService) {
@@ -31,10 +32,13 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.getChats();
+    this.getUnreadForUser();
   }
 
   initializeWebSocketConnection() {
     this.rout.params.subscribe(next => {
+      // this.readChats();
+      // this.getChats();
       let usr = next.id;
       console.log("USR "+usr);
       this.messageTo = usr;
@@ -44,7 +48,8 @@ export class ChatComponent implements OnInit {
       this.sent = next.sentBy;
       console.log("messageTo: "+ this.messageTo);
       console.log("messageFrom: "+ this.messageFrom);
-
+      this.getUnreadChats();
+      this.readChats();
     }, err => {
       console.log(err);
     });
@@ -55,7 +60,14 @@ export class ChatComponent implements OnInit {
     this.stompClient.connect({}, function (frame) {
       that.stompClient.subscribe("/chat", (message) => {
         that.getChats();
+        that.getUnreadChats();
+      /*  if (that.unreadChats) {*/
+          that.readChats();
+          that.getChats();
+       /* }*/
         if (message.body) {
+          that.getUnreadChats();
+          that.readChats();
           that.getChats();
         }
       });
@@ -75,6 +87,7 @@ export class ChatComponent implements OnInit {
       console.log(response);
       this.getChats();
     });
+
     this.stompClient.send("/app/send/message", {}, message);
     $('#input').val('');
   }
@@ -83,6 +96,25 @@ export class ChatComponent implements OnInit {
     this.chatService.getAllChats(this.messageTo, this.messageFrom).subscribe((response) => {
       this.chats = response;
     });
+  }
+
+  getUnreadChats() {
+    this.chatService.getUnreadMessages(this.messageTo, this.messageFrom).subscribe((response) => {
+      this.unreadChats = response;
+    });
+  }
+  readChats() {
+    this.chatService.readMessages(this.messageTo, this.messageFrom).subscribe((response) => {
+      //
+    });
+  }
+
+  getUnreadForUser(){
+    this.chatService.getUnreadMessagesForAUser(this.messageTo).subscribe((response) => {
+      console.log(response);
+      this.unreadChatsForUser = response;
+    });
+    console.log('Unread CHAT FOR A USER:::' + this.unreadChatsForUser);
   }
 
 }

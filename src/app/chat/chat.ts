@@ -5,8 +5,7 @@ export class Chat {
     providerId: string;
     message: string;
     sentBy: string;
-
-
     messageTo: string;
     messageFrom: string;
+    isRead:string="false";
 }

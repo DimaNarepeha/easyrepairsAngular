@@ -20,6 +20,15 @@ export class ChatService {
     return this.httpService.get(environment.baseURL+"/message/" +sendTo /*this.customerId*/ + "/" + sendFrom/*this.providerId*/).map((response: Response) => response.json()).catch(this.handleError);
   }
 
+  getUnreadMessages(sendTo:any,sendFrom:any):Observable<Chat[]>{
+    return this.httpService.get(environment.baseURL+"/message/unread/" +sendTo  + "/" + sendFrom).map((response: Response) => response.json()).catch(this.handleError);
+  }
+
+  readMessages(sendTo:any,sendFrom:any){
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.httpService.post(environment.baseURL+"/message/read/" +sendTo  + "/" + sendFrom, options);
+  }
   addChat(chat: Chat) {
     const body = JSON.stringify(chat);
     const headers = new Headers({'Content-Type': 'application/json'});
@@ -29,6 +38,10 @@ export class ChatService {
 
   private handleError(error: Response) {
     return Observable.throw(error);
+  }
+
+  getUnreadMessagesForAUser(sendTo:any){
+    return this.httpService.get(environment.baseURL+"/message/getUnreadForUser/" +sendTo ).map((response: Response) => response.json()).catch(this.handleError);
   }
 
 }
