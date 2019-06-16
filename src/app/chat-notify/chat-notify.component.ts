@@ -13,6 +13,7 @@ export class ChatNotifyComponent implements OnInit {
   isOpened = false;
   id:any;
   unreadChatsForUser: Chat[];
+  url = environment.baseURL +"/service-providers/image/";
   constructor(private httpService: Http,private src: SecurityRolesService) { }
   getUnreadMessagesForAUser(sendTo:any){
     this.httpService.get(environment.baseURL+"/message/getUnreadForUser/" +sendTo ).map((response: Response) => response.json())

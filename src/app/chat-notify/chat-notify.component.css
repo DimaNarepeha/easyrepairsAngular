@@ -16,7 +16,7 @@
 .notification-block {
   float: left;
   right: 70%;
-  height: 400px;
+  /*height: 400px;*/
   min-width: 150%;
   width: 150%;
 }
@@ -44,4 +44,24 @@
 
 .dot {
   float: right;
+}
+.user_img{
+  height: 70px;
+  width: 70px;
+  border:1.5px solid #f5f6fa;
+
+}
+
+.msg_cotainer{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 1400px;
+  border-radius: 25px;
+  float: right;
+  background-color: #FFA500;
+  padding: 10px;
+  /* margin-left:auto;*/ margin-right:0;
+  /*float: right!important;*/
+  /*position: relative;*/
+  /*position: fixed;*/
 }

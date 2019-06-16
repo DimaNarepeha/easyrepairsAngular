@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ChatService} from "./chat.service";
 import {environment} from "../../environments/environment";
 import {SecurityRolesService} from "../security-roles.service";
+import {UserDTO} from "./userDTO";
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import {SecurityRolesService} from "../security-roles.service";
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
+  url = environment.baseURL +"/service-providers/image/";
   private serverUrl = environment.baseURL + '/socket';
   private title = 'WebSockets chat';
   private stompClient;
@@ -78,8 +80,10 @@ export class ChatComponent implements OnInit {
     this.chat.message = message;
     this.chat.providerId = this.userId;
     this.chat.customerId = '1';
-    this.chat.messageTo = this.messageTo;
-    this.chat.messageFrom = this.messageFrom;
+    this.chat.messageTo = new UserDTO();
+    this.chat.messageFrom = new UserDTO();
+    this.chat.messageTo.id = this.messageTo;
+    this.chat.messageFrom.id = this.messageFrom;
     this.chat.sentBy = this.sent;
     console.log("CHATmessageTo: "+ this.chat.messageTo);
     console.log("CHATmessageFrom: "+ this.chat.messageFrom);

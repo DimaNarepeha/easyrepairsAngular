@@ -1,13 +1,25 @@
-
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!--<div *ngIf="securityRolesService.isLoggedIn()"><p *ngIf="!isNewNotifications"><img width="40px" (click)="openNotifications(divNotifications)" src="../../assets/img/bell-icon.png"></p>-->
+ <div>
   <p ><img width="40px" (click)="openNotifications(divNotifications)" src="../../assets/img/bell-icon-new-notification.png"></p>
-  <div [hidden]="isOpened" class="notification-block card text-dark overflow-auto">
+  <div  #divNotifications [hidden]="isOpened" class=" notification-block card text-dark overflow-auto">
     <!--<p [hidden]="notifications?.length" class="text-center">There are no notifications yet! :(</p>-->
-    <div #divNotifications *ngFor="let chat of unreadChatsForUser" class="border-top border-bottom notification-card">
-      <p class="notification-header">{{chat.messageTo}}</p>
-      <p class="notification-message">{{chat.messageFrom}}</p>
-      <div class="notification_time">{{chat.message}}</div>
+    <div  *ngFor="let chat of unreadChatsForUser" class="border-top border-bottom notification-card">
+      <img class="user_img img-fluid" src= "{{url}}{{chat.messageFrom.image}}" alt="">
+      <p class="notification-header">To:{{chat.messageTo.username}}</p>
+      <p class="notification-header">From:{{chat.messageFrom.username}}</p>
+      <div class="notification_message">{{chat.message}}</div>
+      <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" [routerLink]="['/chat',chat.messageFrom.id,'1']">Communicate</button>
+      <!--<button class="btn btn-success" [routerLink]="['/chat',serviceProvider.userDTO.id,'1']">Communicate with service provider</button>-->
     </div>
-    <!--<button class="w3-btn w3-yellow w3-round-large w3-margin-bottom"   (click) = "reverse()">Update Customer</button>-->
-  </div>
 
+  </div>
+ </div>
