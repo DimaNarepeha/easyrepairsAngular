@@ -4,6 +4,7 @@ import {ServiceProviders} from '../service-providers';
 import {ServiceProvidersService} from '../service-providers.service';
 import {environment} from '../../../environments/environment';
 import {NotifierService} from 'angular-notifier';
+import {Service} from '../service';
 
 @Component({
   selector: 'app-update-service-provider',
@@ -19,6 +20,9 @@ export class UpdateServiceProviderComponent implements OnInit {
   public addr: object;
   private currentId: any;
   private role: any;
+  service: any;
+  allServices: Service[];
+  newS: Service[];
 
 
   constructor(private serviceProvidersService: ServiceProvidersService, private rout: ActivatedRoute,
@@ -68,8 +72,26 @@ export class UpdateServiceProviderComponent implements OnInit {
       });
   }
 
+  addService(): void {
+    let newSerivce = new Service();
+    newSerivce.serviceName = this.service;
+    console.log(newSerivce);
+    this.serviceProvidersService.saveServiceForProvider(this.serviceProvider.id, newSerivce)
+      .subscribe(data => console.log(data));
+    location.reload();
+    this.notifier.notify('success', 'Service added');
+  }
+
+
   ngOnInit() {
     window.scroll(0, 0);
+    this.serviceProvidersService.getAllServices()
+      .subscribe(data => {
+        this.allServices = data;
+        this.allServices.forEach(el => {
+          console.log(el);
+        });
+      });
     this.rout.params.subscribe(next => {
       this.serviceProvidersService.getServiceProviderById(next.id).subscribe(next => {
         if (this.isAdmin() || this.isCurrentProvider(next.userDTO.id)) {

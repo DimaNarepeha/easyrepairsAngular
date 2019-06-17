@@ -14,11 +14,12 @@ import {NotifierService} from 'angular-notifier';
 import {Portfolio} from '../portfolio/portfolio';
 import {Router} from '@angular/router';
 import {ExceptionHandler} from "../global-exception-handler/exception-handler";
+import {Service} from "./service";
 
 
 const headers = new HttpHeaders(
   {
-    'Content-Type': 'application/json;'
+    'Content-Type': 'application/json;charset=UTF-8'
   });
 
 @Injectable()
@@ -112,6 +113,22 @@ export class ServiceProvidersService {
 
   getPortfolio(id: number): Observable<Portfolio> {
     return this.httpService.get<Portfolio>(this.baseURL + '/provider-portfolio/provider/' + id)
+      .catch(err => this.exception.handleError(err));
+  }
+
+  findAllServicesForServiceProviders(): Observable<any[]> {
+    return this.httpService.get<any[]>(this.baseURL + '/services')
+      .catch(err => this.exception.handleError(err));
+  }
+
+  getAllServices(): Observable<Service[]> {
+    return this.httpService.get<Service[]>(this.baseURL + '/services')
+      .catch(err => this.exception.handleError(err));
+  }
+
+  saveServiceForProvider(id: number, service: Service): Observable<Service> {
+    return this.httpService.post<Service>(this.baseURL + '/services/save/' + id + '?access_token='
+      + this.apiService.returnAccessToken(), JSON.stringify(service), {headers})
       .catch(err => this.exception.handleError(err));
   }
 

@@ -29,6 +29,26 @@
             Enter description: <textarea class="form-control" [(ngModel)]="serviceProvider.description"
                                          name="description"
                                          value="serviceProvider.description" cols="500" rows="5"></textarea><br/>
+
+            <div style="margin-top: 15px;">
+              <h4>Services:</h4>
+              <ul class="list-horizontal">
+                <li *ngFor="let service of serviceProvider.services" >
+                  <h5>{{service.serviceName}}</h5>
+                </li>
+              </ul>
+            </div>
+
+            <form>
+            <label style="margin-right: 10px;">Choose new services:</label>
+            <select id="select-type-basic" [(ngModel)]="service" [ngModelOptions]="{standalone: true}" (change)="addService()">
+              <option *ngFor="let ser of allServices">
+                {{ser.serviceName}}
+              </option>
+              <!--<button class="btn btn-success" (click)="addService(ser.valueOf())">add</button>-->
+            </select>
+            </form>
+            <br/>
             <h3>Your location:</h3>
             <p class="card-text">Country: {{serviceProvider.location?.country}}</p>
             <p class="card-text">Region: {{serviceProvider.location?.region}}</p>
@@ -41,6 +61,7 @@
               (onSelect)="setAddress($event)"
               placeholder="Type to search..">
             </div>
+
             <button *ngIf="isCurrentProvider(serviceProvider.userDTO.id) || isAdmin()" style="margin-top: 54px;"
                     class="btn btn-success" (click)="updateService()">Update
             </button>
