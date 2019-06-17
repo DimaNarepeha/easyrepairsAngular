@@ -85,19 +85,19 @@ export class UpdateServiceProviderComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0, 0);
-    this.serviceProvidersService.getAllServices()
-      .subscribe(data => {
-        this.allServices = data;
-        this.allServices.forEach(el => {
-          console.log(el);
-        });
-      });
     this.rout.params.subscribe(next => {
       this.serviceProvidersService.getServiceProviderById(next.id).subscribe(next => {
         if (this.isAdmin() || this.isCurrentProvider(next.userDTO.id)) {
           this.serviceProvider = next;
           console.log(next);
           console.log(this.serviceProvider);
+          this.serviceProvidersService.getAllServiceIsNotPresentInProvider(this.serviceProvider.id)
+            .subscribe(data => {
+              this.allServices = data;
+              this.allServices.forEach(el => {
+                console.log(el);
+              });
+            });
         } else {
           this.router.navigate(['/']);
           this.notifier.notify('error', 'Access denied');

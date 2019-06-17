@@ -126,6 +126,12 @@ export class ServiceProvidersService {
       .catch(err => this.exception.handleError(err));
   }
 
+  getAllServiceIsNotPresentInProvider(id: number): Observable<Service[]> {
+    return this.httpService.get<Service[]>(this.baseURL + '/services/not-in-provider/' + id + '?access_token='
+      + this.apiService.returnAccessToken(), {headers})
+      .catch(err => this.exception.handleError(err));
+  }
+
   saveServiceForProvider(id: number, service: Service): Observable<Service> {
     return this.httpService.post<Service>(this.baseURL + '/services/save/' + id + '?access_token='
       + this.apiService.returnAccessToken(), JSON.stringify(service), {headers})
