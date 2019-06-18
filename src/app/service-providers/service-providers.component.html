@@ -27,14 +27,6 @@
                 <h5>{{serviceProvider.name}}</h5>
               </a>
               <p>{{serviceProvider.description}}</p>
-
-              <ul class="list-horizontal">
-                <li *ngFor="let service of serviceProvider.services">
-                  <h5>{{service.serviceName}}</h5>
-                </li>
-
-
-              </ul>
               <br/>
               <br/>
               <button *ngIf="isAdmin()" class="left genric-btn primary" (click) = "deleteService(serviceProvider.id)" style="margin-left: 10px; background-color: darkred;">Delete</button>

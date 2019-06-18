@@ -82,6 +82,14 @@ export class UpdateServiceProviderComponent implements OnInit {
     this.notifier.notify('success', 'Service added');
   }
 
+  deleteByServiceName(serviceName: string): void {
+    console.log('service name:' + serviceName + "id:" + this.serviceProvider.id);
+    this.serviceProvidersService.deleteServiceInProvider(this.serviceProvider.id, serviceName)
+      .subscribe(data => console.log(data));
+    this.notifier.notify('success', 'Service deleted');
+    location.reload();
+  }
+
 
   ngOnInit() {
     window.scroll(0, 0);

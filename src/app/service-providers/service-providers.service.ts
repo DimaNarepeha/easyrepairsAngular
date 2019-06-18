@@ -138,4 +138,9 @@ export class ServiceProvidersService {
       .catch(err => this.exception.handleError(err));
   }
 
+  deleteServiceInProvider(id: number, serviceName: string): Observable<Service[]> {
+    return this.httpService.delete<Service[]>(this.baseURL + '/services/delete/' + id + '/' + serviceName, {headers})
+      .catch(err => this.exception.handleError(err));
+  }
+
 }

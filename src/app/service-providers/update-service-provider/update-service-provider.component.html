@@ -34,18 +34,18 @@
               <h4>Services:</h4>
               <ul class="list-horizontal">
                 <li *ngFor="let service of serviceProvider.services" >
-                  <h5>{{service.serviceName}}</h5>
+                  <h5>{{service.serviceName}}    <button style="margin-left: 10px;" class="btn btn-outline-danger" (click)="deleteByServiceName(service.serviceName)">Х</button></h5>
                 </li>
               </ul>
             </div>
 
             <form>
             <label style="margin-right: 10px;">Choose new services:</label>
-            <select id="select-type-basic" [(ngModel)]="service" [ngModelOptions]="{standalone: true}" (change)="addService()">
+            <select id="select-type-basic" [(ngModel)]="service" [ngModelOptions]="{standalone: true}" (change)="addService()" >
+              <option style="display: none;"></option>
               <option *ngFor="let ser of allServices">
                 {{ser.serviceName}}
               </option>
-              <!--<button class="btn btn-success" (click)="addService(ser.valueOf())">add</button>-->
             </select>
             </form>
             <br/>
