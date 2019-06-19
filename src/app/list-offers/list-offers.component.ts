@@ -36,7 +36,8 @@ export class ListOffersComponent implements OnInit {
   private getOfferDTOs(): void {
     this.listOfferService.getAllOffers()
       .subscribe((x) => {
-          this.offerDTOs = x; console.log(x);
+          this.offerDTOs = x;
+          console.log(x);
         },
         (error) => {
           console.log(error);
