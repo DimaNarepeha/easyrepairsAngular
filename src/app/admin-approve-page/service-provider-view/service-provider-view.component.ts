@@ -98,25 +98,3 @@ export class ServiceProviderViewComponent implements OnInit {
   ngOnInit() {
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
