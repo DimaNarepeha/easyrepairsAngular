@@ -7,8 +7,6 @@ import {ProviderStatus} from "../../service-providers/service-provider.status";
 import {NotifierService} from "angular-notifier";
 import {environment} from "../../../environments/environment";
 
-
-
 @Component({
   selector: 'app-service-provider-view',
   templateUrl: './service-provider-view.component.html',
@@ -96,7 +94,6 @@ export class ServiceProviderViewComponent implements OnInit {
         console.log(error);
       });
   }
-
 
   ngOnInit() {
   }
