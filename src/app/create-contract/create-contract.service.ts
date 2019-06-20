@@ -7,7 +7,7 @@ import {ApiService} from '../core/api.service';
 import {OrderDTO} from '../create-offer/models/orderDTO';
 import {ServiceDTO} from '../create-offer/models/serviceDTO';
 import {CustomerDTO} from '../create-offer/models/customerDTO';
-import {ProviderDTO} from '../create-offer/models/providerDTO';
+import {ServiceProvider} from '../create-offer/models/serviceProvider';
 
 const headers = new HttpHeaders(
   {
@@ -32,8 +32,8 @@ export class CreateOrderService {
       .catch(this.handleError);
   }
 
-  getProviderById(id: number): Observable<ProviderDTO> {
-    return this.httpService.get<ProviderDTO>(environment.baseURL + '/service-providers/find-by-id/' + id + '?access_token='
+  getProviderById(id: number): Observable<ServiceProvider> {
+    return this.httpService.get<ServiceProvider>(environment.baseURL + '/service-providers/find-by-id/' + id + '?access_token='
       + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
   }

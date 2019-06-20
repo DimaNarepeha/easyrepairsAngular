@@ -8,8 +8,8 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!--<div *ngIf="securityRolesService.isLoggedIn()"><p *ngIf="!isNewNotifications"><img width="40px" (click)="openNotifications(divNotifications)" src="../../assets/img/bell-icon.png"></p>-->
- <div>
-   <p ><i  class="com far fa-comment" style="font-size: 50px"  (click)="openNotifications(divNotifications)" ></i></p>
+<div >
+   <p  ><i <!--*ngIf="securityRolesService.isLoggedIn()"--> class="com far fa-comment" style="font-size: 50px"  (click)="openNotifications(divNotifications)" ></i></p>
 
    <div  #divNotifications [hidden]="isOpened" class=" notification-block card text-dark overflow-auto">
      <div  *ngFor="let chat of unreadChatsForUser" class="border-top border-bottom notification-card">
