@@ -15,7 +15,7 @@ import {UserDTO} from "./userDTO";
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  url = environment.baseURL +"/service-providers/image/";
+  url = environment.baseURL + "/service-providers/image/";
   private serverUrl = environment.baseURL + '/socket';
   private title = 'WebSockets chat';
   private stompClient;
@@ -25,9 +25,9 @@ export class ChatComponent implements OnInit {
   public messageFrom: any;
   public sent: any;
   public chats: Chat [];
-  public unreadChats: Chat []; public unreadChatsForUser: Chat [];
-  public man1 = environment.baseURL +"/customers/image/man1";
-  public man2 = environment.baseURL +"/customers/image/man2";
+  public unreadChats: Chat [];
+  public unreadChatsForUser: Chat [];
+
   constructor(private chatService: ChatService, private rout: ActivatedRoute, private src: SecurityRolesService) {
     this.initializeWebSocketConnection();
   }
@@ -39,17 +39,9 @@ export class ChatComponent implements OnInit {
 
   initializeWebSocketConnection() {
     this.rout.params.subscribe(next => {
-      // this.readChats();
-      // this.getChats();
-      let usr = next.id;
-      console.log("USR "+usr);
-      this.messageTo = usr;
-      this.userId = "20002";
+      this.messageTo = next.id;
       this.messageFrom = this.src.getUserId();
-      console.log(this.src.getUserId());
       this.sent = next.sentBy;
-      console.log("messageTo: "+ this.messageTo);
-      console.log("messageFrom: "+ this.messageFrom);
       this.getUnreadChats();
       this.readChats();
     }, err => {
@@ -58,15 +50,12 @@ export class ChatComponent implements OnInit {
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
-
     this.stompClient.connect({}, function (frame) {
       that.stompClient.subscribe("/chat", (message) => {
         that.getChats();
         that.getUnreadChats();
-      /*  if (that.unreadChats) {*/
-          that.readChats();
-          that.getChats();
-       /* }*/
+        that.readChats();
+        that.getChats();
         if (message.body) {
           that.getUnreadChats();
           that.readChats();
@@ -85,8 +74,6 @@ export class ChatComponent implements OnInit {
     this.chat.messageTo.id = this.messageTo;
     this.chat.messageFrom.id = this.messageFrom;
     this.chat.sentBy = this.sent;
-    console.log("CHATmessageTo: "+ this.chat.messageTo);
-    console.log("CHATmessageFrom: "+ this.chat.messageFrom);
     this.chatService.addChat(this.chat).subscribe((response) => {
       console.log(response);
       this.getChats();
@@ -107,18 +94,17 @@ export class ChatComponent implements OnInit {
       this.unreadChats = response;
     });
   }
+
   readChats() {
     this.chatService.readMessages(this.messageTo, this.messageFrom).subscribe((response) => {
-      //
     });
   }
 
-  getUnreadForUser(){
+  getUnreadForUser() {
     this.chatService.getUnreadMessagesForAUser(this.messageTo).subscribe((response) => {
       console.log(response);
       this.unreadChatsForUser = response;
     });
-    console.log('Unread CHAT FOR A USER:::' + this.unreadChatsForUser);
   }
 
 }

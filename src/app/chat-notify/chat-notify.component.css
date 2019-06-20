@@ -20,10 +20,10 @@
   min-width: 150%;
   width: 150%;
 }
-.notification-card{
+
+.notification-card {
   min-width: 200px;
 }
-
 
 .notification-header {
   font-weight: bold;
@@ -45,14 +45,15 @@
 .dot {
   float: right;
 }
-.user_img{
+
+.user_img {
   height: 70px;
   width: 70px;
-  border:1.5px solid #f5f6fa;
+  border: 1.5px solid #f5f6fa;
 
 }
 
-.msg_cotainer{
+.msg_cotainer {
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 1400px;
@@ -60,15 +61,12 @@
   float: right;
   background-color: #FFA500;
   padding: 10px;
-  /* margin-left:auto;*/ margin-right:0;
-  /*float: right!important;*/
-  /*position: relative;*/
-  /*position: fixed;*/
+  margin-right: 0;
+
 }
 
-
-.com{
-  margin-left:-60px;
+.com {
+  margin-left: -60px;
   margin-top: -5px;
 
 }

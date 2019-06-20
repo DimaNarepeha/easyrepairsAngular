@@ -13,25 +13,29 @@ import {NotifierService} from "angular-notifier";
 export class ChatNotifyComponent implements OnInit {
   private readonly notifier: NotifierService;
   isOpened = false;
-  empty:boolean;
+  empty: boolean;
   id: any;
   unreadChatsForUser: Chat[];
   url = environment.baseURL + "/service-providers/image/";
-  constructor(private httpService: Http,private src: SecurityRolesService, notifierService: NotifierService) {
+
+  constructor(private httpService: Http, private src: SecurityRolesService, notifierService: NotifierService) {
     this.notifier = notifierService;
   }
-  getUnreadMessagesForAUser(sendTo:any){
-    this.httpService.get(environment.baseURL + "/message/getUnreadForUser/" + sendTo ).map((response: Response) => response.json())
+
+  getUnreadMessagesForAUser(sendTo: any) {
+    this.httpService.get(environment.baseURL + "/message/getUnreadForUser/" + sendTo).map((response: Response) => response.json())
       .subscribe((response) => {
         console.log(response);
         this.unreadChatsForUser = response;
       });
-    if (this.unreadChatsForUser && this.unreadChatsForUser.length===0){
+    if (this.unreadChatsForUser && this.unreadChatsForUser.length === 0) {
       this.notifier.notify('success', 'No messages for you!');
     }
   }
+
   ngOnInit() {
   }
+
   @HostListener('click')
   clickOutside() {// if clicked outside the div then close the notification block
     this.isOpened = !this.isOpened;
@@ -40,6 +44,7 @@ export class ChatNotifyComponent implements OnInit {
   reverse() {
     this.isOpened = false;
   }
+
   openNotifications(divNotifications: HTMLDivElement) {
     this.id = this.src.getUserId();
     this.isOpened = true;
