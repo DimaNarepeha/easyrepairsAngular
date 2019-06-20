@@ -21,15 +21,16 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <form>
-            Enter name: <input type="text" class="form-control" [(ngModel)]="serviceProvider.name" name="name"
-                               value="serviceProvider.name"><br/>
-            Enter email: <input type="text" class="form-control" [(ngModel)]="serviceProvider.email" name="email"
-                                value="serviceProvider.email"><br/>
-            Enter description: <textarea class="form-control" [(ngModel)]="serviceProvider.description"
+            <form [formGroup]="formGroup">
+            Enter name: <input formControlName="name" type="text" class="form-control" [(ngModel)]="serviceProvider.name" name="name"
+                              ><br/>
+            Enter email: <input formControlName="email" type="text" class="form-control" [(ngModel)]="serviceProvider.email" name="email"
+                               ><br/>
+            Enter description: <textarea formControlName="description" class="form-control" [(ngModel)]="serviceProvider.description"
                                          name="description"
-                                         value="serviceProvider.description" cols="500" rows="5"></textarea><br/>
+                                         cols="500" rows="5"></textarea><br/>
 
+            </form>
             <div style="margin-top: 15px;">
               <h4>Services:</h4>
               <ul class="list-horizontal">
@@ -39,7 +40,7 @@
               </ul>
             </div>
 
-            <form>
+
             <label style="margin-right: 10px;">Choose new services:</label>
             <select id="select-type-basic" [(ngModel)]="service" [ngModelOptions]="{standalone: true}" (change)="addService()" >
               <option style="display: none;"></option>
@@ -47,7 +48,6 @@
                 {{ser.serviceName}}
               </option>
             </select>
-            </form>
             <br/>
             <h3>Your location:</h3>
             <p class="card-text">Country: {{serviceProvider.location?.country}}</p>
@@ -62,10 +62,9 @@
               placeholder="Type to search..">
             </div>
 
-            <button *ngIf="isCurrentProvider(serviceProvider.userDTO.id) || isAdmin()" style="margin-top: 54px;"
+            <button [disabled]="!formGroup.valid" *ngIf="isCurrentProvider(serviceProvider.userDTO.id) || isAdmin()" style="margin-top: 54px;"
                     class="btn btn-success" (click)="updateService()">Update
             </button>
-          </form>
         </div>
       </div>
     </div>

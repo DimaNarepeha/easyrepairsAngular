@@ -5,6 +5,7 @@ import {ServiceProvidersService} from '../service-providers.service';
 import {environment} from '../../../environments/environment';
 import {NotifierService} from 'angular-notifier';
 import {Service} from '../service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-update-service-provider',
@@ -12,6 +13,12 @@ import {Service} from '../service';
   styleUrls: ['./update-service-provider.component.css']
 })
 export class UpdateServiceProviderComponent implements OnInit {
+
+
+  constructor(private serviceProvidersService: ServiceProvidersService, private rout: ActivatedRoute,
+              private zone: NgZone, notifierService: NotifierService, private router: Router) {
+    this.notifier = notifierService;
+  }
 
   serviceProvider = new ServiceProviders();
   private url = environment.baseURL + '/service-providers/image/';
@@ -24,11 +31,24 @@ export class UpdateServiceProviderComponent implements OnInit {
   allServices: Service[];
   newS: Service[];
 
+  formGroup: FormGroup = new FormGroup({
+    name: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(60)
+    ]),
+    description: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(2)
 
-  constructor(private serviceProvidersService: ServiceProvidersService, private rout: ActivatedRoute,
-              private zone: NgZone, notifierService: NotifierService, private router: Router) {
-    this.notifier = notifierService;
-  }
+    ]),
+    email: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(90),
+      Validators.pattern('^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$')
+    ])
+  });
 
   public isCurrentProvider(id: number) {
     this.currentId = JSON.parse(window.sessionStorage.getItem('user')).id;
@@ -117,5 +137,4 @@ export class UpdateServiceProviderComponent implements OnInit {
       console.log(err);
     });
   }
-
 }
