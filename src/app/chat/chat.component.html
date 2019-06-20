@@ -51,7 +51,7 @@
                    class="rounded-circle user_img_msg">
             </div>
             <div class="msg_cotainer">
-              {{chat1.message}} {{chat1.messageFrom}} {{messageFrom}} {{chat1.isRead}}
+              {{chat1.message}}
               <div *ngIf="chat1.isRead==false">
               <i class="fas fa-circle"></i>
             </div>
@@ -61,14 +61,14 @@
         <div *ngIf="chat1.messageFrom.id!==messageFrom">
           <div class="d-flex justify-content-end mb-4">
             <div class="msg_cotainer_send">
-              {{chat1.message}} {{chat1.messageFrom}} {{messageFrom}}
+              {{chat1.message}}
               <div *ngIf="chat1.isRead==false">
                 <i class="fas fa-circle"></i>
               </div>
             </div>
             <div class="img_cont_msg">
               <img
-                src="{{url}}{{chat1.messageTo.image}}"
+                src="{{url}}{{chat1.messageFrom.image}}"
                 class="rounded-circle user_img_msg">
             </div>
           </div>

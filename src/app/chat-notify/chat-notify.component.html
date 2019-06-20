@@ -9,10 +9,10 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!--<div *ngIf="securityRolesService.isLoggedIn()"><p *ngIf="!isNewNotifications"><img width="40px" (click)="openNotifications(divNotifications)" src="../../assets/img/bell-icon.png"></p>-->
  <div>
-  <p ><img width="40px" (click)="openNotifications(divNotifications)" src="../../assets/img/bell-icon-new-notification.png"></p>
-  <div  #divNotifications [hidden]="isOpened" class=" notification-block card text-dark overflow-auto">
-    <!--<p [hidden]="notifications?.length" class="text-center">There are no notifications yet! :(</p>-->
-    <div  *ngFor="let chat of unreadChatsForUser" class="border-top border-bottom notification-card">
+   <p ><i  class="com far fa-comment" style="font-size: 50px"  (click)="openNotifications(divNotifications)" ></i></p>
+
+   <div  #divNotifications [hidden]="isOpened" class=" notification-block card text-dark overflow-auto">
+     <div  *ngFor="let chat of unreadChatsForUser" class="border-top border-bottom notification-card">
       <img class="user_img img-fluid" src= "{{url}}{{chat.messageFrom.image}}" alt="">
       <p class="notification-header">To:{{chat.messageTo.username}}</p>
       <p class="notification-header">From:{{chat.messageFrom.username}}</p>
@@ -20,6 +20,6 @@
       <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" [routerLink]="['/chat',chat.messageFrom.id,'1']">Communicate</button>
       <!--<button class="btn btn-success" [routerLink]="['/chat',serviceProvider.userDTO.id,'1']">Communicate with service provider</button>-->
     </div>
-
+     <!--<p *ngIf="!empty" class="text-center">No messages!</p>-->
   </div>
  </div>
