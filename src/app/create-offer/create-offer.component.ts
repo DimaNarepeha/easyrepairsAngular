@@ -42,7 +42,7 @@ export class CreateOfferComponent implements OnInit {
     this.getServiceDTOs();
     this.offerDTO.locationDTO = new LocationDTO();
     const d = new Date();
-    this.currentDate = formatDate(d.setDate(d.getDate() - 1), 'yyyy-MM-dd', 'en');
+    this.currentDate = formatDate(d, 'yyyy-MM-dd', 'en');
   }
 
   private setAddress(addrObj) {

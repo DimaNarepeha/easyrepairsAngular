@@ -36,7 +36,6 @@ export class ListContractsComponent implements OnInit {
     if (this.isProvider()) {
       this.getProviderDTOByUserId(this.userId);
     }
-    // this.getOrderDTOs();
   }
 
   private getOrderDTOs(): void {
@@ -65,8 +64,6 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.getCustomerByUserId(id)
       .subscribe((x) => {
           this.customerDTO = x;
-          console.log('customer:');
-          console.log(x);
         },
         (error) => {
           console.log(error);
@@ -77,8 +74,6 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.getProviderByUserId(id)
       .subscribe((x) => {
           this.providerDTO = x;
-          console.log('customer:');
-          console.log(x);
         },
         (error) => {
           console.log(error);
