@@ -22,20 +22,12 @@
                   </a>
 
                 </div>
-
-                <button style="background-color: darkgreen"
-                        [routerLink]="['/update-service-provider',serviceProvider.id]"
-                        class="genric-btn primary">Update
-                </button>
-                <button style="background-color: darkred" (click)="deleteService(serviceProvider.id)"
-                        class="genric-btn primary">Delete
-                </button>
                 <br>
                 <br>
                 <br>
                 <b>Name:</b> {{customer.firstName}}
                 <br>
-                <b>e-mail:</b> {{customer.userDTO.email}}
+                <b>e-mail:</b> {{customer.email}}
 
 
 
