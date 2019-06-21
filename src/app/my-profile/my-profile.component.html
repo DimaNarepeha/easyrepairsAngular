@@ -1,5 +1,5 @@
 <app-nav></app-nav>
-<div *ngIf="isCustomer()==true">
+<div *ngIf="isCustomer()">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -13,7 +13,7 @@
             </div>
             <div class="blog_text">
               <div class="blog_text_inner">
-                <a href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
+                <a class="twPc-avatarLink">
                   <img style="margin-top: 5px;" alt="" src="{{urlCustomer+customer.image}}"
                        class="twPc-avatarImg">
                 </a>
@@ -22,20 +22,12 @@
                   </a>
 
                 </div>
-
-                <button style="background-color: darkgreen"
-                        [routerLink]="['/update-service-provider',serviceProvider.id]"
-                        class="genric-btn primary">Update
-                </button>
-                <button style="background-color: darkred" (click)="deleteService(serviceProvider.id)"
-                        class="genric-btn primary">Delete
-                </button>
                 <br>
                 <br>
                 <br>
                 <b>Name:</b> {{customer.firstName}}
                 <br>
-                <b>e-mail:</b> {{customer.userDTO.email}}
+                <b>e-mail:</b> {{customer.email}}
 
 
 
@@ -48,7 +40,7 @@
   </div>
 </div>
 
-<div *ngIf="isProvider()==true">
+<div *ngIf="isProvider()">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -62,7 +54,7 @@
             </div>
             <div class="blog_text">
               <div class="blog_text_inner">
-                <a href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
+                <a class="twPc-avatarLink">
                   <img style="margin-top: 1px;" alt="" src="{{url+serviceProvider.image}}"
                        class="twPc-avatarImg">
                 </a>

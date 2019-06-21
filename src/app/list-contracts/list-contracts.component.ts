@@ -21,6 +21,7 @@ export class ListContractsComponent implements OnInit {
   constructor(private listOrderService: ListOrderService, private readonly notifier: NotifierService) { }
 
   ngOnInit() {
+    window.scroll(0, 0);
     this.delay(1000);
     if (JSON.parse(window.sessionStorage.getItem('user')) == null) {
       console.log('Stop loading!!!');
@@ -35,7 +36,6 @@ export class ListContractsComponent implements OnInit {
     if (this.isProvider()) {
       this.getProviderDTOByUserId(this.userId);
     }
-    // this.getOrderDTOs();
   }
 
   private getOrderDTOs(): void {
@@ -53,6 +53,7 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.deleteOrderById(id)
       .subscribe((x) => {
         console.log(x);
+        this.notifier.notify('success', 'Contract was deleted!');
         this.getOrderDTOs();
       }, (error) => {
         console.log(error);
@@ -63,8 +64,6 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.getCustomerByUserId(id)
       .subscribe((x) => {
           this.customerDTO = x;
-          console.log('customer:');
-          console.log(x);
         },
         (error) => {
           console.log(error);
@@ -75,8 +74,6 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.getProviderByUserId(id)
       .subscribe((x) => {
           this.providerDTO = x;
-          console.log('customer:');
-          console.log(x);
         },
         (error) => {
           console.log(error);

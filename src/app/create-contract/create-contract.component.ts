@@ -6,6 +6,7 @@ import {formatDate} from '@angular/common';
 import {CreateOrderService} from './create-contract.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from 'angular-notifier';
+import {ProviderDTO} from '../create-offer/models/providerDTO';
 
 @Component({
   selector: 'app-create-contract',
@@ -17,8 +18,8 @@ export class CreateContractComponent implements OnInit {
   private orderDTO: OrderDTO = new OrderDTO();
   private serviceDTOs: ServiceDTO[];
   private chosenServices: ServiceDTO[];
-  private addrKeys: string[];
-  private addr: object;
+  private addrKeys: string[] = null;
+  private addr: object = null;
   private currentDate: string;
   private userId: number;
   private role: string;
@@ -41,21 +42,20 @@ export class CreateContractComponent implements OnInit {
     if (this.isCustomer()) {
       this.getCustomerDTOByUserId(this.userId);
     }
+    this.orderDTO.providerDTO = null;
     this.activatedRoute.params.subscribe((params) => {
       if (params.id == null) {
         this.router.navigate(['./']);  // TODO
       }
       this.providerId = params.id;
       this.getProviderById(this.providerId);
-      console.log('proveder_id=' + this.providerId);
 
+      console.log('proveder_id=' + this.providerId);
     });
     this.orderDTO.timeRequirement = 'approximate';
-    this.getServiceDTOs();
     this.orderDTO.locationDTO = new LocationDTO();
-    this.orderDTO.providerDTO = null;
-    let d = new Date();
-    this.currentDate = formatDate(d.setDate(d.getDate() - 1), 'yyyy-MM-dd', 'en');
+    const d = new Date();
+    this.currentDate = formatDate(d, 'yyyy-MM-dd', 'en');
   }
 
   private setAddress(addrObj) {
@@ -79,6 +79,10 @@ export class CreateContractComponent implements OnInit {
       return;
     }
     if (this.orderDTO.description == null) {
+      this.notifier.notify('success', 'You should write some description!');
+      return;
+    }
+    if (this.orderDTO.description.length < 2) {
       this.notifier.notify('success', 'You should write some description!');
       return;
     }
@@ -108,8 +112,6 @@ export class CreateContractComponent implements OnInit {
     this.createOrderService.getCustomerByUserId(id)
       .subscribe((x) => {
           this.orderDTO.customerDTO = x;
-          console.log('customer:');
-          console.log(x.id);  // TODO
         },
         (error) => {
           console.log(error);
@@ -119,22 +121,16 @@ export class CreateContractComponent implements OnInit {
   private getProviderById(id: number) {
     this.createOrderService.getProviderById(id)
       .subscribe((x) => {
-          this.orderDTO.providerDTO = x;
-          console.log('provider: ' + x.id);
+          this.orderDTO.providerDTO = new ProviderDTO();
+          this.orderDTO.providerDTO.id = x.id;
+          this.orderDTO.providerDTO.name = x.name;
+          this.orderDTO.providerDTO.email = x.email;
+          this.orderDTO.providerDTO.userDTO = x.userDTO;
+          this.orderDTO.providerDTO.serviceDTOs = x.services;
+          this.serviceDTOs = x.services;
         },
         (error) => {
-          console.log(error);
-        });
-  }
-
-  private getServiceDTOs(): void {
-    this.createOrderService.getAllServices()
-      .subscribe((x) => {
-          this.serviceDTOs = x;
-          console.log(x);
-        },
-        (error) => {
-          console.log(error);
+        console.log(error);
         });
   }
 
