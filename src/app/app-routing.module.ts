@@ -17,16 +17,18 @@ import {ChatComponent} from './chat/chat.component';
 import {ChatsComponent} from './chat/chats/chats';
 import {FeedbackComponent} from './feedback/feedback.component';
 import {VerificationComponent} from './verification/verification.component';
-import {MyProfileComponent} from "./my-profile/my-profile.component";
 import {AdminApproveStartComponent} from "./admin-approve-page/admin-approve-start/admin-approve-start.component";
 import {ServiceProviderViewComponent} from "./admin-approve-page/service-provider-view/service-provider-view.component";
 import {CustomerViewComponent} from "./admin-approve-page/customer-view/customer-view.component";
 import {FavoriteComponent} from "./favorite/favorite.component";
 import {PortfolioComponent} from './portfolio/portfolio.component';
 import {EditPostComponent} from './portfolio/edit-post/edit-post.component';
-import {NotFoundComponent} from './not-found/not-found.component';
+import {AddPostComponent} from './portfolio/add-post/add-post.component';
+import {MyProfileComponent} from './my-profile/my-profile.component';
+import {NotFoundComponent} from './error-page/not-found/not-found.component';
 import {CreateContractComponent} from './create-contract/create-contract.component';
 import {ListContractsComponent} from './list-contracts/list-contracts.component';
+import {InternalServerErrorComponent} from "./error-page/internal-server-error/internal-server-error.component";
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -39,7 +41,6 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'recovery', component: PasswordRecoveryComponent},
   {path: 'register', component: RegistrationComponent},
-  {path: 'recovery', component: PasswordRecoveryComponent},
   {path: 'create-offer', component: CreateOfferComponent},
   {path: 'list-offers', component: ListOffersComponent},
   {path: 'logout', component: LogoutComponent},
@@ -57,9 +58,12 @@ const routes: Routes = [
   {path: 'my-profile', component: MyProfileComponent},
   {path: 'provider-portfolio/:id', component: PortfolioComponent},
   {path: 'portfolio/edit-post/:id', component: EditPostComponent},
+  {path: 'portfolio/add-post/:id', component: AddPostComponent},
+  {path: 'chats', component: ChatsComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'create-contract/:id', component: CreateContractComponent},
-  {path: 'list-contracts', component: ListContractsComponent}
+  {path: 'list-contracts', component: ListContractsComponent},
+  {path: 'server-error', component: InternalServerErrorComponent}
 ];
 
 @NgModule({

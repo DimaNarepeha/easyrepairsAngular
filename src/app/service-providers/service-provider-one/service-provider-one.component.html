@@ -26,7 +26,7 @@
                     <a><i style=" color: #FFC107;" class="fas fa-star"
                           aria-hidden="true"></i> {{serviceProvider.raiting}}</a>
                   </div>
-                  <button *ngIf="isCurentProvider(serviceProvider.userDTO?.id)" style="background-color: darkgreen"
+                  <button *ngIf="isCurentProvider(serviceProvider.userDTO.id)" style="background-color: darkgreen"
                           [routerLink]="['/update-service-provider',serviceProvider.id]"
                           class="genric-btn primary">Update
                   </button>
@@ -86,22 +86,11 @@
             <div class='slide'>
               <div class='quote'>{{feedback.comment}}</div>
             </div>
-            <div class='author' style="margin-left: -60px;">
-              <img src="{{url+feedback.addressedFrom.image}}">
-
-              From: {{feedback.addressedFrom.username}}
-            </div>
-            <div class='author' style="margin-left: 120px;">
-              <img src="{{url+feedback.addressedTo.image}}">
-
-              To: {{feedback.addressedTo.username}}
-            </div>
-          </div>
-
         </div>
         </div>
       </div>
     </div>
+</div>
   <br/>
   <br/>
   <button class="btn btn-danger" routerLink="/" style="margin: 25px;"> Home page</button>
