@@ -62,13 +62,10 @@ export class ServiceProvidersComponent implements OnInit {
         data => {
           console.log(data);
           const d = data;
-          console.log(d);
-          // console.log("result = " + d.result);
           this.serviceProviders = data.content;
           this.pages = new Array(d.totalPages);
           console.log(data.content);
           console.log(this.pages);
-          console.log(this.providerPage);
           console.log(data);
         },
         (error) => {
