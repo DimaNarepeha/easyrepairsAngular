@@ -16,6 +16,7 @@ export class ServiceProvidersComponent implements OnInit {
 
   private page = 0;
   serviceProviders: ServiceProviders[];
+  favouriteServiceProviders: ServiceProviders[];
   serviceProvider = new ServiceProviders();
   private providerPage: Array<any>;
   private pages: Array<number>;
@@ -36,12 +37,19 @@ export class ServiceProvidersComponent implements OnInit {
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
     this.customerService.getCustomerByUserId(this.userId).subscribe((serviceProvidersData) => {
       this.customerId = serviceProvidersData.id;
+      this.favouriteService.getFavouriteServiceProviders(this.customerId).subscribe(proviers => {
+        this.favouriteServiceProviders = proviers['favourites'];
+      });
+
     });
   }
 
   checkFavouriteProvider(serviceProvider: ServiceProviders): boolean {
-    // return this.favouriteService.checkFavourite(serviceProvider, this.customerId);
-    return false;
+    if (this.favouriteServiceProviders.map(provider => provider.id).includes(serviceProvider.id)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   private isCustomer(): boolean {
@@ -102,7 +110,6 @@ export class ServiceProvidersComponent implements OnInit {
 
   addToFavourite(serviceProvider: ServiceProviders) {
     this.favouriteService.addToFavourite(this.customerId, serviceProvider).subscribe(data => {
-      console.log("favoritService: "+data);
     });
     this.ngOnInit();
   }

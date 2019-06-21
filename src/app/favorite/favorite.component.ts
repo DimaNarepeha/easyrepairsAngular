@@ -37,13 +37,11 @@ export class FavoriteComponent implements OnInit {
         this.customerId = serviceProvidersData.id;
         console.log("customerId" + this.customerId);
         this.favouriteService.getFavouriteServiceProviders(this.customerId).subscribe((serviceProvider) =>{
-          this.serviceProviders = serviceProvider['favourite'];
+          this.serviceProviders = serviceProvider['favourites'];
         })
       },
       (error) => {
         console.log(error);
       });
-
   }
-
 }

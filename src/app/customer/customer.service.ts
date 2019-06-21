@@ -66,8 +66,8 @@ export class CustomerService {
     const statusString: string = CustomerStatus[status];
     const params = new HttpParams().set('pageSize', String(numberOfCustomersOnPage))
       .set('pageNumber', String(page)).set('status', statusString);
-    return this.httpService.get( environment.customer_url + 'status?' + params + '&access_token=' + this.service.returnAccessToken()).
-    map( (response: Response) => response.json()).catch(this.handleError);
+    return this.http.get<Customer[]>( environment.customer_url + 'status?' + params + '&access_token=' + this.service.returnAccessToken(),{headers})
+    .catch(this.handleError);
   }
 
   updateStatus(id: number, status: CustomerStatus): Observable<any> {

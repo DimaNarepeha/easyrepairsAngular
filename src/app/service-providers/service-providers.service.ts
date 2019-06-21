@@ -9,7 +9,6 @@ import {Response} from '@angular/http';
 import {throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {ProviderStatus} from './service-provider.status';
-import {map} from 'rxjs/operators';
 import {ApiService} from '../core/api.service';
 import {NotifierService} from 'angular-notifier';
 import {Email} from "../admin-approve-page/Email";
@@ -98,8 +97,6 @@ export class ServiceProvidersService {
       .set('page', String(page)).set('status', statusString);
     return this.httpService.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/status?` + params + '&access_token='
       + this.apiService.returnAccessToken())
-      .pipe(
-        map(res => res['content']));
   }
 
   getServiceProvidersByName(searchName: string, page: number, numberOfProvidersOnPage: number, status: ProviderStatus): Observable<ServiceProviders[]>{
