@@ -50,6 +50,7 @@ export class ServiceProviderOneComponent implements OnInit {
       this.serviceProvidersService.getServiceProviderById(next.id).subscribe(next => {
         this.serviceProvider = next;
         console.log(this.serviceProvider);
+        console.log(this.serviceProvider.feedbacks);
       }, err => {
         console.log(err);
       });

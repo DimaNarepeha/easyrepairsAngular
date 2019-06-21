@@ -1,3 +1,5 @@
+import {UserDTO} from "./userDTO";
+
 
 export class Chat {
     id: string;
@@ -5,4 +7,7 @@ export class Chat {
     providerId: string;
     message: string;
     sentBy: string;
+    messageTo: UserDTO;
+    messageFrom: UserDTO;
+    isRead:string="false";
 }
