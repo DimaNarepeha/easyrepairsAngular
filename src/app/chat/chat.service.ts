@@ -6,17 +6,26 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import {Chat} from "./chat";
 import {environment} from "../../environments/environment";
+import {SecurityRolesService} from "../security-roles.service";
 
 @Injectable()
 export class ChatService {
-  private customerId = "1";
-  private providerId = "20002";
 
-  constructor(private httpService: Http) {
+  constructor(private httpService: Http, private src: SecurityRolesService) {
   }
 
-  getAllChats(): Observable<Chat[]> {
-    return this.httpService.get(environment.baseURL+"/message/" + this.customerId + "/" + this.providerId).map((response: Response) => response.json()).catch(this.handleError);
+  getAllChats(sendTo: any, sendFrom: any): Observable<Chat[]> {
+    return this.httpService.get(environment.baseURL + "/message/" + sendTo /*this.customerId*/ + "/" + sendFrom/*this.providerId*/).map((response: Response) => response.json()).catch(this.handleError);
+  }
+
+  getUnreadMessages(sendTo: any, sendFrom: any): Observable<Chat[]> {
+    return this.httpService.get(environment.baseURL + "/message/unread/" + sendTo + "/" + sendFrom).map((response: Response) => response.json()).catch(this.handleError);
+  }
+
+  readMessages(sendTo: any, sendFrom: any) {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.httpService.post(environment.baseURL + "/message/read/" + sendTo + "/" + sendFrom, options);
   }
 
   addChat(chat: Chat) {
@@ -28,6 +37,10 @@ export class ChatService {
 
   private handleError(error: Response) {
     return Observable.throw(error);
+  }
+
+  getUnreadMessagesForAUser(sendTo: any) {
+    return this.httpService.get(environment.baseURL + "/message/getUnreadForUser/" + sendTo).map((response: Response) => response.json()).catch(this.handleError);
   }
 
 }

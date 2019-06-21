@@ -3,6 +3,9 @@
   <div class="notification_icon_position">
     <app-notification></app-notification>
   </div>
+  <div class="notification_icon_position1">
+    <app-chat-notify></app-chat-notify>
+  </div>
   <div class="login" *ngIf="isUser()==false"><a routerLink="/login"><span class="orange">Log</span>In</a></div>
   <div class="login" *ngIf="isUser()==true">
     <ul class="nav user_menu">

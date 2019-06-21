@@ -40,7 +40,7 @@
                         (click)="deleteOrderDTOById(order.id)"
                         class="right genric-btn primary">Delete
                 </button>
-                <button *ngIf="isProvider()" [routerLink] = "['/chat','1','2']" style="margin-right: 20px"
+                <button *ngIf="isProvider()" [routerLink] = "['/chat',order.customerDTO.userDTO.id,'2']" style="margin-right: 20px"
                         class="right genric-btn primary">Contact with customer
                 </button>
                 <button *ngIf="compareWithCustomerId(order.customerDTO.id) && order.customerApproved !== 'approved'"

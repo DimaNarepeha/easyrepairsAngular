@@ -11,27 +11,29 @@ import {environment} from 'src/environments/environment';
 import {ApiService} from '../core/api.service';
 
 
+
 @Injectable()
 export class CustomerService {
-  constructor(private httpService: Http, private service: ApiService) {
+
+  constructor(private httpService: Http, private apiService: ApiService) {
   }
 
   uploadImage(file: any, id: number) {
     const formData = new FormData();
     formData.append('imageFile', file);
-    return this.httpService.post(environment.customer_url + id + '/image', formData);
+    return this.httpService.post(environment.customer_url + id + '/image?access_token=' + this.apiService.returnAccessToken(), formData);
   }
 
   getImage(image: string): Observable<any> {
-    return this.httpService.get(environment.customer_url + 'image/' + image);
+    return this.httpService.get(environment.customer_url + 'image/' + image + '?access_token=' + this.apiService.returnAccessToken());
   }
 
   getCustomersPage(page: number) {
-    return this.httpService.get(environment.customer_url + 'list?page=' + page + '&access_token=' + this.service.returnAccessToken());
+    return this.httpService.get(environment.customer_url + 'list?page=' + page + '&access_token=' + this.apiService.returnAccessToken());
   }
 
   getAllCustomers(): Observable<Customer[]> {
-    return this.httpService.get(environment.customer_url + '?access_token=' + this.service.returnAccessToken())
+    return this.httpService.get(environment.customer_url + '?access_token=' + this.apiService.returnAccessToken())
       .map((response: Response) => response.json()).catch(this.handleError);
   }
 
@@ -39,15 +41,15 @@ export class CustomerService {
     const body = JSON.stringify(customer);
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.httpService.put(environment.customer_url + '?access_token=' + this.service.returnAccessToken(), body, options);
+    return this.httpService.put(environment.customer_url + '?access_token=' + this.apiService.returnAccessToken(), body, options);
   }
 
   deleteCustomer(customerId: string) {
-    return this.httpService.delete(environment.customer_url + customerId + '?access_token=' + this.service.returnAccessToken());
+    return this.httpService.delete(environment.customer_url + customerId + '?access_token=' + this.apiService.returnAccessToken());
   }
 
   getCustomerById(customerId: string): Observable<Customer> {
-    return this.httpService.get(environment.customer_url + customerId + '?access_token=' + this.service.returnAccessToken())
+    return this.httpService.get(environment.customer_url + customerId + '?access_token=' + this.apiService.returnAccessToken())
       .map((response: Response) => response.json())
       .catch(this.handleError);
   }

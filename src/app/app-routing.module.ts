@@ -24,7 +24,7 @@ import {MyProfileComponent} from './my-profile/my-profile.component';
 import {NotFoundComponent} from './error-page/not-found/not-found.component';
 import {CreateContractComponent} from './create-contract/create-contract.component';
 import {ListContractsComponent} from './list-contracts/list-contracts.component';
-import {InternalServerErrorComponent} from "./error-page/internal-server-error/internal-server-error.component";
+import {InternalServerErrorComponent} from './error-page/internal-server-error/internal-server-error.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},

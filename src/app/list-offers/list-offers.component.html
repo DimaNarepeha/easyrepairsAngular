@@ -29,7 +29,7 @@
               <button *ngIf="(isAdmin() || compareWithCustomerId(offer.customerDTO.id))" (click)="deleteOfferDTOById(offer.id)"
                       class="right genric-btn primary">Delete
               </button>
-              <button *ngIf="isProvider()" [routerLink] = "['/chat','1','2']" style="margin-right: 20px"
+              <button *ngIf="isProvider()" [routerLink] = "['/chat',offer.customerDTO.userDTO.id,'2']" style="margin-right: 20px"
                       class="right genric-btn primary">Contact with customer
               </button>
             </div>
