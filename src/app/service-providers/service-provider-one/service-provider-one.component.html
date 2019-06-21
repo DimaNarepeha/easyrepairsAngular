@@ -34,7 +34,9 @@
                           [routerLink]="['/service-providers',1]"
                           class="genric-btn primary">Delete
                   </button>
-                  <button class="btn btn-success" [routerLink]="['/chat',serviceProvider.userDTO.id,'1']">Communicate with service provider</button>
+                  <button class="btn btn-success" [routerLink]="['/chat',serviceProvider.userDTO.id,'1']">Communicate
+                    with service provider
+                  </button>
                   <button style="float: right; margin-right: 0px; margin-top: -40px;"
                           (click)="getPortfolioByProviderId()"
                           class="genric-btn primary"> Portfolio
@@ -75,27 +77,26 @@
       </div>
     </div>
 
-    <button class="btn btn-success" [routerLink]="['/chat','20002','1']">Communicate with service provider</button>
 
-      <div class="row">
-        <div class="col-lg-4" *ngFor="let feedback of serviceProvider.feedbacks ">
-          <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-          <div class='slider center'>
-            <div class='love fa fa-heart-o'></div>
-            <span class="right">{{feedback.rating}}</span>
-            <div class='slide'>
-              <div class='quote'>{{feedback.comment}}</div>
-            </div>
-            <div class='author' style="margin-left: -60px;">
-              <img src="{{url+feedback.addressedFrom.image}}">
+    <div class="row">
+      <div class="col-lg-4" *ngFor="let feedback of serviceProvider.feedbacks ">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <div class='slider center'>
+          <div class='love fa fa-heart-o'></div>
+          <span class="right">{{feedback.rating}}</span>
+          <div class='slide'>
+            <div class='quote'>{{feedback.comment}}</div>
+          </div>
+          <div class='author' style="margin-left: -60px;">
+            <img src="{{url+feedback.addressedFrom.image}}">
 
-              From: {{feedback.addressedFrom.username}}
-            </div>
+            From: {{feedback.addressedFrom.username}}
+          </div>
 
-        </div>
         </div>
       </div>
     </div>
+  </div>
   <br/>
   <br/>
   <button class="btn btn-danger" routerLink="/" style="margin: 25px;"> Home page</button>
