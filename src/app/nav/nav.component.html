@@ -60,7 +60,7 @@
           </li>
           <li *ngIf="isAdmin()"><a routerLink="/customers"><i class="far fa-smile"></i>Customers</a></li>
 
-          <li><a [routerLink] = "['/chat','1','2']"><i class="far fa-smile"></i> Messages</a></li>
+          <li><a routerLink = "/list-message"><i class="far fa-smile"></i> Messages</a></li>
           <!--          <li><a routerLink="/logout"><i class="fas fa-sign-out-alt"></i>Log out</a></li>-->
           <li *ngIf="isCustomer()"><a routerLink="/create-offer"><i class="far fa-smile"></i>Create offer</a></li>
           <li><a routerLink="/list-offers"><i class="far fa-smile"></i>List offers</a></li>

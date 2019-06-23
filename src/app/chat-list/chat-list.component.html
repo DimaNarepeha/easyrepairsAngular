@@ -1,5 +1,13 @@
-<<<<<<< HEAD
-<div class="chat-index">
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<div style="width: 1050px" class="chat-index">
 
   <!--       <div class="chat-profile_content">
           <div class="avatar-user">
@@ -9,172 +17,184 @@
       </div> -->
 
 
-  <div class="chat-column-left">
+  <div style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('tool.jpg');" class="chat-column-left">
     <div class="chat-list">
       <div class="chat-list_search">
 
       </div>
-      <div class="chat-list_rooms">
-        <div class="chat-list_content">
-          <div class="avatar">
+      <div style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('tool.jpg');" class="chat-list_rooms">
+        <div *ngFor="let chat of chatsForUser" class="chat-list_content">
+          <div *ngIf="chat.messageFrom.id==src.getUserId()" class="avatar">
             <img
-              src="https://i.kinja-img.com/gawker-media/image/upload/s--dMTJCIXu--/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">
+              src="{{url}}{{chat.messageTo.image}}">
           </div>
-          <div class="chat-list_content_description">
-            <div class="chat-list_content_description_header">
-              <span>Иван Иванов</span>
+          <div *ngIf="chat.messageTo.id==src.getUserId()" class="avatar">
+            <img
+              src="{{url}}{{chat.messageFrom.image}}">
+          </div>
+          <div  class="chat-list_content_description">
+            <div  class="msg_cotainer chat-list_content_description_header">
+              <div *ngIf="chat.messageTo.id==src.getUserId()">Chat with: {{chat.messageFrom.username}}</div>
+              <div *ngIf="chat.messageFrom.id==src.getUserId()">Chat with: {{chat.messageTo.username}}</div>
               <div class="chat-list_content_description_header_time"><span>10.12.2019</span>
               </div>
-              <div class="chat-list_content_description_body">
-                <div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>
+              <div class="speech-bubble chat-list_content_description_body">
+                <div class="chat-list_content_description_body_message"><span>{{chat.messageFrom.username}}: {{chat.message}}</span>
                 </div>
-                <div class="chat-list_content_description_body_badge">
-                  <span>3</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="chat-list_content">
-          <div class="avatar">
-            <img
-              src="https://i.kinja-img.com/gawker-media/image/upload/s--dMTJCIXu--/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">
-          </div>
-          <div class="chat-list_content_description">
-            <div class="chat-list_content_description_header">
-              <span>Иван Иванов</span>
-            </div>
-            <div class="chat-list_content_description_body">
-              <div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>
-              </div>
-              <div class="chat-list_content_description_body_time"><span>10.12.2019</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="chat-list_content">
-          <div class="avatar">
-            <img
-              src="https://i.kinja-img.com/gawker-media/image/upload/s--dMTJCIXu--/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">
-          </div>
-          <div class="chat-list_content_description">
-            <div class="chat-list_content_description_header">
-              <span>Иван Иванов</span>
-            </div>
-            <div class="chat-list_content_description_body">
-              <div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>
-              </div>
-              <div class="chat-list_content_description_body_time"><span>10.12.2019</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="chat-list_content">
-          <div class="avatar">
-            <img
-              src="https://i.kinja-img.com/gawker-media/image/upload/s--dMTJCIXu--/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">
-          </div>
-          <div class="chat-list_content_description">
-            <div class="chat-list_content_description_header">
-              <span>Иван Иванов</span>
-            </div>
-            <div class="chat-list_content_description_body">
-              <div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>
-              </div>
-              <div class="chat-list_content_description_body_time"><span>10.12.2019</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="chat-list_content">
-          <div class="avatar">
-            <img
-              src="https://i.kinja-img.com/gawker-media/image/upload/s--dMTJCIXu--/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">
-          </div>
-          <div class="chat-list_content_description">
-            <div class="chat-list_content_description_header">
-              <span>Иван Иванов</span>
-            </div>
-            <div class="chat-list_content_description_body">
-              <div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>
-              </div>
-              <div class="chat-list_content_description_body_time"><span>10.12.2019</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="chat-list_content">
-          <div class="avatar">
-            <img
-              src="https://i.kinja-img.com/gawker-media/image/upload/s--dMTJCIXu--/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">
-          </div>
-          <div class="chat-list_content_description">
-            <div class="chat-list_content_description_header">
-              <span>Иван Иванов</span>
-            </div>
-            <div class="chat-list_content_description_body">
-              <div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>
-              </div>
-              <div class="chat-list_content_description_body_time"><span>10.12.2019</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="chat-list_content">
-          <div class="avatar">
-            <img
-              src="https://i.kinja-img.com/gawker-media/image/upload/s--dMTJCIXu--/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">
-          </div>
-          <div class="chat-list_content_description">
-            <div class="chat-list_content_description_header">
-              <span>Иван Иванов</span>
-            </div>
-            <div class="chat-list_content_description_body">
-              <div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>
-              </div>
-              <div class="chat-list_content_description_body_time"><span>10.12.2019</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="chat-list_content">
-          <div class="avatar">
-            <img
-              src="https://i.kinja-img.com/gawker-media/image/upload/s--dMTJCIXu--/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">
-          </div>
-          <div class="chat-list_content_description">
-            <div class="chat-list_content_description_header">
-              <span>Иван Иванов</span>
-            </div>
-            <div class="chat-list_content_description_body">
-              <div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>
-              </div>
-              <div class="chat-list_content_description_body_time"><span>10.12.2019</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="chat-list_content">
-          <div class="avatar">
-            <img
-              src="https://i.kinja-img.com/gawker-media/image/upload/s--dMTJCIXu--/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">
-          </div>
-          <div class="chat-list_content_description">
-            <div class="chat-list_content_description_header">
-              <span>Иван Иванов</span>
-            </div>
-            <div class="chat-list_content_description_body">
-              <div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>
-              </div>
-              <div class="chat-list_content_description_body_time"><span>10.12.2019</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-  </div>
+                <!--<button *ngIf="chat.messageFrom.id==src.getUserId()" [routerLink] = "['/chat',chat.messageTo.id,'2']" style="margin-right: 20px"-->
+                        <!--class="w3-btn w3-yellow w3-round-small w3-margin-bottom">Go to chat-->
+                <!--</button>-->
+                <!--<button *ngIf="chat.messageTo.id==src.getUserId()" [routerLink] = "['/chat',chat.messageFrom.id,'2']" style="margin-right: 20px"-->
+                        <!--class="w3-btn w3-yellow w3-round-small w3-margin-bottom">Go to chat-->
+                <!--</button>-->
+                <i *ngIf="chat.messageFrom.id==src.getUserId()" [routerLink] = "['/chat',chat.messageTo.id,'2']" style="font-size: 50px" class="fas fa-comment-dots"></i>
+                <i *ngIf="chat.messageTo.id==src.getUserId()" [routerLink] = "['/chat',chat.messageFrom.id,'2']" style="font-size: 50px" class="fas fa-comment-dots"></i>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--<div class="chat-list_content">-->
+          <!--<div class="avatar">-->
+            <!--<img-->
+              <!--src="https://i.kinja-img.com/gawker-media/image/upload/s&#45;&#45;dMTJCIXu&#45;&#45;/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">-->
+          <!--</div>-->
+          <!--<div class="chat-list_content_description">-->
+            <!--<div class="chat-list_content_description_header">-->
+              <!--<span>Иван Иванов</span>-->
+            <!--</div>-->
+            <!--<div class="chat-list_content_description_body">-->
+              <!--<div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>-->
+              <!--</div>-->
+              <!--<div class="chat-list_content_description_body_time"><span>10.12.2019</span>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="chat-list_content">-->
+          <!--<div class="avatar">-->
+            <!--<img-->
+              <!--src="https://i.kinja-img.com/gawker-media/image/upload/s&#45;&#45;dMTJCIXu&#45;&#45;/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">-->
+          <!--</div>-->
+          <!--<div class="chat-list_content_description">-->
+            <!--<div class="chat-list_content_description_header">-->
+              <!--<span>Иван Иванов</span>-->
+            <!--</div>-->
+            <!--<div class="chat-list_content_description_body">-->
+              <!--<div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>-->
+              <!--</div>-->
+              <!--<div class="chat-list_content_description_body_time"><span>10.12.2019</span>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="chat-list_content">-->
+          <!--<div class="avatar">-->
+            <!--<img-->
+              <!--src="https://i.kinja-img.com/gawker-media/image/upload/s&#45;&#45;dMTJCIXu&#45;&#45;/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">-->
+          <!--</div>-->
+          <!--<div class="chat-list_content_description">-->
+            <!--<div class="chat-list_content_description_header">-->
+              <!--<span>Иван Иванов</span>-->
+            <!--</div>-->
+            <!--<div class="chat-list_content_description_body">-->
+              <!--<div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>-->
+              <!--</div>-->
+              <!--<div class="chat-list_content_description_body_time"><span>10.12.2019</span>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="chat-list_content">-->
+          <!--<div class="avatar">-->
+            <!--<img-->
+              <!--src="https://i.kinja-img.com/gawker-media/image/upload/s&#45;&#45;dMTJCIXu&#45;&#45;/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">-->
+          <!--</div>-->
+          <!--<div class="chat-list_content_description">-->
+            <!--<div class="chat-list_content_description_header">-->
+              <!--<span>Иван Иванов</span>-->
+            <!--</div>-->
+            <!--<div class="chat-list_content_description_body">-->
+              <!--<div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>-->
+              <!--</div>-->
+              <!--<div class="chat-list_content_description_body_time"><span>10.12.2019</span>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="chat-list_content">-->
+          <!--<div class="avatar">-->
+            <!--<img-->
+              <!--src="https://i.kinja-img.com/gawker-media/image/upload/s&#45;&#45;dMTJCIXu&#45;&#45;/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">-->
+          <!--</div>-->
+          <!--<div class="chat-list_content_description">-->
+            <!--<div class="chat-list_content_description_header">-->
+              <!--<span>Иван Иванов</span>-->
+            <!--</div>-->
+            <!--<div class="chat-list_content_description_body">-->
+              <!--<div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>-->
+              <!--</div>-->
+              <!--<div class="chat-list_content_description_body_time"><span>10.12.2019</span>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="chat-list_content">-->
+          <!--<div class="avatar">-->
+            <!--<img-->
+              <!--src="https://i.kinja-img.com/gawker-media/image/upload/s&#45;&#45;dMTJCIXu&#45;&#45;/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">-->
+          <!--</div>-->
+          <!--<div class="chat-list_content_description">-->
+            <!--<div class="chat-list_content_description_header">-->
+              <!--<span>Иван Иванов</span>-->
+            <!--</div>-->
+            <!--<div class="chat-list_content_description_body">-->
+              <!--<div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>-->
+              <!--</div>-->
+              <!--<div class="chat-list_content_description_body_time"><span>10.12.2019</span>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="chat-list_content">-->
+          <!--<div class="avatar">-->
+            <!--<img-->
+              <!--src="https://i.kinja-img.com/gawker-media/image/upload/s&#45;&#45;dMTJCIXu&#45;&#45;/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">-->
+          <!--</div>-->
+          <!--<div class="chat-list_content_description">-->
+            <!--<div class="chat-list_content_description_header">-->
+              <!--<span>Иван Иванов</span>-->
+            <!--</div>-->
+            <!--<div class="chat-list_content_description_body">-->
+              <!--<div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>-->
+              <!--</div>-->
+              <!--<div class="chat-list_content_description_body_time"><span>10.12.2019</span>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="chat-list_content">-->
+          <!--<div class="avatar">-->
+            <!--<img-->
+              <!--src="https://i.kinja-img.com/gawker-media/image/upload/s&#45;&#45;dMTJCIXu&#45;&#45;/c_scale,f_auto,fl_progressive,q_80,w_800/myblkoukcgxb3dn1vyd7.jpg">-->
+          <!--</div>-->
+          <!--<div class="chat-list_content_description">-->
+            <!--<div class="chat-list_content_description_header">-->
+              <!--<span>Иван Иванов</span>-->
+            <!--</div>-->
+            <!--<div class="chat-list_content_description_body">-->
+              <!--<div class="chat-list_content_description_body_message"><span>Lorem ipsum dolor sit amet.</span>-->
+              <!--</div>-->
+              <!--<div class="chat-list_content_description_body_time"><span>10.12.2019</span>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+  <!--</div>-->
 
 </div>
 <!-- Modal Structure -->
@@ -187,3 +207,4 @@
     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
   </div>
 </div>
+    </div></div></div>

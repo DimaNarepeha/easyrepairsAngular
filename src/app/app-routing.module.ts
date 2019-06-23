@@ -25,6 +25,7 @@ import {NotFoundComponent} from './error-page/not-found/not-found.component';
 import {CreateContractComponent} from './create-contract/create-contract.component';
 import {ListContractsComponent} from './list-contracts/list-contracts.component';
 import {InternalServerErrorComponent} from './error-page/internal-server-error/internal-server-error.component';
+import {ChatListComponent} from "./chat-list/chat-list.component";
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -53,7 +54,8 @@ const routes: Routes = [
   {path: 'not-found', component: NotFoundComponent},
   {path: 'create-contract/:id', component: CreateContractComponent},
   {path: 'list-contracts', component: ListContractsComponent},
-  {path: 'server-error', component: InternalServerErrorComponent}
+  {path: 'server-error', component: InternalServerErrorComponent},
+  {path: 'list-message', component: ChatListComponent}
 ];
 
 @NgModule({

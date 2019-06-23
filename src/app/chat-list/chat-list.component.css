@@ -1,5 +1,35 @@
 /* Mixins */
 /* Style */
+.speech-bubble {
+  position: relative;
+  background: #ffff80;
+  border-radius: .4em;
+}
+
+.speech-bubble:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-right-color: #ffff80;
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: -10px;
+  margin-left: -20px;
+}
+
+.msg_cotainer {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+  border-radius: 25px;
+  background-color: #EEE8AA;
+  padding: 10px;
+
+}
 html,
 body {
   font-family: 'Roboto Condensed', sans-serif;
@@ -7,6 +37,7 @@ body {
   min-height: 100%;
   margin: 0;
   padding: 0;
+  background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('tool.jpg')!important;
 }
 input:focus {
   border: 1px solid 1px;
@@ -21,18 +52,19 @@ i {
 }
 .chat-index .chat-column-left {
   border-right: none;
-  width: 300px;
+  width: 1500px;/*300px*/
+  height:700px;
 }
 .chat-index .chat-column-left .chat-profile {
-  background: #dc3545;
+ /* background: #dc3545;
   color: #fff;
   height: 8vh;
-  padding: 5px 5px;
+  padding: 5px 5px;*/
 }
 .chat-index .chat-column-left .chat-profile_content {
-  display: grid;
+  /*display: grid;
   justify-content: center;
-  margin: 0 0 25px 0;
+  margin: 0 0 25px 0;*/
 }
 .chat-index .chat-column-left .chat-profile_content .avatar-user {
   width: 100px;
@@ -65,14 +97,14 @@ i {
   border-radius: 4px;
   box-sizing: border-box;
   height: 35px;
-  border: 1px solid #d8d8d8;
+  /*border: 1px solid #d8d8d8;*/
 }
 .chat-index .chat-column-left .chat-list_search .close-icon {
   right: 0;
   position: absolute;
   top: 10px;
   font-size: 19px;
-  color: #a2a2a2;
+  /*color: #a2a2a2;*/
   display: none;
 }
 .chat-index .chat-column-left .chat-list_rooms {
@@ -80,7 +112,7 @@ i {
   height: 87vh;
 }
 .chat-index .chat-column-left .chat-list_content {
-  border: 1px solid #d8d8d8;
+ /* border: 1px solid #d8d8d8;*/
   display: grid;
   grid-template-columns: 65px 1fr;
   padding: 10px;

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {environment} from "../../environments/environment";
+import {Http, Response} from "@angular/http";
+import {Chat} from "../chat/chat";
+import {NotifierService} from "angular-notifier";
+import {SecurityRolesService} from "../security-roles.service";
 
 @Component({
   selector: 'app-chat-list',
@@ -6,10 +11,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-list.component.css']
 })
 export class ChatListComponent implements OnInit {
-
-  constructor() { }
+  url = environment.baseURL + "/service-providers/image/";
+  chatsForUser:Chat[];
+  id:any;
+  c:any;
+  constructor(private httpService: Http, private src: SecurityRolesService) {
+  }
 
   ngOnInit() {
+    this.id = this.src.getUserId();
+    this.getMessagesForAUser(this.id);
+  }
+  getMessagesForAUser(sendFrom: any) {
+    this.httpService.get(environment.baseURL + "/message/getMessagesForUser/" + sendFrom).map((response: Response) => response.json())
+      .subscribe((response) => {
+        console.log(response);
+        this.chatsForUser = response;
+
+
+
+      });
+
   }
 
 }
