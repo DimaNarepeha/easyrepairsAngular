@@ -8,6 +8,7 @@ export class OrderDTO {
   description: string;
   extraDetails: string;
   price: string;
+  status: string;
   createDate: string;
   startDate: string;
   endDate: string;
