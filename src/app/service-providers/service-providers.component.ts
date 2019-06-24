@@ -32,18 +32,17 @@ export class ServiceProvidersComponent implements OnInit {
     this.notifier = notifierService;
   }
 
+
   ngOnInit() {
-    this.getServiceProvidersByPage();
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
     this.customerService.getCustomerByUserId(this.userId).subscribe((serviceProvidersData) => {
       this.customerId = serviceProvidersData.id;
-      this.favouriteService.getFavouriteServiceProviders(this.customerId).subscribe(proviers => {
-        this.favouriteServiceProviders = proviers['favourites'];
+      this.favouriteService.getFavouriteServiceProviders(this.customerId).subscribe(providers => {
+        this.favouriteServiceProviders = providers['favourites'];
       });
-
     });
+    this.getServiceProvidersByPage();
   }
-
   checkFavouriteProvider(serviceProvider: ServiceProviders): boolean {
     if (this.favouriteServiceProviders.map(provider => provider.id).includes(serviceProvider.id)) {
       return true;
@@ -82,7 +81,6 @@ export class ServiceProvidersComponent implements OnInit {
           console.log(data);
           const d = data;
           console.log(d);
-          // console.log("result = " + d.result);
           this.serviceProviders = data.content;
           this.pages = new Array(d.totalPages);
           console.log(data.content);
@@ -109,8 +107,7 @@ export class ServiceProvidersComponent implements OnInit {
 
 
   addToFavourite(serviceProvider: ServiceProviders) {
-    this.favouriteService.addToFavourite(this.customerId, serviceProvider).subscribe(data => {
-    });
-    this.ngOnInit();
+    this.favouriteService.addToFavourite(this.customerId, serviceProvider).subscribe(
+      this.ngOnInit());
   }
 }

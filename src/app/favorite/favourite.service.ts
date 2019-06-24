@@ -20,7 +20,6 @@ export class FavouriteService {
   }
 
   addToFavourite(customerId: number, serviceProvider: ServiceProviders): any {
-    const body  = JSON.stringify(serviceProvider.id);
     return this.http.put(environment.favourite_url + "addToFavourite/" + customerId +'/provider/' + serviceProvider.id, {});
   }
 }
