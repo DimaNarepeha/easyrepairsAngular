@@ -4,6 +4,9 @@ import {CustomerDTO} from '../create-offer/models/customerDTO';
 import {ListOrderService} from './list-contracts.service';
 import {ProviderDTO} from '../create-offer/models/providerDTO';
 import {NotifierService} from 'angular-notifier';
+import {FeedbackService} from "../feedback/feedback.service";
+import {Feedback} from "../feedback/feedback";
+import {UserDTO} from "../create-offer/models/userDTO";
 
 @Component({
   selector: 'app-list-contracts',
@@ -17,8 +20,11 @@ export class ListContractsComponent implements OnInit {
   private userId: number;
   private role: string;
   private providerDTO: ProviderDTO;
+  private feedback = new Feedback();
 
-  constructor(private listOrderService: ListOrderService, private readonly notifier: NotifierService) { }
+  constructor(private listOrderService: ListOrderService, private readonly notifier: NotifierService,
+              private feedbackService: FeedbackService) {
+  }
 
   ngOnInit() {
     window.scroll(0, 0);
@@ -41,7 +47,8 @@ export class ListContractsComponent implements OnInit {
   private getOrderDTOs(): void {
     this.listOrderService.getAllOrders()
       .subscribe((x) => {
-          this.orderDTOs = x; console.log(x);
+          this.orderDTOs = x;
+          console.log(x);
         },
         (error) => {
           console.log(error);
@@ -109,10 +116,13 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.updateOrder(order)
       .subscribe((x) => {
           this.notifier.notify('success', 'Order approved!:');
+          this.createFeedbackFromCustomerToProvider(order.providerDTO.userDTO, order.customerDTO.userDTO);
         },
         (error) => {
           this.notifier.notify('success', error);
         });
+    console.log(this.feedback);
+    this.notifier.notify('success', 'Feedback added');
   }
 
   private providerApproveOrderDTO(order: OrderDTO) {
@@ -120,9 +130,48 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.updateOrder(order)
       .subscribe((x) => {
           this.notifier.notify('success', 'Order approved!:');
+          this.createFeedbackFromProviderToCustomer(order.customerDTO.userDTO, order.providerDTO.userDTO);
         },
         (error) => {
           this.notifier.notify('success', error);
+        });
+  }
+
+  createFeedbackFromCustomerToProvider(userTo: UserDTO, userFrom: UserDTO) {
+    console.log(userTo);
+    console.log(userFrom);
+    // @ts-ignore
+    this.feedback.addressedFrom = userFrom;
+    // @ts-ignore
+    this.feedback.addressedTo = userTo;
+    console.log(this.feedback);
+    this.feedbackService.addFeedback(this.feedback)
+      .subscribe(data => {
+        console.log(data);
+        this.notifier.notify('success', 'Feedback added');
+        this.feedback = null;
+      },
+        (error) => {
+          this.notifier.notify('error', error);
+        });
+  }
+
+  createFeedbackFromProviderToCustomer(userTo: UserDTO, userFrom: UserDTO) {
+    console.log(userTo);
+    console.log(userFrom);
+    // @ts-ignore
+    this.feedback.addressedFrom = userFrom;
+    // @ts-ignore
+    this.feedback.addressedTo = userTo;
+    console.log(this.feedback);
+    this.feedbackService.addFeedback(this.feedback)
+      .subscribe(data => {
+          console.log(data);
+          this.notifier.notify('success', 'Feedback added');
+          this.feedback = null;
+        },
+        (error) => {
+          this.notifier.notify('error', error);
         });
   }
 
