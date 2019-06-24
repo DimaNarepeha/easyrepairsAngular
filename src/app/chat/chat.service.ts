@@ -14,6 +14,7 @@ export class ChatService {
   constructor(private httpService: Http, private src: SecurityRolesService) {
   }
 
+
   getAllChats(sendTo: any, sendFrom: any): Observable<Chat[]> {
     return this.httpService.get(environment.baseURL + "/message/" + sendTo /*this.customerId*/ + "/" + sendFrom/*this.providerId*/).map((response: Response) => response.json()).catch(this.handleError);
   }

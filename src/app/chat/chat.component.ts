@@ -8,6 +8,7 @@ import {ChatService} from "./chat.service";
 import {environment} from "../../environments/environment";
 import {SecurityRolesService} from "../security-roles.service";
 import {UserDTO} from "./userDTO";
+import {Http, Response} from "@angular/http";
 
 @Component({
   selector: 'app-root',
@@ -27,12 +28,17 @@ export class ChatComponent implements OnInit {
   public chats: Chat [];
   public unreadChats: Chat [];
   public unreadChatsForUser: Chat [];
-
-  constructor(private chatService: ChatService, private rout: ActivatedRoute, private src: SecurityRolesService) {
+  chatsForUser:Chat[];
+  id:any;
+  c:any;
+  cs: ChatService;
+  constructor(private httpService: Http, public chatService: ChatService, private rout: ActivatedRoute, private src: SecurityRolesService) {
     this.initializeWebSocketConnection();
   }
 
   ngOnInit(): void {
+    this.id = this.src.getUserId();
+    this.getMessagesForAUser(this.id);
     this.getChats();
     this.getUnreadForUser();
   }
@@ -77,18 +83,36 @@ export class ChatComponent implements OnInit {
     this.chatService.addChat(this.chat).subscribe((response) => {
       console.log(response);
       this.getChats();
+      this.getMessagesForAUser(this.id);
     });
 
     this.stompClient.send("/app/send/message", {}, message);
     $('#input').val('');
   }
+  getMessagesForAUser(sendFrom: any) {
+    this.httpService.get(environment.baseURL + "/message/getMessagesForUser/" + sendFrom).map((response: Response) => response.json())
+      .subscribe((response) => {
+        console.log(response);
+        this.chatsForUser = response;
 
-  getChats() {
+
+
+      });
+
+  }
+  public getChats() {
     this.chatService.getAllChats(this.messageTo, this.messageFrom).subscribe((response) => {
       this.chats = response;
     });
   }
+  public getChatsWithParameters(messageT:any,messageF:any) {
+    this.chatService.getAllChats(messageT, messageF).subscribe((response) => {
+      this.chats = response;
+    });
+    this.messageTo = messageF;
+    this.messageFrom = messageT;
 
+  }
   getUnreadChats() {
     this.chatService.getUnreadMessages(this.messageTo, this.messageFrom).subscribe((response) => {
       this.unreadChats = response;

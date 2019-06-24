@@ -60,6 +60,7 @@ import {ListOrderService} from './list-contracts/list-contracts.service';
 import {ChatNotifyComponent} from './chat-notify/chat-notify.component';
 import {InternalServerErrorComponent} from './error-page/internal-server-error/internal-server-error.component';
 import {ExceptionHandler} from './global-exception-handler/exception-handler';
+import {EncrDecrService} from "./EncrDecrSevice.service";
 
 
 const customNotifierOptions: NotifierOptions = {
@@ -165,7 +166,7 @@ const customNotifierOptions: NotifierOptions = {
   ],
 
   providers: [ServiceProvidersService, ChatService, PortfolioService, CustomerService, ApiService, LandingPageService,
-    RegistrationService, CreateOfferService, ListOfferService, FeedbackService, CreateOrderService, ListOrderService, ExceptionHandler],
+    RegistrationService, CreateOfferService, ListOfferService, FeedbackService, CreateOrderService, ListOrderService, ExceptionHandler, EncrDecrService],
   bootstrap:
     [AppComponent]
 

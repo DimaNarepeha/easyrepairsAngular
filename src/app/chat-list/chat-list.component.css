@@ -52,7 +52,7 @@ i {
 }
 .chat-index .chat-column-left {
   border-right: none;
-  width: 1500px;/*300px*/
+  width: 300px;/*300px*/
   height:700px;
 }
 .chat-index .chat-column-left .chat-profile {

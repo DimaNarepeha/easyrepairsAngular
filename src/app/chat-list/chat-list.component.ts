@@ -4,6 +4,7 @@ import {Http, Response} from "@angular/http";
 import {Chat} from "../chat/chat";
 import {NotifierService} from "angular-notifier";
 import {SecurityRolesService} from "../security-roles.service";
+import {ChatService} from "../chat/chat.service";
 
 @Component({
   selector: 'app-chat-list',
@@ -15,7 +16,9 @@ export class ChatListComponent implements OnInit {
   chatsForUser:Chat[];
   id:any;
   c:any;
-  constructor(private httpService: Http, private src: SecurityRolesService) {
+  cs: ChatService;
+  constructor(private chatService: ChatService, private httpService: Http, private src: SecurityRolesService) {
+ this.cs = this.chatService;
   }
 
   ngOnInit() {
