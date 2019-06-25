@@ -5,53 +5,50 @@
 <br/>
 <div class="container">
   <div class="row">
-    <div class="col-lg-8">
-      <div class="blog_left_sidebar" *ngFor="let serviceProvider of serviceProviders ">
+    <div class="col-lg-6" *ngFor="let serviceProvider of serviceProviders">
+      <div class="blog_left_sidebar">
         <article class="blog_style1">
           <div class="blog_img">
-            <img class="img-fluid" src="{{url+serviceProvider.image}}" alt="">
+            <img class="img-fluid" style="height: 400px; width: auto;" src="{{url+serviceProvider.image}}" alt="">
           </div>
-          <div class="blog_text">
+          <div class="blog_text" style="height: 600px;">
             <div class="blog_text_inner">
               <div class="cat">
                 <a><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{serviceProvider.location.city}}</a>
                 <a><i class="far fa-calendar-alt" aria-hidden="true"></i> {{serviceProvider.registrationDate}}
                 </a>
                 <a href="#"><i class="far fa-comments" aria-hidden="true"></i> {{serviceProvider.countComment}}</a>
-                <a><i class="fa fa-heart" (click)="addToFavourite(serviceProvider)" *ngIf="checkFavouriteProvider(serviceProvider)&&this.isCustomer()" ></i></a>
-                <a><i class="fa fa-heart-o" (click)="addToFavourite(serviceProvider)" *ngIf="!checkFavouriteProvider(serviceProvider)&&this.isCustomer()"></i></a>
+                <a><i class="fa fa-heart" (click)="addToFavourite(serviceProvider)" *ngIf="checkFavouriteProvider(serviceProvider)&&isCustomer()" ></i></a>
+                <a><i class="fa fa-heart-o" (click)="addToFavourite(serviceProvider)" *ngIf="!checkFavouriteProvider(serviceProvider)&&isCustomer()"></i></a>
                 <div class="right">
                   <a><i style=" color: #FFC107;" class="fas fa-star"
                                  aria-hidden="true"></i> {{serviceProvider.raiting}}</a>
                 </div>
               </div>
               <a [routerLink]="['/service-providers',serviceProvider.id]">
-                <h4>{{serviceProvider.name}}</h4>
+                <h5>{{serviceProvider.name}}</h5>
               </a>
               <p>{{serviceProvider.description}}</p>
-
-              <ul class="list-horizontal">
-                <li *ngFor="let service of serviceProvider.servicesDTO">
-                  <h5>{{service.serviceName}}</h5>
-                </li>
-
-
-              </ul>
               <br/>
               <br/>
-              <button *ngIf="isAdmin()==true" class="left genric-btn primary" (click) = "deleteService(serviceProvider.id)" style="margin-left: 10px; background-color: darkred;">Delete</button>
+              <button *ngIf="isAdmin()" class="left genric-btn primary" (click) = "deleteService(serviceProvider.id)" style="margin-left: 10px; background-color: darkred;">Delete</button>
               <a [routerLink]="['/service-providers',serviceProvider.id]" class="right genric-btn primary">Read more</a>
-              <button *ngIf="isAdmin()==true || isCurentProvider(serviceProvider.userDTO.id)==true" class="right genric-btn primary" [routerLink] = "['/update-service-provider',serviceProvider.id]" style="margin-right: 10px; background-color: darkgreen">Update</button>
+              <a *ngIf="isCustomer()" [routerLink]="['/create-contract', serviceProvider.id]" style="margin-right: 10px; background-color: #4faadd;" class="right genric-btn primary">Create contract</a>
+              <button *ngIf="isAdmin() || isCurentProvider(serviceProvider.userDTO.id)" class="right genric-btn primary" [routerLink] = "['/update-service-provider',serviceProvider.id]" style="margin-right: 10px; background-color: darkgreen">Update</button>
+
+
             </div>
           </div>
         </article>
       </div>
-      <ul class="nav nav-pills">
-        <li class="nav-item" *ngFor="let p of pages; let i=index">
-          <a class="nav-link " href="" (click)="setPage(i,$event)">{{i + 1}}</a>
-        </li>
-      </ul>
     </div>
   </div>
+  <br/>
+  <ul class="nav nav-pills">
+    <li class="nav-item" *ngFor="let p of pages; let i=index">
+      <a class="nav-link " href="" (click)="setPage(i,$event)">{{i + 1}}</a>
+    </li>
+  </ul>
+  <br/>
 </div>
 <app-footer></app-footer>

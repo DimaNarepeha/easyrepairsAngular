@@ -8,13 +8,14 @@ import 'rxjs/add/observable/throw';
 import {throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {ProviderStatus} from './service-provider.status';
+import {map} from 'rxjs/operators';
 import {ApiService} from '../core/api.service';
 import {NotifierService} from 'angular-notifier';
+import {Portfolio} from '../portfolio/portfolio';
 import {Router} from '@angular/router';
 import {ExceptionHandler} from "../global-exception-handler/exception-handler";
 import {Service} from "./service";
 import {Email} from "../admin-approve-page/Email";
-import {Portfolio} from "../portfolio/portfolio";
 
 
 const headers = new HttpHeaders(

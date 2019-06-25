@@ -14,7 +14,7 @@ export class FavoriteComponent implements OnInit {
   serviceProviders: Array<ServiceProviders>;
 
   customer: Customer;
-  customerId: number;
+  customerId: any;
   userId: number;
 
   constructor(private favouriteService :FavouriteService, private customerService :CustomerService) {

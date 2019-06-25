@@ -56,9 +56,9 @@ export class CustomerService {
       .catch(this.handleError);
   }
 
-  getCustomerByUserId(id: any): any {
+  getCustomerByUserId(id: number): Observable<Customer> {
     console.log(environment.customer_url + 'find-by-userId/' + id);
-    return this.http.get(environment.customer_url + 'find-by-userId/' + id + '?access_token=' + this.apiService.returnAccessToken(), {headers})
+    return this.http.get<Customer>(environment.customer_url + 'find-by-userId/' + id + '?access_token=' + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
 
   }

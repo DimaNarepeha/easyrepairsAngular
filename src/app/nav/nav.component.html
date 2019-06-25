@@ -3,18 +3,26 @@
   <div class="notification_icon_position">
     <app-notification></app-notification>
   </div>
+  <div class="notification_icon_position1">
+    <app-chat-notify></app-chat-notify>
+  </div>
   <div class="login" *ngIf="isUser()==false"><a routerLink="/login"><span class="orange">Log</span>In</a></div>
   <div class="login" *ngIf="isUser()==true">
     <ul class="nav user_menu">
       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" style="color: #f5f528;width: 20%;">{{getName()}}</a>
+        <a class="dropdown-toggle " data-toggle="dropdown" style="color: #f5f528;width: 20%;"><img style="border-radius: 50%; height: 50px; width: 50px" src="{{avatarUrl}}{{getImage()}}"/></a>
+
         <ul class="dropdown-menu lllll" style="width: 12em; top:10px">
-          <div>
-            <img src="https://www.hdwallpapers.in/download/yellow_blue_material_design_4k-wide.jpg">
-          </div>
-          <li style="margin: 10%"><a routerLink="/my-profile"><i class="fas fa-user"></i>My Profile</a></li>
-          <li style="margin: 10%"><a routerLink="/favourite"><i class="fas fa-heart"></i>Favourite</a></li>
-          <li style="margin: 10%"><a routerLink = "/feedback"><i class="fas fa-archive"></i>Feedbacks</a></li>
+
+          <li style="margin: 10%"><a routerLink="/"><i
+            class="fas fa-user"></i> {{getName()}}</a></li>
+          <hr>
+          <li style="margin: 10%" *ngIf="isCustomer() || isProvider()"><a routerLink="/my-profile"><i
+            class="fas fa-user"></i>My Profile</a></li>
+          <li style="margin: 10%" *ngIf="isCustomer()"><a routerLink="/favourite"><i class="fas fa-heart"></i>Favorite</a>
+          </li>
+          <li style="margin: 10%" *ngIf="isCustomer() || isProvider()"><a routerLink="/feedback"><i
+            class="fas fa-archive"></i>Feedbacks</a></li>
           <div class="dropdown-divider"></div>
           <li style="margin: 10%"><a routerLink="/logout"><i class="fas fa-sign-out-alt"></i>Log out</a></li>
         </ul>
@@ -36,17 +44,24 @@
         </div>
       </div>
       <div class="avatar_container" *ngIf="isUser()==true">
-        <img src="https://avatars2.githubusercontent.com/u/49271116?s=460&v=4"/>
+        <img src="{{avatarUrl}}{{getImage()}}"/>
         <div class="user_info">
           <p style="margin-left: 35%;">{{getName()}}</p>
         </div>
       </div>
       <div class="user_menu" *ngIf="isUser()==true">
         <ul>
-          <li *ngIf="isAdmin()==true"><a routerLink="/admin-approve"><i class="fas fa-cog"></i>Administration page</a></li>
+          <li *ngIf="isAdmin()==true"><a routerLink="/admin-approve"><i class="fas fa-cog"></i>Administration page</a>
+          </li>
           <li *ngIf="isUser()==true"><a routerLink="/service-providers"><i class="fas fa-cog"></i>Service providers</a>
           </li>
-          <li *ngIf="isAdmin()==true"><a routerLink="/customers"><i class="far fa-smile"></i>Customers</a></li>
+          <li *ngIf="isAdmin()"><a routerLink="/customers"><i class="far fa-smile"></i>Customers</a></li>
+
+          <li><a [routerLink] = "['/chat','1','2']"><i class="far fa-smile"></i> Messages</a></li>
+          <!--          <li><a routerLink="/logout"><i class="fas fa-sign-out-alt"></i>Log out</a></li>-->
+          <li *ngIf="isCustomer()"><a routerLink="/create-offer"><i class="far fa-smile"></i>Create offer</a></li>
+          <li><a routerLink="/list-offers"><i class="far fa-smile"></i>List offers</a></li>
+          <li><a routerLink="/list-contracts"><i class="far fa-smile"></i>List contracts</a></li>
         </ul>
         <hr>
       </div>
