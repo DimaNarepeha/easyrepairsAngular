@@ -1,11 +1,10 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit, NgZone} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {ServiceProviders} from '../service-providers';
 import {ServiceProvidersService} from '../service-providers.service';
+import {ProviderLocatoin} from '../../location/provider-locatoin';
 import {environment} from '../../../environments/environment';
 import {NotifierService} from 'angular-notifier';
-import {Service} from '../service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-update-service-provider',
@@ -14,50 +13,21 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class UpdateServiceProviderComponent implements OnInit {
 
-
-  constructor(private serviceProvidersService: ServiceProvidersService, private rout: ActivatedRoute,
-              private zone: NgZone, notifierService: NotifierService, private router: Router) {
-    this.notifier = notifierService;
-  }
-
   serviceProvider = new ServiceProviders();
+  public userFile: any = File;
   private url = environment.baseURL + '/service-providers/image/';
   private readonly notifier: NotifierService;
+
+  public title = 'Places';
   public addrKeys: string[];
   public addr: object;
-  private currentId: any;
-  private role: any;
-  service: any;
-  allServices: Service[];
-  newS: Service[];
 
-  formGroup: FormGroup = new FormGroup({
-    name: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(60)
-    ]),
-    description: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(2)
+  providerLocation = new ProviderLocatoin();
 
-    ]),
-    email: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(5),
-      Validators.maxLength(90),
-      Validators.pattern('^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$')
-    ])
-  });
 
-  public isCurrentProvider(id: number) {
-    this.currentId = JSON.parse(window.sessionStorage.getItem('user')).id;
-    return this.currentId === id;
-  }
-
-  public isAdmin() {
-    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
-    return this.role == 'ADMIN';
+  constructor(private serviceProvidersService: ServiceProvidersService, private rout: ActivatedRoute,
+              private zone: NgZone, notifierService: NotifierService) {
+    this.notifier = notifierService;
   }
 
   setAddress(addrObj) {
@@ -77,11 +47,19 @@ export class UpdateServiceProviderComponent implements OnInit {
   onSelectFile(event, id) {
     const file = event.target.files[0];
     console.log(file);
+    this.userFile = file;
     this.serviceProvidersService.uploadImage(file, id);
   }
 
 
   updateService(): void {
+    // this.providerLocation.id = this.serviceProvider.id;
+    // this.providerLocation.name = this.serviceProvider.name;
+    // this.providerLocation.email = this.serviceProvider.email;
+    // this.providerLocation.description = this.serviceProvider.description;
+    // this.providerLocation.country = this.serviceProvider.location.country;
+    // this.providerLocation.city = this.serviceProvider.location.city;
+    // this.providerLocation.region = this.serviceProvider.location.region;
     this.serviceProvidersService.updateServiceProvider(this.serviceProvider)
       .subscribe((response) => {
         console.log(response);
@@ -92,44 +70,12 @@ export class UpdateServiceProviderComponent implements OnInit {
       });
   }
 
-  addService(): void {
-    let newSerivce = new Service();
-    newSerivce.serviceName = this.service;
-    console.log(newSerivce);
-    this.serviceProvidersService.saveServiceForProvider(this.serviceProvider.id, newSerivce)
-      .subscribe(data => console.log(data));
-    location.reload();
-    this.notifier.notify('success', 'Service added');
-  }
-
-  deleteByServiceName(serviceName: string): void {
-    console.log('service name:' + serviceName + "id:" + this.serviceProvider.id);
-    this.serviceProvidersService.deleteServiceInProvider(this.serviceProvider.id, serviceName)
-      .subscribe(data => console.log(data));
-    this.notifier.notify('success', 'Service deleted');
-    location.reload();
-  }
-
-
   ngOnInit() {
-    window.scroll(0, 0);
     this.rout.params.subscribe(next => {
       this.serviceProvidersService.getServiceProviderById(next.id).subscribe(next => {
-        if (this.isAdmin() || this.isCurrentProvider(next.userDTO.id)) {
-          this.serviceProvider = next;
-          console.log(next);
-          console.log(this.serviceProvider);
-          this.serviceProvidersService.getAllServiceIsNotPresentInProvider(this.serviceProvider.id)
-            .subscribe(data => {
-              this.allServices = data;
-              this.allServices.forEach(el => {
-                console.log(el);
-              });
-            });
-        } else {
-          this.router.navigate(['/']);
-          this.notifier.notify('error', 'Access denied');
-        }
+        this.serviceProvider = next;
+        console.log(next);
+        console.log(this.serviceProvider);
       }, err => {
         console.log(err);
       });
@@ -137,4 +83,5 @@ export class UpdateServiceProviderComponent implements OnInit {
       console.log(err);
     });
   }
+
 }

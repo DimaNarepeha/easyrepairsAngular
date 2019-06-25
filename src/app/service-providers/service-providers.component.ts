@@ -35,25 +35,26 @@ export class ServiceProvidersComponent implements OnInit {
 
   ngOnInit() {
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
-    this.customerService.getCustomerByUserId(this.userId).subscribe((serviceProvidersData) => {
-      this.customerId = serviceProvidersData.id;
-      this.favouriteService.getFavouriteServiceProviders(this.customerId).subscribe(providers => {
-        this.favouriteServiceProviders = providers['favourites'];
+    if (this.isCustomer()) {
+      this.customerService.getCustomerByUserId(this.userId).subscribe((serviceProvidersData) => {
+        this.customerId = serviceProvidersData.id;
+        this.favouriteService.getFavouriteServiceProviders(this.customerId).subscribe(providers => {
+          this.favouriteServiceProviders = providers['favourites'];
+        });
       });
-    });
+    }
     this.getServiceProvidersByPage();
   }
   checkFavouriteProvider(serviceProvider: ServiceProviders): boolean {
-    if (this.favouriteServiceProviders.map(provider => provider.id).includes(serviceProvider.id)) {
-      return true;
+    if (this.isCustomer()) {
+      return (this.favouriteServiceProviders.map(provider => provider.id).includes(serviceProvider.id));
     } else {
       return false;
     }
   }
 
-  private isCustomer(): boolean {
-    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
-    return this.role == 'CUSTOMER';
+  public isUser() {
+    return window.sessionStorage.getItem('user') != null;
   }
 
   public isAdmin() {
@@ -61,7 +62,12 @@ export class ServiceProvidersComponent implements OnInit {
     return this.role == 'ADMIN';
   }
 
-  public isCurrentProvider(id: number) {
+  public isCustomer() {
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    return this.role == 'CUSTOMER';
+  }
+
+  public isCurentProvider(id: number) {
     this.currentId = JSON.parse(window.sessionStorage.getItem('user')).id;
     return this.currentId === id;
   }
@@ -73,6 +79,12 @@ export class ServiceProvidersComponent implements OnInit {
 
   }
 
+  onSelectFile(file1, id) {
+    const file = file1;
+    console.log(file);
+    this.userFile = file;
+    this.serviceProvidersService.uploadImage(file, id);
+  }
 
   getServiceProvidersByPage() {
     this.serviceProvidersService.getServiceProvidersByPage(this.page)
@@ -94,11 +106,35 @@ export class ServiceProvidersComponent implements OnInit {
       );
   }
 
+  getServiceProviders(): void {
+    this.serviceProvidersService.getAllServiceProviders()
+      .subscribe((serviceProvidersData) => {
+          this.serviceProviders = serviceProvidersData, console.log(serviceProvidersData);
+        },
+        (error) => {
+          console.log(error);
+        });
+  }
+
+  private reset() {
+    this.serviceProvider.id = null;
+    this.serviceProvider.name = null;
+  }
+
+  getServiceProviderById(id: number) {
+    this.serviceProvidersService.getServiceProviderById(id)
+      .subscribe((serviceProvidersData) => {
+          this.serviceProvider = serviceProvidersData;
+        },
+        (error) => {
+          console.log(error);
+        });
+  }
 
   deleteService(id: number) {
     this.serviceProvidersService.deleteServiceProvider(id)
       .subscribe((response) => {
-        this.notifier.notify('error', 'Deleted')
+        this.notifier.notify('error', 'deleted!')
         this.getServiceProvidersByPage();
       }, (error) => {
         console.log(error);

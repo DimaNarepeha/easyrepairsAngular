@@ -129,4 +129,15 @@ export class ListContractsComponent implements OnInit {
   private async delay(ms: number) {
     await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => this.getOrderDTOs());
   }
+
+  private closeOrderDTO(order: OrderDTO) {
+    order.status = 'closed';
+    this.listOrderService.updateOrder(order)
+      .subscribe((x) => {
+          this.notifier.notify('success', 'Order closed!:');
+        },
+        (error) => {
+          this.notifier.notify('success', error);
+        });
+  }
 }
