@@ -34,6 +34,9 @@
                           [routerLink]="['/service-providers',1]"
                           class="genric-btn primary">Delete
                   </button>
+                  <button class="btn btn-success" [routerLink]="['/chat',serviceProvider.userDTO.id,'1']">Communicate
+                    with service provider
+                  </button>
                   <button style="float: right; margin-right: 0px; margin-top: -40px;"
                           (click)="getPortfolioByProviderId()"
                           class="genric-btn primary"> Portfolio
@@ -42,7 +45,6 @@
                   <b>Name:</b> {{serviceProvider.name}}
                   <br>
                   <b>e-mail:</b> {{serviceProvider.email}}
-
                   <hr>
                   <b>Description:</b>
                   <p>
@@ -58,7 +60,7 @@
                     <h2>SERVICES</h2>
 
                     <div class="row">
-                      <div class="col-lg-4 " *ngFor="let service of serviceProvider.services">
+                      <div class="col-lg-4 " *ngFor="let service of serviceProvider.servicesDTO">
                         <div class="service-block text-center">
 
                           <span>{{service.serviceName}} </span>
@@ -75,25 +77,23 @@
       </div>
     </div>
 
-    <button class="btn btn-success" [routerLink]="['/chat','20002','1']">Communicate with service provider</button>
-
-      <div class="row">
-        <div class="col-lg-4" *ngFor="let feedback of serviceProvider.feedbacks ">
-          <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-          <div class='slider center'>
-            <div class='love fa fa-heart-o'></div>
-            <span class="right">{{feedback.rating}}</span>
-            <div class='slide'>
-              <div class='quote'>{{feedback.comment}}</div>
-            </div>
-        </div>
+    <div class="row">
+      <div class="col-lg-4" *ngFor="let feedback of serviceProvider.feedbacks ">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <div class='slider center'>
+          <div class='love fa fa-heart-o'></div>
+          <span class="right">{{feedback.rating}}</span>
+          <div class='slide'>
+            <div class='quote'>{{feedback.comment}}</div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
-  <br/>
-  <br/>
-  <button class="btn btn-danger" routerLink="/" style="margin: 25px;"> Home page</button>
-  <br/>
-  <br/>
-  <app-footer></app-footer>
+<br/>
+<br/>
+<button class="btn btn-danger" routerLink="/" style="margin: 25px;"> Home page</button>
+<br/>
+<br/>
+<app-footer></app-footer>

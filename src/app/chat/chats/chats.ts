@@ -16,9 +16,9 @@ public cha: Chat;
   constructor(private chatService: ChatService) {}
 
   getChats() {
-    this.chatService.getAllChats().subscribe((response) => {
+  /*  this.chatService.getAllChats().subscribe((response) => {
       this.chat = response;
-    });
+    });*/
   }
 
 

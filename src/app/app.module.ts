@@ -1,4 +1,3 @@
-
 import {HttpModule} from '@angular/http';
 import {BannerComponent} from './banner/banner.component';
 import {NgModule} from '@angular/core';
@@ -58,8 +57,10 @@ import {CreateContractComponent} from './create-contract/create-contract.compone
 import {CreateOrderService} from './create-contract/create-contract.service';
 import {ListContractsComponent} from './list-contracts/list-contracts.component';
 import {ListOrderService} from './list-contracts/list-contracts.service';
-import { InternalServerErrorComponent } from './error-page/internal-server-error/internal-server-error.component';
-import {ExceptionHandler} from "./global-exception-handler/exception-handler";
+import {ChatNotifyComponent} from './chat-notify/chat-notify.component';
+import {InternalServerErrorComponent} from './error-page/internal-server-error/internal-server-error.component';
+import {ExceptionHandler} from './global-exception-handler/exception-handler';
+
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -131,6 +132,8 @@ const customNotifierOptions: NotifierOptions = {
     PortfolioComponent,
     ChatsComponent,
     ChatComponent,
+    ChatListComponent,
+    ChatNotifyComponent,
     ListOffersComponent,
     AdminApprovePageComponent,
     MenuBarComponent,
@@ -145,8 +148,8 @@ const customNotifierOptions: NotifierOptions = {
     NotFoundComponent,
     CreateContractComponent,
     ListContractsComponent,
+    ChatNotifyComponent,
     InternalServerErrorComponent
-
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,7 @@
                   <h6>Customer: {{order.customerDTO.firstName}} {{order.customerDTO.lastName}}</h6>
                   <h6>ProviderApproved: {{order.providerApproved}}</h6>
                   <h6>CustomerApproved: {{order.customerApproved}}</h6>
+                  <h6>Contract status: {{order.status}}</h6>
                   <h6>Price: {{order.price}}</h6>
                   <h6>TimeRequirement: {{order.timeRequirement}}</h6>
                   <div class="row">
@@ -36,20 +37,26 @@
                     </li>
                   </ul>
                 </div>
-                <button *ngIf="(isAdmin() || (compareWithCustomerId(order.customerDTO.id) && order.providerApproved !== 'approved'))"
+                <button *ngIf="(isAdmin() || (compareWithCustomerId(order.customerDTO.id)
+                && order.providerApproved !== 'approved' && order.status !== 'closed'))"
                         (click)="deleteOrderDTOById(order.id)"
                         class="right genric-btn primary">Delete
                 </button>
-                <button *ngIf="isProvider()" [routerLink] = "['/chat','1','2']" style="margin-right: 20px"
+                <button *ngIf="isProvider()" [routerLink] = "['/chat',order.customerDTO.userDTO.id,'2']" style="margin-right: 20px"
                         class="right genric-btn primary">Contact with customer
                 </button>
                 <button *ngIf="compareWithCustomerId(order.customerDTO.id) && order.customerApproved !== 'approved'"
                         style="margin-right: 20px" (click)="customerApproveOrderDTO(order)"
                         class="right genric-btn primary">Approve by Customer
                 </button>
-                <button *ngIf="compareWithProviderId(order.providerDTO.id)  && order.providerApproved !== 'approved'"
+                <button *ngIf="compareWithProviderId(order.providerDTO.id) && order.providerApproved !== 'approved'"
                         style="margin-right: 20px" (click)="providerApproveOrderDTO(order)"
                         class="right genric-btn primary">Approve by Provider
+                </button>
+                <button *ngIf="(compareWithProviderId(order.providerDTO.id) || compareWithCustomerId(order.customerDTO.id))
+                && order.status !== 'closed'"
+                        style="margin-right: 20px" (click)="closeOrderDTO(order)"
+                        class="right genric-btn primary">Close contract
                 </button>
               </div>
             </div>
