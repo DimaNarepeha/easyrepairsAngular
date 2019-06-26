@@ -69,7 +69,7 @@ export class ServiceProvidersComponent implements OnInit {
     return this.role == 'CUSTOMER';
   }
 
-  public isCurentProvider(id: number) {
+  public isCurrentProvider(id: number) {
     this.currentId = JSON.parse(window.sessionStorage.getItem('user')).id;
     return this.currentId === id;
   }
