@@ -116,7 +116,6 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.updateOrder(order)
       .subscribe((x) => {
           this.notifier.notify('success', 'Order approved!:');
-          this.createFeedbackFromCustomerToProvider(order.providerDTO.userDTO, order.customerDTO.userDTO);
         },
         (error) => {
           this.notifier.notify('success', error);
@@ -130,7 +129,6 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.updateOrder(order)
       .subscribe((x) => {
           this.notifier.notify('success', 'Order approved!:');
-          this.createFeedbackFromProviderToCustomer(order.customerDTO.userDTO, order.providerDTO.userDTO);
         },
         (error) => {
           this.notifier.notify('success', error);
@@ -148,7 +146,6 @@ export class ListContractsComponent implements OnInit {
     this.feedbackService.addFeedback(this.feedback)
       .subscribe(data => {
         console.log(data);
-        this.notifier.notify('success', 'Feedback added');
         this.feedback = null;
       },
         (error) => {
@@ -167,7 +164,6 @@ export class ListContractsComponent implements OnInit {
     this.feedbackService.addFeedback(this.feedback)
       .subscribe(data => {
           console.log(data);
-          this.notifier.notify('success', 'Feedback added');
           this.feedback = null;
         },
         (error) => {
@@ -184,6 +180,8 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.updateOrder(order)
       .subscribe((x) => {
           this.notifier.notify('success', 'Order closed!:');
+          this.createFeedbackFromCustomerToProvider(order.providerDTO.userDTO, order.customerDTO.userDTO);
+          this.createFeedbackFromProviderToCustomer(order.customerDTO.userDTO, order.providerDTO.userDTO);
         },
         (error) => {
           this.notifier.notify('success', error);
