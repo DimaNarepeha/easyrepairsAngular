@@ -32,7 +32,6 @@ export class ServiceProvidersComponent implements OnInit {
     this.notifier = notifierService;
   }
 
-
   ngOnInit() {
     this.userId = JSON.parse(window.sessionStorage.getItem('user')).id;
     if (this.isCustomer()) {
@@ -53,10 +52,6 @@ export class ServiceProvidersComponent implements OnInit {
     } else {
       return false;
     }
-  }
-
-  public isUser() {
-    return window.sessionStorage.getItem('user') != null;
   }
 
   public isAdmin() {
@@ -88,12 +83,10 @@ export class ServiceProvidersComponent implements OnInit {
         data => {
           console.log(data);
           const d = data;
-          console.log(d);
           this.serviceProviders = data.content;
           this.pages = new Array(d.totalPages);
           console.log(data.content);
           console.log(this.pages);
-          console.log(this.providerPage);
           console.log(data);
         },
         (error) => {

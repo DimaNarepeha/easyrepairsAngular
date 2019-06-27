@@ -12,7 +12,7 @@ import {environment} from '../../../environments/environment';
 export class ServiceProviderOneComponent implements OnInit {
 
   serviceProvider = new ServiceProviders();
-  private url = environment.baseURL + '/service-providers/image/';
+  public url = environment.baseURL + '/service-providers/image/';
   private role: any;
   private currentId: any;
   private userId: any;

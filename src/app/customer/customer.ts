@@ -10,5 +10,6 @@ export class Customer {
     updated: string;
     image:string = '1.jpg';
     logo: any;
+    rating: number;
     status: CustomerStatus;
 }

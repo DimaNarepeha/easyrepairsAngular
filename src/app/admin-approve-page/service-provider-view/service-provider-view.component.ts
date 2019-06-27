@@ -6,6 +6,8 @@ import {Email} from "../Email";
 import {ProviderStatus} from "../../service-providers/service-provider.status";
 import {NotifierService} from "angular-notifier";
 import {environment} from "../../../environments/environment";
+import {promise} from "selenium-webdriver";
+import {Time} from "@angular/common";
 
 @Component({
   selector: 'app-service-provider-view',
@@ -30,6 +32,8 @@ export class ServiceProviderViewComponent implements OnInit {
   private status: ProviderStatus;
   private selectedStatus: ProviderStatus = this.status;
   statuses: ProviderStatus [] = [ProviderStatus.NOTAPPROVED, ProviderStatus.APPROVED, ProviderStatus.MODIFIED, ProviderStatus.BLOCKED];
+  private searchDelay: number;
+  private delay: number;
 
   constructor(private serviceProvidersService: ServiceProvidersService ,private router: Router,
               private rout: ActivatedRoute, private notifier: NotifierService) {
@@ -42,6 +46,7 @@ export class ServiceProviderViewComponent implements OnInit {
 
   setStatusForAllServiceProviders(status: ProviderStatus) {
     this.status = status;
+    this.pageNumber = 0;
     this.getServiceProvidersByStatus(this.pageNumber, this.numberOfProvidersOnPage, this.status);
   }
 
@@ -86,13 +91,21 @@ export class ServiceProviderViewComponent implements OnInit {
   }
 
   getServiceProvidersByName(searchName: string): void {
-    this.serviceProvidersService.getServiceProvidersByName(searchName,this.pageNumber, this.numberOfProvidersOnPage, this.status).subscribe((serviceProvidersData) => {
-        this.serviceProviders = serviceProvidersData['content'],
-          this.pages = new Array(serviceProvidersData['totalPages']);
-      },
-      (error) => {
-        console.log(error);
-      });
+    clearTimeout(this.delay);
+    // @ts-ignore
+    this.delay = setTimeout(() => {
+      if (searchName == "") {
+        this.getServiceProvidersByStatus(this.pageNumber, this.numberOfProvidersOnPage, this.status);
+      } else {
+          this.serviceProvidersService.getServiceProvidersByName(searchName, this.pageNumber, this.numberOfProvidersOnPage, this.status).subscribe((serviceProvidersData) => {
+              this.serviceProviders = serviceProvidersData['content'];
+              this.pages = new Array(serviceProvidersData['totalPages']);
+            },
+            (error) => {
+              console.log(error);
+            });
+      }
+    }, 700);
   }
 
   ngOnInit() {
