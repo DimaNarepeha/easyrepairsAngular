@@ -28,10 +28,11 @@ export class ChatComponent implements OnInit {
   public chats: Chat [];
   public unreadChats: Chat [];
   public unreadChatsForUser: Chat [];
-  chatsForUser:Chat[];
-  id:any;
-  c:any;
+  chatsForUser: Chat[];
+  id: any;
+  c: any;
   cs: ChatService;
+
   constructor(private httpService: Http, public chatService: ChatService, private rout: ActivatedRoute, private src: SecurityRolesService) {
     this.initializeWebSocketConnection();
   }
@@ -89,6 +90,7 @@ export class ChatComponent implements OnInit {
     this.stompClient.send("/app/send/message", {}, message);
     $('#input').val('');
   }
+
   getMessagesForAUser(sendFrom: any) {
     this.httpService.get(environment.baseURL + "/message/getMessagesForUser/" + sendFrom).map((response: Response) => response.json())
       .subscribe((response) => {
@@ -96,16 +98,17 @@ export class ChatComponent implements OnInit {
         this.chatsForUser = response;
 
 
-
       });
 
   }
+
   public getChats() {
     this.chatService.getAllChats(this.messageTo, this.messageFrom).subscribe((response) => {
       this.chats = response;
     });
   }
-  public getChatsWithParameters(messageT:any,messageF:any) {
+
+  public getChatsWithParameters(messageT: any, messageF: any) {
     this.chatService.getAllChats(messageT, messageF).subscribe((response) => {
       this.chats = response;
     });
@@ -113,6 +116,7 @@ export class ChatComponent implements OnInit {
     this.messageFrom = messageT;
 
   }
+
   getUnreadChats() {
     this.chatService.getUnreadMessages(this.messageTo, this.messageFrom).subscribe((response) => {
       this.unreadChats = response;
