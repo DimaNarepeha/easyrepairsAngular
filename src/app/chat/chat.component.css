@@ -1,15 +1,21 @@
 body {
-  background-image: url("https://images.unsplash.com/photo-1560568082-c15188aa6510?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80");
+  /*background-image: url("https://images.unsplash.com/photo-1560568082-c15188aa6510?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80");*/
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 
 }
 
+.container-fluid{
+
+
+
+}
 .container {
-  height:400px;
+  /*margin-top: 90px;*/
+  height:350px;
   overflow: auto;
-  margin: 60px auto;
+  /*margin: 60px auto;*/
   background: #fff;
   padding: 0;
   border-radius: 7px;
@@ -220,7 +226,7 @@ body {
   min-height: 100%;
   margin: 0;
   padding: 0;
-  background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('tool.jpg')!important;
+ /* background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('tool.jpg')!important;*/
 }
 input:focus {
   border: 1px solid 1px;
@@ -493,12 +499,12 @@ h1 {
 body, html {
   height: 400% !important;
   margin: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('tool.jpg');
+  /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('tool.jpg');*/
 }
 
 .chat {
   height: 400%;
-  margin-top: auto;
+  margin-top: 80px;
   margin-bottom: auto;
 }
 
@@ -596,7 +602,9 @@ body, html {
 .active {
   background-color: rgba(0, 0, 0, 0.3);
 }
-
+.active:hover {
+  color: #f8b600;
+}
 .user_img {
   height: 70px;
   width: 70px;
