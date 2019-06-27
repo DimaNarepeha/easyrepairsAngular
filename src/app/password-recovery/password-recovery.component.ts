@@ -27,7 +27,7 @@ export class PasswordRecoveryComponent implements OnInit {
 
     this.apiService.password_recovery(body.toString()).subscribe(next => {
         console.log(next);
-        this.router.navigate(['login']);
+
       }, error => {
         this.handleError(error);
         this.invalidForm = true;
@@ -43,8 +43,13 @@ export class PasswordRecoveryComponent implements OnInit {
 
   handleError(error: any) {
     if (error instanceof HttpErrorResponse) {
-      this.msg = error.error.error_description;
-      this.notifier.notify('error', this.msg);
+      if (error.status === 200) {
+        this.notifier.notify('success', 'Password changed');
+        this.router.navigate(['login']);
+      } else {
+        this.msg = error.error.error_description;
+        this.notifier.notify('error', this.msg);
+      }
     }
   }
 }
