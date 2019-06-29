@@ -53,10 +53,20 @@
                         style="margin-right: 20px" (click)="providerApproveOrderDTO(order)"
                         class="right genric-btn primary">Approve by Provider
                 </button>
-                <button *ngIf="(compareWithProviderId(order.providerDTO.id) || compareWithCustomerId(order.customerDTO.id))
-                && order.status !== 'closed'"
+                <button *ngIf="((compareWithProviderId(order.providerDTO.id) || compareWithCustomerId(order.customerDTO.id))
+                && (order.customerApproved === 'approved' && order.providerApproved === 'approved'))"
+                        style="margin-right: 20px" (click)="downloadContract(order.contractName)"
+                        class="right genric-btn primary">Download contract
+                </button>
+                <button *ngIf="((compareWithProviderId(order.providerDTO.id) || compareWithCustomerId(order.customerDTO.id))
+                && ((order.customerApproved === 'approved' && order.providerApproved === 'approved') && order.status !== 'closed'))"
                         style="margin-right: 20px" (click)="closeOrderDTO(order)"
                         class="right genric-btn primary">Close contract
+                </button>
+                <button *ngIf="((compareWithProviderId(order.providerDTO.id) || compareWithCustomerId(order.customerDTO.id))
+                && (order.customerApproved === 'approved' && order.providerApproved === 'approved'))"
+                        style="margin-right: 20px" (click)="receiveContractByEmail(order.id)"
+                        class="right genric-btn primary">Receive contract by email
                 </button>
               </div>
             </div>

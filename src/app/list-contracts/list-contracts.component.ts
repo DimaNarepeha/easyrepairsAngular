@@ -4,6 +4,8 @@ import {CustomerDTO} from '../create-offer/models/customerDTO';
 import {ListOrderService} from './list-contracts.service';
 import {ProviderDTO} from '../create-offer/models/providerDTO';
 import {NotifierService} from 'angular-notifier';
+import * as fileSaver from 'file-saver';
+import {UserDTO} from '../create-offer/models/userDTO';
 
 @Component({
   selector: 'app-list-contracts',
@@ -17,8 +19,10 @@ export class ListContractsComponent implements OnInit {
   private userId: number;
   private role: string;
   private providerDTO: ProviderDTO;
+  private userDTO: UserDTO;
 
-  constructor(private listOrderService: ListOrderService, private readonly notifier: NotifierService) { }
+  constructor(private listOrderService: ListOrderService, private readonly notifier: NotifierService) {
+  }
 
   ngOnInit() {
     window.scroll(0, 0);
@@ -41,7 +45,8 @@ export class ListContractsComponent implements OnInit {
   private getOrderDTOs(): void {
     this.listOrderService.getAllOrders()
       .subscribe((x) => {
-          this.orderDTOs = x; console.log(x);
+          this.orderDTOs = x;
+          console.log(x);
         },
         (error) => {
           console.log(error);
@@ -64,6 +69,7 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.getCustomerByUserId(id)
       .subscribe((x) => {
           this.customerDTO = x;
+          this.userDTO = x.userDTO;
         },
         (error) => {
           console.log(error);
@@ -74,6 +80,7 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.getProviderByUserId(id)
       .subscribe((x) => {
           this.providerDTO = x;
+          this.userDTO = x.userDTO;
         },
         (error) => {
           console.log(error);
@@ -108,6 +115,10 @@ export class ListContractsComponent implements OnInit {
     order.customerApproved = 'approved';
     this.listOrderService.updateOrder(order)
       .subscribe((x) => {
+          this.orderDTOs = this.orderDTOs.filter(item => {
+            return (item.id !== x.id);
+          });
+          this.orderDTOs.push(x);
           this.notifier.notify('success', 'Order approved!:');
         },
         (error) => {
@@ -119,6 +130,10 @@ export class ListContractsComponent implements OnInit {
     order.providerApproved = 'approved';
     this.listOrderService.updateOrder(order)
       .subscribe((x) => {
+          this.orderDTOs = this.orderDTOs.filter(item => {
+            return (item.id !== x.id);
+          });
+          this.orderDTOs.push(x);
           this.notifier.notify('success', 'Order approved!:');
         },
         (error) => {
@@ -139,5 +154,28 @@ export class ListContractsComponent implements OnInit {
         (error) => {
           this.notifier.notify('success', error);
         });
+  }
+
+  private receiveContractByEmail(id: number) {
+    this.listOrderService.receiveContractByEmail(id, this.userDTO)
+      .subscribe((x) => {
+          this.notifier.notify('success', 'Contract sent!:');
+        },
+        (error) => {
+          this.notifier.notify('success', error);
+        });
+  }
+
+  private downloadContract(contractName: string) {
+    this.listOrderService.downloadContract(contractName)
+      .subscribe((x) => {
+        const filename = x.headers.get('filename');
+        this.saveFile(x.body, filename);
+      });
+  }
+
+  private saveFile(data: any, filename?: string) {
+    const blob = new Blob([data], {type: 'application/pdf'});
+    fileSaver.saveAs(blob, 'contract');
   }
 }
