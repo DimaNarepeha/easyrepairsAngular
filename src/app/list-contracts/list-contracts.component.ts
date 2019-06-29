@@ -6,6 +6,8 @@ import {ProviderDTO} from '../create-offer/models/providerDTO';
 import {NotifierService} from 'angular-notifier';
 import * as fileSaver from 'file-saver';
 import {UserDTO} from '../create-offer/models/userDTO';
+import {FeedbackService} from '../feedback/feedback.service';
+import {Feedback} from '../feedback/feedback';
 
 @Component({
   selector: 'app-list-contracts',
@@ -20,8 +22,10 @@ export class ListContractsComponent implements OnInit {
   private role: string;
   private providerDTO: ProviderDTO;
   private userDTO: UserDTO;
+  private feedback = new Feedback();
 
-  constructor(private listOrderService: ListOrderService, private readonly notifier: NotifierService) {
+  constructor(private listOrderService: ListOrderService, private readonly notifier: NotifierService,
+              private feedbackService: FeedbackService) {
   }
 
   ngOnInit() {
@@ -124,6 +128,8 @@ export class ListContractsComponent implements OnInit {
         (error) => {
           this.notifier.notify('success', error);
         });
+    console.log(this.feedback);
+    this.notifier.notify('success', 'Feedback added');
   }
 
   private providerApproveOrderDTO(order: OrderDTO) {
@@ -141,6 +147,42 @@ export class ListContractsComponent implements OnInit {
         });
   }
 
+  createFeedbackFromCustomerToProvider(userTo: UserDTO, userFrom: UserDTO) {
+    console.log(userTo);
+    console.log(userFrom);
+    // @ts-ignore
+    this.feedback.addressedFrom = userFrom;
+    // @ts-ignore
+    this.feedback.addressedTo = userTo;
+    console.log(this.feedback);
+    this.feedbackService.addFeedback(this.feedback)
+      .subscribe(data => {
+        console.log(data);
+        this.feedback = null;
+      },
+        (error) => {
+          this.notifier.notify('error', error);
+        });
+  }
+
+  createFeedbackFromProviderToCustomer(userTo: UserDTO, userFrom: UserDTO) {
+    console.log(userTo);
+    console.log(userFrom);
+    // @ts-ignore
+    this.feedback.addressedFrom = userFrom;
+    // @ts-ignore
+    this.feedback.addressedTo = userTo;
+    console.log(this.feedback);
+    this.feedbackService.addFeedback(this.feedback)
+      .subscribe(data => {
+          console.log(data);
+          this.feedback = null;
+        },
+        (error) => {
+          this.notifier.notify('error', error);
+        });
+  }
+
   private async delay(ms: number) {
     await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => this.getOrderDTOs());
   }
@@ -150,6 +192,8 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.updateOrder(order)
       .subscribe((x) => {
           this.notifier.notify('success', 'Order closed!:');
+          this.createFeedbackFromCustomerToProvider(order.providerDTO.userDTO, order.customerDTO.userDTO);
+          this.createFeedbackFromProviderToCustomer(order.customerDTO.userDTO, order.providerDTO.userDTO);
         },
         (error) => {
           this.notifier.notify('success', error);
