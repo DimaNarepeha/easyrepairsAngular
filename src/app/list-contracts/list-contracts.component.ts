@@ -128,8 +128,6 @@ export class ListContractsComponent implements OnInit {
         (error) => {
           this.notifier.notify('success', error);
         });
-    console.log(this.feedback);
-    this.notifier.notify('success', 'Feedback added');
   }
 
   private providerApproveOrderDTO(order: OrderDTO) {
@@ -147,7 +145,7 @@ export class ListContractsComponent implements OnInit {
         });
   }
 
-  createFeedbackFromCustomerToProvider(userTo: UserDTO, userFrom: UserDTO) {
+  private createFeedbackFromCustomerToProvider(userTo: UserDTO, userFrom: UserDTO) {
     console.log(userTo);
     console.log(userFrom);
     // @ts-ignore
@@ -165,7 +163,7 @@ export class ListContractsComponent implements OnInit {
         });
   }
 
-  createFeedbackFromProviderToCustomer(userTo: UserDTO, userFrom: UserDTO) {
+  private createFeedbackFromProviderToCustomer(userTo: UserDTO, userFrom: UserDTO) {
     console.log(userTo);
     console.log(userFrom);
     // @ts-ignore
