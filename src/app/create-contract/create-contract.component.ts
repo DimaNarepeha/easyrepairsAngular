@@ -24,6 +24,7 @@ export class CreateContractComponent implements OnInit {
   private userId: number;
   private role: string;
   private providerId = 0;
+  private isProviderAppeared = false;
 
   constructor(private createOrderService: CreateOrderService, private zone: NgZone,
               private activatedRoute: ActivatedRoute, private router: Router,
@@ -128,6 +129,7 @@ export class CreateContractComponent implements OnInit {
           this.orderDTO.providerDTO.userDTO = x.userDTO;
           this.orderDTO.providerDTO.serviceDTOs = x.services;
           this.serviceDTOs = x.services;
+          this.isProviderAppeared = true;
         },
         (error) => {
         console.log(error);
