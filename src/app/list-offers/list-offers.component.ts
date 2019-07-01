@@ -37,6 +37,7 @@ export class ListOffersComponent implements OnInit {
     this.listOfferService.getAllOffers()
       .subscribe((x) => {
           this.offerDTOs = x;
+          this.offerDTOs.sort(this.sortFn);
           console.log(x);
         },
         (error) => {
@@ -86,5 +87,9 @@ export class ListOffersComponent implements OnInit {
 
   private async delay(ms: number) {
     await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => this.getOfferDTOs());
+  }
+
+  sortFn(n1: OfferDTO , n2: OfferDTO) {
+    return (n2.id - n1.id);
   }
 }

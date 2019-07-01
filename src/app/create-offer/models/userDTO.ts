@@ -3,5 +3,4 @@ export class UserDTO {
   username: string;
   email: string;
   signature: string;
-  // password: string;
 }
