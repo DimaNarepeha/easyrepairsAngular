@@ -6,6 +6,8 @@ import {environment} from '../../environments/environment';
 import {ApiService} from '../core/api.service';
 import {OfferDTO} from '../create-offer/models/offerDTO';
 import {CustomerDTO} from '../create-offer/models/customerDTO';
+import {OrderDTO} from "../create-offer/models/orderDTO";
+import {ServiceProviders} from "../service-providers/service-providers";
 
 const headers = new HttpHeaders(
   {
@@ -32,6 +34,17 @@ export class ListOfferService {
   deleteOfferById(id: number) {
     return this.httpService.delete(environment.baseURL + '/offers/' + id + '?access_token='
       + this.apiService.returnAccessToken());
+  }
+
+  updateOffer(offer: OfferDTO): Observable<any> {
+    console.log("offer.id " + offer.id);
+    console.log(environment.baseURL + '/offers/update' + '?access_token='
+      + this.apiService.returnAccessToken());
+    console.log(JSON.stringify(offer));
+    return this.httpService.put<OfferDTO>(environment.baseURL + '/offers/update'
+      + '?access_token=' + this.apiService.returnAccessToken()
+      , JSON.stringify(offer), {headers})
+      .catch(err => this.handleError(err));
   }
 
   private handleError(error: Response) {

@@ -3,6 +3,8 @@ import {OfferDTO} from '../create-offer/models/offerDTO';
 import {ListOfferService} from './list-offer.service';
 import {CustomerDTO} from '../create-offer/models/customerDTO';
 import {NotifierService} from 'angular-notifier';
+import {DatePipe, formatDate} from "@angular/common";
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-list-offers',
@@ -15,8 +17,10 @@ export class ListOffersComponent implements OnInit {
   private customerDTO: CustomerDTO;
   private userId: number;
   private role: string;
+  timerEnds = new Array<boolean>();
+  dayInMs = 86400000;
 
-  constructor(private listOfferService: ListOfferService, private readonly notifier: NotifierService) { }
+  constructor(private listOfferService: ListOfferService, private readonly notifier: NotifierService) {}
 
   ngOnInit() {
     window.scroll(0, 0);
@@ -86,5 +90,30 @@ export class ListOffersComponent implements OnInit {
 
   private async delay(ms: number) {
     await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => this.getOfferDTOs());
+  }
+
+
+  onNotify(offerId: number) {
+    this.timerEnds[offerId] = true;
+  }
+
+  getRemoveTime(offer: OfferDTO) {
+    let date = new Date(offer.createDate);
+    const removeTime = new Date(offer.removeDate).getTime();
+    if ((removeTime - new Date().getTime()) <= this.dayInMs) {
+      this.onNotify(offer.id);
+    }
+    return (removeTime);
+  }
+
+  continueOffer(offer: OfferDTO) {
+    const datePipe = new DatePipe('en-US');
+    const newRemoveDate = new Date();
+    newRemoveDate.setDate(new Date(offer.removeDate).getDate() + 7);
+    offer.removeDate = datePipe.transform(newRemoveDate, 'yyyy-MM-dd');
+    this.listOfferService.updateOffer(offer).subscribe();
+    this.timerEnds[offer.id] = false;
+    delay(1200);
+    this.ngOnInit();
   }
 }

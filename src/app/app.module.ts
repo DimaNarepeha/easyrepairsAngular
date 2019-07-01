@@ -65,6 +65,8 @@ import {FavouriteService} from "./favorite/favourite.service";
 import {InternalServerErrorComponent} from './error-page/internal-server-error/internal-server-error.component';
 import {ExceptionHandler} from './global-exception-handler/exception-handler';
 import {ChatNotifyComponent} from './chat-notify/chat-notify.component';
+import { CountdownModule } from 'ngx-countdown';
+
 
 
 const customNotifierOptions: NotifierOptions = {
@@ -170,7 +172,8 @@ const customNotifierOptions: NotifierOptions = {
     HttpClientModule,
     NgbModule,
     NgxCaptchaModule,
-    NotifierModule.withConfig(customNotifierOptions)
+    NotifierModule.withConfig(customNotifierOptions),
+    CountdownModule
   ],
 
   providers: [ServiceProvidersService,ServiceProviderViewComponent, FavouriteService, CustomerViewComponent, ChatService, PortfolioService, CustomerService, ApiService, LandingPageService,
