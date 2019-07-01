@@ -4,9 +4,10 @@ import {CustomerDTO} from '../create-offer/models/customerDTO';
 import {ListOrderService} from './list-contracts.service';
 import {ProviderDTO} from '../create-offer/models/providerDTO';
 import {NotifierService} from 'angular-notifier';
-import {FeedbackService} from "../feedback/feedback.service";
-import {Feedback} from "../feedback/feedback";
-import {UserDTO} from "../create-offer/models/userDTO";
+import * as fileSaver from 'file-saver';
+import {UserDTO} from '../create-offer/models/userDTO';
+import {FeedbackService} from '../feedback/feedback.service';
+import {Feedback} from '../feedback/feedback';
 
 @Component({
   selector: 'app-list-contracts',
@@ -20,6 +21,7 @@ export class ListContractsComponent implements OnInit {
   private userId: number;
   private role: string;
   private providerDTO: ProviderDTO;
+  private userDTO: UserDTO;
   private feedback = new Feedback();
 
   constructor(private listOrderService: ListOrderService, private readonly notifier: NotifierService,
@@ -71,6 +73,7 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.getCustomerByUserId(id)
       .subscribe((x) => {
           this.customerDTO = x;
+          this.userDTO = x.userDTO;
         },
         (error) => {
           console.log(error);
@@ -81,6 +84,7 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.getProviderByUserId(id)
       .subscribe((x) => {
           this.providerDTO = x;
+          this.userDTO = x.userDTO;
         },
         (error) => {
           console.log(error);
@@ -115,19 +119,25 @@ export class ListContractsComponent implements OnInit {
     order.customerApproved = 'approved';
     this.listOrderService.updateOrder(order)
       .subscribe((x) => {
+          this.orderDTOs = this.orderDTOs.filter(item => {
+            return (item.id !== x.id);
+          });
+          this.orderDTOs.push(x);
           this.notifier.notify('success', 'Order approved!:');
         },
         (error) => {
           this.notifier.notify('success', error);
         });
-    console.log(this.feedback);
-    this.notifier.notify('success', 'Feedback added');
   }
 
   private providerApproveOrderDTO(order: OrderDTO) {
     order.providerApproved = 'approved';
     this.listOrderService.updateOrder(order)
       .subscribe((x) => {
+          this.orderDTOs = this.orderDTOs.filter(item => {
+            return (item.id !== x.id);
+          });
+          this.orderDTOs.push(x);
           this.notifier.notify('success', 'Order approved!:');
         },
         (error) => {
@@ -135,7 +145,7 @@ export class ListContractsComponent implements OnInit {
         });
   }
 
-  createFeedbackFromCustomerToProvider(userTo: UserDTO, userFrom: UserDTO) {
+  private createFeedbackFromCustomerToProvider(userTo: UserDTO, userFrom: UserDTO) {
     console.log(userTo);
     console.log(userFrom);
     // @ts-ignore
@@ -153,7 +163,7 @@ export class ListContractsComponent implements OnInit {
         });
   }
 
-  createFeedbackFromProviderToCustomer(userTo: UserDTO, userFrom: UserDTO) {
+  private createFeedbackFromProviderToCustomer(userTo: UserDTO, userFrom: UserDTO) {
     console.log(userTo);
     console.log(userFrom);
     // @ts-ignore
@@ -186,5 +196,28 @@ export class ListContractsComponent implements OnInit {
         (error) => {
           this.notifier.notify('success', error);
         });
+  }
+
+  private receiveContractByEmail(id: number) {
+    this.listOrderService.receiveContractByEmail(id, this.userDTO)
+      .subscribe((x) => {
+          this.notifier.notify('success', 'Contract sent!:');
+        },
+        (error) => {
+          this.notifier.notify('success', error);
+        });
+  }
+
+  private downloadContract(contractName: string) {
+    this.listOrderService.downloadContract(contractName)
+      .subscribe((x) => {
+        const filename = x.headers.get('filename');
+        this.saveFile(x.body, filename);
+      });
+  }
+
+  private saveFile(data: any, filename?: string) {
+    const blob = new Blob([data], {type: 'application/pdf'});
+    fileSaver.saveAs(blob, 'contract');
   }
 }

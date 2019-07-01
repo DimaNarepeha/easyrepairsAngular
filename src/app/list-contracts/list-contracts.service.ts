@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Response} from '@angular/http';
 import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
@@ -7,6 +6,7 @@ import {ApiService} from '../core/api.service';
 import {OrderDTO} from '../create-offer/models/orderDTO';
 import {CustomerDTO} from '../create-offer/models/customerDTO';
 import {ProviderDTO} from '../create-offer/models/providerDTO';
+import {UserDTO} from '../create-offer/models/userDTO';
 
 const headers = new HttpHeaders(
   {
@@ -43,6 +43,16 @@ export class ListOrderService {
   deleteOrderById(id: number) {
     return this.httpService.delete(environment.baseURL + '/orders/' + id + '?access_token='
       + this.apiService.returnAccessToken());
+  }
+
+  downloadContract(fileName: string) {
+    return this.httpService.get(environment.baseURL + '/orders/contract/' + fileName + '?access_token='
+      + this.apiService.returnAccessToken(), {headers, responseType: 'blob', observe: 'response'});
+  }
+
+  receiveContractByEmail(id: number, userDTO: UserDTO) {
+    return this.httpService.put(environment.baseURL + '/orders/email/contract/' + id + '?access_token='
+      + this.apiService.returnAccessToken(), JSON.stringify(userDTO), {headers});
   }
 
   private handleError(error: Response) {
