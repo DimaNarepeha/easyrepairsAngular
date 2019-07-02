@@ -1,0 +1,35 @@
+<app-menu-bar [showForCustomers]="true"></app-menu-bar>
+
+<div class="container-fluid">
+<div class="row rounded border border-dark" style="margin: 20px; padding: 20px" *ngFor="let customer of customers">
+  <div class="col-lg-2">
+    <img class="img_styles rounded" alt="{{customer.userDTO.image}}" width="100" height="100"
+         src="{{url}}image/{{customer.userDTO.image}}"/>
+  </div>
+  <div class="col-lg-6">
+
+       First Name: {{customer.firstName}}
+    <br>Last Name:  {{customer.lastName}}
+    <br>Email: {{customer.email}}
+</div>
+
+  <div class="col-lg-4">
+
+    <div class="approve">
+      <select class="form-control status-select" placeholder="Select Status"
+              name="selectedStatus" (change)="updateCustomerStatus(customer.id,$event.target.value)">
+        <option selected> Choose Status </option>
+        <option *ngFor="let selectedStatus of customerStatuses" [value]="selectedStatus">
+          {{selectedStatus}}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+</div>
+<ul class="nav nav-pills">
+  <li class="nav-item" *ngFor="let p of pages; let i=index">
+    <a class="nav-link " href="" (click)="setPage(i,$event)">{{i + 1}}</a>
+  </li>
+</ul>
+

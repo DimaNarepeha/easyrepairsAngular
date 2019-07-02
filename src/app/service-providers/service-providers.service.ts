@@ -15,6 +15,7 @@ import {Portfolio} from '../portfolio/portfolio';
 import {Router} from '@angular/router';
 import {ExceptionHandler} from "../global-exception-handler/exception-handler";
 import {Service} from "./service";
+import {Email} from "../admin-approve-page/Email";
 
 
 const headers = new HttpHeaders(
@@ -106,9 +107,15 @@ export class ServiceProvidersService {
       .set('page', String(page)).set('status', statusString);
     return this.httpService.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/status?` + params + '&access_token='
       + this.apiService.returnAccessToken())
-      .pipe(
-        map(res => res['content']))
       .catch(err => this.exception.handleError(err));
+  }
+
+  getServiceProvidersByName(searchName: string, page: number, numberOfProvidersOnPage: number, status: ProviderStatus): Observable<ServiceProviders[]>{
+    const statusString: string = ProviderStatus[status];
+    const params = new HttpParams().set('numberOfProvidersOnPage', String(numberOfProvidersOnPage))
+      .set('page', String(page)).set('status', statusString).set("searchName", searchName);
+    return this.httpService.get<ServiceProviders[]>(this.baseURL + `/service-providers/find-all/searchByName?` + params
+      + '&access_token=' + this.apiService.returnAccessToken(), {headers});
   }
 
   getPortfolio(id: number): Observable<Portfolio> {
@@ -132,6 +139,10 @@ export class ServiceProvidersService {
       .catch(err => this.exception.handleError(err));
   }
 
+  sendEmailToUser( email: Email) : Observable<any> {
+    let body = JSON.stringify(email);
+    return this.httpService.post(environment.baseURL + '/email/', body , {headers} );
+  }
   saveServiceForProvider(id: number, service: Service): Observable<Service> {
     return this.httpService.post<Service>(this.baseURL + '/services/save/' + id + '?access_token='
       + this.apiService.returnAccessToken(), JSON.stringify(service), {headers})
@@ -142,5 +153,4 @@ export class ServiceProvidersService {
     return this.httpService.delete<Service[]>(this.baseURL + '/services/delete/' + id + '/' + serviceName, {headers})
       .catch(err => this.exception.handleError(err));
   }
-
 }

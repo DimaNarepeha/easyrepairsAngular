@@ -18,6 +18,8 @@
                 <a><i class="far fa-calendar-alt" aria-hidden="true"></i> {{serviceProvider.registrationDate}}
                 </a>
                 <a><i class="far fa-comments" aria-hidden="true"></i> {{serviceProvider.countComment}}</a>
+                <a><i class="fa fa-heart" (click)="addToFavourite(serviceProvider)" *ngIf="checkFavouriteProvider(serviceProvider)&&isCustomer()" ></i></a>
+                <a><i class="fa fa-heart-o" (click)="addToFavourite(serviceProvider)" *ngIf="!checkFavouriteProvider(serviceProvider)&&isCustomer()"></i></a>
                 <div class="right">
                   <a><i style=" color: #FFC107;" class="fas fa-star"
                                  aria-hidden="true"></i> {{serviceProvider.raiting}}</a>

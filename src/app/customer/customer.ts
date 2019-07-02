@@ -1,3 +1,4 @@
+import {CustomerStatus} from "./CustomerStatus";
 
 
 export class Customer {
@@ -10,4 +11,5 @@ export class Customer {
     image:string = '1.jpg';
     logo: any;
     rating: number;
+    status: CustomerStatus;
 }
