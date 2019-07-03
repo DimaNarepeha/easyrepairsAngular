@@ -25,7 +25,6 @@ export class CreateContractComponent implements OnInit {
   private role: string;
   private providerId = 0;
   private isProviderAppeared = false;
-  private isCustomerAppeared = false;
 
   constructor(private createOrderService: CreateOrderService, private zone: NgZone,
               private activatedRoute: ActivatedRoute, private router: Router,
@@ -114,7 +113,6 @@ export class CreateContractComponent implements OnInit {
     this.createOrderService.getCustomerByUserId(id)
       .subscribe((x) => {
           this.orderDTO.customerDTO = x;
-          this.isCustomerAppeared = true;
         },
         (error) => {
           console.log(error);
@@ -147,9 +145,5 @@ export class CreateContractComponent implements OnInit {
     const sDate = new Date(startDate);
     const eDate = new Date(endDate);
     return ((sDate.getTime() <= eDate.getTime()) && (cDate.getTime() <= sDate.getTime()));
-  }
-
-  private cancelOrderDTO(): void {
-    this.router.navigate(['./']);
   }
 }

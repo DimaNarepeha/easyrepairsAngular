@@ -38,8 +38,6 @@
             </div>
             <h3 *ngIf="isProviderAppeared" style="color: #FFC107">Provider name: {{orderDTO.providerDTO.name}}</h3>
             <br>
-            <h3 *ngIf="isCustomerAppeared" style="color: #FFC107">Customer name: {{orderDTO.customerDTO.firstName}} {{orderDTO.customerDTO.lastName}}</h3>
-            <br>
             <p style="color: #FFC107">Enter your location:</p>
             <input type="text"
                    class="google-place-input w3-input w3-border w3-round-large container"
@@ -89,14 +87,8 @@
                       maxlength="1000" class="w3-input w3-border w3-round-large container">
             </textarea>
             <br>
-            <p style="color: #FFC107">By typing your name you agree to the terms and conditions of this contract.
-              The contract cannot be amended after you sign it. But it will be possible to create "Addendum to the contract.</p>
-            <br>
             <div class="row justify-content-center">
-              <button class="col-md-4 w3-btn w3-yellow w3-round-large" (click)="createOrderDTO()">Create contract
-              </button>
-              <div class="col-md-1" > </div>
-              <button class=" col-md-4 w3-btn w3-yellow w3-round-large" (click)="cancelOrderDTO()">Cancel
+              <button class="w3-btn w3-yellow w3-round-large" (click)="createOrderDTO()">Create contract
               </button>
             </div>
             <br>

@@ -3,8 +3,8 @@ import {OfferDTO} from '../create-offer/models/offerDTO';
 import {ListOfferService} from './list-offer.service';
 import {CustomerDTO} from '../create-offer/models/customerDTO';
 import {NotifierService} from 'angular-notifier';
-import {DatePipe, formatDate} from '@angular/common';
-import {delay} from 'rxjs/operators';
+import {DatePipe, formatDate} from "@angular/common";
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-list-offers',
@@ -20,7 +20,7 @@ export class ListOffersComponent implements OnInit {
   timerEnds = new Array<boolean>();
   dayInMs = 86400000;
 
-  constructor(private listOfferService: ListOfferService, private readonly notifier: NotifierService) { }
+  constructor(private listOfferService: ListOfferService, private readonly notifier: NotifierService) {}
 
   ngOnInit() {
     window.scroll(0, 0);
@@ -41,7 +41,6 @@ export class ListOffersComponent implements OnInit {
     this.listOfferService.getAllOffers()
       .subscribe((x) => {
           this.offerDTOs = x;
-          this.offerDTOs.sort(this.sortFn);
           console.log(x);
         },
         (error) => {
@@ -93,9 +92,6 @@ export class ListOffersComponent implements OnInit {
     await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => this.getOfferDTOs());
   }
 
-  sortFn(element1: OfferDTO , element2: OfferDTO) {
-    return (element1.id - element2.id);
-  }
 
   onNotify(offerId: number) {
     this.timerEnds[offerId] = true;
