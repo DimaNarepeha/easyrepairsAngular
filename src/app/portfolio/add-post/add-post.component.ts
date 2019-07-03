@@ -35,7 +35,7 @@ export class AddPostComponent implements OnInit {
     if (this.condition == false) {
       this.notifier.notify('error', 'Upload photo!');
     } else {
-      if (this.post.mainDescription == null || this.post.header == null) {
+      if (this.post.mainDescription.length === 0 || this.post.header.length === 0) {
         this.notifier.notify('error', 'Fields must be filled');
       } else {
         console.log('Portfolio id: ' + this.portfolioId);
