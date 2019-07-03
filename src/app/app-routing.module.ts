@@ -58,7 +58,7 @@ const routes: Routes = [
   {path: 'my-profile', component: MyProfileComponent},
   {path: 'provider-portfolio/:id', component: PortfolioComponent},
   {path: 'portfolio/edit-post/:id', component: EditPostComponent},
-  {path: 'portfolio/add-post/:id', component: AddPostComponent},
+  {path: 'portfolio/add-post/:id/:username', component: AddPostComponent},
   {path: 'chats', component: ChatsComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'create-contract/:id', component: CreateContractComponent},

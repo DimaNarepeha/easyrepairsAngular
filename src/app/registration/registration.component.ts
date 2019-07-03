@@ -64,7 +64,7 @@ export class RegistrationComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       err => {
-        this.notifier.notify('success', 'Email or username already exist!');
+        this.notifier.notify('error', 'Email or username already exist!');
       });
   }
 
