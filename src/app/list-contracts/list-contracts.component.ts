@@ -224,7 +224,7 @@ export class ListContractsComponent implements OnInit {
     fileSaver.saveAs(blob, 'contract');
   }
 
-  sortFn(n1: OrderDTO , n2: OrderDTO) {
-    return (n2.id - n1.id);
+  sortFn(element1: OrderDTO , element2: OrderDTO) {
+    return (element1.id - element2.id);
   }
 }

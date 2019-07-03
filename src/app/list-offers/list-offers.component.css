@@ -235,6 +235,10 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 5%;
 }
 
+.continue-button {
+  margin-right: 2%;
+  height: 40px;
+}
 .image {
   /*background-image: url("~res/showBg.jpg");*/
   /*background-size: cover;*/
