@@ -22,4 +22,8 @@ export class FavouriteService {
   addToFavourite(customerId: number, serviceProvider: ServiceProviders): any {
     return this.http.put(environment.favourite_url + "addToFavourite/" + customerId +'/provider/' + serviceProvider.id, {});
   }
+
+  removeFromFavourite(customerId: any, serviceProvider: ServiceProviders): any {
+    return this.http.put(environment.favourite_url + "removeFromFavourite/" + customerId +'/provider/' + serviceProvider.id, {});
+  }
 }
