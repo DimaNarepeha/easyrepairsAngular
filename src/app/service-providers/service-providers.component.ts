@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import {NotifierService} from 'angular-notifier';
 import {FavouriteService} from "../favorite/favourite.service";
 import {CustomerService} from "../customer/customer.service";
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-service-providers',
@@ -108,7 +109,12 @@ export class ServiceProvidersComponent implements OnInit {
 
 
   addToFavourite(serviceProvider: ServiceProviders) {
-    this.favouriteService.addToFavourite(this.customerId, serviceProvider).subscribe(
-      this.ngOnInit());
+    this.favouriteService.addToFavourite(this.customerId, serviceProvider).subscribe();
+    this.ngOnInit();
+  }
+
+  removeFromFavourite(serviceProvider: ServiceProviders) {
+    this.favouriteService.removeFromFavourite(this.customerId, serviceProvider).subscribe();
+    this.ngOnInit();
   }
 }

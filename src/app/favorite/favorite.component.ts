@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServiceProviders} from "../service-providers/service-providers";
 import {FavouriteService} from "./favourite.service";
-import {environment} from "../../environments/environment";
 import {Customer} from "../registration/customer";
 import {CustomerService} from "../customer/customer.service";
 
@@ -43,5 +42,12 @@ export class FavoriteComponent implements OnInit {
       (error) => {
         console.log(error);
       });
+  }
+
+  removeFromFavourite(serviceProvider: ServiceProviders) {
+    this.favouriteService.removeFromFavourite(this.customerId, serviceProvider).subscribe(data => {
+      console.log(data);
+    });
+    this.ngOnInit();
   }
 }
