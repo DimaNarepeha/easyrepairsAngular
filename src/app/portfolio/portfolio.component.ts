@@ -3,10 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PortfolioService} from './portfolio.service';
 import {Portfolio} from './portfolio';
 import {Post} from './post';
-import {ApiService} from "../core/api.service";
-import {environment} from "../../environments/environment";
-import {ServiceProviderOneComponent} from "../service-providers/service-provider-one/service-provider-one.component";
-import {ServiceProviders} from "../service-providers/service-providers";
+import {ApiService} from '../core/api.service';
+import {environment} from '../../environments/environment';
+import {ServiceProviders} from '../service-providers/service-providers';
 
 
 @Component({
@@ -23,7 +22,7 @@ export class PortfolioComponent implements OnInit {
   provider = new ServiceProviders();
   isProvider: boolean;
   isAdmin: boolean;
-  private currentId: number;
+  currentId: number;
   private imageUrl = environment.baseURL + '/service-providers/image/';
 
   constructor(private portfolioService: PortfolioService, private rout: ActivatedRoute, private apiService: ApiService) {
@@ -39,6 +38,10 @@ export class PortfolioComponent implements OnInit {
     }
   }
 
+  public isCurrentProvider(id: number) {
+    this.currentId = JSON.parse(window.sessionStorage.getItem('user')).id;
+    return this.currentId === id;
+  }
   ngOnInit() {
     this.rout.params.subscribe(next => {
         this.portfolioService.getPortfolioById(next.id).subscribe(next => {
