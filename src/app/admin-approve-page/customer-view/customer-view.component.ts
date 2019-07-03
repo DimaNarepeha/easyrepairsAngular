@@ -30,9 +30,6 @@ export class CustomerViewComponent implements OnInit {
   public im: any;
   role: string;
 
-  // constructor(private customerService: CustomerService) {
-  //   this.status = CustomerStatus.ACTIVE;
-  // }
   constructor(private customerService: CustomerService, private _sanitizer: DomSanitizer, notifierService: NotifierService) {
     this.status = CustomerStatus.ACTIVE;
     this.notifier = notifierService;
@@ -40,7 +37,6 @@ export class CustomerViewComponent implements OnInit {
 
   ngOnInit() {
     this.getCustomersByStatus(this.pageNumber, this.numberOfCustomersOnPage, CustomerStatus.ACTIVE);
-    // this.getCustomersByPage();
   }
 
   setPage(pageNumber, event: any) {
@@ -53,15 +49,8 @@ export class CustomerViewComponent implements OnInit {
   getCustomersByStatus(page: number, numberOfCustomersOnPage: number, status: CustomerStatus): void {
     this.customerService.getCustomersByStatus(page, numberOfCustomersOnPage, status).subscribe(
       data => {
-        console.log(data);
-        // const d = data.json();
-        console.log(data);
         this.customerPage = data['content'];
         this.pages = new Array(data['totalPages']);
-        console.log(data['content']);
-        console.log(this.pages);
-        console.log(this.customerPage);
-        console.log(data);
         if (data['content'] != "") {
           this.isAnyCustomersPreset = true;
         }
@@ -69,14 +58,6 @@ export class CustomerViewComponent implements OnInit {
       (error) => {
         console.log(error);
       });
-      // .subscribe((customersData) => {
-      //   this.customers = customersData['content'];
-      //   this.pages = new Array(customersData['totalPages']);
-      //   console.log('customersData = ' + customersData);
-      // },
-      // (error) => {
-      //   console.log(error);
-      // });
   }
 
   updateCustomerStatus(id: number, status: CustomerStatus) {
@@ -104,49 +85,15 @@ export class CustomerViewComponent implements OnInit {
       } else {
         this.customerService.getCustomersByFirstName(this.pageNumber, this.numberOfCustomersOnPage, this.status, firstName).subscribe(
           data => {
-            console.log(data);
-            // const d = data.json();
-            console.log(data);
             this.customerPage = data['content'];
             this.pages = new Array(data['totalPages']);
-            console.log(data['content']);
-            console.log(this.pages);
-            console.log(this.customerPage);
-            console.log(data);
           },
           (error) => {
             console.log(error);
           });
-
-          // .subscribe((customersData) => {
-          //   console.log(customersData);
-          //   this.customers = customersData['content'];
-          //   this.pages = new Array(customersData['totalPages']);
-          // },
-          // (error) => {
-          //   console.log(error);
-          // });
       }
     }, 700);
   }
-
-
-  // constructor(private customerService: CustomerService, private _sanitizer: DomSanitizer, notifierService: NotifierService) {
-  //
-  //   this.notifier = notifierService;
-  // }
-  //
-  // ngOnInit(): void {
-  //   this.getCustomersByPage();
-  // }
-  //
-  // setPage(i, event: any) {
-  //   event.preventDefault();
-  //   this.page = i;
-  //   this.getCustomersByPage();
-  //
-  // }
-
 
   formGroup: FormGroup = new FormGroup({
     firstname: new FormControl(null, [
@@ -189,25 +136,6 @@ export class CustomerViewComponent implements OnInit {
       this.getCustomersByStatus(this.pageNumber, this.numberOfCustomersOnPage, CustomerStatus.ACTIVE);
     });
   }
-
-  // getCustomersByPage() {
-  //   return this.customerService.getCustomersPage(this.page).subscribe(
-  //     data => {
-  //       console.log(data);
-  //       const d = data.json();
-  //       console.log(d);
-  //       this.customerPage = d['content'];
-  //       this.pages = new Array(d['totalPages']);
-  //       console.log(data['content']);
-  //       console.log(this.pages);
-  //       console.log(this.customerPage);
-  //       console.log(data);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
 
   getCustomers(): void {
     this.customerService.getAllCustomers().subscribe(
@@ -262,7 +190,6 @@ export class CustomerViewComponent implements OnInit {
 
   }
 
-
   getCustomerById(customerId: string) {
     this.customerService.getCustomerById(customerId)
       .subscribe((customerData) => {
@@ -273,7 +200,4 @@ export class CustomerViewComponent implements OnInit {
         console.log(error);
       });
   }
-
-
-
 }
