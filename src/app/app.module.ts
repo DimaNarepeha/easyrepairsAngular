@@ -57,9 +57,16 @@ import {CreateContractComponent} from './create-contract/create-contract.compone
 import {CreateOrderService} from './create-contract/create-contract.service';
 import {ListContractsComponent} from './list-contracts/list-contracts.component';
 import {ListOrderService} from './list-contracts/list-contracts.service';
-import {ChatNotifyComponent} from './chat-notify/chat-notify.component';
+import { AdminApproveStartComponent } from './admin-approve-page/admin-approve-start/admin-approve-start.component';
+import { CustomerViewComponent } from './admin-approve-page/customer-view/customer-view.component';
+import { ServiceProviderViewComponent } from './admin-approve-page/service-provider-view/service-provider-view.component';
+import { FavoriteComponent } from './favorite/favorite.component';
+import {FavouriteService} from "./favorite/favourite.service";
 import {InternalServerErrorComponent} from './error-page/internal-server-error/internal-server-error.component';
 import {ExceptionHandler} from './global-exception-handler/exception-handler';
+import {ChatNotifyComponent} from './chat-notify/chat-notify.component';
+import { CountdownModule } from 'ngx-countdown';
+
 
 
 const customNotifierOptions: NotifierOptions = {
@@ -139,7 +146,11 @@ const customNotifierOptions: NotifierOptions = {
     MenuBarComponent,
     FeedbackComponent,
     VerificationComponent,
-    CaptchaComponent,
+    MyProfileComponent,
+    AdminApproveStartComponent,
+    CustomerViewComponent,
+    ServiceProviderViewComponent,
+    FavoriteComponent,
     EditPostComponent,
     AddPostComponent,
     CaptchaComponent,
@@ -161,15 +172,16 @@ const customNotifierOptions: NotifierOptions = {
     HttpClientModule,
     NgbModule,
     NgxCaptchaModule,
-    NotifierModule.withConfig(customNotifierOptions)
+    NotifierModule.withConfig(customNotifierOptions),
+    CountdownModule
   ],
 
-  providers: [ServiceProvidersService, ChatService, PortfolioService, CustomerService, ApiService, LandingPageService,
+  providers: [ServiceProvidersService,ServiceProviderViewComponent, FavouriteService, CustomerViewComponent, ChatService, PortfolioService, CustomerService, ApiService, LandingPageService,
     RegistrationService, CreateOfferService, ListOfferService, FeedbackService, CreateOrderService, ListOrderService, ExceptionHandler],
   bootstrap:
     [AppComponent]
-
 })
 
 export class AppModule {
 }
+

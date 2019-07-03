@@ -93,21 +93,39 @@ export class UpdateServiceProviderComponent implements OnInit {
   }
 
   addService(): void {
-    let newSerivce = new Service();
-    newSerivce.serviceName = this.service;
-    console.log(newSerivce);
-    this.serviceProvidersService.saveServiceForProvider(this.serviceProvider.id, newSerivce)
-      .subscribe(data => console.log(data));
-    location.reload();
+    const newService = new Service();
+    newService.serviceName = this.service;
+    console.log(newService);
+    this.serviceProvidersService.saveServiceForProvider(this.serviceProvider.id, newService)
+      .subscribe(data => {
+        this.serviceProvider.services.push(data);
+        this.getAllServiceIsNotPresentInProvider();
+        console.log(data);
+      });
     this.notifier.notify('success', 'Service added');
   }
 
   deleteByServiceName(serviceName: string): void {
-    console.log('service name:' + serviceName + "id:" + this.serviceProvider.id);
+    console.log('service name:' + serviceName + 'id:' + this.serviceProvider.id);
     this.serviceProvidersService.deleteServiceInProvider(this.serviceProvider.id, serviceName)
-      .subscribe(data => console.log(data));
-    this.notifier.notify('success', 'Service deleted');
-    location.reload();
+      .subscribe(data => {
+        console.log(data);
+        this.serviceProvider.services =  this.serviceProvider.services.filter( item => {
+          return (item.serviceName !== serviceName);
+        });
+        this.getAllServiceIsNotPresentInProvider();
+      });
+    this.notifier.notify('error', 'Service deleted');
+  }
+
+  getAllServiceIsNotPresentInProvider() {
+    this.serviceProvidersService.getAllServiceIsNotPresentInProvider(this.serviceProvider.id)
+      .subscribe(data => {
+        this.allServices = data;
+        this.allServices.forEach(el => {
+          console.log(el);
+        });
+      });
   }
 
 
@@ -119,13 +137,7 @@ export class UpdateServiceProviderComponent implements OnInit {
           this.serviceProvider = next;
           console.log(next);
           console.log(this.serviceProvider);
-          this.serviceProvidersService.getAllServiceIsNotPresentInProvider(this.serviceProvider.id)
-            .subscribe(data => {
-              this.allServices = data;
-              this.allServices.forEach(el => {
-                console.log(el);
-              });
-            });
+          this.getAllServiceIsNotPresentInProvider();
         } else {
           this.router.navigate(['/']);
           this.notifier.notify('error', 'Access denied');

@@ -60,7 +60,7 @@
                     <h2>SERVICES</h2>
 
                     <div class="row">
-                      <div class="col-lg-4 " *ngFor="let service of serviceProvider.servicesDTO">
+                      <div class="col-lg-4 " *ngFor="let service of serviceProvider.services">
                         <div class="service-block text-center">
 
                           <span>{{service.serviceName}} </span>
@@ -80,7 +80,7 @@
     <div class="row">
       <div class="col-lg-4" *ngFor="let feedback of serviceProvider.feedbacks ">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <div class='slider center'>
+        <div *ngIf="feedback.rating != 0" class='slider center'>
           <div class='love fa fa-heart-o'></div>
           <span class="right">{{feedback.rating}}</span>
           <div class='slide'>

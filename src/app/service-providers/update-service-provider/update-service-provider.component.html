@@ -49,6 +49,7 @@
               </option>
             </select>
             <br/>
+          <div style="alignment: left;" class="card-body">
             <h3>Your location:</h3>
             <p class="card-text">Country: {{serviceProvider.location?.country}}</p>
             <p class="card-text">Region: {{serviceProvider.location?.region}}</p>
@@ -61,6 +62,7 @@
               (onSelect)="setAddress($event)"
               placeholder="Type to search..">
             </div>
+          </div>
 
             <button [disabled]="!formGroup.valid" *ngIf="isCurrentProvider(serviceProvider.userDTO.id) || isAdmin()" style="margin-top: 54px;"
                     class="btn btn-success" (click)="updateService()">Update
