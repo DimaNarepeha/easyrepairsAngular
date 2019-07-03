@@ -14,8 +14,8 @@
           <label class="custom-file-upload">
             <input type="file" class="btn btn-outline-info" accept="image/"
                    (change)="onSelectFile($event,serviceProvider.id)"
-                   style="height:100%"/>
-            <i class="fa fa-cloud-upload"></i> Change image
+                   style="height:100%;" [hidden]="true"/>
+            <i class="fa fa-cloud-upload" style="margin-left: 10px;"></i> Change image
           </label>
         </div>
       </div>
