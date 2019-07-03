@@ -8,7 +8,7 @@
         <label>
           <input class="input-number"
             style="width: 40px;    height:30px;font-size: 1em; line-height: 18px; padding: 2px; background: none; border:1px solid grey ;"
-            type="number" value="pageSize" min="1"
+            type="number" value="pageSize" min="1" max="30"
             (change)="getServiceProvidersByPage()"
             [(ngModel)]="pageSize">
         </label>
@@ -37,13 +37,13 @@
           <div class="blog_text">
             <div class="blog_text_inner">
               <div class="cat">
-                <a href="#"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{serviceProvider.city}}</a>
-                <a href="#"><i class="far fa-calendar-alt" aria-hidden="true"></i> {{serviceProvider.registrationDate}}
+                <a><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{serviceProvider.city}}</a>
+                <a><i class="far fa-calendar-alt" aria-hidden="true"></i> {{serviceProvider.registrationDate}}
                 </a>
-                <a href="#"><i class="fas fa-tools" aria-hidden="true"></i> {{serviceProvider.countContract}}</a>
-                <a href="#"><i class="far fa-comments" aria-hidden="true"></i> {{serviceProvider.countComment}}</a>
+                <a><i class="fas fa-tools" aria-hidden="true"></i> {{serviceProvider.countContract}}</a>
+                <a><i class="far fa-comments" aria-hidden="true"></i> {{serviceProvider.countComment}}</a>
                 <div class="right">
-                  <a href="#"><i style=" color: #FFC107;" class="fas fa-star"
+                  <a><i style=" color: #FFC107;" class="fas fa-star"
                                  aria-hidden="true"></i> {{serviceProvider.raiting}}</a>
                 </div>
               </div>
@@ -99,9 +99,9 @@
         </aside>
 
         <aside style="padding-bottom: 20px;">
-          <h4 class="widget_title"><span class="orange">RATING</span> Range MORE THEN</h4>
+          <h4 class="widget_title"><span class=" orange">RATING</span> Range MORE THEN</h4>
           <div class="slidecontainer">
-            <input type="range" min="1" max="4" value="providersCriteria.minRating" class="slider" id="myRange"
+            <input type="range" min="0" max="4" value="providersCriteria.minRating" class="slider" id="myRange"
                    [(ngModel)]="providersCriteria.minRating" (click)="setProviderParam()">
           </div>
           <div class="right-span"><span class="range-span"> {{providersCriteria.minRating}}</span></div>
