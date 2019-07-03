@@ -17,7 +17,7 @@ export class LogoutComponent implements OnInit {
   }
 
   logout() {
-    this.service.logoutme();
+    this.service.logoutme().subscribe();
     this.deleteTokenAndUser();
     this.router.navigate(['']);
     console.log(window.sessionStorage.getItem('user'));
