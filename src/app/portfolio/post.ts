@@ -8,4 +8,5 @@ export class Post {
   portfolioId: number;
   postInfo: Array<PostInfo>;
   createdDate: string;
+  username: string;
 }

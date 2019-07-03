@@ -61,7 +61,7 @@ export class PortfolioService {
   }
 
   deletePost(post: Post): Observable<Post> {
-    return this.http.delete<Post>(this.baseURL + '/provider-portfolio/post/' + post.id + '?access_token=' + this.apiService.returnAccessToken(), {headers});
+    return this.http.put<Post>(this.baseURL + '/provider-portfolio/delete-post/' + post.id + '?access_token=' + this.apiService.returnAccessToken(), JSON.stringify(post), {headers});
   }
 
   createPost(post: Post): Observable<Post> {
