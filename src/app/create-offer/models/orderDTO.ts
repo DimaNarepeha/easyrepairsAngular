@@ -12,6 +12,7 @@ export class OrderDTO {
   createDate: string;
   startDate: string;
   endDate: string;
+  contractName: string;
   timeRequirement: string;
   customerApproved: string;
   providerApproved: string;

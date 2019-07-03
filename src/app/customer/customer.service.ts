@@ -1,22 +1,24 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, RequestOptions, Headers} from '@angular/http';
-import {HttpClient, HttpClientModule, HttpParams} from '@angular/common/http';
+import {Headers, Http, RequestOptions, Response} from '@angular/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Customer} from './customer';
-import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import {environment} from 'src/environments/environment';
 import {ApiService} from '../core/api.service';
+import {CustomerStatus} from "./CustomerStatus";
 
-
+const headers = new HttpHeaders(
+  {
+    'Content-Type': 'application/json'
+  });
 
 @Injectable()
 export class CustomerService {
+  constructor(private httpService: Http, private http: HttpClient,private apiService: ApiService) {}
 
-  constructor(private httpService: Http, private apiService: ApiService) {
-  }
 
   uploadImage(file: any, id: number) {
     const formData = new FormData();
@@ -54,9 +56,31 @@ export class CustomerService {
       .catch(this.handleError);
   }
 
-  getCustomerByUserId(id: any): Observable<Customer> {
-    return this.httpService.get(environment.customer_url + 'find-by-userId/' + id)
-      .map((response: Response) => response.json())
+  getCustomerByUserId(id: number): Observable<Customer> {
+    console.log(environment.customer_url + 'find-by-userId/' + id);
+    return this.http.get<Customer>(environment.customer_url + 'find-by-userId/' + id + '?access_token=' + this.apiService.returnAccessToken(), {headers})
+      .catch(this.handleError);
+
+  }
+
+  getCustomersByStatus(page: any, numberOfCustomersOnPage: any, status: CustomerStatus): Observable<Customer[]> {
+    const statusString: string = CustomerStatus[status];
+    const params = new HttpParams().set('pageSize', String(numberOfCustomersOnPage))
+      .set('pageNumber', String(page)).set('status', statusString);
+    return this.http.get<Customer[]>( environment.customer_url + 'status?' + params + '&access_token=' + this.apiService.returnAccessToken(),{headers})
+      .catch(this.handleError);
+  }
+
+  updateStatus(id: number, status: CustomerStatus): Observable<any> {
+    const body  = CustomerStatus[status];
+    return this.http.put<any>(environment.customer_url + 'update-status/' +  id +  '?access_token=' + this.apiService.returnAccessToken(), body,{headers});
+  }
+
+  getCustomersByFirstName(page: any, numberOfCustomersOnPage: any, status: CustomerStatus, firstName: string): Observable<Customer[]> {
+    const statusString: string = CustomerStatus[status];
+    const params = new HttpParams().set('firstName', firstName).set('pageSize', String(numberOfCustomersOnPage))
+      .set('pageNumber', String(page)).set('status', statusString);
+    return this.http.get<Customer[]>( environment.customer_url + 'status/searchByFirstName?' + params + '&access_token=' + this.apiService.returnAccessToken(), {headers})
       .catch(this.handleError);
   }
 
@@ -64,3 +88,4 @@ export class CustomerService {
     return Observable.throw(error);
   }
 }
+

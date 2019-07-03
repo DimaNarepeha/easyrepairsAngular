@@ -42,8 +42,6 @@ export class ApiService {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + this.returnAccessToken()
     });
-    console.log(this.returnAccessToken());
-    console.log(headers);
     return this.http.get(this.baseURL + '/logmeout', {headers})
       .catch(err => Observable.throw(err));
   }
@@ -53,6 +51,13 @@ export class ApiService {
       return JSON.parse(window.sessionStorage.getItem('token')).access_token;
     }
   }
+
+  returnRefreshToken() {
+    if (window.sessionStorage.getItem('token') != null) {
+      return JSON.parse(window.sessionStorage.getItem('token')).refresh_token;
+    }
+  }
+
   public isAdmin(): boolean {
     this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
     return this.role.toString() === 'ADMIN';
