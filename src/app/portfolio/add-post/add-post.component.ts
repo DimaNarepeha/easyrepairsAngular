@@ -38,7 +38,7 @@ export class AddPostComponent implements OnInit {
       if (this.post.mainDescription == null || this.post.header == null) {
         this.notifier.notify('error', 'Fields must be filled');
       } else {
-        console.log('Portfolio id: '+ this.portfolioId);
+        console.log('Portfolio id: ' + this.portfolioId);
         this.post.portfolioId = this.portfolioId;
         this.post.mainPhoto = this.image.name;
         this.portfolioService.createPost(this.post)
@@ -57,7 +57,7 @@ export class AddPostComponent implements OnInit {
   ngOnInit() {
     this.rout.params.subscribe(next => {
         this.portfolioId = next.id;
-        console.log(this.portfolioId);
+        this.post.username = next.username;
       }
     );
   }

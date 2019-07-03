@@ -27,7 +27,7 @@ export class NavComponent implements OnInit {
   }
 
   logout() {
-    this.service.logoutme();
+    this.service.logoutme().subscribe();
   }
 
   public isUser() {

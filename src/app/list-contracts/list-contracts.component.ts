@@ -50,6 +50,7 @@ export class ListContractsComponent implements OnInit {
     this.listOrderService.getAllOrders()
       .subscribe((x) => {
           this.orderDTOs = x;
+          this.orderDTOs.sort(this.sortFn);
           console.log(x);
         },
         (error) => {
@@ -123,6 +124,7 @@ export class ListContractsComponent implements OnInit {
             return (item.id !== x.id);
           });
           this.orderDTOs.push(x);
+          this.orderDTOs.sort(this.sortFn);
           this.notifier.notify('success', 'Order approved!:');
         },
         (error) => {
@@ -138,6 +140,7 @@ export class ListContractsComponent implements OnInit {
             return (item.id !== x.id);
           });
           this.orderDTOs.push(x);
+          this.orderDTOs.sort(this.sortFn);
           this.notifier.notify('success', 'Order approved!:');
         },
         (error) => {
@@ -219,5 +222,9 @@ export class ListContractsComponent implements OnInit {
   private saveFile(data: any, filename?: string) {
     const blob = new Blob([data], {type: 'application/pdf'});
     fileSaver.saveAs(blob, 'contract');
+  }
+
+  sortFn(element1: OrderDTO , element2: OrderDTO) {
+    return (element1.id - element2.id);
   }
 }
