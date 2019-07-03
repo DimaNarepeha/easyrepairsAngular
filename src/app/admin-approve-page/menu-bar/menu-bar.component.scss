@@ -2,7 +2,6 @@
 .bar_text {
   display: inline-block;
   margin-right: 20px;
-  margin-top: 80px;
   margin-left: 5%;
 }
 
@@ -19,7 +18,7 @@ h3 {
   margin-bottom: 8px;
 }
 
-mat-option {   background-color: #a1d1f5;  color: blueviolet;}
+//mat-option {   background-color: #a1d1f5;  color: blueviolet;}
 
 .myPanelClass {
   width: 30%;
@@ -34,4 +33,15 @@ mat-option {   background-color: #a1d1f5;  color: blueviolet;}
   display: inline-block;
   width: 11%;
   margin-bottom: 1%;
+}
+
+.component_change_buttons {
+  display: inline-block;
+  margin-left: 1%;
+  margin-top: 80px;
+}
+
+.input-name{
+  display: inline-block;
+  width: 13%;
 }
