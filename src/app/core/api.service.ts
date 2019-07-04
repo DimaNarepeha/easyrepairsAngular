@@ -8,6 +8,7 @@ import {environment} from '../../environments/environment';
 export class ApiService {
 
   private readonly baseURL;
+  role: string;
 
   constructor(private http: HttpClient) {
     this.baseURL = environment.baseURL;
@@ -21,9 +22,27 @@ export class ApiService {
     return this.http.post(this.baseURL + '/oauth/token', loginPayload, {headers});
   }
 
+  password_recovery(loginPayload) {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/x-www-form-urlencoded'
+    });
+    return this.http.post(this.baseURL + '/recovery', loginPayload, {headers});
+  }
+
   get(): Observable<User> {
-    // @ts-ignore
-    return this.http.get(this.baseURL + '/user?access_token=' + this.returnAccessToken())
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + this.returnAccessToken()
+    });
+    console.log(headers);
+    return this.http.get<User>(this.baseURL + '/user', {headers})
+      .catch(err => Observable.throw(err));
+  }
+
+  logoutme() {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + this.returnAccessToken()
+    });
+    return this.http.get(this.baseURL + '/logmeout', {headers})
       .catch(err => Observable.throw(err));
   }
 
@@ -31,6 +50,27 @@ export class ApiService {
     if (window.sessionStorage.getItem('token') != null) {
       return JSON.parse(window.sessionStorage.getItem('token')).access_token;
     }
+  }
+
+  returnRefreshToken() {
+    if (window.sessionStorage.getItem('token') != null) {
+      return JSON.parse(window.sessionStorage.getItem('token')).refresh_token;
+    }
+  }
+
+  public isAdmin(): boolean {
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    return this.role.toString() === 'ADMIN';
+  }
+
+  public isCustomer(): boolean {
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    return this.role.toString() === 'CUSTOMER';
+  }
+
+  public isProvider(): boolean {
+    this.role = JSON.parse(window.sessionStorage.getItem('user')).roles;
+    return this.role.toString() === 'PROVIDER';
   }
 
 }

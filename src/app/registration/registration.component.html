@@ -14,16 +14,20 @@
   <div class=" register-container" id="accordion">
     <h2 style="margin: auto; text-align: center">Registration </h2>
     <div class="choose-variant">
-      <button class="btn btn-outline-warning btn-lg" id="headingOne"  style="width: 48%; margin-top: 10px;" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample2">
+      <button class="btn btn-outline-warning btn-lg" id="headingOne" style="width: 48%; margin-top: 10px;" type="button"
+              data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false"
+              aria-controls="collapseExample2">
         Customer
       </button>
-      <button class="btn btn-outline-warning btn-lg" id="headingTwo"  style="width: 48%; margin-top: 10px; margin-left:4%;" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" >
+      <button class="btn btn-outline-warning btn-lg" id="headingTwo"
+              style="width: 48%; margin-top: 10px; margin-left:4%;" type="button" data-toggle="collapse"
+              data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
         Provider
       </button>
       <div class="collapse" id="collapseExample1" aria-labelledby="headingOne" data-parent="#accordion">
         <form [formGroup]="CustomerForm" (ngSubmit)="registerCustomer()">
           <div class="form-group mt-4">
-            <input type="text" class="form-control" formControlName="username"  id="username1"  autocomplete="off"
+            <input type="text" maxlength="50" class="form-control" formControlName="username" id="username1" autocomplete="off"
                    placeholder="Username">
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="CustomerForm.controls['username'].hasError('required') && CustomerForm.controls['username'].touched">
@@ -31,7 +35,7 @@
             </div>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control"  id="pwd1" formControlName="password" autocomplete="off"
+            <input type="password" maxlength="50" class="form-control" id="pwd1" formControlName="password" autocomplete="off"
                    placeholder="Password">
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="CustomerForm.controls['password'].hasError('required') && CustomerForm.controls['password'].touched">
@@ -39,7 +43,7 @@
             </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control"  id="email1" formControlName="email" name="email" autocomplete="off"
+            <input type="text" class="form-control" maxlength="100" id="email1" formControlName="email" name="email" autocomplete="off"
                    placeholder="Email">
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="CustomerForm.controls['email'].hasError('required') && CustomerForm.controls['email'].touched">
@@ -47,11 +51,11 @@
             </div>
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="CustomerForm.controls['email'].hasError('email') && CustomerForm.controls['email'].dirty">
-              Email can be right
+              E-mail should be like example@example.com
             </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" formControlName="firstName" id="firstName1" autocomplete="off"
+            <input type="text" class="form-control" maxlength="20" formControlName="firstName" id="firstName1" autocomplete="off"
                    placeholder="First name">
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="CustomerForm.controls['firstName'].hasError('required') && CustomerForm.controls['firstName'].touched">
@@ -63,7 +67,7 @@
             </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" formControlName="lastName" id="LastName1"  autocomplete="off"
+            <input type="text" class="form-control" maxlength="20" formControlName="lastName" id="LastName1" autocomplete="off"
                    placeholder="Last name">
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="CustomerForm.controls['lastName'].hasError('required') && CustomerForm.controls['lastName'].touched">
@@ -72,6 +76,12 @@
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="CustomerForm.controls['lastName'].hasError('pattern') && CustomerForm.controls['lastName'].dirty">
               Incorrect format of last name
+            </div>
+            <br/>
+            <app-captcha></app-captcha>
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="isCaptchaIgnored">
+              Captcha is required
             </div>
           </div>
           <div class="text-right mt-4">
@@ -82,7 +92,7 @@
       <div class="collapse" id="collapseExample2" aria-labelledby="headingTwo" data-parent="#accordion">
         <form [formGroup]="ProviderForm" (ngSubmit)="registerProvider()">
           <div class="form-group mt-4">
-            <input type="text" class="form-control" formControlName="username" id="username2" autocomplete="off"
+            <input type="text" class="form-control" maxlength="50" formControlName="username" id="username2" autocomplete="off"
                    placeholder="Username">
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="ProviderForm.controls['username'].hasError('required') && ProviderForm.controls['username'].touched">
@@ -91,7 +101,7 @@
           </div>
 
           <div class="form-group">
-            <input type="password" class="form-control" formControlName="password" id="pwd2" autocomplete="off"
+            <input type="password" class="form-control" maxlength="50" formControlName="password" id="pwd2" autocomplete="off"
                    placeholder="Password">
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="ProviderForm.controls['password'].hasError('required') && ProviderForm.controls['password'].touched">
@@ -99,7 +109,7 @@
             </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" formControlName="email" id="email" autocomplete="off"
+            <input type="text" class="form-control" maxlength="40" formControlName="email" id="email" autocomplete="off"
                    placeholder="Email">
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="ProviderForm.controls['email'].hasError('required') && ProviderForm.controls['email'].touched">
@@ -111,11 +121,17 @@
             </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" formControlName="name" id="Name" autocomplete="off"
+            <input type="text" class="form-control" maxlength="50" formControlName="name" id="Name" autocomplete="off"
                    placeholder="Name">
             <div class="error" style="text-align: center; color: red;"
                  *ngIf="ProviderForm.controls['name'].hasError('required') && ProviderForm.controls['name'].touched">
               Name is required field
+            </div>
+            <br/>
+            <app-captcha></app-captcha>
+            <div class="error" style="text-align: center; color: red;"
+                 *ngIf="isCaptchaIgnored">
+              Captcha is required
             </div>
           </div>
           <div class="text-right mt-4">
@@ -124,9 +140,6 @@
         </form>
       </div>
     </div>
-
-
-
   </div>
 </div>
 

@@ -1,0 +1,59 @@
+<app-nav></app-nav>
+<br/>
+<br/>
+<br/>
+<table class="table table-hover " align="center">
+  <tr *ngFor="let feedback of feedbacks">
+    <div class="rounded border border-dark" style="margin: 20px">
+      <td style="width: 23%;">
+        <div class="row" style="margin-left: auto;">
+          <div class="description">
+            <div class="col-md-8">
+              <div class="card-body">
+                <form>
+                  From: {{feedback.addressedFrom.username}}<br/>
+                  To: {{feedback.addressedTo.username}}<br/>
+                  <p class="card-text">
+                    <small class="text-muted">Create at  {{feedback.createdDate}}</small>
+                  </p>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <button style="margin-left: 20px;"class="btn btn-outline-light email-buttom" type="button" data-toggle="collapse"
+                attr.data-target="#collapseWriteEmail{{feedback.id}}" aria-expanded="false"
+                aria-controls="collapseWriteEmail{{feedback.id}">
+          <img src="https://cdn3.iconfinder.com/data/icons/communication-148/44/communication-16-512.png"
+               class="edit-send-submit-buttons" alt="img">
+        </button>
+        <div style="margin-left: 20px;" class="collapse write-menu" id="collapseWriteEmail{{feedback.id}}">
+          <div class="form-group">
+            Enter comment: <br/> <textarea class="form-control" cols="500" rows="5"
+                                           [(ngModel)]="feedback.comment"></textarea><br/>
+            <ngb-rating [(rate)]="currentRate" max="5">
+              <ng-template let-fill="fill" let-index="index">
+                <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+              </ng-template>
+            </ngb-rating>
+
+            <button style="margin-left: 20px;" class="btn btn-outline-light sent-button rounded-circle" type="button"
+                    attr.data-target="#collapseSent{{feedback.id}}" aria-expanded="false"
+                    (click)="sendFeedback(feedback)">
+              <img
+                src="http://www.myiconfinder.com/uploads/iconsets/256-256-5149d17faeeffb6ebf2ff0ea5a6a5aaa-message.png"
+                alt="img" style="width: 50px; height: 50px;">
+            </button>
+          </div>
+
+        </div>
+      </td>
+
+    </div>
+
+  </tr>
+</table>
+<br/>
+<app-footer></app-footer>
+

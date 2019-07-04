@@ -4,24 +4,29 @@
   font-weight: 400;
   src: local('Nunito Regular'), local('Nunito-Regular'), url(https://fonts.gstatic.com/s/nunito/v10/XRXV3I6Li01BKofINeaE.ttf) format('truetype');
 }
+
 @font-face {
   font-family: 'Nunito';
   font-style: normal;
   font-weight: 700;
   src: local('Nunito Bold'), local('Nunito-Bold'), url(https://fonts.gstatic.com/s/nunito/v10/XRXW3I6Li01BKofAjsOUYevN.ttf) format('truetype');
 }
+
 body {
   background-color: #4c4f52;
   font-family: "Nunito", sans-serif;
   font-size: 12pt;
 }
+
 .slider {
   color: white;
   display: block;
-  position:absolute;
+  position: absolute;
   box-shadow: 0px 0px 2px 1px #aaa, 0 20px 10px -5px #999;
   overflow: hidden;
+  margin-bottom: 30px;
 }
+
 .slider::before {
   content: "";
   background-color: #222;
@@ -33,10 +38,12 @@ body {
   position: relative;
   z-index: -1;
 }
+
 .slider > .slide {
   top: 55px;
   position: absolute;
 }
+
 .slider > .counter {
   display: block;
   position: absolute;
@@ -44,6 +51,7 @@ body {
   left: 18px;
   z-index: 999;
 }
+
 .slider > .progress {
   width: 0px;
   height: 5px;
@@ -54,6 +62,7 @@ body {
   left: 0;
   z-index: 999;
 }
+
 .slider > .progress::before {
   content: "";
   width: 315px;
@@ -66,6 +75,7 @@ body {
   background-color: #f5f528;
   opacity: 0.25;
 }
+
 .center {
   margin-top: 25px;
   position: relative;
@@ -76,23 +86,27 @@ body {
   right: 0;
   background-color: #222;
 }
+
 .quote {
   padding: 0 20px;
   font-size: 15pt;
   text-align: center;
 }
+
 .quote::before {
   content: "\f10d  ";
   font-family: FontAwesome;
   color: #f5f528;
   font-size: 18pt;
 }
+
 .quote::after {
   content: "  \f10e";
   font-family: FontAwesome;
   color: #f5f528;
   font-size: 18pt;
 }
+
 .author {
   width: 315px;
   position: absolute;
@@ -102,6 +116,7 @@ body {
   margin: auto;
   text-align: center;
 }
+
 .author img {
   width: 62px;
   height: 62px;
@@ -115,6 +130,7 @@ body {
   right: 0;
   margin: 5px auto;
 }
+
 .love {
   border-radius: 50%;
   border: 2px solid white;
@@ -123,10 +139,19 @@ body {
   top: 16px;
   position: absolute;
   content: "\f08a";
+  color: #f5f528;
   font-family: FontAwesome;
   display: block;
 }
-.love:hover:before {
+
+.love:before {
   color: #f5f528;
   content: "\f004";
+}
+
+.right {
+  float: right;
+  margin-top: 16px;
+  margin-right: 52px;
+  color: #f5f528;
 }

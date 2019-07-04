@@ -13,60 +13,95 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=<Your API KEY>&libraries=places&language=en"></script>
 </head>
-<div class="w3-container w3-yellow">
-<h1>Welcome to  Api! </h1>
-</div>
-<div>
-     <form  class="w3-selection bg-dark w3-padding" [formGroup]="formGroup">
+
+<div class="floatcontainer w3-container w3-black">
+
+     <form  class="sel w3-left w3-selection bg-dark w3-padding " [formGroup]="formGroup">
         <input type="hidden" name="customer.id"/>
        <p class="text-white bg-dark"> Enter first name:</p> <input formControlName="firstname" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text" [(ngModel)]= "customer.firstName" name ="firstName"/><br/>
        <p class="text-white bg-dark">   Enter last name:</p><input formControlName="lastname" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%" type="text" [(ngModel)]= "customer.lastName" name ="lastName"/><br/>
         <p class="text-white bg-dark">  Enter email name:</p><input  formControlName="email" type="text" [(ngModel)]= "customer.email" name ="email" [ngClass]="formGroup.get('email').invalid ? 'invalid-input' : 'valid-input'"  class="w3-input w3-animate-input w3-border w3-round-large" /><br/>
-       
-        <button [disabled]="!formGroup.valid" class="w3-btn w3-yellow w3-round-large w3-margin-bottom"   (click) = "addCustomer()">Add Customer</button>
+
+        <button [disabled]="!formGroup.valid" class="w3-btn w3-yellow w3-round-large w3-margin-bottom"   (click) = "addCustomer()">Update Customer</button>
     </form>
 </div>
-<div class="w3-container w3-yellow">
-        <h2>Customers</h2>
+<!--<div class="w3-container w3-yellow">-->
+        <!--<h2>Customers</h2>-->
+    <!--</div>-->
+<!--<div>-->
+
+    <!--<div class=" w3-container w3-yellow " *ngFor = "let customer1 of customerPage ">-->
+      <!--<div class="container-fluid w3-yellow">-->
+      <!--<img class="rounded float-left" alt="{{customer1.image}}" width="159" height="159" src= "http://localhost:8080/customers/image/{{customer1.image}}" />-->
+
+        <!--<div  class="text-lg-center">{{customer1.firstName}}</div>-->
+        <!--<div class="text-lg-center">{{customer1.lastName}}</div>-->
+        <!--<div class="text-lg-center">{{customer1.email}}</div>-->
+        <!--<div class="text-lg-center">{{customer1.updated}}</div>-->
+        <!--<div class="text-lg-center">&lt;!&ndash;-<div class="form-group">&ndash;&gt;-->
+          <!--<div class="sell  custom-file">-->
+            <!--<input type="file" class=" custom-file-input" id="customFile" (change)="onSelectFile($event,customer1.id)">-->
+            <!--<label class="custom-file-label" for="customFile">Choose file</label>-->
+          <!--</div></div>-->
+
+        <!--<div><button class="w3-btn w3-Khaki w3-round-large-center w3-margin-bottom" (click)="getCustomerById(customer1.id)" >Update</button>|<button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="deleteCustomer(customer1.id)">Delete</button> </div>-->
+
+      <!--</div>-->
+      <!--<div class="clearfix"></div>-->
+    <!--</div>-->
+<!--&lt;!&ndash;</tbody>-->
+    <!--</table>&ndash;&gt;-->
+
+
+    <!--<ul class="nav nav-pills">-->
+            <!--<li class="nav-item" *ngFor="let p of pages; let i=index">-->
+              <!--<a  class="nav-link " href="" (click)="setPage(i,$event)" >{{i}}</a>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <!--<app-footer></app-footer>-->
+
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="blog_left_sidebar" *ngFor="let customer1 of customerPage ">
+        <article class="blog_style1">
+          <div class="blog_img">
+            <img class="img-fluid" src= "{{url}}{{customer1.image}}" alt="">
+          </div>
+          <div class="blog_text">
+            <div class="blog_text_inner">
+              <div class="cat">
+                <a><i class="far fa-calendar-alt" aria-hidden="true"></i> {{customer1.updated}}
+                </a>
+                <a><i style=" color: #FFC107;" class="fas fa-star" aria-hidden="true"></i> {{customer.rating}}
+                </a>
+              </div>
+                <h4>{{customer1.firstName}} {{customer1.lastName}}</h4>
+              <h3>{{customer1.email}}</h3>
+              <div  *ngIf="isAdmin()==true" class="sell  custom-file">
+                <input type="file" class=" custom-file-input" id="customFile" (change)="onSelectFile($event,customer1.id)">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+              </div>
+              <br/>
+              <button *ngIf="isAdmin()==true" class="left genric-btn primary" (click)="deleteCustomer(customer1.id)" style="margin-right: 10px;margin-top: 20px; margin-left: 10px; background-color: darkred;">Delete</button>
+              <button *ngIf="isAdmin()==true" class=" genric-btn primary" (click)="getCustomerById(customer1.id)" style="margin-top: 20px;margin-right: 10px; background-color: darkgreen" >Update</button>
+              <br/>
+            </div>
+          </div>
+        </article>
+      </div>
+      <ul class="nav nav-pills">
+        <li class="nav-item" *ngFor="let p of pages; let i=index">
+          <a  class="nav-link " href="" (click)="setPage(i,$event)" >{{i+1}}</a>
+        </li>
+      </ul>
     </div>
-<div>
-<table class="table table-hover table-dark">
-                <thead>
-        <tr>
+  </div>
+</div>
+<app-footer></app-footer>
 
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>Email</th>
-            <th>Last Update</th>
-            <th>Photo</th>
-            <th>Image</th>
-            <th>Actions</th>
-            
-        </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor = "let customer1 of customerPage ">
-            
-
-        <td>{{customer1.firstName}}</td>
-        <td>{{customer1.lastName}}</td>
-        <td>{{customer1.email}}</td>
-        <td>{{customer1.updated}}</td>
-        <td><!---<div class="form-group">-->
-            <label for="file">File upload:</label>
-            <input type="file" class="form-control" accept="image/" (change)="onSelectFile($event,customer1.id)" style="height:100%" />
-      <!--- </div>--></td>
-       <img  alt="{{customer1.image}}" width="100" height="100" src= "http://localhost:8080/customers/image/{{customer1.image}}" />
-        <td><button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="getCustomerById(customer1.id)" >Update</button>|<button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="deleteCustomer(customer1.id)">Delete</button> </td>
-    </tr>
-</tbody>
-    </table>
-
-    
-    <ul class="nav nav-pills">
-            <li class="nav-item" *ngFor="let p of pages; let i=index">
-              <a  class="nav-link " href="" (click)="setPage(i,$event)" >{{i}}</a>
-            </li>
-        </ul> 
-    </div>
-    <app-footer></app-footer>

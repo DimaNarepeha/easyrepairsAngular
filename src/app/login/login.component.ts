@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../core/api.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpParams} from '@angular/common/http';
+import {HttpErrorResponse, HttpParams} from '@angular/common/http';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +15,13 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   invalidLogin = false;
+  msg: string;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, private notifier: NotifierService) {
   }
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      this.invalidLogin = true;
       return;
     }
     const body = new HttpParams()
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
         });
         this.router.navigate(['']);
       }, error => {
+        this.handleError(error);
         this.invalidLogin = true;
       }
     );
@@ -48,5 +50,12 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.compose([Validators.required])],
       password: ['', Validators.required]
     });
+  }
+
+  handleError(error: any) {
+    if (error instanceof HttpErrorResponse) {
+      this.msg = error.error.error_description;
+      this.notifier.notify('error', this.msg);
+    }
   }
 }

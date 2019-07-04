@@ -1,0 +1,165 @@
+<app-nav></app-nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="blog_left_sidebar">
+        <article class="blog_style1">
+
+          <div class="blog_img">
+            <img class="img-fluid"
+                 src="http://handymanwalthamstow.com/wp-content/uploads/2016/09/odd-jobs-slider-background.jpg" alt="">
+          </div>
+          <div class="blog_text">
+            <div class="blog_text_inner">
+              <a href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
+                <img alt="Mert S. Kaplan" src="http://localhost:8080/service-providers/image/man4.jpg"
+                     class="twPc-avatarImg">
+              </a>
+              <div class="cat">
+                <a href="#"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Lviv</a>
+                <a href="#"><i class="far fa-calendar-alt" aria-hidden="true"></i> 2019-12-12 12:12:10
+                </a>
+                <a href="#"><i class="fas fa-tools" aria-hidden="true"></i> 3</a>
+                <a href="#"><i class="far fa-comments" aria-hidden="true"></i> 3</a>
+                <a href="#"><i style=" color: #FFC107;" class="fas fa-star" aria-hidden="true"></i> 4.5</a>
+
+              </div>
+
+              <button style="background-color: darkred" (click)="openUpdate()"
+                      class="genric-btn primary">Update
+              </button>
+              <button style="background-color: darkgreen" [routerLink]="['/service-providers',1]"
+                      class="genric-btn primary">Delete
+              </button>
+              <button [routerLink]="['/service-providers',1]" class="genric-btn primary">My Portfolio
+              </button>
+
+              <br>
+              <br>
+              <br>
+              <b>Name:</b> Vasia Pupkin
+              <br>
+              <b>e-mail:</b> anastasia.hanuliak@gmail.com
+
+              <hr>
+              <b>BIO:</b>
+              <p>
+                We have a large team of multi-skilled handymen who are able to perform any task that you can think of.
+                These odd jobs include, bath and shower screen fitting, toilet seat fitting, aerial installation
+              </p>
+              <hr>
+
+              <div class="services text-center">
+                <h2>Our SERVICES</h2>
+
+                <div class="row">
+                  <div class="col-lg-4 ">
+                    <div class="service-block text-center">
+
+                      <span> Service name</span>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 ">
+                    <div class="service-block">
+                      Service name
+                    </div>
+                  </div>
+                  <div class="col-lg-4 ">
+                    <div class="service-block">
+                      Service name
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-lg-4">
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+      <div class='slider center'>
+        <div class='love fa fa-heart-o'></div>
+        <span class="right">4</span>
+        <div class='slide'>
+          <div class='quote'>HJHhwkejfw efnwefjwnf fnwekfnwkjf wjefnewjkfnw wfenwje efnejw ee</div>
+        </div>
+        <div class='author'>
+          <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/81117/einstein_1.png'>
+
+          User Name
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+      <div class='slider center'>
+        <div class='love fa fa-heart-o'></div>
+        <span class="right">4</span>
+        <div class='slide'>
+          <div class='quote'>HJHhwkejfw efnwefjwnf fnwekfnwkjf wjefnewjkfnw wfenwje efnejw ee</div>
+        </div>
+        <div class='author'>
+          <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/81117/einstein_1.png'>
+
+          User Name
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-4">
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+      <div class='slider center'>
+        <div class='love fa fa-heart-o'></div>
+        <span class="right">4</span>
+        <div class='slide'>
+          <div class='quote'>HJHhwkejfw efnwefjwnf fnwekfnwkjf wjefnewjkfnw wfenwje efnejw ee</div>
+        </div>
+        <div class='author'>
+          <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/81117/einstein_1.png'>
+
+          User Name
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="form-popup" id="myForm"  [style.display]="displayOn?'block':'none'" >
+
+  <div class="bg"></div>
+  <form action="#" class="form-container">
+    <h1>Update Profile</h1>
+
+    Enter name: <input type="text" class="form-control" name="name">
+    Enter email: <input type="text" class="form-control" name="email">
+    Enter description: <textarea class="form-control" name="description"
+                                 cols="500" rows="1"></textarea>
+    <h3>Your location:</h3>
+    <div class="input-container">
+      Enter your location <input type="text" class="form-control" name="name">
+      <!--      <button style="margin-top: 54px;" class="btn btn-success" (click)="updateService()">Update</button>-->
+    </div>
+    <br>
+    <button style="background-color: darkgreen" [routerLink]="['/service-providers',1]"
+            class="genric-btn primary">Update
+    </button>
+    <button style="background-color: darkred" class="genric-btn primary" (click)="closeUpdate()">Close
+    </button>
+  </form>
+
+</div>
+<app-footer></app-footer>

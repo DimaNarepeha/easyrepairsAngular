@@ -1,0 +1,246 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700");
+
+.list {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+.row.m0 {
+  margin: 0px;
+}
+
+body {
+  line-height: 26px;
+  font-family: "Inconsolata", monospace;
+  font-weight: normal;
+  color: #777777;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Inconsolata", monospace;
+  font-weight: bold;
+}
+.blog_text h4 {
+  font-size: 46px;
+  line-height: 52px;
+  color: #222;
+  margin-bottom: 18px;
+}
+
+.blog_post img {
+  max-width: 100%;
+}
+
+.blog_style1 {
+  margin-bottom: 20px;
+}
+
+.blog_style1 .blog_text {
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 0px;
+  padding-bottom: 20px;
+}
+
+.blog_style1 .blog_text .blog_text_inner {
+  background: #fff;
+  margin-top: -100px;
+  position: relative;
+  -webkit-box-shadow: 0px 10px 20px 0px rgba(153, 153, 153, 0.1);
+  box-shadow: 0px 10px 20px 0px rgba(9, 9, 9, 0.2);
+  padding:30px 30px 60px 30px;
+  height: auto;
+}
+
+.blog_style1 .blog_text .blog_text_inner .cat {
+  margin-bottom: 12px;
+}
+
+.blog_style1 .blog_text .blog_text_inner .cat .cat_btn {
+  background: #f9f9ff;
+  color: #000;
+  border: 1px solid #e9e9e9;
+}
+
+.blog_style1 .blog_text .blog_text_inner h4 {
+  font-family: "Inconsolata", monospace;
+  padding-right: 20px;
+  margin-bottom: 17px;
+  -webkit-transition: all 300ms linear 0s;
+  -o-transition: all 300ms linear 0s;
+  transition: all 300ms linear 0s;
+}
+
+.blog_style1 .blog_text .blog_text_inner h4:hover {
+  color: #f8b600;
+}
+
+.blog_style1 .blog_text .blog_text_inner p {
+  color: #777777;
+  margin-bottom: 22px;
+}
+
+.blog_style1 .blog_text .blog_text_inner .cat  a {
+  color: #777777;
+  font-size: 15px;
+  font-weight: normal;
+  font-family: "Inconsolata", monospace;
+  margin-right: 25px;
+  -webkit-transition: all 300ms linear 0s;
+  -o-transition: all 300ms linear 0s;
+  transition: all 300ms linear 0s;
+}
+
+.blog_style1 .blog_text .blog_text_inner .date a:hover {
+  color: #6f6fff;
+}
+
+.blog_style1 .blog_text .blog_text_inner .date a i {
+  padding-right: 5px;
+}
+
+.blog_style1 .blog_text .blog_text_inner .date a:last-child {
+  margin-right: 0px;
+}
+
+.list-horizontal{
+  position: relative;
+  display: inline-block;
+  margin-bottom: 30px;
+  float:left;
+  padding: 0;
+}
+.list-horizontal li{
+  display: inline-block;
+  margin-right:  10px;
+  padding: 0;
+}
+.list-horizontal li h5{
+  font-size: 1em;
+}
+
+.genric-btn {
+  position: relative;
+
+  line-height: 40px;
+  padding: 0 30px;
+  font-size: .8em;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  color: #fff;
+  background: #f8b600;
+  border: 1px solid transparent;
+}
+
+.right {
+  display: inline-block;
+  float: right;
+  margin-bottom:  40px;
+}
+
+.genric-btn.primary:hover {
+  color: #f8b600;
+  border: 1px solid #f8b600;
+  background: #fff;
+}
+
+.cat span.checked {
+  color: orange;
+}
+
+.cat span {
+  color:#777;
+}
+
+/*pagination style*/
+
+.blog-pagination {
+  padding-top: 25px;
+  margin-bottom: 35px;
+}
+
+.blog-pagination .page-link {
+  border-radius: 0;
+}
+
+.blog-pagination .page-item {
+  border: none;
+}
+
+.page-link {
+  background: transparent;
+  font-weight: 400;
+}
+
+.blog-pagination .page-item.active .page-link {
+  background-color: #000;
+  border-color: transparent;
+  color: #fff;
+}
+
+.blog-pagination .page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #8a8a8a;
+  border: none;
+}
+
+.blog-pagination .page-link .lnr {
+  font-weight: 600;
+}
+
+.blog-pagination .page-item:last-child .page-link,
+.blog-pagination .page-item:first-child .page-link {
+  border-radius: 0;
+}
+
+.blog-pagination .page-link:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: #f8b600;
+  border-color: #eee;
+}
+
+
+.blog-pagination .page-link:active {
+  background-color: #000;
+  border-color: transparent;
+  color: #fff;
+}
+
+.x1 {
+  padding-top: 11%;
+}
+
+.x2 {
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.continue-button {
+  margin-right: 2%;
+  height: 40px;
+}
+.image {
+  /*background-image: url("~res/showBg.jpg");*/
+  /*background-size: cover;*/
+}
+

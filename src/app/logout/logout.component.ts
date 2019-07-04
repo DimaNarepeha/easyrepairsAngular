@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {ApiService} from '../core/api.service';
 
 @Component({
   selector: 'app-logout',
@@ -8,10 +9,15 @@ import {Router} from '@angular/router';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private service: ApiService) {
   }
 
   ngOnInit() {
+    this.logout();
+  }
+
+  logout() {
+    this.service.logoutme().subscribe();
     this.deleteTokenAndUser();
     this.router.navigate(['']);
     console.log(window.sessionStorage.getItem('user'));

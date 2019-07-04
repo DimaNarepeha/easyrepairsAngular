@@ -52,6 +52,30 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "heroku": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
@@ -63,6 +87,9 @@
           "configurations": {
             "production": {
               "browserTarget": "easyr-appg:build:production"
+            },
+            "heroku": {
+              "browserTarget": "easyr-appg:build:heroku"
             }
           }
         },

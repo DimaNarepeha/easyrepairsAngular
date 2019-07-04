@@ -1,0 +1,72 @@
+.notification_message_block {
+}
+
+.notification_time {
+  float: right;
+  font-style: italic;
+  font-size: 80%;
+  z-index: 13;
+}
+
+.notification_dropdown_block {
+  background: #212121;
+  z-index: 13;
+}
+
+.notification-block {
+  float: left;
+  right: 70%;
+  /*height: 400px;*/
+  min-width: 150%;
+  width: 150%;
+}
+
+.notification-card {
+  min-width: 200px;
+}
+
+.notification-header {
+  font-weight: bold;
+  font-size: 100%;
+}
+
+.notification-message {
+  font-style: italic;
+  font-size: 80%;
+}
+
+.unread {
+  background: #f5ff70;
+}
+
+.read {
+}
+
+.dot {
+  float: right;
+}
+
+.user_img {
+  height: 70px;
+  width: 70px;
+  border: 1.5px solid #f5f6fa;
+
+}
+
+.msg_cotainer {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 1400px;
+  border-radius: 25px;
+  float: right;
+  background-color: #FFA500;
+  padding: 10px;
+  margin-right: 0;
+
+}
+
+.com {
+  margin-left: -60px;
+  margin-top: -5px;
+
+}

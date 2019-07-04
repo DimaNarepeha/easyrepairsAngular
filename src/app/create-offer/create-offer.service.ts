@@ -1,50 +1,42 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptions, Response} from '@angular/http';
-import {Observable} from 'rxjs';
+import {Response} from '@angular/http';
+import {Observable, throwError} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from 'src/environments/environment';
+import {ApiService} from '../core/api.service';
 import {OfferDTO} from './models/offerDTO';
 import {ServiceDTO} from './models/serviceDTO';
-import {HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/Rx';
-import { environment } from 'src/environments/environment';
+import {CustomerDTO} from './models/customerDTO';
+
+const headers = new HttpHeaders(
+  {
+    'Content-Type': 'application/json;'
+  });
 
 @Injectable()
 export class CreateOfferService {
 
-  constructor(private httpService: Http) {
+  constructor(private httpService: HttpClient, private apiService: ApiService) {
   }
 
   createOffer(offerDTO: OfferDTO): Observable<OfferDTO> {
-    let body = JSON.stringify(offerDTO);
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
-
-    return this.httpService.post(environment.baseURL + '/offers/create', body, options)
-      .map((response: Response) => response.json());
-  }
-
-  getAllOffers(): Observable<OfferDTO[]> {
-    let headers = new Headers({'Access-Control-Allow-Origin': environment.baseURL});
-    let options = new RequestOptions({headers: headers});
-    return this.httpService.get(environment.baseURL + '/offers/get-all', options)
-      .map((response: Response) => response.json())
+    return this.httpService.post<OfferDTO>(environment.baseURL + '/offers' + '?access_token='
+      + this.apiService.returnAccessToken(), JSON.stringify(offerDTO), {headers})
       .catch(this.handleError);
   }
 
-  deleteOfferById(id: number) {
-    return this.httpService.delete(environment.baseURL + '/offers/delete/' + id);
+  getCustomerByUserId(id: number): Observable<CustomerDTO> {
+    return this.httpService.get<CustomerDTO>(environment.baseURL + '/customers/find-by-userId/' + id + '?access_token='
+      + this.apiService.returnAccessToken(), {headers})
+      .catch(this.handleError);
   }
 
   private handleError(error: Response) {
-    return Observable.throw(error);
+    return throwError(error);
   }
 
   getAllServices(): Observable<ServiceDTO[]> {
-    let headers = new Headers({'Access-Control-Allow-Origin': environment.baseURL});
-    let options = new RequestOptions({headers: headers});
-    return this.httpService.get(environment.baseURL + '/services/get-all', options)
-      .map((response: Response) => response.json())
+    return this.httpService.get<ServiceDTO[]>(environment.baseURL + '/services', {headers})
       .catch(this.handleError);
   }
 }

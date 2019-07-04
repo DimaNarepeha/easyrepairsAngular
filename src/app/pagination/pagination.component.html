@@ -1,4 +1,4 @@
-<nav class="blog-pagination justify-content-center d-flex">
+<!--<nav class="portfolio-pagination justify-content-center d-flex">
 <ul class="pagination">
     <li class="page-item">
         <a href="#" class="page-link" aria-label="Previous">
@@ -12,6 +12,28 @@
     <li class="page-item"><a href="#" class="page-link">03</a></li>
     <li class="page-item"><a href="#" class="page-link">04</a></li>
     <li class="page-item"><a href="#" class="page-link">09</a></li>
+    <li class="page-item">
+        <a href="#" class="page-link" aria-label="Next">
+            <span aria-hidden="true">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+</nav>
+-->
+<nav class="blog-pagination justify-content-center d-flex">
+<ul class="pagination">
+    <li class="page-item">
+        <a href="#" class="page-link" aria-label="Previous">
+            <span aria-hidden="true">
+                  <i class="fas fa-arrow-left"></i>
+            </span>
+        </a>
+    </li>
+    <li class="page-item" *ngFor="let p of pages; let i=index">
+      <a href="" class="page-link" (click)="setPage(i,$event)" >{{i+1}}</a>
+    </li>
     <li class="page-item">
         <a href="#" class="page-link" aria-label="Next">
             <span aria-hidden="true">

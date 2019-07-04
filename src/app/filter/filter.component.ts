@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {LandingPageService} from "../landing-page/landing-page.service";
+import { Service } from '../core/model/service';
+import { ProvidersCriteria } from '../core/model/providers-criteria';
 
 @Component({
   selector: 'app-filter',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilterComponent implements OnInit {
 
-  constructor() { }
+  private service: Service;
+  private services: Service[];
+  private providersCriteria = new ProvidersCriteria();
+
+  constructor(private serviceService: LandingPageService) { }
 
   ngOnInit() {
+}
+
+  addProvidersCriteria(): void {
+
   }
 
 }

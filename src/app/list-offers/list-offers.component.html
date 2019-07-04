@@ -1,52 +1,51 @@
-<head>
-  <meta charset="UTF-8">
-  <title>Super app!</title>
-  <script src="http://code.jquery.com/jquery.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-          crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css"
-        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <script src="https://maps.googleapis.com/maps/api/js?key=<Your API KEY>&libraries=places&language=en"></script>
-</head>
-<div class="w3-container w3-yellow">
-  <h2>Offers</h2>
+<div class="image">
+  <app-nav></app-nav>
+  <div class="container x1">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="blog_left_sidebar x2" *ngFor="let offer of offerDTOs">
+          <article class="blog_style1">
+            <div class="blog_text">
+              <div class="blog_text_inner">
+                <div class="cat">
+                  <div class="row">
+                    <a href="https://www.google.com/maps/place/
+                  {{offer.locationDTO.country}}, + {{offer.locationDTO.region}}, + {{offer.locationDTO.city}}">
+                      <i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{offer.locationDTO.country}},
+                      {{offer.locationDTO.region}}, {{offer.locationDTO.city}}</a>
+                  </div>
+                  <div class="row">
+                    <p class="col far fa-calendar-alt" aria-hidden="true"> created: {{offer.createDate}} </p>
+                    <p class="col far fa-calendar-alt" aria-hidden="true"> start date: {{offer.startDate}} </p>
+                    <p class="col far fa-calendar-alt" aria-hidden="true"> end date: {{offer.endDate}} </p>
+                  </div>
+                  <p class="far fa-comments" aria-hidden="true"> {{offer.description}}</p>
+                  <ul class="list">
+                    <li *ngFor="let service of offer.serviceDTOs" [id]="service.id">
+                      <h6>{{service.serviceName}}</h6>
+                    </li>
+                  </ul>
+                </div>
+                <countdown [config]="{stopTime: getRemoveTime(offer)}">$!d! days left</countdown>
+
+                <button *ngIf="(isAdmin() || compareWithCustomerId(offer.customerDTO.id))"
+                        (click)="deleteOfferDTOById(offer.id)"
+                        class="right genric-btn primary">Delete
+                </button>
+                <button *ngIf="(timerEnds[offer.id] && (isAdmin() || compareWithCustomerId(offer.customerDTO.id)))"
+                        (click)="continueOffer(offer)"
+                        class="right btn btn-outline-info continue-button">Continue Offer
+                </button>
+                <button *ngIf="isProvider()" [routerLink]="['/chat',offer.customerDTO.userDTO.id,'2']"
+                        style="margin-right: 20px"
+                        class="right genric-btn primary">Contact with customer
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
 </div>
-<div>
-  <table class="table table-hover table-dark">
-    <thead>
-    <tr>
-      <th>FirstName</th>
-      <th>LastName</th>
-      <th>Email</th>
-      <th>Country</th>
-      <th>Region</th>
-      <th>City</th>
-      <th>Date</th>
-      <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let offer of offerDTOs ">
-      <td>{{offer.customerDTO.firstName}}</td>
-      <td>{{offer.customerDTO.lastName}}</td>
-      <td>{{offer.customerDTO.email}}</td>
-      <td>{{offer.locationDTO.country}}</td>
-      <td>{{offer.locationDTO.region}}</td>
-      <td>{{offer.locationDTO.city}}</td>
-      <td>{{offer.startDate}}</td>
-      <td>{{offer.description}}</td>
-      <td><!---<div class="form-group">-->
-      <td>
-        <button class="w3-btn w3-yellow w3-round-large w3-margin-bottom" (click)="chooseOfferDTOById(offer.id)">
-          Choose
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-<app-footer></app-footer>

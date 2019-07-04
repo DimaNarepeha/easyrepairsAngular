@@ -1,0 +1,121 @@
+<app-nav></app-nav>
+<div *ngIf="isCustomer()">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="blog_left_sidebar">
+          <article class="blog_style1">
+
+            <div class="blog_img">
+              <img class="img-fluid"
+                   src="http://handymanwalthamstow.com/wp-content/uploads/2016/09/odd-jobs-slider-background.jpg"
+                   alt="">
+            </div>
+            <div class="blog_text">
+              <div class="blog_text_inner">
+                <a class="twPc-avatarLink">
+                  <img style="margin-top: 5px;" alt="" src="{{urlCustomer+customer.image}}"
+                       class="twPc-avatarImg">
+                </a>
+                <div class="cat">
+                  <a><i class="far fa-calendar-alt" aria-hidden="true"></i> {{customer.updated}}
+                  </a>
+                  <a><i style=" color: #FFC107;" class="fas fa-star" aria-hidden="true"></i> {{customer.rating}}
+                  </a>
+
+                </div>
+                <br>
+                <br>
+                <br>
+                <b>Name:</b> {{customer.firstName}}
+                <br>
+                <b>e-mail:</b> {{customer.email}}
+
+
+
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isProvider()">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="blog_left_sidebar">
+          <article class="blog_style1">
+
+            <div class="blog_img">
+              <img class="img-fluid"
+                   src="http://handymanwalthamstow.com/wp-content/uploads/2016/09/odd-jobs-slider-background.jpg"
+                   alt="">
+            </div>
+            <div class="blog_text">
+              <div class="blog_text_inner">
+                <a class="twPc-avatarLink">
+                  <img style="margin-top: 1px;" alt="" src="{{url+serviceProvider.image}}"
+                       class="twPc-avatarImg">
+                </a>
+                <div class="cat">
+                  <a><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{serviceProvider.location?.city}}</a>
+                  <a><i class="far fa-calendar-alt" aria-hidden="true"></i> {{serviceProvider.registrationDate}}
+                  </a>
+                  <a><i class="far fa-comments" aria-hidden="true"></i> {{serviceProvider.countComment}}</a>
+                  <a><i style=" color: #FFC107;" class="fas fa-star" aria-hidden="true"></i> {{serviceProvider.raiting}}
+                  </a>
+
+                </div>
+
+                <button style="background-color: darkgreen"
+                        [routerLink]="['/update-service-provider',serviceProvider.id]"
+                        class="genric-btn primary">Update
+                </button>
+                <button style="background-color: darkred" (click)="deleteService(serviceProvider.id)"
+                        class="genric-btn primary">Delete
+                </button>
+                <button (click)="getPortfolioByProviderId()" class="genric-btn primary">My Portfolio
+                </button>
+
+                <br>
+                <br>
+                <br>
+                <b>Name:</b> {{serviceProvider.name}}
+                <br>
+                <b>e-mail:</b> {{serviceProvider.email}}
+
+                <hr>
+                <b>Description:</b>
+                <p>
+                  {{serviceProvider.description}}
+                </p>
+                <hr>
+
+                <div class="services text-center">
+                  <h2>Our SERVICES</h2>
+
+                  <div class="row">
+                    <div class="col-lg-4 " *ngFor="let service of serviceProvider.services">
+                      <div class="service-block text-center">
+
+                        <span>{{service.serviceName}} </span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<app-footer></app-footer>

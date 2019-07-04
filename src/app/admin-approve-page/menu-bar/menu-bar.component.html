@@ -1,0 +1,31 @@
+<div class="background_menu">
+  <div class = "component_change_buttons">
+    <div class="custom-control "  >
+      <label  routerLink="/admin-approve/customers" [ngStyle]="{'color':showForCustomers ? 'yellow' : 'aliceblue' }" >Customers</label>
+    </div>
+    <div class="custom-control ">
+      <label  routerLink="/admin-approve/service-providers" [ngStyle]="{'color':showForServiceProviders ? 'yellow' : 'aliceblue' }" >Service Providers</label>
+    </div>
+  </div>
+  <h3 class="bar_text" [hidden]="!showForServiceProviders">Select by Status:</h3>
+
+  <select [hidden]="!showForServiceProviders" class="form-control status-select " placeholder="Select Status" [(ngModel)]="serviceProviderStatus" name="selectedStatus" panelClass="myPanelClass" (change)="setServiceProviderStatus()">
+    <option *ngFor="let selectedStatus of providerStatuses" [value]="selectedStatus">
+      {{selectedStatus}}
+    </option>
+  </select>
+
+  <h3 class="bar_text" [hidden]="!showForCustomers">Select by Status:</h3>
+
+  <select [hidden]="!showForCustomers" class="form-control status-select" placeholder="Select Status" [(ngModel)]="customerStatus" name="selectedStatus" panelClass="myPanelClass" (change)="setCustomerStatus()">
+    <option *ngFor="let selectedStatus of customerStatuses" [value]="selectedStatus">
+      {{selectedStatus}}
+    </option>
+  </select>
+
+  <h3 class="bar_text" [hidden]="!showForServiceProviders">Search by Name:</h3>
+  <input type="text" placeholder="Enter Name" class="form-control input-name" [hidden]="!showForServiceProviders" [(ngModel)]="searchName" (ngModelChange)="serviceProviderViewComponent.getServiceProvidersByName(searchName)"/>
+
+  <h3 class="bar_text" [hidden]="!showForCustomers">Search by First Name</h3>
+  <input type="text" placeholder="Enter First Name" class="form-control input-name" [hidden]="!showForCustomers" [(ngModel)]="searchName" (ngModelChange)="customerViewComponent.getCustomersByFirstName(searchName)"/>
+</div>
