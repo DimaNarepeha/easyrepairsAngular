@@ -171,7 +171,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .cat span.checked {
-  color: orange;
+  color: #2ff528;
 }
 
 .cat span {
@@ -416,7 +416,7 @@ li .lab {
 }
 
 .checked {
-  color: orange;
+  color: #2ff528;
 }
 
 .primary-checkbox {
@@ -653,6 +653,9 @@ input:focus {
 
 .orange {
   color: #f5f528;
+}
+.green{
+  color: #2ff528;
 }
 
 .blog_right_sidebar .widget_title:before {

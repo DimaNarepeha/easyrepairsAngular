@@ -74,7 +74,7 @@
       <div class="blog_right_sidebar">
         <aside class="search_widget_title_area">
           <div class="title_area">
-            <p>FIND YOUR <span class="orange">SERVICE</span> PROVIDER</p>
+            <p>FIND YOUR <span class="green">SERVICE</span> PROVIDER</p>
           </div>
         </aside>
         <aside class="single_sidebar_widget search_widget">
@@ -99,7 +99,7 @@
         </aside>
 
         <aside style="padding-bottom: 20px;">
-          <h4 class="widget_title"><span class=" orange">RATING</span> Range MORE THEN</h4>
+          <h4 class="widget_title"><span class=" green">RATING</span> Range MORE THEN</h4>
           <div class="slidecontainer">
             <input type="range" min="0" max="4" value="providersCriteria.minRating" class="slider" id="myRange"
                    [(ngModel)]="providersCriteria.minRating" (click)="setProviderParam()">
@@ -107,7 +107,7 @@
           <div class="right-span"><span class="range-span"> {{providersCriteria.minRating}}</span></div>
         </aside>
         <aside class="single_sidebar_widget post_category_widget">
-          <h4 class="widget_title"><span class="orange">SERVICE</span> Categories</h4>
+          <h4 class="widget_title"><span class="green">SERVICE</span> Categories</h4>
           <form class="cat-list-form" action="/">
             <div class="custom-control custom-checkbox" *ngFor="let service of services">
               <input type="checkbox" class="custom-control-input" (change)="setCheckedServices()" [id]="service.id"

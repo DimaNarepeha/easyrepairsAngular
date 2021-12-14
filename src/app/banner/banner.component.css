@@ -35,7 +35,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .home_banner_area {
-  background: url(http://www.possibilitree.com/wp-content/uploads/2018/09/tradesman-tool-belt-2.jpg) no-repeat scroll center left;
+  background: url("~res/designer.jpg") no-repeat scroll center left;
   background-color: #f7f7f8;
   background-size: contain;
 }

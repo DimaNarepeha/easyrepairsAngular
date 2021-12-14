@@ -201,6 +201,9 @@ img {
 .orange {
   color: #f5f528;
 }
+.green{
+  color: #2ff528;
+}
 
 .lllll li a:hover {
   color: #f8b600;
@@ -298,5 +301,5 @@ a i {
 }
 
 a:hover i {
-  color: orange;
+  color: #2ff528;
 }
