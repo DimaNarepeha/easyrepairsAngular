@@ -64,7 +64,7 @@ color: #fff;
 }
 
 .custom-radio :checked{
-  color: #f5f528;
+  color: #f52828;
 }
 
 .cat-list{
@@ -96,19 +96,19 @@ padding: 0;
 
 .genric-btn.primary {
   color: #fff;
-  background: #f8b600;
+  background: #f80000;
   border: 1px solid transparent;
 }
 
 .genric-btn.primary:hover {
-  color: #f8b600;
-  border: 1px solid #f8b600;
+  color: #0015f8;
+  border: 1px solid #f80008;
   background: #fff;
 }
 
 .genric-btn.primary-border {
-  color: #f8b600;
-  border: 1px solid #f8b600;
+  color: #f80000;
+  border: 1px solid #0015f8;
   background: #fff;
 }
 
@@ -138,7 +138,7 @@ li .lab {
 }
 .cat-list li .check{
 
-  color: #f5f528;
+  color: #f52828;
 	visibility: visible;
 
 }
@@ -172,7 +172,7 @@ li .lab {
 }
 
 .checked {
-  color: #2ff528;
+  color: #2843f5;
 }
 
 
@@ -370,7 +370,7 @@ margin-top: 10px;
 
  .sub-btn {
   background: #555;
-  color: #f5f528;
+  color: #f52828;
   font-weight: 300;
   border-radius: 0;
   line-height: 34px;
@@ -383,7 +383,7 @@ margin-top: 10px;
 
 .sub-btn-order{
  background: #555;
- color: #f5f528;
+ color: #2832f5;
  font-weight: 300;
  border-radius: 0;
  line-height: 34px;
@@ -411,12 +411,15 @@ margin-top: 10px;
 .green{
   color: #2ff528;
 }
+.red{
+  color: #f52828;
+}
 
 .blog_right_sidebar .widget_title:before {
   content: "";
   width: 30px;
   height: 4px;
-  background: #f5f528;
+  background: #f52828;
   position: absolute;
   left: 0px;
   top: 50%;

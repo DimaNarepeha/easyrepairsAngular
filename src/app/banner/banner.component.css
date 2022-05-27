@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .blog_text {
-  background-color: #f5f517;
+  background-color: #f51717;
 }
 
 .blog_text {
@@ -98,7 +98,7 @@ h1, h2, h3, h4, h5, h6 {
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
   color: #fff;
-  background: #f8b600;
+  background: #f80000;
   border: 1px solid transparent;
 }
 
@@ -107,7 +107,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .genric-btn.primary:hover {
-  color: #f8b600;
-  border: 1px solid #f8b600;
+  color: #f80000;
+  border: 1px solid #0021f8;
   background: #fff;
 }

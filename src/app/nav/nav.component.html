@@ -1,16 +1,16 @@
 <div>
-  <header tabindex="0"><span>TOP</span><span class="green">DESIGN.COM</span></header>
+  <header tabindex="0"><span>SERVICE</span><span class="red">CENTERS</span></header>
   <div class="notification_icon_position">
     <app-notification></app-notification>
   </div>
   <div class="notification_icon_position1">
     <app-chat-notify></app-chat-notify>
   </div>
-  <div class="login" *ngIf="isUser()==false"><a routerLink="/login"><span class="orange">Log</span>In</a></div>
+  <div class="login" *ngIf="isUser()==false"><a routerLink="/login"><span class="red">Log</span>In</a></div>
   <div class="login" *ngIf="isUser()==true">
     <ul class="nav user_menu">
       <li class="dropdown">
-        <a class="dropdown-toggle " data-toggle="dropdown" style="color: #f5f528;width: 20%;"><img style="border-radius: 50%; height: 50px; width: 50px" src="{{avatarUrl}}{{getImage()}}"/></a>
+        <a class="dropdown-toggle " data-toggle="dropdown" style="color: #f52828;width: 20%;"><img style="border-radius: 50%; height: 50px; width: 50px" src="{{avatarUrl}}{{getImage()}}"/></a>
 
         <ul class="dropdown-menu lllll" style="width: 12em; top:10px">
 
