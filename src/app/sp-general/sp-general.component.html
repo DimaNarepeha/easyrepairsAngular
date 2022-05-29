@@ -1,20 +1,5 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-8"
-         style="margin-top: 20px; font-size: 1.3em; color: #444422; margin-bottom: 10px; font-family:'Inconsolata', monospace">
-      About {{totalElements}} results
-      <div style="float: right;">
-        Show
-        <label>
-          <input class="input-number"
-            style="width: 40px;    height:30px;font-size: 1em; line-height: 18px; padding: 2px; background: none; border:1px solid grey ;"
-            type="number" value="pageSize" min="1" max="30"
-            (change)="getServiceProvidersByPage()"
-            [(ngModel)]="pageSize">
-        </label>
-        elements on page
-      </div>
-    </div>
   </div>
   <div class="row">
     <div class="col-lg-8">
@@ -74,7 +59,7 @@
       <div class="blog_right_sidebar">
         <aside class="search_widget_title_area">
           <div class="title_area">
-            <p>FIND YOUR <span class="red">SERVICE</span> CENTER</p>
+            <p>FILTER</p>
           </div>
         </aside>
         <aside class="single_sidebar_widget search_widget">
