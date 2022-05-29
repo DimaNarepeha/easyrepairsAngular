@@ -414,6 +414,9 @@ margin-top: 10px;
 .red{
   color: #f52828;
 }
+.red{
+  color: #0015f8;
+}
 
 .blog_right_sidebar .widget_title:before {
   content: "";
